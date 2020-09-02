@@ -1,7 +1,7 @@
-import { cards } from '../components/clash/cards/cards';
-import { createCard } from '../components/clash/cards/createCard';
-import { CardsArray } from '../components/clash/gameplay/CardsArray';
-import { playCard } from '../components/clash/gameplay/playCard';
+import { cards } from '../cards/cards';
+import { createCard } from '../cards/createCard';
+import { CardsArray } from '../gameplay/CardsArray';
+import { playCard } from '../gameplay/playCard';
 
 const state = {};
 

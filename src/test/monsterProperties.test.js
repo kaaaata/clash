@@ -1,5 +1,5 @@
-import { monstersByTier } from '../components/clash/monsters/monsters';
-import { cards } from '../components/clash/cards/cards';
+import { monstersByTier } from '../monsters/monsters';
+import { cards } from '../cards/cards';
 
 test('all monsters are valid', () => {
   const errorMessages = [];

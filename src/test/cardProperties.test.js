@@ -1,5 +1,5 @@
-import { cards } from '../components/clash/cards/cards';
-import { createCard } from '../components/clash/cards/createCard';
+import { cards } from '../cards/cards';
+import { createCard } from '../cards/createCard';
 
 test('all cards are valid', () => {
   const errorMessages = [];
