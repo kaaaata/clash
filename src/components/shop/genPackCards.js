@@ -8,11 +8,7 @@ export const genPackCards = (pack) => {
 
   Object.keys(cards).forEach(rarity => {
     for (let i = 0; i < cards[rarity]; i++) {
-      if (rarity === 'common' && Math.random() < 0.05) {
-        packCards.unshift('Strange Key');
-      } else {
-        packCards.unshift(sample(lootableCardPool[rarity]));
-      }
+      packCards.unshift(sample(lootableCardPool[rarity]));
     }
   });
 

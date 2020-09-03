@@ -8,9 +8,10 @@ import { WorkForGold } from './WorkForGold';
 import { ReceiveBlessing } from './ReceiveBlessing';
 import { PurchaseCards } from './PurchaseCards';
 import { MonsterPreview } from '../modals/MonsterPreview';
-// import { RandomEvent } from './randomEvents/RandomEvent';
+import { RobberyWheel } from './randomEvents';
 import { townCss } from './townCss';
 import { RemoveCards } from './RemoveCards';
+import { TreasureSlime } from './randomEvents/TreasureSlime';
 
 export const Town = () => {
   const {
@@ -57,11 +58,20 @@ export const Town = () => {
       modal = <ReceiveBlessing closeModal={() => setActiveModal(null)} />;
       break;
     case 'Next Day':
-      modal = <MonsterPreview title={`It's the end of the ${day}${daySuffix} day.`} />;
+      modal = (
+        <MonsterPreview
+          title={`It's the end of the ${day}${daySuffix} day.`}
+          retreatText='Back to Town'
+          closeModal={() => setActiveModal(null)}
+        />
+      );
       break;
-    // case 'Random Event':
-    //   modal = <RandomEvent closeModal={() => setActiveModal(null)} />;
-    //   break;
+    case 'Spin the Wheel':
+      modal = <RobberyWheel rng={Math.random()} closeModal={() => setActiveModal(null)} />;
+      break;
+    case 'Treasure Slime':
+      modal = <TreasureSlime rng={Math.random()} closeModal={() => setActiveModal(null)} />;
+      break;
     case 'Learn Magic':
       modal = (
         <PurchaseCards
@@ -137,7 +147,7 @@ export const Town = () => {
                 name={i.name}
                 image={i.image}
                 energy={i.energy}
-                canAfford={energy >= i.energy && !completedTownActions[index]}
+                canAfford={energy >= i.energy}
                 isDisabled={
                   (day === 1 && i.name !== 'Next Day')
                   || completedTownActions[index]
@@ -145,8 +155,10 @@ export const Town = () => {
                 onMouseEnter={() => setTownActionDescription(i.description) }
                 onClick={() => {
                   if (energy >= i.energy) {
-                    dispatch(actions.setTownActionCompleted(index));
-                    dispatch(actions.adjustPlayerEnergy(-1 * i.energy));
+                    if (i.name !== 'Next Day') {
+                      dispatch(actions.setTownActionCompleted(index));
+                      dispatch(actions.adjustPlayerEnergy(-1 * i.energy));
+                    }
                     if (i.name === 'Learn Magic') {
                       dispatch(actions.setTownPurchasableCards('magic'));
                     } else if (i.name === 'Brew Potions') {

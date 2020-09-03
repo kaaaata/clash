@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import {  useDispatch } from 'react-redux';
 import * as actions from '../../../stores/actions';
-import { rarityColors } from '../../cards/rarity';
-import { lootableCardPool } from '../../cards/cards';
+import { rarityColors } from '../../../cards/rarity';
+import { lootableCardPool } from '../../../cards/cards';
 import { random, sample } from 'lodash';
 import { packs } from '../../shop/packs';
 import { genPackCards } from '../../shop/genPackCards';
@@ -45,6 +45,10 @@ export const TreasureChest = ({ rng, closeModal }) => {
     lootPack = 'gold';
   } else if (rng < 0.5) {
     lootPack = 'diamond';
+  } else if (rng < 0.6) {
+    lootText = <span className='yellow'>a gold bar!</span>
+    lootCb = () => dispatch(actions.adjustPlayerGoldBars(1));
+    greenText = `Receive 1 gold bar.`;
   } else {
     const gold = random(50, 75);
     lootText = <span className='yellow'>{gold} gold!</span>

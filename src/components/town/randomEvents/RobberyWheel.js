@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { css, jsx } from '@emotion/core'; /** @jsx jsx */
 import { useDispatch } from 'react-redux';
 import * as actions from '../../../stores/actions';
-import { Image, FlexContainer } from '../../../particles';
-import { colors } from '../../../styles';
+import { Image, FlexContainer } from '../../particles';
+import { colors } from '../../styles';
 import { genPackCards } from '../../shop/genPackCards';
 import { packs } from '../../shop/packs';
 import { CardLootModal } from '../../modals/CardLootModal';
@@ -15,7 +15,7 @@ const wheelImages = [
   { image: 'bomb', width: 36, height: 36 },
   { image: 'cursed_gold', width: 36, height: 50 },
   { image: 'candy_corn', width: 45, height: 45 },
-  { image: 'key', width: 45, height: 45 },
+  { image: 'gold_bar', width: 36, height: 36 },
 ];
 
 const robberyWheelCss = css`
@@ -143,12 +143,12 @@ export const RobberyWheel = ({ rng, closeModal }) => {
     case 5:
       flavorText = (
         <React.Fragment>
-          You win a <span className='violet'>strange key!</span>
+          You win a <span className='yellow'>gold bar!</span>
         </React.Fragment>
       );
-      continueGoodText = 'Receive card: Strange Key.'
+      continueGoodText = 'Receive 1 gold bar.'
       continueOnClick = () => {
-        dispatch(actions.addCardsToCollection('Strange Key'));
+        dispatch(actions.adjustPlayerGoldBars(1));
         closeModal();
       };
       break;

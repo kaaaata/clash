@@ -6,10 +6,10 @@ const isTestingEnabled = true;
 // const isTestingEnabled = false;
 
 export const controller = isTestingEnabled ? {
-  // gold: 0,
-  // goldBars: 10,
-  // energy: 10,
-  // day: 1,
+  gold: 100,
+  goldBars: 10,
+  energy: 10,
+  day: 2,
   // yourHand: ['Sword', 'Sword', 'Sword'],
   // yourDeck: ['Sword', 'Sword', 'Sword'],
   // yourDiscard: ['Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword'],

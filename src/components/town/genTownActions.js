@@ -19,55 +19,62 @@ export const genTownActions = () => {
 };
 
 const townActions = [
-  {
-    name: 'Work for Gold',
-    energy: [1, 2],
-    probability: 6,
-    image: 'gold',
-    description: 'Earn some gold.'
-  },
-  {
-    name: 'Buy Weapons',
-    energy: [4, 5, 6, 7],
-    probability: 3,
-    image: 'slice',
-    description: 'Obtain attack cards.'
-  },
-  {
-    name: 'Learn Magic',
-    energy: [4, 5, 6, 7],
-    probability: 1,
-    image: 'double_fireball',
-    description: 'Obtain magic cards.'
-  },
-  {
-    name: 'Brew Potions',
-    energy: [4, 5, 6, 7],
-    probability: 1,
-    image: 'blue_potion',
-    description: 'Obtain potion cards.'
-  },
-  {
-    name: 'Recruit Allies',
-    energy: [4, 5, 6, 7],
-    probability: 2,
-    image: 'mage',
-    description: 'Obtain ally cards.'
-  },
   // {
-  //   name: 'Random Event',
-  //   energy: [1, 2, 3],
-  //   probability: 1,
-  //   image: 'map',
-  //   description: 'A random event!'
+  //   name: 'Work for Gold',
+  //   energy: [1, 2],
+  //   probability: 6,
+  //   image: 'gold',
+  //   description: 'Earn some gold.'
   // },
-  {
-    name: 'Donate a Card',
-    energy: [1, 2],
-    probability: 4,
-    image: 'weapons_guy',
-    description: 'Remove a card from your deck.'
-  }
+  // {
+  //   name: 'Buy Weapons',
+  //   energy: [4, 5, 6, 7],
+  //   probability: 4,
+  //   image: 'slice',
+  //   description: 'Obtain attack cards.'
+  // },
+  // {
+  //   name: 'Learn Magic',
+  //   energy: [4, 5, 6, 7],
+  //   probability: 3,
+  //   image: 'double_fireball',
+  //   description: 'Obtain magic cards.'
+  // },
+  // {
+  //   name: 'Brew Potions',
+  //   energy: [4, 5, 6, 7],
+  //   probability: 2,
+  //   image: 'blue_potion',
+  //   description: 'Obtain potion cards.'
+  // },
+  // {
+  //   name: 'Recruit Allies',
+  //   energy: [4, 5, 6, 7],
+  //   probability: 3,
+  //   image: 'mage',
+  //   description: 'Obtain ally cards.'
+  // },
+  // {
+  //   name: 'Donate a Card',
+  //   energy: [0],
+  //   probability: 1,
+  //   image: 'weapons_guy',
+  //   description: 'Remove a card from your deck.'
+  // },
+  // {
+  //   name: 'Spin the Wheel',
+  //   energy: [2, 3, 4],
+  //   probability: 1,
+  //   image: 'goblin_boss',
+  //   description: 'Spin the goblin\'s wheel!'
+  // },
+  // {
+  //   name: 'Treasure Slime',
+  //   energy: [2, 3, 4],
+  //   probability: 1,
+  //   image: 'treasure_slime_monster',
+  //   description: 'A random encounter!'
+  // }
 ];
 const townActionPool = [];
 townActions.forEach(action => {

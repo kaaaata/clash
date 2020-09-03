@@ -27,11 +27,18 @@ const CardsRarityString = ({ _cards }) => {
   );
 };
 
-export const MonsterPreview = ({ title, monsterOverride, closeModal }) => {
-  const { deck, day, monster } = useSelector(state => ({
+export const MonsterPreview = ({
+  title,
+  monsterOverride,
+  monsterGoldRewardOverride,
+  closeModal,
+  retreatText = 'Retreat'
+}) => {
+  const { deck, day, monster, monsterGoldReward } = useSelector(state => ({
     deck: state.clashPlayer.deck,
     day: state.clashTown.day,
-    monster: monsterOverride || state.clashTown.monsterWaves[state.clashTown.day - 1]
+    monster: monsterOverride || state.clashTown.monsterWaves[state.clashTown.day - 1],
+    monsterGoldReward: monsterGoldRewardOverride || state.clashTown.dailyMonsterGoldReward
   }), shallowEqual);
   const dispatch = useDispatch();
 
@@ -48,13 +55,6 @@ export const MonsterPreview = ({ title, monsterOverride, closeModal }) => {
   if (isMonsterElite) {
     monsterStats[sample('attack', 'defense', 'magic')]++;
   }
-  const battleRewardGold = (
-    (monster.type === 'wave' ? 25 : 0)
-    + (isMonsterElite ? 50 : 0)
-    + 10 * monster.tier
-    + 3 * day
-    + random(0, 10)
-  );
 
   const battleOnClick = () => {
     dispatch(actions.setBattleInitialState());
@@ -84,7 +84,7 @@ export const MonsterPreview = ({ title, monsterOverride, closeModal }) => {
         ].slice(0, 4)
         : sampleSize(enemyDeck, 4)
     ));
-    dispatch(actions.setBattleRewardGold(battleRewardGold));
+    dispatch(actions.setBattleRewardGold(monsterGoldReward));
     dispatch(actions.setScene('battle'));
   };
 
@@ -92,14 +92,14 @@ export const MonsterPreview = ({ title, monsterOverride, closeModal }) => {
     <React.Fragment>
       You are attacked by: <span className='yellow'>{monsterName}!</span>
       <br /><br />
-      Enemy cards: {enemyDeck.length} <CardsRarityString _cards={enemyDeck} />
+      Enemy cards: <span className='bold yellow'>{enemyDeck.length}</span> <CardsRarityString _cards={enemyDeck} />
       <br />
-      Your cards: {yourDeck.length} <CardsRarityString _cards={yourDeck} />
+      Your cards: <span className='bold yellow'>{yourDeck.length}</span> <CardsRarityString _cards={yourDeck} />
       <br /><br />
-      Victory: <span className='green'>gain {battleRewardGold} gold</span> and <span className='green'>2 cards from the enemy's deck</span>
+      Victory: <span className='green'>gain {monsterGoldReward} gold</span> and <span className='green'>2 cards from the enemy's deck</span>
       <br />
       Defeat: <span className='red'>{
-        [4, 8, 12].includes(day) ? 'death!' : `lose ${Math.floor(battleRewardGold / 4)} gold`
+        [4, 8, 12].includes(day) ? 'death!' : `lose ${Math.floor(monsterGoldReward / 4)} gold`
       }</span>
     </React.Fragment>
   );
@@ -119,9 +119,7 @@ export const MonsterPreview = ({ title, monsterOverride, closeModal }) => {
             onClick: battleOnClick
           },
           {
-            name: 'Retreat',
-            isDisabled: monster.type === 'wave',
-            redText: monster.type === 'wave' ? 'Can\'t retreat from end-of-day battles!' : '',
+            name: retreatText,
             onClick: () => {
               closeModal();
               dispatch(actions.setCanVisitShop(true));

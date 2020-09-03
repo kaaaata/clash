@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import * as actions from '../../../stores/actions';
 import { MonsterPreview } from '../../modals/MonsterPreview';
-import { eventMonsters } from '../../monsters/monsters';
+import { eventMonsters } from '../../../monsters/monsters';
 import { TreasureChest } from './TreasureChest';
 import { EventModal, EventModalPage } from '../../modals/EventModal';
 
 export const TreasureSlime = ({ rng, closeModal }) => {
-  const { hasKey, gold } = useSelector(state => ({
-    hasKey: state.clashPlayer.deck.includes('Strange Key'),
+  const { hasGoldBar, gold } = useSelector(state => ({
+    hasGoldBar: state.clashPlayer.goldBars > 0,
     gold: state.clashPlayer.gold
   }), shallowEqual);
   const dispatch = useDispatch();
@@ -30,14 +30,14 @@ export const TreasureSlime = ({ rng, closeModal }) => {
           }
           options={[
             {
-              name: 'Give Key',
-              isDisabled: !hasKey,
-              redText: hasKey ? 'Lose card: Strange Key.' : 'Requires card: Strange Key.',
-              greenText: hasKey ? 'Open the chest.' : '',
+              name: 'Give Gold Bar',
+              isDisabled: !hasGoldBar,
+              redText: hasGoldBar ? 'Lose 1 gold bar.' : 'Requires 1 gold bar.',
+              greenText: hasGoldBar ? 'Open the chest.' : '',
               redTextFirst: true,
               onClick: () => {
-                setPage('give_key');
-                dispatch(actions.removeCardsFromCollection('Strange Key'));
+                setPage('give_gold_bar');
+                dispatch(actions.adjustPlayerGoldBars(-1));
               }
             },
             {
@@ -64,19 +64,20 @@ export const TreasureSlime = ({ rng, closeModal }) => {
         />
       );
       break;
-    case 'give_key':
+    case 'give_gold_bar':
       pageComponent = (
         <EventModalPage
           page={2}
           text={
             <React.Fragment>
-              You toss the slime your <span className='yellow'>Strange Key</span>. Extending a <span className='violet'>slimy tentacle</span>, the slime absorbs the key into its body!
+              You toss the slime a <span className='yellow'>gold bar</span>. Extending a <span className='violet'>slimy tentacle</span>, the slime accepts your payment.
               <br /><br />
-              The chest is <span className='green'>unlocked!</span>
+              Magically, the chest is <span className='green'>unlocked!</span>
             </React.Fragment>
           }
           options={[{
-            name: 'Open Chest',
+            name: 'Continue',
+            greenText: 'Open the chest.',
             onClick: () => setPage('treasure_chest')
           }]}
         />
@@ -124,6 +125,7 @@ export const TreasureSlime = ({ rng, closeModal }) => {
     return (
       <MonsterPreview
         title='You attack the slime!'
+        retreatText='Run away!'
         monsterOverride={eventMonsters['Treasure Slime']}
         closeModal={closeModal}
       />

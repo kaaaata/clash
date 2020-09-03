@@ -3,7 +3,11 @@ import { Image, FlexContainer } from '../particles';
 import { Text } from './Text';
 
 export const Gold = ({ gold, color = 'yellow' }) => (
-  <FlexContainer alignItems='center' justifyContent='center' className='gold'>
+  <FlexContainer
+    alignItems='center'
+    justifyContent='flex-start'
+    className='gold'
+  >
     <Image
       src='gold.png'
       width={30}

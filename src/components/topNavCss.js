@@ -16,19 +16,22 @@ export const topNavCss = css`
 
   .left {
     .top_nav_portrait {
-      margin-right: 35px;
+      margin-right: 40px;
       flex: 0 0 auto;
     }
 
     .attributes {
-      margin-right: 35px;
+      margin-right: 40px;
       width: 110px;
       font-size: 24px;
       flex: 0 0 auto;
     }
 
-    .gold {
-      flex: 0 0 auto;
+    .gold_bar {
+      .image {
+        margin-right: 7px;
+        ${effects.hoverScale()}
+      }
     }
   }
 
@@ -44,17 +47,13 @@ export const topNavCss = css`
       }
     }
 
-    .gold_bar {
-      margin-left: 25px;
-
-      .image {
-        margin-right: 7px;
-        ${effects.hoverScale()}
-      }
+    .gold {
+      flex: 0 0 auto;
+      margin-left: 10px;
+      width: 110px;
     }
 
     .shop {
-      margin-left: 30px;
       font-size: 16px;
       line-height: 40px;
       text-align: center;
@@ -93,7 +92,6 @@ export const energyMeterCss = css`
 
 export const collectionCss = css`
   position: relative;
-  margin-left: 10px;
   transition: transform 0.1s ease-out;
   cursor: pointer;
   width: 53px;

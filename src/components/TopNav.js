@@ -51,7 +51,15 @@ export const TopNav = () => {
             height={36}
           />
           <Attributes stats={stats} statBonuses={statBonuses} />
-          <Gold gold={gold} />
+          <FlexContainer className='gold_bar' alignItems='center' justifyContent='flex-start'>
+            <Image
+              src='gold_bar.png'
+              width={35}
+              height={35}
+              onClick={() => setActiveModal(activeModal === 'crafting' ? null : 'crafting')}
+            />
+            <Text color='yellow'>{goldBars}</Text>
+          </FlexContainer>
         </FlexContainer>
 
         <FlexContainer className='center' justifyContent='center' alignItems='center'>
@@ -83,15 +91,7 @@ export const TopNav = () => {
             </div>
             <Text className='deck_count'>{deck.length}</Text>
           </FlexContainer>
-          <FlexContainer className='gold_bar' alignItems='center'>
-            <Image
-              src='gold_bar.png'
-              width={35}
-              height={35}
-              onClick={() => setActiveModal(activeModal === 'crafting' ? null : 'crafting')}
-            />
-            <Text color='yellow'>{goldBars}</Text>
-          </FlexContainer>
+          <Gold gold={gold} />
           <Image
             src='shop.png'
             width={35}

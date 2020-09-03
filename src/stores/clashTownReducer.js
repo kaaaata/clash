@@ -1,20 +1,29 @@
 import { genMonsterWaves } from '../monsters/genMonsterWaves';
+import { genMonsterGoldReward } from '../monsters/genMonsterGoldReward';
 import { genTownActions } from '../components/town/genTownActions';
 import { genPurchasableCards } from '../components/town/genPurchasableCards';
 import { controller } from '../controller';
 
-const genInitialState = () => ({
-  energy: controller.energy || 0,
-  day: controller.day || 1,
-  monsterWaves: genMonsterWaves(),
-  townActions: genTownActions(),
-  purchasableCards: [],
-  completedTownActions: {},
-  feed: [
-    'Welcome to town!',
-    'You are too tired from your long journey to do anything else today.'
-  ]
-});
+const genInitialState = () => {
+  const monsterWaves = genMonsterWaves();
+  return {
+    energy: controller.energy || 0,
+    day: controller.day || 1,
+    monsterWaves,
+    dailyMonsterGoldReward: genMonsterGoldReward(
+      monsterWaves[(controller.day || 1) - 1],
+      false,
+      controller.day || 1
+    ),
+    townActions: genTownActions(),
+    purchasableCards: [],
+    completedTownActions: {},
+    feed: [
+      'Welcome to town!',
+      'You are too tired from your long journey to do anything else today.'
+    ]
+  };
+};
 const initialState = genInitialState();
 
 export default (state = initialState, action) => {
@@ -31,6 +40,11 @@ export default (state = initialState, action) => {
         energy: 10,
         day: newDay,
         canDoRandomEvent: true,
+        dailyMonsterGoldReward: genMonsterGoldReward(
+          state.monsterWaves[newDay - 1],
+          [3, 6, 9].includes(newDay),
+          newDay
+        ),
         townActions: genTownActions(),
         completedTownActions: {},
         feed: [

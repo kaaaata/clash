@@ -2,16 +2,6 @@ import { createCard } from './createCard';
 
 export const attacks = [
   {
-    name: 'Strange Key',
-    image: 'key',
-    imageSlant: 1,
-    rarity: 'common',
-    attack: 2,
-    defense: 0,
-    isToken: true,
-    customDescription: 'Maybe this unlocks something....'
-  },
-  {
     name: 'Sword',
     image: 'strike',
     rarity: 'common',
@@ -164,5 +154,5 @@ export const attacks = [
 ].map(card => createCard({
   ...card,
   type: 'attack',
-  isCraftable: card.rarity !== 'legendary' && !card.isToken && card.name !== 'Strange Key'
+  isCraftable: card.rarity !== 'legendary' && !card.isToken
 }));
