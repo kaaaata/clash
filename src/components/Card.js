@@ -14,38 +14,47 @@ const _Card = React.memo(
   ({ name }) => {
     const {
       image,
+      imageSlant,
+      craftedImage,
+      craftedImageSlant,
       rarity,
       attack,
       defense,
       type,
-      description
+      description,
+      glow
     } = cards[name];
 
     const cardArt = (
       <React.Fragment>
         <Spacer height={70} />
-        <div className='glow'></div>
-        <Image
-          src={`${image}.png`}
-          width='100%'
-          height={70}
-          size='contain'
-          className='card_art'
-        />
-        {/* <Image
-          src={`slash.png`}
-          width='100%'
-          height={70}
-          size='contain'
-          className='card_art'
-        />
-        <Image
-          src={`slice.png`}
-          width='100%'
-          height={70}
-          size='contain'
-          className='card_art'
-        /> */}
+        {glow && <div className={`glow glow_${glow}`} />}
+        {rarity === 'crafted' ? (
+          <React.Fragment>
+            <Image
+              src={`${image}.png`}
+              width='100%'
+              height={70}
+              size='contain'
+              className='card_art faded'
+            />
+            <Image
+              src={`${craftedImage}.png`}
+              width='100%'
+              height={70}
+              size='contain'
+              className={`card_art ${imageSlant === craftedImageSlant ? 'horizontal_flip' : ''}`}
+            />
+          </React.Fragment>
+        ) : (
+          <Image
+            src={`${image}.png`}
+            width='100%'
+            height={70}
+            size='contain'
+            className='card_art'
+          />
+        )}
       </React.Fragment>
     );
   
@@ -60,7 +69,7 @@ const _Card = React.memo(
       </Image>
     );
   
-    const defenseDisplay = typeof defense === 'number' && (
+    const defenseDisplay = type !== 'potion' && (
       <Image
         className='defense'
         src='defense.png'

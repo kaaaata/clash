@@ -9,7 +9,7 @@ export const attacks = [
     attack: 2,
     defense: 0,
     isToken: true,
-    description: 'Maybe this unlocks something....'
+    customDescription: 'Maybe this unlocks something....'
   },
   {
     name: 'Sword',
@@ -81,7 +81,7 @@ export const attacks = [
     attack: 2,
     defense: 1,
     playCopiesOfCards: ['Fire'],
-    description: 'Play a copy of Fire.'
+    customDescription: 'Play a copy of Fire.'
   },
   {
     name: 'Multishot',
@@ -90,7 +90,7 @@ export const attacks = [
     attack: 0,
     defense: 0,
     playCopiesOfCards: ['Arrow', 'Arrow'],
-    description: 'Play two copies of Arrow.'
+    customDescription: 'Play two copies of Arrow.'
   },
   {
     name: 'Shield',
@@ -139,7 +139,7 @@ export const attacks = [
     attack: 2,
     defense: 5,
     shuffleCardCopiesIntoOpponentsPiles: [{ card: 'Freeze', pile: 'deck' }],
-    description: 'Shuffle a copy of Freeze into your opponent\'s deck.'
+    customDescription: 'Shuffle a copy of Freeze into your opponent\'s deck.'
   },
   {
     name: 'Forest Bow',
@@ -150,7 +150,7 @@ export const attacks = [
     defense: 0,
     playCopiesOfCards: ['Arrow', 'Arrow', 'Arrow'],
     statBonuses: { attack: 1 },
-    description: 'Play 3 copies of Arrow. Gain +1 attack for the rest of the battle.'
+    customDescription: 'Play 3 copies of Arrow. Gain +1 attack for the rest of the battle.'
   },
   {
     name: 'Dragon Blade',
@@ -164,5 +164,5 @@ export const attacks = [
 ].map(card => createCard({
   ...card,
   type: 'attack',
-  isCraftable: card.rarity !== 'legendary' && !card.isToken
+  isCraftable: card.rarity !== 'legendary' && !card.isToken && card.name !== 'Strange Key'
 }));

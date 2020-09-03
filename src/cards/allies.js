@@ -22,7 +22,7 @@ export const allies = [
     attack: 0,
     defense: 2,
     customEffect: true,
-    description: 'Play a random ally from your discard pile, then banish it.'
+    customDescription: 'Play a random ally from your discard pile, then banish it.'
   },
   {
     name: 'Goblin',
@@ -33,7 +33,7 @@ export const allies = [
     shuffleCardCopiesIntoOpponentsPiles: [
       { card: 'Bomb', pile: 'deck' }
     ],
-    description: 'Shuffle a copy of Bomb into your opponent\'s deck.'
+    customDescription: 'Shuffle a copy of Bomb into your opponent\'s deck.'
   },
   {
     name: 'Cleric',
@@ -45,7 +45,8 @@ export const allies = [
     onDiscard: {
       customEffect: true
     },
-    description: 'When played or discarded, shuffle a random potion from your banish into your deck.'
+    triggerDiscardOnPlay: true,
+    customDescription: 'Shuffle a random potion from your banish into your deck.'
   },
   {
     name: 'Paladin',
@@ -54,7 +55,7 @@ export const allies = [
     attack: 2,
     defense: 1,
     shuffleCardCopiesIntoYourPiles: [{ card: 'Healing Blade', pile: 'deck' }],
-    description: 'Shuffle a copy of Healing Blade into your deck.'
+    customDescription: 'Shuffle a copy of Healing Blade into your deck.'
   },
   {
     name: 'Mermaid',
@@ -75,7 +76,7 @@ export const allies = [
       { card: 'Freeze', pile: 'deck' },
       { card: 'Freeze', pile: 'deck' }
     ],
-    description: 'Shuffle 2 copies of Freeze into your opponent\'s deck.'
+    customDescription: 'Shuffle 2 copies of Freeze into your opponent\'s deck.'
   },
   {
     name: 'Hobgoblin',
@@ -84,7 +85,7 @@ export const allies = [
     attack: 2,
     defense: 0,
     playCopiesOfCards: ['Falchion'],
-    description: 'Play a copy of Falchion.'
+    customDescription: 'Play a copy of Falchion.'
   },
   {
     name: 'Brawler',
@@ -93,7 +94,7 @@ export const allies = [
     attack: 3,
     defense: 2,
     customEffect: true,
-    description: 'Shuffle a copy of a random non-legendary attack into your deck.'
+    customDescription: 'Shuffle a copy of a random non-legendary attack into your deck.'
   },
   {
     name: 'Warlock',
@@ -102,7 +103,7 @@ export const allies = [
     attack: 0,
     defense: 0,
     playCopiesOfCards: ['Fire', 'Fire'],
-    description: 'Play 2 copies of Fire.'
+    customDescription: 'Play 2 copies of Fire.'
   },
   {
     name: 'Mimic',
@@ -111,7 +112,7 @@ export const allies = [
     attack: 2,
     defense: 2,
     playCopiesOfCards: ['Tentacles', 'Tentacles'],
-    description: 'Play 2 copies of Tentacles.'
+    customDescription: 'Play 2 copies of Tentacles.'
   },
   {
     name: 'Minotaur',
@@ -120,7 +121,7 @@ export const allies = [
     attack: 0,
     defense: 0,
     customEffect: true,
-    description: 'Play 2 random attacks from your discard, then banish them.'
+    customDescription: 'Play 2 random attacks from your discard, then banish them.'
   },
   {
     name: 'Mage',
@@ -129,7 +130,7 @@ export const allies = [
     attack: 0,
     defense: 0,
     customEffect: true,
-    description: 'Play 2 random magic attacks from your discard, then banish them.'
+    customDescription: 'Play 2 random magic attacks from your discard, then banish them.'
   },
   {
     name: 'Vampire',
@@ -151,7 +152,7 @@ export const allies = [
       { card: 'Burn', pile: 'deck' },
       { card: 'Freeze', pile: 'deck' }
     ],
-    description: 'Shuffle a copy of Burn and a copy of Freeze into your opponent\'s deck.'
+    customDescription: 'Shuffle a copy of Burn and a copy of Freeze into your opponent\'s deck.'
   },
   {
     name: 'Fire Dragon',
@@ -167,7 +168,7 @@ export const allies = [
         { card: 'Burn', pile: 'deck' }
       ],
     },
-    description: 'Play a copy of Super Fire. If discarded, shuffle 3 copies of Burn into your opponent\'s deck.'
+    customDescription: 'Play a copy of Super Fire. If discarded, shuffle 3 copies of Burn into your opponent\'s deck.'
   },
   {
     name: 'Catherine the Great',
@@ -182,7 +183,7 @@ export const allies = [
         { card: 'Healing Blade', pile: 'deck' }
       ],
     },
-    description: 'Play a copy of Healing Blade. If discarded, shuffle 2 copies of Healing Blade into your deck.'
+    customDescription: 'Play a copy of Healing Blade. If discarded, shuffle 2 copies of Healing Blade into your deck.'
   },
   {
     name: 'Ice Queen',
@@ -197,7 +198,7 @@ export const allies = [
         { card: 'Ice Blade', pile: 'deck' }
       ],
     },
-    description: 'Play a copy of Ice Blade. If discarded, shuffle 2 copies of Ice Blade into your deck.'
+    customDescription: 'Play a copy of Ice Blade. If discarded, shuffle 2 copies of Ice Blade into your deck.'
   }
 ].map(card => createCard({
   ...card,

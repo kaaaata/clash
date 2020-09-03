@@ -2,25 +2,30 @@ const cardTemplate = {
   name: '',
   image: '',
   imageSlant: 0, // 0 = SW -> NE, 1 = NW -> SE
+  craftedImage: '',
+  craftedImageSlant: 0,
+  isCraftable: false, // can the card be used in crafting?
+  glow: null,
   rarity: '',
-  isCraftable: false,
-  attack: null,
-  defense: null,
-  heal: null,
-  healEnemy: null,
+  attack: 0,
+  defense: 0,
+  heal: 0,
+  healEnemy: 0,
   onDiscard: null,
   type: '',
-  description: '',
-  damageSelf: null,
+  description: '', // procedurally generated. may include customDescription at the end.
+  customDescription: '', // manually generated
+  damageSelf: 0,
   isMockCard: false, // "pseudo" card for discard effects, etc.
   dealsBanishingDamage: false,
   banishesOnPlay: false,
+  triggerDiscardOnPlay: false,
   customEffect: false,
   pierces: false,
   isToken: false,
-  playCopiesOfCards: null,
-  shuffleCardCopiesIntoYourPiles: null,
-  shuffleCardCopiesIntoOpponentsPiles: null,
+  playCopiesOfCards: [],
+  shuffleCardCopiesIntoYourPiles: [],
+  shuffleCardCopiesIntoOpponentsPiles: [],
   statBonuses: null
 };
 
@@ -29,17 +34,21 @@ const genCardDescription = ({
   healEnemy,
   damageSelf,
   pierces,
-  description,
   onDiscard,
+  triggerDiscardOnPlay,
   type,
-  dealsBanishingDamage
-}) => description || [
+  dealsBanishingDamage,
+  customDescription
+}) => [
   heal && `Heal ${heal}.`,
   healEnemy && `Heal enemy ${healEnemy}.`,
   damageSelf && `Deal ${damageSelf} to yourself.`,
-  pierces && `Damage dealt pierces shields.`,
-  onDiscard && type !== 'potion' && `On discard: ${genCardDescription(onDiscard)}`,
-  dealsBanishingDamage && 'Damage dealt banishes.'
+  pierces && `Damage dealt pierces.`,
+  onDiscard && type !== 'potion' && (
+    `On ${triggerDiscardOnPlay ? 'play or ' : ''}discard: ${genCardDescription(onDiscard)}`
+  ),
+  dealsBanishingDamage && 'Damage dealt banishes.',
+  customDescription
 ].filter(Boolean).join(' ');
 
 export const createCard = (properties = {}) => {

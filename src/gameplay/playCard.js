@@ -198,15 +198,15 @@ export const playCard = (state, card, player, location, index) => {
     customCardEffects[name](state, card, player);
   }
 
-  if (!state.winner && shuffleCardCopiesIntoOpponentsPiles) {
+  if (!state.winner && shuffleCardCopiesIntoOpponentsPiles.length) {
     addCardCopiesIntoPiles(state, shuffleCardCopiesIntoOpponentsPiles, opponent);
   }
 
-  if (!state.winner && shuffleCardCopiesIntoYourPiles) {
+  if (!state.winner && shuffleCardCopiesIntoYourPiles.length) {
     addCardCopiesIntoPiles(state, shuffleCardCopiesIntoYourPiles, player);
   }
 
-  if (!state.winner && playCopiesOfCards) {
+  if (!state.winner && playCopiesOfCards.length) {
     playCopiesOfCards.forEach(cardName => {
       logs.push(`${player} plays a copy of ${cardName}`);
       playCard(state, cards[cardName], player);

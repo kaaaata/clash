@@ -11,7 +11,7 @@ import * as actions from '../stores/actions';
 import { CardViewModal } from './modals/CardViewModal';
 
 export const TopNav = () => {
-  const [activeModal, setActiveModal] = useState('crafting');
+  const [activeModal, setActiveModal] = useState(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const {
     gold,
@@ -126,7 +126,10 @@ export const TopNav = () => {
       </div>
 
       <div css={css`display: ${activeModal === 'crafting' ? 'unset' : 'none'};`}>
-        <Crafting closeModal={() => setActiveModal(null)} />
+        <Crafting
+          isOpen={activeModal === 'crafting'}
+          closeModal={() => setActiveModal(null)}
+        />
       </div>
 
       <div css={css`display: ${activeModal === 'shop' ? 'unset' : 'none'};`}>

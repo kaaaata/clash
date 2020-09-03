@@ -2,7 +2,9 @@ export const rarityColors = {
   common: 'sand',
   uncommon: 'green',
   rare: 'blue',
-  legendary: 'red'
+  legendary: 'red',
+
+  crafted: 'yellow'
 };
 
 export const rarityScore = {

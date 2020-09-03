@@ -11,10 +11,13 @@ export const cardsArray = CardsArray([
   ...potions,
   ...allies
 ]);
+
 export const cards = keyBy(cardsArray, 'name');
+
 const lootableCards = cardsArray
   .filter(card => card.type !== 'ally' && !card.isToken)
   .map(card => card.name);
+  
 export const lootableCardPool = {
   common: lootableCards.filter(card => cards[card].rarity === 'common'),
   uncommon: lootableCards.filter(card => cards[card].rarity === 'uncommon'),

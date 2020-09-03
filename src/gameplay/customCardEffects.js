@@ -1,6 +1,7 @@
 import { cardsArray } from '../cards/cards';
 import { addCardCopiesIntoPiles } from './addCardCopiesIntoPiles';
 import { playCard } from './playCard';
+import { actionGenerators } from './actionGenerators';
 
 export const customCardEffects = {
   'Brawler': (state, card, player) => {
@@ -8,7 +9,7 @@ export const customCardEffects = {
     const attack = cardsArray.getRandomCardByFilter(
       card => (
         card.type === 'attack' 
-        && card.rarity !== 'legendary'
+        && !['legendary', 'crafted'].includes(card.rarity)
         && card.name !== 'Strange Key'
       )
     );
@@ -90,6 +91,18 @@ export const customCardEffects = {
         );
       }
     }
+
+    // COPIED AND PASTED HEAL CODE FROM playCard.js SO HEAL CAN HAPPEN AFTER CUSTOM EFFECT
+    const totalHeal = Math.min(5, state[player].discard.length);
+    state.logs.push(`${player} heals ${totalHeal}`);
+    for (let i = 0; i < totalHeal; i++) {
+      const healedCard = state[player].discard.getTopCard();
+      state.logs.push(`${player} heals ${healedCard.name}`);
+      state.renderActions.push([
+        actionGenerators.removeCard(state, player, 'discard', 'top'),
+        actionGenerators.addCard(state, healedCard, player, 'deck', 'random')
+      ]);
+    }
   },
   'Magic Scroll': (state, card, player) => {
     // Play a copy of a random non-legendary card.
@@ -97,7 +110,7 @@ export const customCardEffects = {
       card => (
         !card.isToken
         && card.name !== 'Magic Scroll'
-        && card.rarity !== 'legendary'
+        && !['legendary', 'crafted'].includes(card.rarity)
       )
     );
     state.logs.push(`${player} plays a copy of ${randomCard.name}`);
@@ -124,7 +137,7 @@ export const customCardEffects = {
         card => (
           !card.isToken
           && card.type === 'magic'
-          && card.rarity !== 'legendary'
+          && !['legendary', 'crafted'].includes(card.rarity)
         )
       ).name,
       pile: 'deck'

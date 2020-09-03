@@ -8,10 +8,13 @@ export const craftingCss = css`
     border: 2px solid ${colors.grey};
     margin: 0 15px;
     box-sizing: content-box;
-    cursor: pointer;
 
     .card {
       box-shadow: unset;
+      cursor: pointer;
+    }
+
+    &.pointer {
       cursor: pointer;
     }
 
@@ -38,5 +41,9 @@ export const craftingCss = css`
     &:last-child {
       margin-right: 0;
     }
+  }
+
+  .recipes {
+    text-align: center;
   }
 `;

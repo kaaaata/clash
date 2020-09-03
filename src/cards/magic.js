@@ -13,13 +13,13 @@ export const magic = [
     name: 'Frost',
     image: 'frost',
     rarity: 'common',
-    attack: 3,
+    attack: 2,
     defense: 1,
     isCraftable: true,
     shuffleCardCopiesIntoOpponentsPiles: [
       { card: 'Freeze', pile: 'deck' }
     ],
-    description: 'Damage dealt pierces shields. Shuffle a copy of Freeze into your opponent\'s deck.'
+    customDescription: 'Shuffle a copy of Freeze into your opponent\'s deck.'
   },
   {
     name: 'Tentacles',
@@ -35,7 +35,7 @@ export const magic = [
     attack: 0,
     defense: 0,
     customEffect: true,
-    description: 'Play a copy of a random non-legendary card.'
+    customDescription: 'Play a copy of a random non-legendary card.'
   },
   {
     name: 'Candy Corn',
@@ -47,7 +47,7 @@ export const magic = [
       { card: 'Candy Corn', pile: 'discard', index: 'top' },
       { card: 'Candy Corn', pile: 'discard', index: 'top' }
     ],
-    description: 'Damage dealt pierces shields. Add two copies of Candy Corn into your discard.'
+    customDescription: 'Add two copies of Candy Corn into your discard.'
   },
   {
     name: 'Super Fire',
@@ -60,13 +60,13 @@ export const magic = [
     name: 'Super Frost',
     image: 'double_frost',
     rarity: 'uncommon',
-    attack: 5,
+    attack: 4,
     defense: 2,
     shuffleCardCopiesIntoYourPiles: [
       { card: 'Freeze', pile: 'deck' },
       { card: 'Freeze', pile: 'deck' }
     ],
-    description: 'Damage dealt pierces shields. Shuffle two copies of Freeze into your opponent\'s deck.'
+    customDescription: 'Shuffle two copies of Freeze into your opponent\'s deck.'
   },
   {
     name: 'Tome of Spells',
@@ -78,7 +78,8 @@ export const magic = [
     onDiscard: {
       customEffect: true
     },
-    description: 'Damage dealt pierces shields. When played or discarded, shuffle 4 random magic attacks into your deck.'
+    triggerDiscardOnPlay: true,
+    customDescription: 'Shuffle 4 random non-legendary magic attacks into your deck.'
   }
 ].map(card => createCard({
   ...card,

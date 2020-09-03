@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { css, jsx } from '@emotion/core'; /** @jsx jsx */
+import { jsx } from '@emotion/core'; /** @jsx jsx */
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import * as actions from '../../stores/actions';
 import { Modal } from '../modals/Modal';
@@ -10,27 +10,33 @@ import { craftingCss } from './craftingCss';
 import { isCraftValid } from './isCraftValid';
 import { genCraftedCard } from './genCraftedCard';
 
-export const Crafting = ({ closeModal }) => {
+export const Crafting = ({ isOpen, closeModal }) => {
   const { goldBars } = useSelector(state => ({
     goldBars: state.clashPlayer.goldBars
   }), shallowEqual);
   const dispatch = useDispatch();
-  console.log('crafting render');
+
   const [card1, setCard1] = useState(null);
   const [card2, setCard2] = useState(null);
-  const [isGoldBarPlaced, setIsGoldBarPlaced] = useState(false);
   const [card3, setCard3] = useState(null);
   const [cardSelectModal, setCardSelectModal] = useState(null);
   const [card1Index, setCard1Index] = useState(-1);
   const [card2Index, setCard2Index] = useState(-1);
 
   useEffect(() => {
-    if (isCraftValid(card1, card2) && isGoldBarPlaced) {
-    setCard3(genCraftedCard(card1, card2));
+    if (!isOpen) {
+      setCard1(null);
+      setCard2(null);
+      setCard3(null);
+      setCard1Index(-1);
+      setCard2Index(-1);
+      setCardSelectModal(null)
+    } else if (isCraftValid(card1, card2) && goldBars > 0) {
+      setCard3(genCraftedCard(card1, card2));
     } else {
       setCard3(null);
     }
-  }, [card1, card2, isGoldBarPlaced]);
+  }, [isOpen, card1, card2, goldBars]);
   
   return (
     <React.Fragment>
@@ -38,14 +44,14 @@ export const Crafting = ({ closeModal }) => {
         <div css={craftingCss}>
           <FlexContainer justifyContent='center' alignItems='center'>
             <div
-              className={`card_slot ${card1 ? 'green_border' : 'red_border'}`}
+              className={`card_slot pointer ${card1 ? 'green_border' : 'red_border'}`}
               onClick={() => setCardSelectModal(1)}
             >
               {card1 && !cardSelectModal && <Card name={card1} />}
             </div>
             <Text type='title'>+</Text>
             <div
-              className={`card_slot ${card2 ? 'green_border' : 'red_border'}`}
+              className={`card_slot pointer ${card2 ? 'green_border' : 'red_border'}`}
               onClick={() => setCardSelectModal(2)}
             >
               {card2 && !cardSelectModal && <Card name={card2} />}
@@ -54,14 +60,7 @@ export const Crafting = ({ closeModal }) => {
             <FlexContainer
               justifyContent='center'
               alignItems='center'
-              className={`gold_bar_slot ${isGoldBarPlaced ? 'green_border' : 'red_border faded'}`}
-              onClick={() => {
-                if (goldBars > 0) {
-                  setIsGoldBarPlaced(!isGoldBarPlaced);
-                } else {
-                  dispatch(actions.setToast('Not enough gold bars!'));
-                }
-              }}
+              className={`gold_bar_slot ${goldBars > 0 ? 'green_border' : 'red_border faded'}`}
             >
               <Image
                 src='gold_bar.png'
@@ -80,11 +79,10 @@ export const Crafting = ({ closeModal }) => {
           <FlexContainer justifyContent='center'>
             <Button
               mini
-              isDisabled={!card1 && !card2 && !isGoldBarPlaced}
+              isDisabled={!card1 && !card2}
               onClick={() => {
                 setCard1(null);
                 setCard2(null);
-                setIsGoldBarPlaced(false);
                 setCard3(null);
                 setCard1Index(-1);
                 setCard2Index(-1);
@@ -98,7 +96,6 @@ export const Crafting = ({ closeModal }) => {
               onClick={() => {
                 setCard1(null);
                 setCard2(null);
-                setIsGoldBarPlaced(false);
                 setCard3(null);
                 setCard1Index(-1);
                 setCard2Index(-1);
@@ -111,12 +108,22 @@ export const Crafting = ({ closeModal }) => {
               Craft
             </Button>
           </FlexContainer>
+
+          <Spacer height={40} />
+
+          <div className='recipes'>
+            <Text>Attack + Attack = Stronger Attack</Text>
+            <br />
+            <Text>Attack + Fire = <span className='red'>Fire Imbue</span></Text>
+            <br />
+            <Text>Attack + Frost = <span className='blue'>Frost Imbue</span></Text>
+          </div>
         </div>
       </Modal>
 
       {cardSelectModal && (
         <CraftingCardSelectionModal
-          title={`Choose a card for crafting (card ${cardSelectModal}/2)`}
+          title={`Choose a card for crafting (slot ${cardSelectModal})`}
           cardIndexAlreadySelected={cardSelectModal === 1 ? card2Index : card1Index}
           cardOnClick={(card, index) => {
             if (cardSelectModal === 1) {
@@ -128,6 +135,7 @@ export const Crafting = ({ closeModal }) => {
             }
             setCardSelectModal(null);
           }}
+          closeModal={() => setCardSelectModal(null)}
         />
       )}
     </React.Fragment>

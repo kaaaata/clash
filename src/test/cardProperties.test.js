@@ -42,6 +42,17 @@ test('all cards are valid', () => {
       });
       testIsCardValid(mockCard);
     }
+
+    // temporary rule until code is refactored to link customCardEffects to unique keys, not card names.
+    if (
+      ['attack', 'magic'].includes(card.type)
+      && ['common', 'uncommon', 'rare'].includes(card.rarity)
+      && card.onDiscard
+    ) {
+      errorMessages.push(
+        `${name} is a ${card.rarity} ${card.type} card, so it can't have onDiscard.`
+      )
+    }
   };
 
   Object.values(cards).forEach((card, index) => {

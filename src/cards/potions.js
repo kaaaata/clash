@@ -55,7 +55,7 @@ export const potions = [
       attack: 2,
       pierces: true
     },
-    description: 'Deal 2 damage. Damage dealt pierces shields.'
+    customDescription: 'Deal 2 damage.'
   },
   {
     name: 'Edible Slime',
@@ -65,7 +65,7 @@ export const potions = [
     onDiscard: {
       customEffect: true
     },
-    description: 'Shuffle 3 random common or uncommon cards into your deck.'
+    customDescription: 'Shuffle 3 random common or uncommon cards into your deck.'
   },
   {
     name: 'Attack Potion',
@@ -75,7 +75,7 @@ export const potions = [
     onDiscard: {
       statBonuses: { attack: 1 }
     },
-    description: 'Gain +1 attack for the rest of the battle.'
+    customDescription: 'Gain +1 attack for the rest of the battle.'
   },
   {
     name: 'Magic Potion',
@@ -85,7 +85,7 @@ export const potions = [
     onDiscard: {
       statBonuses: { magic: 1 }
     },
-    description: 'Gain +1 magic for the rest of the battle.'
+    customDescription: 'Gain +1 magic for the rest of the battle.'
   },
   {
     name: 'Defense Potion',
@@ -95,22 +95,21 @@ export const potions = [
     onDiscard: {
       statBonuses: { defense: 1 }
     },
-    description: 'Gain +1 defense for the rest of the battle.'
+    customDescription: 'Gain +1 defense for the rest of the battle.'
   },
   {
     name: 'Golden Goblet',
     image: 'golden_goblet',
     rarity: 'legendary',
     customEffect: true,
-    heal: 5,
     onDiscard: {
       customEffect: true,
-      heal: 5
     },
-    description: 'Shuffle 5 cards from your banish into your discard. Heal 5.'
+    customDescription: 'Shuffle 5 cards from your banish into your discard. Heal 5.'
   }
 ].map(card => createCard({
   ...card,
   type: 'potion',
-  banishesOnPlay: true
+  banishesOnPlay: true,
+  triggerDiscardOnPlay: true
 }));

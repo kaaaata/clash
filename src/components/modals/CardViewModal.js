@@ -2,6 +2,7 @@ import { css, jsx } from '@emotion/core'; /** @jsx jsx */
 // import { cards } from '../cards/cards';
 import { Card } from '../Card';
 import { Modal } from './Modal';
+import { Button } from '../particles';
 // import { rarityScore } from '../cards/rarity';
 
 // maybe it would be more useful to sort by "recently added" instead?
@@ -34,6 +35,13 @@ const collectionCss = css`
   .card:last-child {
     margin-bottom: 25px;
   }
+
+  button {
+    position: absolute;
+    bottom: 17px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 `;
 
 export const CardViewModal = ({
@@ -41,20 +49,26 @@ export const CardViewModal = ({
   shouldShowCardCount = true,
   cards,
   cardOnClick,
-  closeModal
+  closeModal,
+  shouldCloseOnClick = true,
+  shouldShowCloseButton = false
 }) => (
   <Modal
     title={`${title}${shouldShowCardCount ? ` (${cards.length})` : ''}`}
-    closeModal={closeModal}
+    closeModal={shouldCloseOnClick && closeModal}
   >
     <div css={collectionCss}>
-      {cards.map((card, index) => (
+      {cards.map((card, index) => card ? (
         <Card
           key={index}
           name={card}
           onClick={cardOnClick ? () => cardOnClick(card, index) : null}
-          />
-      ))}
+        />
+      ) : <div key={index} css={css`display: none;`} />)}
+
+      {shouldShowCloseButton && closeModal && (
+        <Button mini onClick={closeModal}>Back</Button>
+      )}
     </div>
   </Modal>
 );

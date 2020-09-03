@@ -23,6 +23,14 @@ export const _cardCss = (rarityColor) => css`
 
     .card_art {
       position: absolute;
+
+      &.faded {
+        opacity: 0.8;
+      }
+
+      &.horizontal_flip {
+        transform: scaleX(-1);
+      }
     }
 
     .glow {
@@ -31,7 +39,14 @@ export const _cardCss = (rarityColor) => css`
       width: 1px;
       top: 50%;
       border-radius: 50%;
-      box-shadow: 0px 0px 50px 25px ${colors.red};
+
+      &.glow_red {
+        box-shadow: 0px 0px 55px 35px ${colors.red};
+      }
+
+      &.glow_blue {
+        box-shadow: 0px 0px 55px 35px ${colors.blue};
+      }
     }
 
     .attack, .defense {

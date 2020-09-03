@@ -1,12 +1,14 @@
+import { controller } from '../controller';
+
 const genInitialState = () => ({
   yourDeck: [],
-  yourDiscard: [],
-  yourBanish: [],
+  yourDiscard: controller.yourDiscard || [],
+  yourBanish: controller.yourBanish || [],
   yourHand: [null, null, null],
   battleRewardCards: [],
   enemyDeck: [],
-  enemyDiscard: [],
-  enemyBanish: [],
+  enemyDiscard: controller.enemyDiscard || [],
+  enemyBanish: controller.enemyBanish || [],
   enemyHand: [null, null, null],
   stack: [],
 
