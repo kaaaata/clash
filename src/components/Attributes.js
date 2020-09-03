@@ -32,7 +32,7 @@ export const Attributes = ({ stats, statBonuses }) => {
   const attackDisplay = (
     <Image
       className='attack'
-      src='/clash/attack.png'
+      src='attack.png'
       width={30}
       height={30}
     >
@@ -45,7 +45,7 @@ export const Attributes = ({ stats, statBonuses }) => {
   const magicDisplay = (
     <Image
       className='magic'
-      src='/clash/magic.png'
+      src='magic.png'
       width={30}
       height={30}
     >
@@ -58,7 +58,7 @@ export const Attributes = ({ stats, statBonuses }) => {
   const defenseDisplay = (
     <Image
       className='defense'
-      src='/clash/defense.png'
+      src='defense.png'
       width={30}
       height={30}
     >

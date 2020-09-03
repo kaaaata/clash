@@ -9,9 +9,11 @@ export const FlexContainer = ({
   flexDirection,
   flexWrap,
   _css = '',
+  onClick,
   children
 }) => {
   const idProps = id ? { id } : {};
+  const onClickProps = onClick ? { onClick } : {};
   const flexContainerCss = css`
     display: flex;
     ${mq.genResponsiveCss('justify-content', justifyContent)}
@@ -26,6 +28,7 @@ export const FlexContainer = ({
       css={flexContainerCss}
       className={`flex_container ${className}`}
       {...idProps}
+      {...onClickProps}
     >
       {children}
     </div>

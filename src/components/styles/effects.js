@@ -12,5 +12,12 @@ export const effects = {
       0% { opacity: 0; }
       100% { opacity: 1; }
     `)}
+  `,
+  hoverScale: (duration = 0.1, scale = 1.3) => `
+    transition: transform ${duration}s ease-out;
+  
+    &:hover {
+      transform: scale(${scale});
+    }
   `
 };

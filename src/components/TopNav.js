@@ -4,16 +4,18 @@ import { FlexContainer, Image, Gold, Text } from './particles';
 import { Attributes } from './Attributes';
 import { Settings } from './modals/Settings';
 import { Shop } from './shop/Shop';
+import { Crafting } from './crafting/Crafting';
 import { topNavCss, energyMeterCss, collectionCss } from './topNavCss';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import * as actions from '../stores/actions';
 import { CardViewModal } from './modals/CardViewModal';
 
 export const TopNav = () => {
-  const [activeModal, setActiveModal] = useState(null);
+  const [activeModal, setActiveModal] = useState('crafting');
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const {
     gold,
+    goldBars,
     energy,
     deck,
     image,
@@ -23,6 +25,7 @@ export const TopNav = () => {
     shouldHideTopNav
   } = useSelector(state => ({
     gold: state.clashPlayer.gold,
+    goldBars: state.clashPlayer.goldBars,
     energy: state.clashTown.energy,
     deck: state.clashPlayer.deck,
     image: state.clashBattleStats.yourImage,
@@ -43,7 +46,7 @@ export const TopNav = () => {
         <FlexContainer className='left' alignItems='center'>
           <Image
             className='top_nav_portrait'
-            src={`/clash/${image}.png`}
+            src={`${image}.png`}
             width={20}
             height={36}
           />
@@ -53,7 +56,7 @@ export const TopNav = () => {
 
         <FlexContainer className='center' justifyContent='center' alignItems='center'>
           <Image
-            src='/clash/energy.png'
+            src='energy.png'
             width={20}
             height={25}
             className='energy'
@@ -70,7 +73,7 @@ export const TopNav = () => {
               {[0, 1].map(i => (
                 <Image
                   key={i}
-                  src='/clash/card_back.png'
+                  src='card_back.png'
                   width={24}
                   height={34}
                   onClick={() => setActiveModal(activeModal === 'collection' ? null : 'collection')}
@@ -80,8 +83,17 @@ export const TopNav = () => {
             </div>
             <Text className='deck_count'>{deck.length}</Text>
           </FlexContainer>
+          <FlexContainer className='gold_bar' alignItems='center'>
+            <Image
+              src='gold_bar.png'
+              width={35}
+              height={35}
+              onClick={() => setActiveModal(activeModal === 'crafting' ? null : 'crafting')}
+            />
+            <Text color='yellow'>{goldBars}</Text>
+          </FlexContainer>
           <Image
-            src='/clash/shop.png'
+            src='shop.png'
             width={35}
             height={35}
             onClick={() => {
@@ -96,7 +108,7 @@ export const TopNav = () => {
             $
           </Image>
           <Image
-            src='/clash/gear.png'
+            src='gear.png'
             width={35}
             height={35}
             onClick={() => setIsSettingsOpen(!isSettingsOpen)}
@@ -111,6 +123,10 @@ export const TopNav = () => {
           cards={deck}
           closeModal={() => setActiveModal(null)}
         />
+      </div>
+
+      <div css={css`display: ${activeModal === 'crafting' ? 'unset' : 'none'};`}>
+        <Crafting closeModal={() => setActiveModal(null)} />
       </div>
 
       <div css={css`display: ${activeModal === 'shop' ? 'unset' : 'none'};`}>

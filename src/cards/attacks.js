@@ -4,6 +4,7 @@ export const attacks = [
   {
     name: 'Strange Key',
     image: 'key',
+    imageSlant: 1,
     rarity: 'common',
     attack: 2,
     defense: 0,
@@ -20,6 +21,7 @@ export const attacks = [
   {
     name: 'Cutlass',
     image: 'slash',
+    imageSlant: 1,
     rarity: 'common',
     attack: 2,
     defense: 1
@@ -27,6 +29,7 @@ export const attacks = [
   {
     name: 'Mace',
     image: 'crush',
+    imageSlant: 1,
     rarity: 'common',
     attack: 3,
     defense: 0
@@ -34,6 +37,7 @@ export const attacks = [
   {
     name: 'Saber',
     image: 'parry',
+    imageSlant: 1,
     rarity: 'common',
     attack: 1,
     defense: 2
@@ -57,6 +61,7 @@ export const attacks = [
   {
     name: 'Falchion',
     image: 'slice',
+    imageSlant: 1,
     rarity: 'uncommon',
     attack: 4,
     defense: 0
@@ -64,6 +69,7 @@ export const attacks = [
   {
     name: 'Longsword',
     image: 'two_handed_strike',
+    imageSlant: 1,
     rarity: 'uncommon',
     attack: 4,
     defense: 1
@@ -103,6 +109,7 @@ export const attacks = [
   {
     name: 'Greataxe',
     image: 'sunder',
+    imageSlant: 1,
     rarity: 'rare',
     attack: 5,
     defense: 0
@@ -118,6 +125,7 @@ export const attacks = [
   {
     name: 'Healing Blade',
     image: 'fat_blue_sword',
+    imageSlant: 1,
     rarity: 'rare',
     attack: 3,
     defense: 0,
@@ -126,6 +134,7 @@ export const attacks = [
   {
     name: 'Ice Blade',
     image: 'ice_sword',
+    imageSlant: 1,
     rarity: 'rare',
     attack: 2,
     defense: 5,
@@ -135,6 +144,7 @@ export const attacks = [
   {
     name: 'Forest Bow',
     image: 'green_bow',
+    imageSlant: 1,
     rarity: 'legendary',
     attack: 0,
     defense: 0,
@@ -145,6 +155,7 @@ export const attacks = [
   {
     name: 'Dragon Blade',
     image: 'dragon_blade',
+    imageSlant: 1,
     rarity: 'legendary',
     attack: 6,
     defense: 3,
@@ -152,5 +163,6 @@ export const attacks = [
   }
 ].map(card => createCard({
   ...card,
-  type: 'attack'
+  type: 'attack',
+  isCraftable: card.rarity !== 'legendary' && !card.isToken
 }));

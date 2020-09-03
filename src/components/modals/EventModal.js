@@ -110,7 +110,7 @@ export const EventModal = ({
   <Modal halfModal title={title}>
     <FlexContainer justifyContent='flex-start' _css={eventModalCss}>
       <Image
-        src={`/clash/${image}.png`}
+        src={`${image}.png`}
         height={250}
         width={250}
         {...imageProps}

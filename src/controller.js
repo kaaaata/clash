@@ -1,10 +1,13 @@
 // testing game variables
 
+const fusionCard = 0;
+
 const isTestingEnabled = true;
 // const isTestingEnabled = false;
 
 export const controller = isTestingEnabled ? {
   gold: 100,
+  goldBars: 10,
   energy: 10,
   day: 3,
   // yourHand: ['Sword', 'Sword', 'Sword'],
@@ -24,16 +27,16 @@ export const controller = isTestingEnabled ? {
     'Sword',
     'Sword',
 
-    'Falchion',
-    'Mace',
-    'Minotaur',
-    'Cutlass',
-    'Fire',
+    // 'Falchion',
+    // 'Mace',
+    // 'Minotaur',
+    // 'Cutlass',
+    // 'Fire',
 
-    'Falchion',
-    'Super Fire',
-    'Cutlass',
-    'Cutlass',
-    'Fire',
+    // 'Falchion',
+    // 'Super Fire',
+    // 'Cutlass',
+    // 'Cutlass',
+    // 'Fire',
   ]
 } : {};

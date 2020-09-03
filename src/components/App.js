@@ -5,9 +5,6 @@ import { TopNav } from './TopNav';
 import { Toasts } from './Toasts';
 import { colors } from './styles';
 
-/* use <Text> to avoid red text shadow! */
-const didntUseTextComponentErrorHighlight = 'text-shadow: 4px 4px 8px red;';
-
 const appCss = css`
   width: 1000px;
   height: 600px;
@@ -17,7 +14,6 @@ const appCss = css`
   font-family: 'Cabin', sans-serif;
   color: ${colors.white};
   letter-spacing: 0.3px;
-  ${didntUseTextComponentErrorHighlight};
 
   .sand { color: ${colors.sand}; }
   .green { color: ${colors.green}; }

@@ -24,20 +24,35 @@ const _Card = React.memo(
     const cardArt = (
       <React.Fragment>
         <Spacer height={70} />
+        <div className='glow'></div>
         <Image
-          src={`/clash/${image}.png`}
+          src={`${image}.png`}
           width='100%'
           height={70}
           size='contain'
-          _css='position: absolute;'
+          className='card_art'
         />
+        {/* <Image
+          src={`slash.png`}
+          width='100%'
+          height={70}
+          size='contain'
+          className='card_art'
+        />
+        <Image
+          src={`slice.png`}
+          width='100%'
+          height={70}
+          size='contain'
+          className='card_art'
+        /> */}
       </React.Fragment>
     );
   
     const attackDisplay = type !== 'potion' && (
       <Image
         className='attack'
-        src={`/clash/${type}.png`}
+        src={`${type}.png`}
         width={20}
         height={20}
       >
@@ -48,7 +63,7 @@ const _Card = React.memo(
     const defenseDisplay = typeof defense === 'number' && (
       <Image
         className='defense'
-        src='/clash/defense.png'
+        src='defense.png'
         width={20}
         height={20}
       >
@@ -59,7 +74,7 @@ const _Card = React.memo(
     const cardTypeFlair = (
       <Image
         className='type_flair'
-        src={`/clash/${type === 'potion' ? 'healing_potion' : type}.png`}
+        src={`${type === 'potion' ? 'healing_potion' : type}.png`}
         width={12}
         height={12}
       />
@@ -67,7 +82,7 @@ const _Card = React.memo(
 
     return (
       <Image
-        src='/clash/rock.png'
+        src='rock.png'
         width={width}
         height={height}
         _css={_cardCss(colors[rarityColors[rarity]])}
@@ -115,7 +130,7 @@ const _FaceDownCard = () => (
     }
   `}>
     <Image
-      src='/clash/card_back.png'
+      src='card_back.png'
       width={width}
       height={height}
     />

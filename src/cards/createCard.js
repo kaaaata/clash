@@ -1,7 +1,9 @@
 const cardTemplate = {
   name: '',
   image: '',
+  imageSlant: 0, // 0 = SW -> NE, 1 = NW -> SE
   rarity: '',
+  isCraftable: false,
   attack: null,
   defense: null,
   heal: null,

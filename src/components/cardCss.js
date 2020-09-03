@@ -7,7 +7,6 @@ export const _cardCss = (rarityColor) => css`
   height: 100%;
   text-shadow: 2px 2px 4px ${colors.black};
   border: 2px solid ${rarityColor};
-  border-radius: 5px;
 
   .name {
     color: ${rarityColor};
@@ -21,6 +20,19 @@ export const _cardCss = (rarityColor) => css`
     justify-content: center;
     position: relative;
     background: rgba(255, 255, 255, 0.25);
+
+    .card_art {
+      position: absolute;
+    }
+
+    .glow {
+      position: absolute;
+      height: 1px;
+      width: 1px;
+      top: 50%;
+      border-radius: 50%;
+      box-shadow: 0px 0px 50px 25px ${colors.red};
+    }
 
     .attack, .defense {
       font-size: 24px;

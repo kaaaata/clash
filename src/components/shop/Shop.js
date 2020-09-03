@@ -50,7 +50,7 @@ export const Shop = ({ closeModal }) => {
                 <Spacer height={20} />
                 <Image
                   key={i}
-                  src='/clash/pack.png'
+                  src='pack.png'
                   width={120}
                   height={170}
                   className='pack'
@@ -67,7 +67,7 @@ export const Shop = ({ closeModal }) => {
                 >
                   <Spacer height={45} />
                   <Image
-                    src={`/clash/${pack.image}.png`}
+                    src={`${pack.image}.png`}
                     width={75}
                     height={75}
                     className='gem'

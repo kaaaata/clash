@@ -1,5 +1,5 @@
 import { css } from '@emotion/core'; /** @jsx jsx */
-import { colors, zIndex } from './styles';
+import { colors, zIndex, effects } from './styles';
 
 export const topNavCss = css`
   height: 40px;
@@ -11,17 +11,17 @@ export const topNavCss = css`
   top: 0;
 
   .left, .right {
-    width: 250px;
+    width: 300px;
   }
 
   .left {
     .top_nav_portrait {
-      margin-right: 25px;
+      margin-right: 35px;
       flex: 0 0 auto;
     }
 
     .attributes {
-      margin-right: 20px;
+      margin-right: 35px;
       width: 110px;
       font-size: 24px;
       flex: 0 0 auto;
@@ -37,40 +37,41 @@ export const topNavCss = css`
 
     .collection {
       flex: 0 0 auto;
-      width: 120px;
+      width: 100px;
 
       .deck_count {
         margin-left: 5px;
       }
     }
 
+    .gold_bar {
+      margin-left: 25px;
+
+      .image {
+        margin-right: 7px;
+        ${effects.hoverScale()}
+      }
+    }
+
     .shop {
-      margin-left: 10px;
-      transition: transform 0.1s ease-out;
+      margin-left: 30px;
       font-size: 16px;
       line-height: 40px;
       text-align: center;
-      color: ${colors.yellow};
-  
-      &:hover {
-        transform: scale(1.5);
-      }
+      color: ${colors.yellow};  
+      ${effects.hoverScale()}
     }
   
     .settings {
-      margin-left: 40px;
-      transition: transform 0.1s ease-out;
-  
-      &:hover {
-        transform: scale(1.5);
-      }
+      margin-left: 30px;
+      ${effects.hoverScale()}
     }
   }
 `;
 
 export const energyMeterCss = css`
   position: relative;
-  width: 400px;
+  width: 300px;
   height: 24px;
   border: 2px solid ${colors.yellowLight};
   border-radius: 3px;

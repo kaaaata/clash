@@ -165,7 +165,7 @@ export const RobberyWheel = ({ rng, closeModal }) => {
         {wheelImages.map((i, index) => (
           <Image
             key={index}
-            src={`/clash/${i.image}.png`}
+            src={`${i.image}.png`}
             width={i.width}
             height={i.height}
             className={`option option_${index}`}
@@ -173,7 +173,7 @@ export const RobberyWheel = ({ rng, closeModal }) => {
         ))}
       </div>
       <Image
-        src='/clash/strike.png'
+        src='strike.png'
         width={80}
         height={60}
         className='pointer'

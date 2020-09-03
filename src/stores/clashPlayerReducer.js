@@ -3,6 +3,7 @@ import { controller } from '../controller';
 
 const genInitialState = () => ({
   gold: controller.gold || 25,
+  goldBars: controller.goldBars || 0,
   deck: startingDeck
 });
 
@@ -14,6 +15,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         gold: Math.max(0, state.gold + action.payload)
+      };
+    case 'ADJUST_PLAYER_GOLD_BARS':
+      return {
+        ...state,
+        goldBars: Math.max(0, state.goldBars + action.payload)
       };
     case 'ADD_CARDS_TO_COLLECTION':
       return {

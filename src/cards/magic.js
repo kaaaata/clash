@@ -6,14 +6,16 @@ export const magic = [
     image: 'fire',
     rarity: 'common',
     attack: 2,
-    defense: 0
+    defense: 0,
+    isCraftable: true
   },
   {
     name: 'Frost',
     image: 'frost',
     rarity: 'common',
-    attack: 1,
+    attack: 3,
     defense: 1,
+    isCraftable: true,
     shuffleCardCopiesIntoOpponentsPiles: [
       { card: 'Freeze', pile: 'deck' }
     ],
@@ -58,12 +60,13 @@ export const magic = [
     name: 'Super Frost',
     image: 'double_frost',
     rarity: 'uncommon',
-    attack: 2,
+    attack: 5,
     defense: 2,
     shuffleCardCopiesIntoYourPiles: [
       { card: 'Freeze', pile: 'deck' },
       { card: 'Freeze', pile: 'deck' }
-    ]
+    ],
+    description: 'Damage dealt pierces shields. Shuffle two copies of Freeze into your opponent\'s deck.'
   },
   {
     name: 'Tome of Spells',

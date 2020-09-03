@@ -8,7 +8,7 @@ export const Button = ({
   mini = false,
   isDisabled = false,
   color,
-  className,
+  className = '',
   _css = '',
   children // String|Node
 }) => (

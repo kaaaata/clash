@@ -52,7 +52,7 @@ export const CardViewModal = ({
         <Card
           key={index}
           name={card}
-          onClick={cardOnClick ? () => cardOnClick(card) : null}
+          onClick={cardOnClick ? () => cardOnClick(card, index) : null}
           />
       ))}
     </div>

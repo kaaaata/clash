@@ -34,7 +34,7 @@ export const BackgroundImage = () => {
 
   return (
     <Image
-      src={`/clash/${sceneToBackgroundImage[scene] || 'landscape'}.png`}
+      src={`${sceneToBackgroundImage[scene] || 'landscape'}.png`}
       width={1000}
       height={600}
       rgbaFilter={rgbaFiltersByEnergy[energy]}

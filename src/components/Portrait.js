@@ -75,7 +75,7 @@ export const Portrait = ({ player }) => {
 
   const portrait = (
     <Image
-      src={`/clash/${image}.png`}
+      src={`${image}.png`}
       width={150}
       height={125}
       className={portraitClassName}
@@ -92,7 +92,7 @@ export const Portrait = ({ player }) => {
   const shieldsDisplay = !!shields && (
     <Image
       className='shields'
-      src='/clash/defense.png'
+      src='defense.png'
       width={72}
       height={72}
     >

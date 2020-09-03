@@ -37,7 +37,7 @@ export const TownActionCard = ({
 }) => {
   return (
     <Image
-      src='/clash/frame.png'
+      src='frame.png'
       width={150}
       height={200}
       rgbaFilter='rgba(0, 0, 0, 0.3)'
@@ -47,7 +47,7 @@ export const TownActionCard = ({
       className={isDisabled ? 'disabled' : ''}
     >
       <Image
-        src={`/clash/${image}.png`}
+        src={`${image}.png`}
         width={100}
         height={100}
         size='contain'
@@ -60,7 +60,7 @@ export const TownActionCard = ({
           {energy}
         </Text>
         <Image
-          src='/clash/energy.png'
+          src='energy.png'
           width={35}
           height={40}
           className='energy'
