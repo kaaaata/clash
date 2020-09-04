@@ -7,6 +7,8 @@ export const _cardCss = (rarityColor) => css`
   height: 100%;
   text-shadow: 2px 2px 4px ${colors.black};
   border: 2px solid ${rarityColor};
+  display: flex;
+  flex-direction: column;
 
   .name {
     color: ${rarityColor};
@@ -99,5 +101,6 @@ export const _cardCss = (rarityColor) => css`
     padding: 4px 5px;
     position: relative;
     background: rgba(0, 0, 0, 0.2);
+    flex-grow: 1;
   }
 `;
