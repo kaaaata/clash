@@ -97,9 +97,7 @@ export const MonsterPreview = ({
       <br /><br />
       Victory: <span className='green'>gain {monsterGoldReward} gold</span> and <span className='green'>2 cards from the enemy's deck</span>
       <br />
-      Defeat: <span className='red'>{
-        [4, 8, 12].includes(day) ? 'death!' : `lose ${Math.floor(monsterGoldReward / 4)} gold`
-      }</span>
+      Defeat: <span className='red'>{day === 9 ? 'death!' : 'lose 1 life.'}</span>
     </React.Fragment>
   );
 
@@ -108,7 +106,7 @@ export const MonsterPreview = ({
       title={title}
       image={monster.image}
       imageContainerCss={isMonsterElite
-        ? `${effects.rainbow} animation: rainbow 10s infinite;`
+        ? `${effects.rainbow} animation: rainbow 5s infinite;`
         : ''
       }
     >

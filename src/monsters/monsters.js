@@ -41,11 +41,11 @@ const monstersTier1 = [
 
 const monstersTier2 = [
   {
-    name: 'Edible Slime',
+    name: 'Jello Slime',
     image: 'slime_potion',
     stats: { attack: 0, magic: 0, defense: 1 },
     deck: [
-      'Edible Slime',
+      'Jello Slime',
       'Shield',
       'Shield',
       'Healing Potion'
@@ -156,8 +156,8 @@ const monstersTier3 = [
     image: 'vine_slime',
     stats: { attack: 1, magic: 1, defense: 0 },
     deck: [
-      'Edible Slime',
-      'Edible Slime',
+      'Jello Slime',
+      'Jello Slime',
       'Tentacles',
       'Tentacles',
       'Tentacles',
@@ -174,7 +174,7 @@ const _eventMonsters = [
     image: 'treasure_slime_monster',
     stats: { attack: 0, magic: 1, defense: 0 },
     deck: [
-      'Edible Slime',
+      'Jello Slime',
       'Tentacles',
       'Tentacles',
       'Tentacles',

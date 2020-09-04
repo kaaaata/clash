@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { css, jsx } from '@emotion/core'; /** @jsx jsx */
 import { FlexContainer, Image, Gold, Text } from './particles';
 import { Attributes } from './Attributes';
@@ -9,11 +9,13 @@ import { topNavCss, energyMeterCss, collectionCss } from './topNavCss';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import * as actions from '../stores/actions';
 import { CardViewModal } from './modals/CardViewModal';
+import { GameOver } from './modals/GameOver';
 
 export const TopNav = () => {
   const [activeModal, setActiveModal] = useState(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const {
+    lives,
     gold,
     goldBars,
     energy,
@@ -24,6 +26,7 @@ export const TopNav = () => {
     canVisitShop,
     shouldHideTopNav
   } = useSelector(state => ({
+    lives: state.clashPlayer.lives,
     gold: state.clashPlayer.gold,
     goldBars: state.clashPlayer.goldBars,
     energy: state.clashTown.energy,
@@ -35,6 +38,13 @@ export const TopNav = () => {
     shouldHideTopNav: ['story', 'main_menu'].includes(state.clashScene.scene)
   }), shallowEqual);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!lives) {
+      setActiveModal('gameover');
+      setIsSettingsOpen(false);
+    }
+  }, [lives])
 
   return shouldHideTopNav ? null : (
     <React.Fragment>
@@ -51,14 +61,17 @@ export const TopNav = () => {
             height={36}
           />
           <Attributes stats={stats} statBonuses={statBonuses} />
-          <FlexContainer className='gold_bar' alignItems='center' justifyContent='flex-start'>
-            <Image
-              src='gold_bar.png'
-              width={35}
-              height={35}
-              onClick={() => setActiveModal(activeModal === 'crafting' ? null : 'crafting')}
-            />
-            <Text color='yellow'>{goldBars}</Text>
+          <FlexContainer className='lives' alignItems='center'>
+            <Text type='small'>Lives:&nbsp;</Text>
+            {[1, 2, 3].map(i => (
+              <Image
+                key={i}
+                src='life.png'
+                width={30}
+                height={30}
+                _css={i > lives ? 'opacity: 0.15;' : ''}
+              />
+            ))}
           </FlexContainer>
         </FlexContainer>
 
@@ -84,12 +97,27 @@ export const TopNav = () => {
                   src='card_back.png'
                   width={24}
                   height={34}
-                  onClick={() => setActiveModal(activeModal === 'collection' ? null : 'collection')}
+                  onClick={() => {
+                    setActiveModal(activeModal === 'collection' ? null : 'collection');
+                    setIsSettingsOpen(false);
+                  }}
                   className={`card_${i}`}
                 />
               ))}
             </div>
             <Text className='deck_count'>{deck.length}</Text>
+          </FlexContainer>
+          <FlexContainer className='gold_bar' alignItems='center' justifyContent='flex-start'>
+            <Image
+              src='gold_bar.png'
+              width={35}
+              height={35}
+              onClick={() => {
+                setActiveModal(activeModal === 'crafting' ? null : 'crafting');
+                setIsSettingsOpen(false);
+              }}
+            />
+            <Text color='yellow'>{goldBars}</Text>
           </FlexContainer>
           <Gold gold={gold} />
           <Image
@@ -99,6 +127,7 @@ export const TopNav = () => {
             onClick={() => {
               if (canVisitShop) {
                 setActiveModal(activeModal === 'shop' ? null : 'shop');
+                setIsSettingsOpen(false);
               } else {
                 dispatch(actions.setToast('You can\'t shop right now!'));
               }
@@ -121,7 +150,10 @@ export const TopNav = () => {
         <CardViewModal
           title='Your Deck'
           cards={deck}
-          closeModal={() => setActiveModal(null)}
+          closeModal={() => {
+            setActiveModal(null);
+            setIsSettingsOpen(false);
+          }}
         />
       </div>
 
@@ -131,6 +163,10 @@ export const TopNav = () => {
 
       <div css={css`display: ${activeModal === 'shop' ? 'unset' : 'none'};`}>
         <Shop closeModal={() => setActiveModal(null)} />
+      </div>
+
+      <div css={css`display: ${activeModal === 'gameover' ? 'unset' : 'none'};`}>
+        <GameOver />
       </div>
 
       <div css={css`display: ${isSettingsOpen ? 'unset' : 'none'};`}>

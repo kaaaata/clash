@@ -308,8 +308,8 @@ test('CUSTOM CARD EFFECT (Golden Goblet)', () => {
   expect(state.you.deck.length).toBe(15);
 });
 
-test('CUSTOM CARD EFFECT (Edible Slime)', () => {
-  const card = cards['Edible Slime'];
+test('CUSTOM CARD EFFECT (Jello Slime)', () => {
+  const card = cards['Jello Slime'];
   simulatePlayCard(card);
   expect(state.you.deck.length).toBe(13)
   expect(state.you.deck.filter(i => ['common', 'uncommon'].includes(i.rarity)).length)

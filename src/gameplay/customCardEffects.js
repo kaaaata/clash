@@ -116,13 +116,13 @@ export const customCardEffects = {
     state.logs.push(`${player} plays a copy of ${randomCard.name}`);
     playCard(state, randomCard, player);
   },
-  'Edible Slime': (state, card, player) => {
+  'Jello Slime': (state, card, player) => {
     // Shuffle 3 random common or uncommon cards into your deck.
     const copies = [1, 2, 3].map(i => ({
       card: cardsArray.getRandomCardByFilter(
         card => (
           !card.isToken
-          && card.name !== 'Edible Slime'
+          && card.name !== 'Jello Slime'
           && ['common', 'uncommon'].includes(card.rarity)
         )
       ).name,

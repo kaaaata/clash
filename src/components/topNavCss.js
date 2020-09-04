@@ -11,7 +11,7 @@ export const topNavCss = css`
   top: 0;
 
   .left, .right {
-    width: 350px;
+    width: 385px;
   }
 
   .left {
@@ -21,15 +21,17 @@ export const topNavCss = css`
     }
 
     .attributes {
-      margin-right: 100px;
+      margin-right: 40px;
       font-size: 24px;
       flex: 0 0 auto;
     }
 
-    .gold_bar {
-      .image {
-        margin-right: 7px;
-        ${effects.hoverScale()}
+    .lives {
+      flex: 0 0 auto;
+      margin-right: 40px;
+
+      & > * {
+        margin-right: 3px;
       }
     }
   }
@@ -46,6 +48,15 @@ export const topNavCss = css`
       }
     }
 
+    .gold_bar {
+      width: 70px;
+
+      .image {
+        margin-right: 7px;
+        ${effects.hoverScale()}
+      }
+    }
+
     .gold {
       justify-content: flex-start;
       flex: 0 0 auto;
@@ -59,12 +70,11 @@ export const topNavCss = css`
       text-align: center;
       color: ${colors.yellow};  
       ${effects.hoverScale()}
-      margin-left: 10px;
     }
   
     .settings {
       ${effects.hoverScale()}
-      margin-left: 40px;
+      margin-left: 20px;
     }
   }
 `;

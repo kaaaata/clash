@@ -7,13 +7,13 @@ import { controller } from '../controller';
 const genInitialState = () => {
   const monsterWaves = genMonsterWaves();
   return {
-    energy: controller.energy || 0,
-    day: controller.day || 1,
+    energy: typeof controller.energy === 'number' ? controller.energy : 0,
+    day: typeof controller.day === 'number' ? controller.day : 1,
     monsterWaves,
     dailyMonsterGoldReward: genMonsterGoldReward(
-      monsterWaves[(controller.day || 1) - 1],
+      monsterWaves[(typeof controller.day === 'number' ? controller.day : 1) - 1],
       false,
-      controller.day || 1
+      typeof controller.day === 'number' ? controller.day : 1
     ),
     townActions: genTownActions(),
     purchasableCards: [],

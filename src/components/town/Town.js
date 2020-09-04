@@ -19,12 +19,14 @@ import { townCss } from './townCss';
 
 export const Town = () => {
   const {
+    lives,
     energy,
     day,
     townActions,
     completedTownActions,
     feed
   } = useSelector(state => ({
+    lives: state.clashPlayer.lives,
     energy: state.clashTown.energy,
     day: state.clashTown.day,
     townActions: state.clashTown.townActions,
@@ -34,7 +36,9 @@ export const Town = () => {
   const dispatch = useDispatch();
   
   const [townActionDescription, setTownActionDescription] = useState('Choose an action!');
-  const [activeModal, setActiveModal] = useState([4, 7].includes(day) ? 'Receive Blessing' : null);
+  const [activeModal, setActiveModal] = useState(
+    !!lives && [4, 7].includes(day) && lives > 0 ? 'Receive Blessing' : null
+  );
 
   useEffect(() => {
     if (feed.length) {

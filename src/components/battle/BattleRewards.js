@@ -4,14 +4,12 @@ import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import * as actions from '../../stores/actions';
 import { EventModal, EventModalPage } from '../modals/EventModal';
 import { CardLootModal } from '../modals/CardLootModal';
-import { GameOver } from '../modals/GameOver';
 import { effects } from '../styles';
 
 export const BattleRewards = () => {
   const {
     didPlayerWin,
     didPlayerLose,
-    isGameOver,
     winnerImage,
     battleRewardGold,
     battleRewardCards,
@@ -23,9 +21,7 @@ export const BattleRewards = () => {
       && state.clashBattleStats.yourName === state.clashBattleStats.winner,
     didPlayerLose: state.clashBattleStats.winner
       && state.clashBattleStats.yourName !== state.clashBattleStats.winner,
-    isGameOver: state.clashBattleStats.winner
-      && state.clashBattleStats.yourName !== state.clashBattleStats.winner
-      && state.clashBattleStats.isEnemyElite,
+    isGameOver: !state.clashPlayer.lives,
     winnerImage: state.clashBattleStats.winnerImage,
     battleRewardGold: state.clashBattleCards.battleRewardGold,
     battleRewardCards: state.clashBattleCards.battleRewardCards,
@@ -36,8 +32,6 @@ export const BattleRewards = () => {
   const dispatch = useDispatch();
 
   const [page, setPage] = useState('default');
-
-  const battleDefeatGold = Math.floor(battleRewardGold / 4);
   
   const returnToTown = () => {
     const townFeedMessage = didPlayerWin
@@ -60,23 +54,23 @@ export const BattleRewards = () => {
           page={1}
           text={didPlayerWin ? (
             <React.Fragment>
-              The enemy drops some <span className='yellow'>gold.</span>
+              The enemy drops some <span className='yellow'>gold!</span>
             </React.Fragment>
           ) : (
             <React.Fragment>
-              The enemy <span className='red'>steals</span> some of your <span className='yellow'>gold.</span>
+              You were no match for the <span className='red'>{enemyName}!</span>
             </React.Fragment>
           )}
           options={[{
             name: 'Continue',
             greenText: didPlayerWin ? `Receive ${battleRewardGold} gold.` : '',
-            redText: didPlayerWin ? '' : `Lose ${battleDefeatGold} gold.`,
+            redText: didPlayerWin ? '' : `Lose 1 life.`,
             onClick: () => {
               if (didPlayerWin) {
                 dispatch(actions.adjustPlayerGold(battleRewardGold));
                 setPage('steal_cards');
               } else {
-                dispatch(actions.adjustPlayerGold(-1 * battleDefeatGold));
+                dispatch(actions.adjustPlayerLives(-1));
                 returnToTown();
               }
             }
@@ -105,11 +99,7 @@ export const BattleRewards = () => {
       break;
   }
 
-  if (isGameOver) {
-    return (
-      <GameOver />
-    );
-  } else if (page === 'card_loot_modal') {
+  if (page === 'card_loot_modal') {
     return (
       <CardLootModal
         maxCardsToTake={2}
@@ -123,7 +113,7 @@ export const BattleRewards = () => {
         title={didPlayerWin ? 'Victory!' : 'Defeat!'}
         image={winnerImage}
         imageContainerCss={isEnemyElite && didPlayerLose
-          ? `${effects.rainbow} animation: rainbow 10s infinite;`
+          ? `${effects.rainbow} animation: rainbow 5s infinite;`
           : ''
         }
       >

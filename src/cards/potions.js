@@ -46,7 +46,7 @@ export const potions = [
     isToken: true
   },
   {
-    name: 'Edible Slime',
+    name: 'Jello Slime',
     image: 'slime_potion',
     rarity: 'uncommon',
     customEffect: true,

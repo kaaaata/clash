@@ -8,7 +8,7 @@ export const portraitCss = (player) => css`
 
   .rainbow {
     ${effects.rainbow};
-    animation: rainbow 10s infinite;
+    animation: rainbow 5s infinite;
   }
 
   .portrait {
