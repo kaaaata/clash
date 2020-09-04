@@ -11,12 +11,27 @@ import { Card } from '../Card';
 const purchaseCardsCss = css`
   .item {
     margin-right: 40px;
-    margin-top: -15px;
     display: inline-block;
     line-height: 1 !important;
+    position: relative;
+
+    .gold {
+      justify-content: center;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: top 0.1s ease-out;
+    }
 
     &.hidden {
       visibility: hidden;
+    }
+
+    &.hovered {
+      .gold {
+        top: -20px;
+      }
     }
   }
 `;
@@ -29,6 +44,7 @@ export const PurchaseCards = ({ title, image, closeModal }) => {
   const dispatch = useDispatch();
 
   const [purchasedCards, setPurchasedCards] = useState({});
+  const [hoveredCardIndex, setHoveredCardIndex] = useState(-1);
 
   return (
     <EventModal
@@ -40,9 +56,16 @@ export const PurchaseCards = ({ title, image, closeModal }) => {
         text={
           <div css={purchaseCardsCss}>
             {cards.map((i, index) => (
-              <div className={`item ${purchasedCards[index] ? 'hidden' : ''}`} key={index}>
+              <div
+                key={index}
+                className={[
+                  'item',
+                  purchasedCards[index] ? 'hidden' : '',
+                  hoveredCardIndex === index ? 'hovered' : ''
+                ].filter(Boolean).join(' ')}
+              >
                 <Gold gold={i.cost} color={gold >= i.cost ? 'yellow' : 'red'} />
-                <Spacer height={20} />
+                <Spacer height={35} />
                 <Card
                   name={i.name}
                   onClick={() => {
@@ -57,10 +80,11 @@ export const PurchaseCards = ({ title, image, closeModal }) => {
                       dispatch(actions.setToast('Not enough gold!'));
                     }
                   }}
+                  onMouseEnter={() => setHoveredCardIndex(index)}
+                  onMouseLeave={() => setHoveredCardIndex(-1)}
                 />
               </div>
             ))}
-            <Spacer height={20} />
           </div>
         }
         options={[{

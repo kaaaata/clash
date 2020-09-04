@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { EventModal, EventModalPage } from '../../modals/EventModal';
 import { MonsterPreview } from '../../modals/MonsterPreview';
-import { eventMonsters } from '../../monsters/monsters';
+import { eventMonsters } from '../../../monsters/monsters';
 
 export const CatherineTheGreat = ({ closeModal }) => {
   const [page, setPage] = useState('default');
@@ -39,7 +39,7 @@ export const CatherineTheGreat = ({ closeModal }) => {
           page={2}
           text='You decline the challenge, and run for your life!'
           options={[{
-            name: 'Continue',
+            name: 'Back to Town',
             onClick: closeModal
           }]}
         />

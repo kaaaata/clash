@@ -53,7 +53,7 @@ export const TownActionCard = ({
         size='contain'
       />
       <Spacer height={5} />
-      <Text type='small'>{name}</Text>
+      <Text type='mini'>{name}</Text>
       <Spacer height={10} />
       <FlexContainer justifyContent='center' alignItems='center'>
         <Text type='header' color={canAfford ? 'yellow' : 'red'}>

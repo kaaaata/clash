@@ -155,7 +155,9 @@ export const Card = ({
   shouldAnimateEntry = false,
   isBlurred = false,
   isHidden = false,
-  onClick
+  onClick,
+  onMouseEnter,
+  onMouseLeave
 }) => {
   const animatedEntryStartingTransformCss = 'transform: rotate3d(0, 1, 0, 65deg);';
   const restingPositionTransformCss = isInCardPile
@@ -201,11 +203,22 @@ export const Card = ({
     }, 0);
   });
 
+  const mouseProps = {};
+  if (onClick) {
+    mouseProps.onClick = onClick;
+  }
+  if (onMouseEnter) {
+    mouseProps.onMouseEnter = onMouseEnter;
+  }
+  if (onMouseLeave) {
+    mouseProps.onMouseLeave = onMouseLeave;
+  }
+
   return (
     <div
       className='card'
       css={cardCss}
-      onClick={onClick}
+      {...mouseProps}
     >
       {isFaceDown ? <_FaceDownCard /> : <_Card name={name} />}
     </div>

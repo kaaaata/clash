@@ -10,6 +10,7 @@ import { cards } from '../../cards/cards';
 import { rarityColors } from '../../cards/rarity';
 import { sample } from 'lodash';
 import { controller } from '../../controller';
+import { effects } from '../styles';
 
 const CardsRarityString = ({ _cards }) => {
   const rarityCounts = { common: 0, uncommon: 0, rare: 0, legendary: 0 };
@@ -49,7 +50,6 @@ export const MonsterPreview = ({
   const isMonsterElite = !monsterOverride && [3, 6, 9].includes(day);
   const yourDeck = shuffle(deck);
   const enemyDeck = genMonsterDeck(monster.deck, day);
-  const enemyHueRotate = isMonsterElite ? random(90, 270) : null;
   const monsterStats = monster.stats;
   const monsterName = `${isMonsterElite ? `${genEliteMonsterPrefix()} ` : ''}${monster.name}`;
   if (isMonsterElite) {
@@ -62,7 +62,6 @@ export const MonsterPreview = ({
       name: monsterName,
       image: monster.image,
       type: monster.type,
-      hueRotate: enemyHueRotate,
       isEnemyElite: isMonsterElite,
       stats: monsterStats
     }));
@@ -108,7 +107,10 @@ export const MonsterPreview = ({
     <EventModal
       title={title}
       image={monster.image}
-      imageProps={enemyHueRotate ? { filter: `hue-rotate(${enemyHueRotate}deg)` } : null}
+      imageContainerCss={isMonsterElite
+        ? `${effects.rainbow} animation: rainbow 10s infinite;`
+        : ''
+      }
     >
       <EventModalPage
         key={1}

@@ -2,13 +2,18 @@ import { css, jsx } from '@emotion/core'; /** @jsx jsx */
 import { useSelector, shallowEqual } from 'react-redux';
 import { Image, Spacer } from './particles';
 import { Attributes } from './Attributes';
-import { colors } from './styles';
+import { colors, effects } from './styles';
 import { useState, useEffect } from 'react';
 
 const portraitCss = (player) => css`
   position: absolute;
   left: ${player === 'enemy' ? 885 : 20}px;
   top: ${player === 'enemy' ? 57 : 405}px;
+
+  .rainbow {
+    ${effects.rainbow};
+    animation: rainbow 10s infinite;
+  }
 
   .portrait {
     position: absolute;
@@ -49,7 +54,7 @@ const portraitCss = (player) => css`
 `;
 
 export const Portrait = ({ player }) => {
-  const { image, stats, statBonuses, shields, isDead, enemyHueRotate } = useSelector(state => {
+  const { image, stats, statBonuses, shields, isDead, isEnemyElite } = useSelector(state => {
     return player === 'you' ? {
       image: state.clashBattleStats.yourImage,
       stats: state.clashBattleStats.yourStats,
@@ -62,7 +67,7 @@ export const Portrait = ({ player }) => {
       statBonuses: state.clashBattleStats.enemyStatBonuses,
       shields: state.clashBattleStats.enemyShields,
       isDead: state.clashBattleStats.winner === state.clashBattleStats.yourName,
-      enemyHueRotate: state.clashBattleStats.enemyHueRotate
+      isEnemyElite: state.clashBattleStats.isEnemyElite
     };
   }, shallowEqual);
   const [portraitClassName, setPortraitClassName] = useState('portrait');
@@ -74,14 +79,15 @@ export const Portrait = ({ player }) => {
   }, [isDead]);
 
   const portrait = (
-    <Image
-      src={`${image}.png`}
-      width={150}
-      height={125}
-      className={portraitClassName}
-      size='contain'
-      filter={enemyHueRotate ? `hue-rotate(${enemyHueRotate}deg)` : null}
-    />
+    <div className={isEnemyElite ? 'rainbow' : ''}>
+      <Image
+        src={`${image}.png`}
+        width={150}
+        height={125}
+        className={portraitClassName}
+        size='contain'
+      />
+    </div>
   );
 
   // hold the place during the spinny death animation

@@ -4,14 +4,18 @@ import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import * as actions from '../../stores/actions';
 import { Spacer, FlexContainer, Text } from '../particles';
 import { TownActionCard } from './TownActionCard';
-import { WorkForGold } from './WorkForGold';
+import { FreeGold } from './FreeGold';
 import { ReceiveBlessing } from './ReceiveBlessing';
 import { PurchaseCards } from './PurchaseCards';
 import { MonsterPreview } from '../modals/MonsterPreview';
-import { RobberyWheel } from './randomEvents';
+import { GoldBar } from './GoldBar';
+import {
+  RobberyWheel,
+  TreasureSlime,
+  CatherineTheGreat
+} from './randomEvents';
 import { townCss } from './townCss';
 import { RemoveCards } from './RemoveCards';
-import { TreasureSlime } from './randomEvents/TreasureSlime';
 
 export const Town = () => {
   const {
@@ -51,8 +55,11 @@ export const Town = () => {
   
   let modal;
   switch (activeModal) {
-    case 'Work for Gold':
-      modal = <WorkForGold closeModal={() => setActiveModal(null)} />;
+    case 'Make Money':
+      modal = <FreeGold closeModal={() => setActiveModal(null)} />;
+      break;
+    case 'Gold Bar':
+      modal = <GoldBar closeModal={() => setActiveModal(null)} />;
       break;
     case 'Receive Blessing':
       modal = <ReceiveBlessing closeModal={() => setActiveModal(null)} />;
@@ -66,11 +73,23 @@ export const Town = () => {
         />
       );
       break;
-    case 'Spin the Wheel':
+    case 'Goblin\'s Game':
       modal = <RobberyWheel rng={Math.random()} closeModal={() => setActiveModal(null)} />;
       break;
     case 'Treasure Slime':
       modal = <TreasureSlime rng={Math.random()} closeModal={() => setActiveModal(null)} />;
+      break;
+    case 'Challenge Battle':
+      modal = <CatherineTheGreat closeModal={() => setActiveModal(null)} />;
+      break;
+    case 'Blacksmith':
+      modal = (
+        <PurchaseCards
+          title='Blacksmith'
+          image='dwarf_event'
+          closeModal={() => setActiveModal(null)}
+        />
+      );
       break;
     case 'Learn Magic':
       modal = (
@@ -86,15 +105,6 @@ export const Town = () => {
         <PurchaseCards
           title='Brew Potions'
           image='blue_potion'
-          closeModal={() => setActiveModal(null)}
-        />
-      );
-      break;
-    case 'Buy Weapons':
-      modal = (
-        <PurchaseCards
-          title='Buy Weapons'
-          image='slice'
           closeModal={() => setActiveModal(null)}
         />
       );
@@ -163,12 +173,14 @@ export const Town = () => {
                       dispatch(actions.setTownPurchasableCards('magic'));
                     } else if (i.name === 'Brew Potions') {
                       dispatch(actions.setTownPurchasableCards('potions'));
-                    } else if (i.name === 'Buy Weapons') {
+                    } else if (i.name === 'Blacksmith') {
                       dispatch(actions.setTownPurchasableCards('attacks'));
                     } else if (i.name === 'Recruit Allies') {
                       dispatch(actions.setTownPurchasableCards('allies'));
                     }
                     setActiveModal(i.name);
+                  } else {
+                    dispatch(actions.setToast('Not enough energy!'));
                   }
                 }}
               />

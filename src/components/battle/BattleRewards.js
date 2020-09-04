@@ -5,6 +5,7 @@ import * as actions from '../../stores/actions';
 import { EventModal, EventModalPage } from '../modals/EventModal';
 import { CardLootModal } from '../modals/CardLootModal';
 import { GameOver } from '../modals/GameOver';
+import { effects } from '../styles';
 
 export const BattleRewards = () => {
   const {
@@ -15,7 +16,7 @@ export const BattleRewards = () => {
     battleRewardGold,
     battleRewardCards,
     enemyType,
-    enemyHueRotate,
+    isEnemyElite,
     enemyName
   } = useSelector(state => ({
     didPlayerWin: state.clashBattleStats.winner
@@ -29,7 +30,7 @@ export const BattleRewards = () => {
     battleRewardGold: state.clashBattleCards.battleRewardGold,
     battleRewardCards: state.clashBattleCards.battleRewardCards,
     enemyType: state.clashBattleStats.enemyType,
-    enemyHueRotate: state.clashBattleStats.enemyHueRotate,
+    isEnemyElite: state.clashBattleStats.isEnemyElite,
     enemyName: state.clashBattleStats.enemyName
   }), shallowEqual);
   const dispatch = useDispatch();
@@ -121,9 +122,9 @@ export const BattleRewards = () => {
       <EventModal
         title={didPlayerWin ? 'Victory!' : 'Defeat!'}
         image={winnerImage}
-        imageProps={(enemyHueRotate && didPlayerLose)
-          ? { filter: `hue-rotate(${enemyHueRotate}deg)` }
-          : null
+        imageContainerCss={isEnemyElite && didPlayerLose
+          ? `${effects.rainbow} animation: rainbow 10s infinite;`
+          : ''
         }
       >
         {pageComponent}

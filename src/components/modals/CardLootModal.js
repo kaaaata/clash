@@ -45,9 +45,9 @@ export const CardLootModal = ({
     </React.Fragment>
   );
 
-  const continueOptions = [
-    { text: 'Done', color: 'green', onClick: closeModal },
-    {
+  const continueOptions = [{ text: 'Done', color: 'green', onClick: closeModal }];
+  if (maxCardsToTake === cards.length) {
+    continueOptions.push({
       text: 'Take All',
       color: cardsTakenCount === maxCardsToTake ? 'red' : 'green',
       onClick: () => {
@@ -59,8 +59,8 @@ export const CardLootModal = ({
           closeModal();
         }
       }
-    }
-  ];
+    });
+  }
 
   return (
     <Modal

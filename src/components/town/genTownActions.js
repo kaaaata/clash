@@ -1,11 +1,15 @@
-import { sample } from 'lodash';
+import { sample, keyBy } from 'lodash';
 
 // generate 8 random town actions (the last one is always "next day").
 export const genTownActions = () => {
   const actions = [];
 
   for (let i = 0; i < 7; i++) {
-    actions.push(sample(townActionPool));
+    const action = townActions[sample(townActionPool)];
+    actions.push({
+      ...action,
+      energy: sample(action.energy)
+    });
   }
 
   actions.push({
@@ -18,21 +22,28 @@ export const genTownActions = () => {
   return actions;
 };
 
-const townActions = [
+const townActions = keyBy([
   // {
-  //   name: 'Work for Gold',
-  //   energy: [1, 2],
-  //   probability: 6,
+  //   name: 'Make Money',
+  //   energy: [1, 2, 3],
+  //   probability: 15,
   //   image: 'gold',
   //   description: 'Earn some gold.'
   // },
   // {
-  //   name: 'Buy Weapons',
-  //   energy: [4, 5, 6, 7],
-  //   probability: 4,
-  //   image: 'slice',
-  //   description: 'Obtain attack cards.'
+  //   name: 'Gold Bar',
+  //   energy: [4, 5, 6],
+  //   probability: 2,
+  //   image: 'gold_bar',
+  //   description: 'A free gold bar!'
   // },
+  {
+    name: 'Blacksmith',
+    energy: [1, 2, 3],
+    probability: 1,
+    image: 'dwarf',
+    description: 'Purchase attack cards.'
+  },
   // {
   //   name: 'Learn Magic',
   //   energy: [4, 5, 6, 7],
@@ -57,31 +68,35 @@ const townActions = [
   // {
   //   name: 'Donate a Card',
   //   energy: [0],
-  //   probability: 1,
+  //   probability: 2,
   //   image: 'weapons_guy',
   //   description: 'Remove a card from your deck.'
   // },
   // {
-  //   name: 'Spin the Wheel',
-  //   energy: [2, 3, 4],
-  //   probability: 1,
+  //   name: 'Goblin\'s Game',
+  //   energy: [4, 5, 6],
+  //   probability: 2,
   //   image: 'goblin_boss',
   //   description: 'Spin the goblin\'s wheel!'
   // },
   // {
   //   name: 'Treasure Slime',
-  //   energy: [2, 3, 4],
-  //   probability: 1,
+  //   energy: [4, 5, 6],
+  //   probability: 2,
   //   image: 'treasure_slime_monster',
   //   description: 'A random encounter!'
+  // },
+  // {
+  //   name: 'Challenge Battle',
+  //   energy: [4, 5, 6],
+  //   probability: 1,
+  //   image: 'catherine_the_great',
+  //   description: 'A random encounter!'
   // }
-];
+], 'name');
 const townActionPool = [];
-townActions.forEach(action => {
+Object.values(townActions).forEach(action => {
   for (let i = 0; i < action.probability; i++) {
-    townActionPool.push({
-      ...action,
-      energy: sample(action.energy)
-    });
+    townActionPool.push(action.name);
   }
 });

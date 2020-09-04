@@ -5,9 +5,6 @@ export const genEliteMonsterPrefix = () => sample([
   'Rainbow',
   'Vorpal',
   'Divine',
-  'Almighty',
   'Transcendental',
-  'Immaculate',
-  'Unholy',
   'Chromatic'
 ]);

@@ -195,7 +195,7 @@ export const RobberyWheel = ({ rng, closeModal }) => {
     />
   ) : (
     <EventModal
-      title='Robbery Wheel'
+      title="Goblin's Game"
       image='goblin_boss'
     >
       <EventModalPage

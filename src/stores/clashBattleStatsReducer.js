@@ -12,7 +12,6 @@ const initialState = {
   enemyStats: { attack: 0, magic: 0, defense: 0 },
   enemyStatBonuses: { attack: 0, magic: 0, defense: 0 },
   enemyType: null,
-  enemyHueRotate: null,
   isEnemyElite: false,
   enemyShields: 0,
   yourShields: 0,
@@ -28,7 +27,6 @@ export default (state = initialState, action) => {
         enemyName: action.payload.name,
         enemyImage: action.payload.image,
         enemyType: action.payload.type,
-        enemyHueRotate: action.payload.hueRotate,
         isEnemyElite: action.payload.isEnemyElite
       };
     case 'SET_YOUR_SHIELDS':
