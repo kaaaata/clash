@@ -1,7 +1,7 @@
 import { jsx } from '@emotion/core'; /** @jsx jsx */
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
-import * as actions from '../../stores/actions';
-import { CardViewModal } from '../modals/CardViewModal';
+import * as actions from '../../../stores/actions';
+import { CardViewModal } from '../../modals/CardViewModal';
 
 export const RemoveCards = ({ closeModal }) => {
   const { deck } = useSelector(state => ({

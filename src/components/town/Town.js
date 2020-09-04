@@ -4,18 +4,18 @@ import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import * as actions from '../../stores/actions';
 import { Spacer, FlexContainer, Text } from '../particles';
 import { TownActionCard } from './TownActionCard';
-import { FreeGold } from './FreeGold';
 import { ReceiveBlessing } from './ReceiveBlessing';
-import { PurchaseCards } from './PurchaseCards';
 import { MonsterPreview } from '../modals/MonsterPreview';
-import { GoldBar } from './GoldBar';
 import {
   RobberyWheel,
   TreasureSlime,
-  CatherineTheGreat
+  CatherineTheGreat,
+  RemoveCards,
+  FreeGold,
+  GoldBar,
+  PurchaseCards
 } from './randomEvents';
 import { townCss } from './townCss';
-import { RemoveCards } from './RemoveCards';
 
 export const Town = () => {
   const {

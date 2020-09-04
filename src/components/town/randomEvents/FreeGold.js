@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import * as actions from '../../stores/actions';
+import * as actions from '../../../stores/actions';
 import { random } from 'lodash';
-import { EventModal, EventModalPage } from '../modals/EventModal';
+import { EventModal, EventModalPage } from '../../modals/EventModal';
 
 export const FreeGold = ({ closeModal }) => {
   const dispatch = useDispatch();

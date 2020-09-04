@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import * as actions from '../../stores/actions';
-import { EventModal, EventModalPage } from '../modals/EventModal';
+import * as actions from '../../../stores/actions';
+import { EventModal, EventModalPage } from '../../modals/EventModal';
 
 export const GoldBar = ({ closeModal }) => {
   const dispatch = useDispatch();
