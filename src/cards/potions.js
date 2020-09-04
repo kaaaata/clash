@@ -46,18 +46,6 @@ export const potions = [
     isToken: true
   },
   {
-    name: 'Explosive Potion',
-    image: 'explosive_potion',
-    rarity: 'uncommon',
-    attack: 2,
-    pierces: true,
-    onDiscard: {
-      attack: 2,
-      pierces: true
-    },
-    customDescription: 'Deal 2 damage.'
-  },
-  {
     name: 'Edible Slime',
     image: 'slime_potion',
     rarity: 'uncommon',

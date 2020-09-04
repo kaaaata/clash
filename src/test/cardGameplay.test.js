@@ -183,17 +183,15 @@ test('Play copies of cards works (Hobgoblin)', () => {
     .not.toBe(-1);
 });
 
-test('Shuffle card copies into pile works (Goblin, Candy Corn)', () => {
-  const goblin = cards['Goblin'];
+test('Shuffle card copies into pile works (Paladin, Candy Corn)', () => {
+  const paladin = cards['Paladin'];
   const candyCorn = cards['Candy Corn'];
-  simulatePlayCard(goblin);
+  simulatePlayCard(paladin);
   simulatePlayCard(candyCorn);
   expect(state.you.discard.getRandomCardIndexByFilter(card => card.name === 'Candy Corn'))
     .not.toBe(-1);
-  expect(
-    state.enemy.deck.getRandomCardIndexByFilter(card => card.name === 'Bomb') !== -1
-    || state.enemy.banish.getRandomCardIndexByFilter(card => card.name === 'Bomb') !== -1
-  ).toBe(true);
+  expect(state.you.deck.getRandomCardIndexByFilter(card => card.name === 'Healing Blade'))
+    .not.toBe(-1);
 });
 
 test('Discard effects work (Healing Potion, Falchion)', () => {
@@ -263,11 +261,11 @@ test('Mock cards disappear after being played', () => {
   expect(state.enemy.banish.length).toBe(10);
 });
 
-test('Potions can deal damage using the attack property (Explosive Potion)', () => {
-  const potion = cards['Explosive Potion'];
-  simulatePlayCard(potion);
-  expect(state.enemy.deck.length).toBe(10 - potion.attack);
-});
+// test('Potions can deal damage using the attack property (Explosive Potion)', () => {
+//   const potion = cards['Explosive Potion'];
+//   simulatePlayCard(potion);
+//   expect(state.enemy.deck.length).toBe(10 - potion.attack);
+// });
 
 test('CUSTOM CARD EFFECT (Brawler)', () => {
   const brawler = cards['Brawler'];
@@ -287,10 +285,10 @@ test('CUSTOM CARD EFFECT (Recruiter, Mage)', () => {
     .not.toBe(-1);
 });
 
-test('CUSTOM CARD EFFECT (Cleric, Healing Potion)', () => {
+test('CUSTOM CARD EFFECT (Apothecary, Healing Potion)', () => {
   state.you.banish.push(cards['Healing Potion']);
 
-  const card = cards['Cleric'];
+  const card = cards['Apothecary'];
   simulatePlayCard(card);
   expect(state.you.banish.getRandomCardIndexByFilter(card => card.name === 'Healing Potion'))
     .toBe(-1);

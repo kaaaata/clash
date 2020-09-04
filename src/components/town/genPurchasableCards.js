@@ -20,6 +20,13 @@ export const genPurchasableCards = (type) => {
       cost: 0
     },
     {
+      // magic vendor sells an extra common, to compensate for there being no rare magic card.
+      name: type === 'magic' && !rolledLegendaryCard && (
+        sample(cards[type].filter(card => card.rarity === 'common')) || {}
+      ).name,
+      cost: 15 + random(-5, 5)
+    },
+    {
       name: (sample(cards[type].filter(card => card.rarity === 'uncommon')) || {}).name,
       cost: 30 + random(-10, 10)
     }
@@ -36,6 +43,8 @@ export const genPurchasableCards = (type) => {
       cost: 70 + random(-20, 20)
     });
   }
+
+  
 
   return purchasableCards.filter(card => card.name);
 };

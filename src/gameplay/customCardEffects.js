@@ -64,7 +64,7 @@ export const customCardEffects = {
       );
     }
   },
-  'Cleric': (state, card, player) => {
+  'Apothecary': (state, card, player) => {
     // When played or discarded, shuffle a random potion from your banish into your deck.
     const potionIndex = state[player].banish.getRandomCardIndexByFilter(
       card => card.type === 'potion' && !card.isToken

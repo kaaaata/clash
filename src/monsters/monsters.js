@@ -14,14 +14,6 @@ const monstersTier1 = [
     ]
   },
   {
-    name: 'Goblin',
-    image: 'goblin',
-    stats: { attack: 0, magic: 0, defense: 0 },
-    deck: [
-      'Goblin'
-    ]
-  },
-  {
     name: 'Slime',
     image: 'basic_slime',
     stats: { attack: 0, magic: 0, defense: 0 },

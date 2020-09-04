@@ -91,29 +91,29 @@ export const Town = () => {
         />
       );
       break;
-    case 'Learn Magic':
+    case 'Recruiter':
       modal = (
         <PurchaseCards
-          title='Learn Magic'
-          image='double_fireball'
-          closeModal={() => setActiveModal(null)}
-        />
-      );
-      break;
-    case 'Brew Potions':
-      modal = (
-        <PurchaseCards
-          title='Brew Potions'
-          image='blue_potion'
-          closeModal={() => setActiveModal(null)}
-        />
-      );
-      break;
-    case 'Recruit Allies':
-      modal = (
-        <PurchaseCards
-          title='Recruit Allies'
+          title='Recruiter'
           image='recruiter_event'
+          closeModal={() => setActiveModal(null)}
+        />
+      );
+      break;
+    case 'Mage':
+      modal = (
+        <PurchaseCards
+          title='Mage'
+          image='mage_event'
+          closeModal={() => setActiveModal(null)}
+        />
+      );
+      break;
+    case 'Apothecary':
+      modal = (
+        <PurchaseCards
+          title='Apothecary'
+          image='alchemist_event'
           closeModal={() => setActiveModal(null)}
         />
       );
@@ -169,13 +169,13 @@ export const Town = () => {
                       dispatch(actions.setTownActionCompleted(index));
                       dispatch(actions.adjustPlayerEnergy(-1 * i.energy));
                     }
-                    if (i.name === 'Learn Magic') {
+                    if (i.name === 'Mage') {
                       dispatch(actions.setTownPurchasableCards('magic'));
-                    } else if (i.name === 'Brew Potions') {
+                    } else if (i.name === 'Apothecary') {
                       dispatch(actions.setTownPurchasableCards('potions'));
                     } else if (i.name === 'Blacksmith') {
                       dispatch(actions.setTownPurchasableCards('attacks'));
-                    } else if (i.name === 'Recruit Allies') {
+                    } else if (i.name === 'Recruiter') {
                       dispatch(actions.setTownPurchasableCards('allies'));
                     }
                     setActiveModal(i.name);

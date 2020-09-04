@@ -22,7 +22,7 @@ const _Card = React.memo(
       defense,
       type,
       description,
-      glow
+      glow,
     } = cards[name];
 
     const cardArt = (
@@ -50,9 +50,9 @@ const _Card = React.memo(
           <Image
             src={`${image}.png`}
             width='100%'
-            height={70}
+            height={type === 'ally' ? 115 : 70}
             size='contain'
-            className='card_art'
+            className={`card_art ${type === 'ally' ? 'ally' : ''}`}
           />
         )}
       </React.Fragment>

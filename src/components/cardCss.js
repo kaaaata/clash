@@ -10,6 +10,7 @@ export const _cardCss = (rarityColor) => css`
 
   .name {
     color: ${rarityColor};
+    background: rgba(0, 0, 0, 0.2);
     text-align: center;
     padding: 2px;
     font-size: 12px;
@@ -23,6 +24,10 @@ export const _cardCss = (rarityColor) => css`
 
     .card_art {
       position: absolute;
+
+      &.ally {
+        top: -7px;
+      }
 
       &.faded {
         opacity: 0.8;
@@ -75,11 +80,14 @@ export const _cardCss = (rarityColor) => css`
   .border {
     height: 2px;
     background: ${rarityColor};
+    position: relative;
   }
 
   .flair {
     font-size: 10px;
     padding: 2px 5px;
+    position: relative;
+    background: rgba(0, 0, 0, 0.2);
 
     .rarity {
       color: ${rarityColor};
@@ -90,5 +98,6 @@ export const _cardCss = (rarityColor) => css`
     font-size: 10px;
     padding: 4px 5px;
     position: relative;
+    background: rgba(0, 0, 0, 0.2);
   }
 `;

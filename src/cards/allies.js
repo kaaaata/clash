@@ -25,30 +25,6 @@ export const allies = [
     customDescription: 'Play a random ally from your discard pile, then banish it.'
   },
   {
-    name: 'Goblin',
-    image: 'goblin',
-    rarity: 'common',
-    attack: 1,
-    defense: 0,
-    shuffleCardCopiesIntoOpponentsPiles: [
-      { card: 'Bomb', pile: 'deck' }
-    ],
-    customDescription: 'Shuffle a copy of Bomb into your opponent\'s deck.'
-  },
-  {
-    name: 'Cleric',
-    image: 'cleric',
-    rarity: 'common',
-    attack: 0,
-    defense: 3,
-    customEffect: true,
-    onDiscard: {
-      customEffect: true
-    },
-    triggerDiscardOnPlay: true,
-    customDescription: 'Shuffle a random potion from your banish into your deck.'
-  },
-  {
     name: 'Paladin',
     image: 'paladin',
     rarity: 'common',
@@ -113,6 +89,19 @@ export const allies = [
     defense: 2,
     playCopiesOfCards: ['Tentacles', 'Tentacles'],
     customDescription: 'Play 2 copies of Tentacles.'
+  },
+  {
+    name: 'Apothecary',
+    image: 'alchemist',
+    rarity: 'uncommon',
+    attack: 0,
+    defense: 3,
+    customEffect: true,
+    onDiscard: {
+      customEffect: true
+    },
+    triggerDiscardOnPlay: true,
+    customDescription: 'Shuffle a random potion from your banish into your deck.'
   },
   {
     name: 'Minotaur',

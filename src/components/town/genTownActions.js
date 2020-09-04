@@ -37,33 +37,33 @@ const townActions = keyBy([
   //   image: 'gold_bar',
   //   description: 'A free gold bar!'
   // },
+  // {
+  //   name: 'Blacksmith',
+  //   energy: [2, 3, 4],
+  //   probability: 1,
+  //   image: 'dwarf',
+  //   description: 'Purchase attack cards.'
+  // },
+  // {
+  //   name: 'Mage',
+  //   energy: [2, 3, 4],
+  //   probability: 1,
+  //   image: 'mage',
+  //   description: 'Purchase magic attack cards.'
+  // },
   {
-    name: 'Blacksmith',
-    energy: [1, 2, 3],
+    name: 'Apothecary',
+    energy: [2, 3, 4],
     probability: 1,
-    image: 'dwarf',
-    description: 'Purchase attack cards.'
+    image: 'alchemist',
+    description: 'Purchase potion cards.'
   },
   // {
-  //   name: 'Learn Magic',
-  //   energy: [4, 5, 6, 7],
-  //   probability: 3,
-  //   image: 'double_fireball',
-  //   description: 'Obtain magic cards.'
-  // },
-  // {
-  //   name: 'Brew Potions',
-  //   energy: [4, 5, 6, 7],
-  //   probability: 2,
-  //   image: 'blue_potion',
-  //   description: 'Obtain potion cards.'
-  // },
-  // {
-  //   name: 'Recruit Allies',
-  //   energy: [4, 5, 6, 7],
-  //   probability: 3,
-  //   image: 'mage',
-  //   description: 'Obtain ally cards.'
+  //   name: 'Recruiter',
+  //   energy: [2, 3, 4],
+  //   probability: 1,
+  //   image: 'shop_girl',
+  //   description: 'Purchase ally cards.'
   // },
   // {
   //   name: 'Donate a Card',
