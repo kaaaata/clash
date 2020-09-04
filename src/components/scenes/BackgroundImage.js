@@ -35,8 +35,8 @@ export const BackgroundImage = () => {
   return (
     <Image
       src={`${sceneToBackgroundImage[scene] || 'landscape'}.png`}
-      width={1000}
-      height={600}
+      width={1200}
+      height={700}
       rgbaFilter={rgbaFiltersByEnergy[energy]}
       css={backgroundImageCss}
     />

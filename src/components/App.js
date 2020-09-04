@@ -6,8 +6,8 @@ import { Toasts } from './Toasts';
 import { colors } from './styles';
 
 const appCss = css`
-  width: 1000px;
-  height: 600px;
+  width: 1200px;
+  height: 700px;
   user-select: none;
   position: relative;
 

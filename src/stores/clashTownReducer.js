@@ -31,7 +31,7 @@ export default (state = initialState, action) => {
     case 'ADJUST_PLAYER_ENERGY':
       return {
         ...state,
-        energy: Math.max(0, Math.min(12, state.energy + action.payload))
+        energy: Math.max(0, Math.min(10, state.energy + action.payload))
       };
     case 'START_NEW_DAY': {
       const newDay = state.day + 1;

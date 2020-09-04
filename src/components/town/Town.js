@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { jsx } from '@emotion/core'; /** @jsx jsx */
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import * as actions from '../../stores/actions';
-import { Spacer, FlexContainer, Text } from '../particles';
+import { Spacer, FlexContainer, Text, FlexItem } from '../particles';
 import { TownActionCard } from './TownActionCard';
 import { ReceiveBlessing } from './ReceiveBlessing';
 import { MonsterPreview } from '../modals/MonsterPreview';
@@ -139,14 +139,14 @@ export const Town = () => {
           >
             <Text type='header'>Day: {day}/9</Text>
             <Spacer height={20} />
-            <div className='feed'>
+            <FlexItem className='feed'>
               {feed.map((text, index) => (
                 <React.Fragment key={index}>
-                  <Text type='small' lineHeight={1.25}>{text}</Text>
+                  <Text type='mini' lineHeight={1.25}>{text}</Text>
                   <Spacer height={7} />
                 </React.Fragment>
               ))}
-            </div>
+            </FlexItem>
             <Spacer height={20} />
             <Text type='paragraph' className='description'>{townActionDescription}</Text>
           </FlexContainer>

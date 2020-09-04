@@ -1,5 +1,5 @@
 import { css, jsx } from '@emotion/core'; /** @jsx jsx */
-import { Spacer, FlexContainer, Text } from '../particles';
+import { Spacer, FlexContainer, Text, Button, FlexItem } from '../particles';
 import { colors } from '../styles';
 
 const unclickableAreaCss = css`
@@ -15,14 +15,23 @@ const modalCss = css`
   bottom: 0;
   background: rgba(0, 0, 0, 1);
   font-size: 20px;
-  padding: 30px 60px;
+  padding: 40px 60px;
+
+  .modal_content_container {
+    height: 100%;
+  }
 
   &.half_modal {
-    height: 70%;
-    transform: translateY(-22%);
+    height: unset;
+    bottom: 17%;
     box-shadow: 4px 4px 8px ${colors.black};
     border-top: 3px solid ${colors.yellow};
     border-bottom: 3px solid ${colors.yellow};
+
+    .modal_children_container {
+      height: 300px;
+      width: 100%;
+    }
   }
 
   &.transparent {
@@ -35,6 +44,9 @@ export const Modal = ({
   halfModal = false,
   transparent = true,
   closeModal,
+  shouldCloseOnClick = true,
+  shouldShowCloseButton = false,
+  closeButtonText = 'Back',
   children
 }) => {
   const modalTitle = title && (
@@ -48,11 +60,14 @@ export const Modal = ({
     <div
       css={modalCss}
       className={`modal ${halfModal ? 'half_modal' : ''} ${transparent ? 'transparent' : ''}`}
-      onClick={closeModal}
+      onClick={shouldCloseOnClick ? closeModal : undefined}
     >
-      <FlexContainer alignItems='center' flexDirection='column'>
+      <FlexContainer alignItems='center' flexDirection='column' className='modal_content_container'>
         {modalTitle}
-        {children}
+        <FlexItem className='modal_children_container'>{children}</FlexItem>
+        {!halfModal && shouldShowCloseButton && closeModal && (
+          <Button mini onClick={closeModal}>{closeButtonText}</Button>
+        )}
       </FlexContainer>
     </div>
   );

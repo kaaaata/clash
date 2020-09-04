@@ -2,7 +2,7 @@ import { css, jsx } from '@emotion/core'; /** @jsx jsx */
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import * as actions from '../../stores/actions';
 import { colors } from '../styles';
-import { Card, PileCardPlaceholder } from '../Card';
+import { Card, PileCardPlaceholder, cardWidth, cardHeight } from '../Card';
 
 const CardPile = ({
   cards,
@@ -26,8 +26,8 @@ const CardPile = ({
       position: absolute;
       left: ${x - 5}px;
       top: ${y - 5}px;
-      width: 130px;
-      height: 180px;
+      width: ${cardWidth + 10}px;
+      height: ${cardHeight + 10}px;
       border: 2px solid ${themeColor};
       transform: rotate3d(1, 0, 0, 65deg);
     }
@@ -36,7 +36,7 @@ const CardPile = ({
       position: absolute;
       left: ${countX}px;
       top: ${countY}px;
-      width: 130px;
+      width: ${cardWidth + 10}px;
       text-align: center;
   
       .count {
@@ -87,11 +87,11 @@ export const YourDeck = () => {
   return (
     <CardPile
       cards={cards}
-      x={150}
-      y={385}
+      x={195}
+      y={460}
       themeColor={colors.green}
-      countX={135}
-      countY={500}
+      countX={175}
+      countY={594}
     />
   );
 };
@@ -104,11 +104,11 @@ export const YourDiscard = () => {
   return (
     <CardPile
       cards={cards}
-      x={695}
-      y={385}
+      x={835}
+      y={460}
       themeColor={colors.red}
-      countX={705}
-      countY={500}
+      countX={846}
+      countY={594}
       cardPileModal='yourDiscard'
     />
   );
@@ -122,11 +122,11 @@ export const YourBanish = () => {
   return (
     <CardPile
       cards={cards}
-      x={835}
-      y={385}
+      x={995}
+      y={460}
       themeColor={colors.black}
-      countX={850}
-      countY={500}
+      countX={1013}
+      countY={594}
       cardPileModal='yourBanish'
     />
   );
@@ -143,8 +143,8 @@ export const YourHand = ({ cardOnClick }) => {
       <Card
         key={index}
         name={card}
-        x={300 + 125 * index}
-        y={400}
+        x={370 + (cardWidth + 5) * index}
+        y={475}
         onClick={() => {
           if (!winner) {
             cardOnClick(index);
@@ -163,11 +163,11 @@ export const EnemyBanish = () => {
   return (
     <CardPile
       cards={cards}
-      x={45}
-      y={45}
+      x={64}
+      y={55}
       themeColor={colors.black}
-      countX={25}
-      countY={145}
+      countX={38}
+      countY={171}
       cardPileModal='enemyBanish'
     />
   );
@@ -181,11 +181,11 @@ export const EnemyDiscard = () => {
   return (
     <CardPile
       cards={cards}
-      x={185}
-      y={45}
+      x={225}
+      y={55}
       themeColor={colors.red}
-      countX={170}
-      countY={145}
+      countX={204}
+      countY={171}
       cardPileModal='enemyDiscard'
     />
   );
@@ -199,11 +199,11 @@ export const EnemyDeck = () => {
   return (
     <CardPile
       cards={cards}
-      x={725}
-      y={45}
+      x={865}
+      y={55}
       themeColor={colors.green}
-      countX={735}
-      countY={145}
+      countX={876}
+      countY={171}
     />
   );
 };
@@ -218,8 +218,8 @@ export const EnemyHand = () => {
       <Card
         key={index}
         name={card}
-        x={330 + 125 * index}
-        y={45}
+        x={400 + (cardWidth + 5) * index}
+        y={52}
       />
     ) : null
   ));
@@ -234,8 +234,8 @@ export const Stack = () => {
     <Card
       key={index}
       name={card}
-      x={350 + index * 15}
-      y={222}
+      x={530 + index * 15}
+      y={263}
       isBlurred={cards.length >= 2 && index !== cards.length - 1}
     />
   ));

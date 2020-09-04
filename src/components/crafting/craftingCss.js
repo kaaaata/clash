@@ -1,10 +1,11 @@
 import { css } from '@emotion/core'; /** @jsx jsx */
 import { colors } from '../styles';
+import { cardWidth, cardHeight } from '../Card';
 
 export const craftingCss = css`
   .card_slot, .gold_bar_slot {
-    width: 120px;
-    height: 170px;
+    width: ${cardWidth}px;
+    height: ${cardHeight}px;
     border: 2px solid ${colors.grey};
     margin: 0 15px;
     box-sizing: content-box;

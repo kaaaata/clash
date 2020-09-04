@@ -24,6 +24,7 @@ const eventModalPageCss = css`
 const eventModalCss = css`
   ${effects.fadeIn};
   width: 100%;
+  padding: 0 50px;
 
   .main_image {
     border-radius: 5px;
@@ -107,11 +108,11 @@ export const EventModal = ({
 }) => (
   <Modal halfModal title={title}>
     <FlexContainer justifyContent='flex-start' _css={eventModalCss}>
-      <div css={css`${imageContainerCss}flex: none;margin-right: 20px;`}>
+      <div css={css`${imageContainerCss} flex: none; margin-right: 30px;`}>
         <Image
           src={`${image}.png`}
-          height={250}
-          width={250}
+          height={300}
+          width={300}
           size='contain'
           className='main_image'
         />

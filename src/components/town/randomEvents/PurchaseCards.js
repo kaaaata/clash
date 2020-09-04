@@ -8,43 +8,56 @@ import { Card } from '../../Card';
 
 // the margin-top: -15px is a hack to fit all the content inside EventModal.
 // the line-height: 1 is a hack to disallow EventModal paragraph line height from impacting card text.
-const purchaseCardsCss = css`
-  .item {
-    margin-right: 40px;
-    display: inline-block;
-    line-height: 1 !important;
-    position: relative;
+const cardWithPriceCss = (isHidden, isHovered) => css`
+  margin-right: 40px;
+  display: inline-block;
+  line-height: 1 !important;
+  position: relative;
+  ${isHidden ? 'visibility: hidden;' : ''}
 
-    .gold {
-      justify-content: center;
-      position: absolute;
-      top: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      transition: top 0.1s ease-out;
-    }
-
-    &.hidden {
-      visibility: hidden;
-    }
-
-    &.hovered {
-      .gold {
-        top: -20px;
-      }
-    }
+  .gold {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: top 0.1s ease-out;
+    ${isHovered ? 'top: -22px;' : ''};
   }
 `;
+
+const CardWithPrice = ({ card, cost, canAfford }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const [isPurchased, setIsPurchased] = useState(false);
+  const dispatch = useDispatch();
+
+  return (
+    <div
+      css={cardWithPriceCss(isPurchased, isHovered)}>
+      <Gold gold={cost} color={canAfford ? 'yellow' : 'red'} />
+      <Spacer height={35} />
+      <Card
+        name={card}
+        onClick={() => {
+          if (canAfford) {
+            dispatch(actions.adjustPlayerGold(-1 * cost));
+            dispatch(actions.addCardsToCollection(card));
+            setIsPurchased(true);
+          } else {
+            dispatch(actions.setToast('Not enough gold!'));
+          }
+        }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      />
+    </div>
+  );
+};
 
 export const PurchaseCards = ({ title, image, closeModal }) => {
   const { gold, cards } = useSelector(state => ({
     gold: state.clashPlayer.gold,
     cards: state.clashTown.purchasableCards
   }), shallowEqual);
-  const dispatch = useDispatch();
-
-  const [purchasedCards, setPurchasedCards] = useState({});
-  const [hoveredCardIndex, setHoveredCardIndex] = useState(-1);
 
   return (
     <EventModal
@@ -53,40 +66,14 @@ export const PurchaseCards = ({ title, image, closeModal }) => {
     >
       <EventModalPage
         page={1}
-        text={
-          <div css={purchaseCardsCss}>
-            {cards.map((i, index) => (
-              <div
-                key={index}
-                className={[
-                  'item',
-                  purchasedCards[index] ? 'hidden' : '',
-                  hoveredCardIndex === index ? 'hovered' : ''
-                ].filter(Boolean).join(' ')}
-              >
-                <Gold gold={i.cost} color={gold >= i.cost ? 'yellow' : 'red'} />
-                <Spacer height={35} />
-                <Card
-                  name={i.name}
-                  onClick={() => {
-                    if (gold >= i.cost) {
-                      dispatch(actions.adjustPlayerGold(-1 * i.cost));
-                      dispatch(actions.addCardsToCollection(i.name));
-                      setPurchasedCards({
-                        ...purchasedCards,
-                        [index]: true
-                      });
-                    } else {
-                      dispatch(actions.setToast('Not enough gold!'));
-                    }
-                  }}
-                  onMouseEnter={() => setHoveredCardIndex(index)}
-                  onMouseLeave={() => setHoveredCardIndex(-1)}
-                />
-              </div>
-            ))}
-          </div>
-        }
+        text={cards.map((i, index) => (
+          <CardWithPrice
+            key={index}
+            card={i.name}
+            cost={i.cost}
+            canAfford={gold >= i.cost}
+          />
+        ))}
         options={[{
           name: 'Leave',
           onClick: closeModal

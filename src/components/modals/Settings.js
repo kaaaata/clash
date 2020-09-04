@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import * as actions from '../../stores/actions';
 import { Modal } from './Modal';
-import { Spacer, Button } from '../particles';
+import { Spacer, Button, FlexContainer } from '../particles';
 import { CardViewModal } from './CardViewModal';
 import { cardsArray } from '../../cards/cards';
 
@@ -19,27 +19,39 @@ export const Settings = ({ closeModal }) => {
 
   return (
     <React.Fragment>
-      <Modal halfModal transparent={false}>
-        <Spacer height={100} />
-        <Button 
-          mini
-          isDisabled={scene !== 'battle'}
-          onClick={() => {
-            dispatch(actions.setWinner(enemyName));
-            closeModal();
-          }}
+      <Modal halfModal title='Settings' transparent={false}>
+        <FlexContainer
+          justifyContent='center'
+          alignItems='center'
+          flexDirection='column'
+          _css='height: 100%;'
         >
-          Concede Battle
-        </Button>
-        <Spacer height={20} />
-        {inDevelopment && (
-          <Button
+          <Button 
             mini
-            onClick={() => setIsAllCardsModalActive(true)}
+            isDisabled={scene !== 'battle'}
+            onClick={() => {
+              dispatch(actions.setWinner(enemyName));
+              closeModal();
+            }}
           >
-            View All Cards
+            Concede Battle
           </Button>
-        )}
+
+          <Spacer height={20} />
+          
+          {inDevelopment && (
+            <Button
+              mini
+              onClick={() => setIsAllCardsModalActive(true)}
+            >
+              View All Cards
+            </Button>
+          )}
+
+          <Spacer height={20} />
+
+          <Button mini onClick={closeModal}>Back</Button>
+        </FlexContainer>
       </Modal>
       
       {isAllCardsModalActive && inDevelopment && (

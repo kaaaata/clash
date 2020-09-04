@@ -12,7 +12,7 @@ export const FreeGold = ({ closeModal }) => {
   return (
     <EventModal
       title='Make Money'
-      image='gold'
+      image='gold_with_padding'
     >
       <EventModalPage
         page={1}

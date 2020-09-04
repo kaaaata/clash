@@ -4,7 +4,7 @@ import { sample, keyBy } from 'lodash';
 export const genTownActions = () => {
   const actions = [];
 
-  for (let i = 0; i < 7; i++) {
+  for (let i = 0; i < 9; i++) {
     const action = townActions[sample(townActionPool)];
     actions.push({
       ...action,
@@ -27,7 +27,7 @@ const townActions = keyBy([
     name: 'Make Money',
     energy: [1, 2, 3],
     probability: 15,
-    image: 'gold',
+    image: 'gold_with_padding',
     description: 'Earn some gold.'
   },
   {
@@ -91,7 +91,7 @@ const townActions = keyBy([
     energy: [4, 5, 6],
     probability: 1,
     image: 'catherine_the_great',
-    description: 'A random encounter!'
+    description: 'A very difficult random encounter!'
   }
 ], 'name');
 const townActionPool = [];

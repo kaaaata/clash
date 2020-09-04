@@ -11,7 +11,7 @@ export const topNavCss = css`
   top: 0;
 
   .left, .right {
-    width: 300px;
+    width: 350px;
   }
 
   .left {
@@ -21,8 +21,7 @@ export const topNavCss = css`
     }
 
     .attributes {
-      margin-right: 40px;
-      width: 110px;
+      margin-right: 100px;
       font-size: 24px;
       flex: 0 0 auto;
     }
@@ -48,9 +47,10 @@ export const topNavCss = css`
     }
 
     .gold {
+      justify-content: flex-start;
       flex: 0 0 auto;
-      margin-left: 10px;
       width: 110px;
+      margin-left: 20px;
     }
 
     .shop {
@@ -59,11 +59,12 @@ export const topNavCss = css`
       text-align: center;
       color: ${colors.yellow};  
       ${effects.hoverScale()}
+      margin-left: 10px;
     }
   
     .settings {
-      margin-left: 30px;
       ${effects.hoverScale()}
+      margin-left: 40px;
     }
   }
 `;

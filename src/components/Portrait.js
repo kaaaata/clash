@@ -1,57 +1,9 @@
-import { css, jsx } from '@emotion/core'; /** @jsx jsx */
+import { jsx } from '@emotion/core'; /** @jsx jsx */
 import { useSelector, shallowEqual } from 'react-redux';
-import { Image, Spacer } from './particles';
+import { Image, Spacer, FlexContainer } from './particles';
 import { Attributes } from './Attributes';
-import { colors, effects } from './styles';
 import { useState, useEffect } from 'react';
-
-const portraitCss = (player) => css`
-  position: absolute;
-  left: ${player === 'enemy' ? 885 : 20}px;
-  top: ${player === 'enemy' ? 57 : 405}px;
-
-  .rainbow {
-    ${effects.rainbow};
-    animation: rainbow 10s infinite;
-  }
-
-  .portrait {
-    position: absolute;
-    transition: transform 2s ease-in, width 2s ease-in, height 2s ease-in;
-    margin-left: -25px;
-
-    &.dead {
-      transform: rotate(1260deg);
-      width: 0px;
-      height: 0px;
-      margin-left: 0;
-    }
-  }
-
-  .portrait_placeholder {
-    width: 100px;
-    height: 125px;
-  }
-
-  .shields {
-    position: absolute;
-    top: ${player === 'enemy' ? -10 : -25}px;
-    ${player === 'enemy' ? 'left: -15px;' : 'right: -15px;'}
-    
-    .number {
-      font-size: 36px;
-      text-align: center;
-      text-shadow: 2px 2px 4px ${colors.black};
-      color: black;
-      margin-top: 18px;
-      margin-left: -3px;
-    }
-  }
-
-  .attributes {
-    margin: -3px -5px 0 -5px;
-  }
-`;
+import { portraitCss } from './portraitCss';
 
 export const Portrait = ({ player }) => {
   const { image, stats, statBonuses, shields, isDead, isEnemyElite } = useSelector(state => {
@@ -78,23 +30,6 @@ export const Portrait = ({ player }) => {
     }
   }, [isDead]);
 
-  const portrait = (
-    <div className={isEnemyElite ? 'rainbow' : ''}>
-      <Image
-        src={`${image}.png`}
-        width={150}
-        height={125}
-        className={portraitClassName}
-        size='contain'
-      />
-    </div>
-  );
-
-  // hold the place during the spinny death animation
-  const portraitPlaceholder = (
-    <div className='portrait_placeholder' />
-  );
-
   const shieldsDisplay = !!shields && (
     <Image
       className='shields'
@@ -107,12 +42,21 @@ export const Portrait = ({ player }) => {
   );
 
   return (
-    <div css={portraitCss(player)}>
-      {portrait}
-      {portraitPlaceholder}
+    <FlexContainer flexDirection='column' _css={portraitCss(player)}>
+      <div className={isEnemyElite ? 'rainbow' : ''}>
+        <Image
+          src={`${image}.png`}
+          width={120}
+          height={150}
+          className={portraitClassName}
+          size='contain'
+        />
+      </div>
+      {/* hold the place during the spinny death animation */}
+      <Spacer height={150} />
       <Spacer height={5} />
       {shieldsDisplay}
       <Attributes stats={stats} statBonuses={statBonuses} />
-    </div>
+    </FlexContainer>
   );
 };

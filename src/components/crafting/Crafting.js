@@ -10,7 +10,7 @@ import { craftingCss } from './craftingCss';
 import { isCraftValid } from './isCraftValid';
 import { genCraftedCard } from './genCraftedCard';
 
-export const Crafting = ({ isOpen, closeModal }) => {
+export const Crafting = ({ isOpen }) => {
   const { goldBars } = useSelector(state => ({
     goldBars: state.clashPlayer.goldBars
   }), shallowEqual);
@@ -109,7 +109,7 @@ export const Crafting = ({ isOpen, closeModal }) => {
             </Button>
           </FlexContainer>
 
-          <Spacer height={40} />
+          <Spacer height={80} />
 
           <div className='recipes'>
             <Text>Attack + Attack = Stronger Attack</Text>

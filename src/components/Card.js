@@ -7,8 +7,8 @@ import { colors, zIndex } from './styles';
 import { rarityColors } from '../cards/rarity';
 import { _cardCss } from './cardCss';
 
-const width = 120;
-const height = 170;
+export const cardWidth = 140;
+export const cardHeight = 190;
 
 const _Card = React.memo(
   ({ name }) => {
@@ -27,21 +27,21 @@ const _Card = React.memo(
 
     const cardArt = (
       <React.Fragment>
-        <Spacer height={70} />
+        <Spacer height={90} />
         {glow && <div className={`glow glow_${glow}`} />}
         {rarity === 'crafted' ? (
           <React.Fragment>
             <Image
               src={`${image}.png`}
               width='100%'
-              height={70}
+              height={90}
               size='contain'
               className='card_art faded'
             />
             <Image
               src={`${craftedImage}.png`}
               width='100%'
-              height={70}
+              height={90}
               size='contain'
               className={`card_art ${imageSlant === craftedImageSlant ? 'horizontal_flip' : ''}`}
             />
@@ -50,9 +50,11 @@ const _Card = React.memo(
           <Image
             src={`${image}.png`}
             width='100%'
-            height={type === 'ally' ? 115 : 70}
+            height={type === 'ally' ? 165 : 90}
             size='contain'
             className={`card_art ${type === 'ally' ? 'ally' : ''}`}
+            // adjust top margin for this single card which doesn't come with top whitespace...
+            _css={name === 'Catherine the Great' ? 'top: -6px !important;': ''}
           />
         )}
       </React.Fragment>
@@ -92,8 +94,8 @@ const _Card = React.memo(
     return (
       <Image
         src='rock.png'
-        width={width}
-        height={height}
+        width={cardWidth}
+        height={cardWidth}
         _css={_cardCss(colors[rarityColors[rarity]])}
         rgbaFilter='rgba(0, 0, 0, 0.45)'
       >
@@ -140,8 +142,8 @@ const _FaceDownCard = () => (
   `}>
     <Image
       src='card_back.png'
-      width={width}
-      height={height}
+      width={cardWidth}
+      height={cardHeight}
     />
   </div>
 );
@@ -171,8 +173,8 @@ export const Card = ({
   );
 
   const cardCss = css`
-    width: ${width}px;
-    height: ${height}px;
+    width: ${cardWidth}px;
+    height: ${cardHeight}px;
     ${x && y ? `
       position: absolute;
       left: ${x}px;
@@ -229,8 +231,8 @@ export const Card = ({
 // refactor this eventually to show the card back maybe
 export const PileCardPlaceholder = ({ x, y, isInvisible }) => (
   <div css={css`
-    width: ${width}px;
-    height: ${height}px;
+    width: ${cardWidth}px;
+    height: ${cardHeight}px;
     position: absolute;
     left: ${x}px;
     top: ${y}px;

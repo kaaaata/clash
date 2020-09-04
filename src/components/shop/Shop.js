@@ -8,6 +8,7 @@ import { Spacer, Image, FlexContainer, Gold, Text } from '../particles';
 import { packs } from './packs';
 import { genPackCards } from './genPackCards';
 import { rarityColors } from '../../cards/rarity';
+import { cardWidth, cardHeight } from '../Card';
 
 const shopCss = css`
   .pack_container {
@@ -17,20 +18,42 @@ const shopCss = css`
     .pack {
       transition: transform 0.1s ease-out;
 
-      &:hover {
-        transform: scale(1.25);
-      }
-
       .gem {
         margin: auto;
+      }
+
+      &.energy_pack {
+        width: ${cardWidth}px;
+        height: ${cardHeight}px;
+        position: relative;
+        cursor: pointer;
+
+        .energy {
+          position: absolute;
+
+          &.one {
+            top: 30px;
+            left: 10px;
+          }
+
+          &.two {
+            top: 75px;
+            left: 45px;
+          }
+        }
+      }
+
+      &:hover {
+        transform: scale(1.25);
       }
     }
   }
 `;
 
 export const Shop = ({ closeModal }) => {
-  const { gold } = useSelector(state => ({
-    gold: state.clashPlayer.gold
+  const { gold, energy } = useSelector(state => ({
+    gold: state.clashPlayer.gold,
+    energy: state.clashTown.energy
   }), shallowEqual);
   const dispatch = useDispatch();
 
@@ -39,7 +62,12 @@ export const Shop = ({ closeModal }) => {
   
   return (
     <React.Fragment>
-      <Modal title='Shop' closeModal={closeModal}>
+      <Modal
+        title='Shop'
+        closeModal={closeModal}
+        shouldCloseOnClick={false}
+        shouldShowCloseButton={true}
+      >
         <FlexContainer css={shopCss}>
           {Object.keys(packs).map(i => {
             const pack = packs[i];
@@ -47,32 +75,59 @@ export const Shop = ({ closeModal }) => {
             return (
               <div key={i} className='pack_container'>
                 <Gold gold={pack.cost} color={gold >= pack.cost ? 'yellow' : 'red'} />
-                <Spacer height={20} />
-                <Image
-                  key={i}
-                  src='pack.png'
-                  width={120}
-                  height={170}
-                  className='pack'
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    if (gold >= pack.cost) {
-                      dispatch(actions.adjustPlayerGold(-1 * pack.cost));
-                      setCardLootModalCards(genPackCards(pack));
-                      setIsCardLootModalActive(true);
-                    } else {
-                      dispatch(actions.setToast('Not enough gold!'));
-                    }
-                  }}
-                >
-                  <Spacer height={45} />
+                <Spacer height={25} />
+                {pack.name === 'Energy' ? (
+                  <div
+                    className='pack energy_pack'
+                    onClick={() => {
+                      if (energy === 10) {
+                        dispatch(actions.setToast('Already at full energy!'));
+                      } else {
+                        dispatch(actions.adjustPlayerGold(-1 * pack.cost));
+                        dispatch(actions.adjustPlayerEnergy(10));
+                      }
+                    }}
+                  >
+                    <Image
+                      src={`${pack.image}.png`}
+                      width={100}
+                      height={100}
+                      className='energy one'
+                    />
+                    <Image
+                      src={`${pack.image}.png`}
+                      width={100}
+                      height={100}
+                      className='energy two'
+                    />
+                  </div>
+                ) : (
                   <Image
-                    src={`${pack.image}.png`}
-                    width={75}
-                    height={75}
-                    className='gem'
-                  />
-                </Image>
+                    key={i}
+                    src='pack.png'
+                    width={cardWidth}
+                    height={cardHeight}
+                    className='pack'
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      if (gold >= pack.cost) {
+                        dispatch(actions.adjustPlayerGold(-1 * pack.cost));
+                        setCardLootModalCards(genPackCards(pack));
+                        setIsCardLootModalActive(true);
+                      } else {
+                        dispatch(actions.setToast('Not enough gold!'));
+                      }
+                    }}
+                  >
+                    <Spacer height={55} />
+                    <Image
+                      src={`${pack.image}.png`}
+                      width={75}
+                      height={75}
+                      className='gem'
+                    />
+                  </Image>
+                )}
                 <Spacer height={30} />
                 <FlexContainer alignItems='center' flexDirection='column'>
                   <Text type='small'>{pack.name}</Text>
@@ -86,6 +141,7 @@ export const Shop = ({ closeModal }) => {
                         </Text>
                       </div>
                     ))}
+                    {pack.name === 'Energy' && 'Full energy refill'}
                   </Text>
                 </FlexContainer>
               </div>
@@ -93,8 +149,11 @@ export const Shop = ({ closeModal }) => {
           })}
         </FlexContainer>
 
-        <Spacer height={15} />
-        <Text type='small'>Note: all cards have a 5% chance to upgrade to the next rarity.</Text>
+        <Spacer height={20} />
+
+        <Text type='small' centered>
+          Note: all cards have a 5% chance to upgrade to the next rarity.
+        </Text>
       </Modal>
 
       {isCardLootModalActive && (

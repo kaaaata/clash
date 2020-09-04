@@ -1,4 +1,15 @@
 export const packs = {
+  energy: {
+    name: 'Energy',
+    cards: {
+      legendary: 0,
+      rare: 0,
+      uncommon: 0,
+      common: 0
+    },
+    cost: 50,
+    image: 'energy'
+  },
   bronze: {
     name: 'Bronze Pack',
     cards: {

@@ -12,8 +12,6 @@ export const FlexContainer = ({
   onClick,
   children
 }) => {
-  const idProps = id ? { id } : {};
-  const onClickProps = onClick ? { onClick } : {};
   const flexContainerCss = css`
     display: flex;
     ${mq.genResponsiveCss('justify-content', justifyContent)}
@@ -27,8 +25,8 @@ export const FlexContainer = ({
     <div
       css={flexContainerCss}
       className={`flex_container ${className}`}
-      {...idProps}
-      {...onClickProps}
+      onClick={onClick || undefined}
+      id={id || undefined}
     >
       {children}
     </div>

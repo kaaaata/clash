@@ -18,6 +18,8 @@ export const RemoveCards = ({ closeModal }) => {
         dispatch(actions.removeCardsFromCollection(card));
         closeModal();
       }}
+      closeModal={closeModal}
+      closeButtonText='Cancel'
     />
   );
 };

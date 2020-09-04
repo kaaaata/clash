@@ -24,8 +24,7 @@ export const CraftingCardSelectionModal = ({
       cards={_cards}
       cardOnClick={cardOnClick}
       closeModal={closeModal}
-      shouldCloseOnClick={false}
-      shouldShowCloseButton
+      closeButtonText='Cancel'
     />
   );
 };

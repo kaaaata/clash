@@ -4,6 +4,7 @@ import { Image, FlexContainer, Text } from './particles';
 const attributesCss = css`
   cursor: default;
   text-align: center;
+  width: 120px;
 
   .text {
     margin-top: 11px;

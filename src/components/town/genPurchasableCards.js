@@ -17,14 +17,14 @@ export const genPurchasableCards = (type) => {
   const purchasableCards = [
     {
       name: (sample(cards[type].filter(card => card.rarity === 'common')) || {}).name,
-      cost: 0
+      cost: 10 + random(-5, 5)
     },
     {
       // magic vendor sells an extra common, to compensate for there being no rare magic card.
       name: type === 'magic' && !rolledLegendaryCard && (
         sample(cards[type].filter(card => card.rarity === 'common')) || {}
       ).name,
-      cost: 15 + random(-5, 5)
+      cost: 10 + random(-5, 5)
     },
     {
       name: (sample(cards[type].filter(card => card.rarity === 'uncommon')) || {}).name,

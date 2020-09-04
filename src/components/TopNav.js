@@ -126,10 +126,7 @@ export const TopNav = () => {
       </div>
 
       <div css={css`display: ${activeModal === 'crafting' ? 'unset' : 'none'};`}>
-        <Crafting
-          isOpen={activeModal === 'crafting'}
-          closeModal={() => setActiveModal(null)}
-        />
+        <Crafting isOpen={activeModal === 'crafting'} />
       </div>
 
       <div css={css`display: ${activeModal === 'shop' ? 'unset' : 'none'};`}>

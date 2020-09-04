@@ -16,8 +16,7 @@ export const townCss = css`
   }
 
   .updates {
-    width: 30%;
-    padding-right: 30px;
+    padding-right: 40px;
 
     .feed {
       overflow: scroll;
@@ -36,7 +35,7 @@ export const townCss = css`
 
   .actions {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-gap: 15px;
   }
 `;

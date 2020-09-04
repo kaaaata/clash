@@ -28,7 +28,7 @@ export const _cardCss = (rarityColor) => css`
       position: absolute;
 
       &.ally {
-        top: -7px;
+        top: -10px;
       }
 
       &.faded {

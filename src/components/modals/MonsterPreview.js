@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { jsx } from '@emotion/core'; /** @jsx jsx */
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import * as actions from '../../stores/actions';
-import { shuffle, sampleSize, random } from 'lodash';
+import { shuffle, sampleSize } from 'lodash';
 import { genMonsterDeck } from '../../monsters/genMonsterDeck';
 import { genEliteMonsterPrefix } from '../../monsters/genEliteMonsterPrefix';
 import { EventModal, EventModalPage } from '../modals/EventModal';

@@ -27,7 +27,7 @@ const collectionCss = css`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-gap: 10px;
-  height: 425px;
+  height: 490px;
   overflow: scroll;
   margin: -25px;
   padding: 25px;
@@ -50,12 +50,14 @@ export const CardViewModal = ({
   cards,
   cardOnClick,
   closeModal,
-  shouldCloseOnClick = true,
-  shouldShowCloseButton = false
+  closeButtonText
 }) => (
   <Modal
     title={`${title}${shouldShowCardCount ? ` (${cards.length})` : ''}`}
-    closeModal={shouldCloseOnClick && closeModal}
+    closeModal={closeModal}
+    shouldCloseOnClick={false}
+    shouldShowCloseButton
+    closeButtonText={closeButtonText}
   >
     <div css={collectionCss}>
       {cards.map((card, index) => card ? (
@@ -65,10 +67,6 @@ export const CardViewModal = ({
           onClick={cardOnClick ? () => cardOnClick(card, index) : null}
         />
       ) : <div key={index} css={css`display: none;`} />)}
-
-      {shouldShowCloseButton && closeModal && (
-        <Button mini onClick={closeModal}>Back</Button>
-      )}
     </div>
   </Modal>
 );
