@@ -1,4 +1,4 @@
-This is the codebase for "Clash", a React card game I developed. "Clash" borrows ideas from Clash of the Dragons, an old browser card game I played as a kid, but has since closed down.  
+This is the codebase for "Clash", a React card game I am developing (in progress). "Clash" borrows ideas from Clash of the Dragons, an old browser card game I played as a kid, but has since closed down.  
 
 This repo is meant to render a 1000px x 600px game and nothing else, so that it can be embedded as an iframe inside my main website, [www.kaaaata.com](http://www.kaaaata.com)  
 
