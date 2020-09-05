@@ -5,6 +5,7 @@ import * as actions from '../../stores/actions';
 import { Spacer, FlexContainer, Text, FlexItem } from '../particles';
 import { TownActionCard } from './TownActionCard';
 import { ReceiveBlessing } from './ReceiveBlessing';
+import { Timeline } from './Timeline';
 import { MonsterPreview } from '../modals/MonsterPreview';
 import {
   RobberyWheel,
@@ -131,8 +132,7 @@ export const Town = () => {
 
   return (
     <React.Fragment>
-      <div css={townCss}>
-        <Spacer height={40} />
+      <FlexContainer flexDirection='column' justifyContent='center' alignItems='center' _css={townCss}>
         <Text type='header' centered>Town</Text>
         <Spacer height={40} />
         <FlexContainer>
@@ -191,7 +191,11 @@ export const Town = () => {
             ))}
           </div>
         </FlexContainer>
-      </div>
+
+        <FlexItem />
+        
+        <Timeline />
+      </FlexContainer>
 
       {modal}
     </React.Fragment>

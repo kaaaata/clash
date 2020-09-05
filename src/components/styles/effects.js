@@ -19,5 +19,20 @@ export const effects = {
     &:hover {
       transform: scale(${scale});
     }
+  `,
+  waxAndWane: `
+    ${mixins.keyframes('waxAndWane', `
+      0% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+      100% { transform: scale(1); }
+    `)}
   `
 };
+
+/*
+      0% { transform: scale(1); }
+      25% { transform: scale(1.1); }
+      50% { transform: scale(1); }
+      75% { transform: scale(0.9); }
+      100% { transform: scale(1); }
+*/

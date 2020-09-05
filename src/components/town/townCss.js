@@ -2,7 +2,8 @@ import { css } from '@emotion/core'; /** @jsx jsx */
 import { colors } from '../styles/colors';
 
 export const townCss = css`
-  padding: 0 60px;
+  padding: 40px 60px;
+  height: calc(100% - 40px);
 
   .play {
     position: absolute;
