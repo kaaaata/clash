@@ -8,7 +8,7 @@ export const PileCard = ({
 }) => {
   const animateEntryCss = shouldAnimateEntry ? `
     ${mixins.keyframes('cardAnimatedEntry', `
-      0% { transform: rotate3d(0, 1, 0, 65deg); }
+      0% { transform: rotate3d(0, 1, 0, 45deg); }
       100% { transform: rotate3d(1, 0, 0, 65deg); }
     `)}
     animation: cardAnimatedEntry 0.2s ease-in;
