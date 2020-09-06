@@ -8,7 +8,7 @@ import { Spacer, Image, FlexContainer, Gold, Text } from '../particles';
 import { packs } from './packs';
 import { genPackCards } from './genPackCards';
 import { rarityColors } from '../../cards/rarity';
-import { cardWidth, cardHeight } from '../Card';
+import { cardWidth, cardHeight } from '../card/Card';
 
 const shopCss = css`
   .pack_container {

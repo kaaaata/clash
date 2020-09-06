@@ -93,6 +93,7 @@ export const MonsterPreview = ({
     dispatch(actions.setBattleRewardGold(monsterGoldReward));
     dispatch(actions.setScene('battle'));
   };
+  battleOnClick();
 
   const text = (
     <React.Fragment>

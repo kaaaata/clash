@@ -4,7 +4,7 @@ import * as actions from '../../../stores/actions';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { EventModal, EventModalPage } from '../../modals/EventModal';
 import { Spacer, Gold } from '../../particles';
-import { Card } from '../../Card';
+import { Card } from '../../card/Card';
 
 // the margin-top: -15px is a hack to fit all the content inside EventModal.
 // the line-height: 1 is a hack to disallow EventModal paragraph line height from impacting card text.

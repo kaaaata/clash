@@ -2,7 +2,10 @@ import { css, jsx } from '@emotion/core'; /** @jsx jsx */
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import * as actions from '../../stores/actions';
 import { colors } from '../styles';
-import { Card, PileCardPlaceholder, cardWidth, cardHeight } from '../Card';
+import { Card, cardWidth, cardHeight } from '../card/Card';
+import { PileCardPlaceholder } from '../card/PileCardPlaceholder';
+import { PileCard } from '../card/PileCard';
+import { useRef, useEffect } from 'react';
 
 const CardPile = ({
   cards,
@@ -14,6 +17,12 @@ const CardPile = ({
   cardPileModal
 }) => {
   const dispatch = useDispatch();
+  
+  const prevCardCountRef = useRef();
+  useEffect(() => {
+    prevCardCountRef.current = cards.length;
+  });
+  const prevCardCount = prevCardCountRef.current;
 
   const cardPileCss = css`
     cursor: pointer;
@@ -55,13 +64,19 @@ const CardPile = ({
       <div className='outline' />
       {cards.map((card, index) => (
         (index >= cards.length - 2) ? (
-          <Card
+          <PileCard
             key={index}
-            name={card}
-            x={x}
-            y={y - index}
-            isInCardPile
-            shouldAnimateEntry={index === cards.length - 1}
+            cardProps={{
+              name: card,
+              x,
+              y: y - index,
+              isInCardPile: true
+            }}
+            shouldAnimateEntry={
+              index === cards.length - 1 // only animate top card in pile
+              && prevCardCount !== 'undefined' // no animation needed on first render ever
+              && prevCardCount < cards.length // only animate if card was added to pile
+            }
           />
         ) : (
           <PileCardPlaceholder

@@ -1,8 +1,7 @@
 import { css, jsx } from '@emotion/core'; /** @jsx jsx */
 // import { cards } from '../cards/cards';
-import { Card } from '../Card';
+import { Card } from '../card/Card';
 import { Modal } from './Modal';
-import { Button } from '../particles';
 // import { rarityScore } from '../cards/rarity';
 
 // maybe it would be more useful to sort by "recently added" instead?
@@ -23,14 +22,14 @@ import { Button } from '../particles';
 // };
 
 // the margin/padding is a hack to prevent card clipping on hover
-const collectionCss = css`
+const cardViewModalCss = css`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   grid-gap: 10px;
   height: 490px;
   overflow: scroll;
   margin: -25px;
-  padding: 25px;
+  padding: 50px 25px;
 
   .card:last-child {
     margin-bottom: 25px;
@@ -59,7 +58,7 @@ export const CardViewModal = ({
     shouldShowCloseButton
     closeButtonText={closeButtonText}
   >
-    <div css={collectionCss}>
+    <div css={cardViewModalCss}>
       {cards.map((card, index) => card ? (
         <Card
           key={index}

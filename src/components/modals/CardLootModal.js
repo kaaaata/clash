@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import * as actions from '../../stores/actions';
 import { Modal } from '../modals/Modal';
 import { FlexContainer, Spacer, Button, Text } from '../particles';
-import { Card } from '../Card';
+import { Card } from '../card/Card';
 
 const cardLootModalCss = css`
   .card {

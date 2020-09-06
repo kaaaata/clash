@@ -1,6 +1,6 @@
 import { css } from '@emotion/core'; /** @jsx jsx */
 import { colors } from '../styles';
-import { cardWidth, cardHeight } from '../Card';
+import { cardWidth, cardHeight } from '../card/Card';
 
 export const craftingCss = css`
   .card_slot, .gold_bar_slot {

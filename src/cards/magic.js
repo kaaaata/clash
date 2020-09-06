@@ -62,7 +62,7 @@ export const magic = [
     rarity: 'uncommon',
     attack: 4,
     defense: 2,
-    shuffleCardCopiesIntoYourPiles: [
+    shuffleCardCopiesIntoOpponentsPiles: [
       { card: 'Freeze', pile: 'deck' },
       { card: 'Freeze', pile: 'deck' }
     ],

@@ -1,5 +1,5 @@
 import { css } from '@emotion/core'; /** @jsx jsx */
-import { colors } from './styles';
+import { colors } from '../styles';
 
 export const _cardCss = (rarityColor) => css`
   position: absolute;

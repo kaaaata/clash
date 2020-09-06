@@ -32,7 +32,6 @@ const genTownActionCardImage = (townAction, day) => {
 
 export const Town = () => {
   const {
-    lives,
     energy,
     day,
     townActions,
@@ -50,7 +49,8 @@ export const Town = () => {
   
   const [townActionDescription, setTownActionDescription] = useState('Choose an action!');
   const [activeModal, setActiveModal] = useState(
-    !!lives && [4, 7].includes(day) && lives > 0 ? 'Receive Blessing' : null
+    // !!lives && [4, 7].includes(day) && lives > 0 ? 'Receive Blessing' : null
+    'Next Day'
   );
 
   useEffect(() => {

@@ -4,7 +4,7 @@ import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import * as actions from '../../stores/actions';
 import { Modal } from '../modals/Modal';
 import { Spacer, Image, FlexContainer, Text, Button } from '../particles';
-import { Card } from '../Card';
+import { Card } from '../card/Card';
 import { CraftingCardSelectionModal } from './CraftingCardSelectionModal';
 import { craftingCss } from './craftingCss';
 import { isCraftValid } from './isCraftValid';
