@@ -18,6 +18,18 @@ import {
 } from './randomEvents';
 import { townCss } from './townCss';
 
+const genTownActionCardImage = (townAction, day) => {
+  if (townAction.name === 'Next Day') {
+    if (day === 10) {
+      return 'death_red';
+    } else if ([3, 6, 9].includes(day)) {
+      return 'death';
+    }
+  }
+
+  return townAction.image;
+};
+
 export const Town = () => {
   const {
     lives,
@@ -141,7 +153,7 @@ export const Town = () => {
             flexDirection='column'
             justifyContent='space-between'
           >
-            <Text type='header'>Day: {day}/9</Text>
+            <Text type='header'>Day: {day}/10</Text>
             <Spacer height={20} />
             <FlexItem className='feed'>
               {feed.map((text, index) => (
@@ -159,7 +171,7 @@ export const Town = () => {
               <TownActionCard
                 key={index}
                 name={i.name}
-                image={i.image}
+                image={genTownActionCardImage(i, day)}
                 energy={i.energy}
                 canAfford={energy >= i.energy}
                 isDisabled={

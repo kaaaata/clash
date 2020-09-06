@@ -12,18 +12,25 @@ import { sample } from 'lodash';
 import { controller } from '../../controller';
 import { effects } from '../styles';
 
-const CardsRarityString = ({ _cards }) => {
-  const rarityCounts = { common: 0, uncommon: 0, rare: 0, legendary: 0 };
+const CardsRarityString = ({ _cards, showCrafted }) => {
+  const rarityCounts = { common: 0, uncommon: 0, rare: 0, legendary: 0, crafted: 0 };
   _cards.forEach(card => {
     rarityCounts[cards[card].rarity]++;
   });
 
   return (
     <React.Fragment>
-      ({rarityCounts.legendary} <span className={rarityColors.legendary}>legendary</span>,&nbsp;
-      {rarityCounts.rare} <span className={rarityColors.rare}>rare</span>,&nbsp;
-      {rarityCounts.uncommon} <span className={rarityColors.uncommon}>uncommon</span>,&nbsp;
-      {rarityCounts.common} <span className={rarityColors.common}>common</span>)
+      (
+      {rarityCounts.legendary} <span className={rarityColors.legendary}>legendary</span>
+      ,&nbsp;{rarityCounts.rare} <span className={rarityColors.rare}>rare</span>
+      ,&nbsp;{rarityCounts.uncommon} <span className={rarityColors.uncommon}>uncommon</span>
+      ,&nbsp;{rarityCounts.common} <span className={rarityColors.common}>common</span>
+      {showCrafted && (
+        <React.Fragment>
+          ,&nbsp;{rarityCounts.crafted} <span className={rarityColors.crafted}>crafted</span>
+        </React.Fragment>
+      )}
+      )
     </React.Fragment>
   );
 };
@@ -93,11 +100,11 @@ export const MonsterPreview = ({
       <br /><br />
       Enemy cards: <span className='bold yellow'>{enemyDeck.length}</span> <CardsRarityString _cards={enemyDeck} />
       <br />
-      Your cards: <span className='bold yellow'>{yourDeck.length}</span> <CardsRarityString _cards={yourDeck} />
+      Your cards: <span className='bold yellow'>{yourDeck.length}</span> <CardsRarityString _cards={yourDeck} showCrafted />
       <br /><br />
       Victory: <span className='green'>gain {monsterGoldReward} gold</span> and <span className='green'>2 cards from the enemy's deck</span>
       <br />
-      Defeat: <span className='red'>{day === 9 ? 'death!' : 'lose 1 life.'}</span>
+      Defeat: <span className='red'>{day === 10 ? 'game over!' : 'lose 1 life.'}</span>
     </React.Fragment>
   );
 

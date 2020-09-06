@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
 import { css, jsx } from '@emotion/core'; /** @jsx jsx */
 import { useSelector, shallowEqual } from 'react-redux';
-import * as actions from '../../stores/actions';
-import { Spacer, FlexContainer, Text, FlexItem, Image } from '../particles';
+import { FlexContainer, Image } from '../particles';
 import { colors, effects } from '../styles';
 
 const timelineCss = css`
@@ -76,7 +74,7 @@ const nodes = [
   { image: 'death.png', big: true },
   { image: 'clash_swords.png', big: false },
   { image: 'clash_swords.png', big: false },
-  { image: null, big: false },
+  { image: 'death.png', big: true },
   { image: 'death_red.png', big: true },
 ];
 

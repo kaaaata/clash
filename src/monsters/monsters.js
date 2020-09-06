@@ -1,8 +1,8 @@
 import { keyBy } from 'lodash';
 
-// tier 1: wave 1-4
-// tier 2: wave 5-8
-// tier 3: wave 9-12
+// tier 1: waves 1, 2, 3
+// tier 2: wave 4, 5, 6
+// tier 3: wave 7, 8, 9
 
 const monstersTier1 = [
   {
@@ -191,6 +191,17 @@ const _eventMonsters = [
       'Shield',
       'Longsword',
       'Orc Blade'
+    ]
+  },
+  {
+    name: 'Dragon',
+    image: 'fire_dragon',
+    stats: { attack: 2, magic: 2, defense: 2 },
+    deck: [
+      'Fire Dragon',
+      'Fire Spear',
+      'Fire',
+      'Super Fire',
     ]
   }
 ];

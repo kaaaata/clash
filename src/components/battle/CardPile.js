@@ -220,6 +220,7 @@ export const EnemyHand = () => {
         name={card}
         x={400 + (cardWidth + 5) * index}
         y={52}
+        shouldDisableZoom
       />
     ) : null
   ));

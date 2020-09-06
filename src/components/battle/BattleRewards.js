@@ -64,11 +64,11 @@ export const BattleRewards = () => {
           options={[{
             name: 'Continue',
             greenText: didPlayerWin ? `Receive ${battleRewardGold} gold.` : '',
-            redText: didPlayerWin ? '' : `Lose 1 life.`,
+            redText: didPlayerWin ? '' : 'Lose 1 life.',
             onClick: () => {
               if (didPlayerWin) {
                 dispatch(actions.adjustPlayerGold(battleRewardGold));
-                setPage('steal_cards');
+                setPage('gold_bar');
               } else {
                 dispatch(actions.adjustPlayerLives(-1));
                 returnToTown();
@@ -78,10 +78,32 @@ export const BattleRewards = () => {
         />
       );
       break;
-    case 'steal_cards':
+    case 'gold_bar':
       pageComponent = (
         <EventModalPage
           page={2}
+          text={(
+            <React.Fragment>
+              The enemy also drops a <span className='yellow'>gold bar!</span>
+            </React.Fragment>
+          )}
+          options={[{
+            name: 'Continue',
+            greenText: 'Receive 1 gold bar.',
+            onClick: () => {
+              dispatch(actions.adjustPlayerGoldBars(1));
+              setPage('steal_cards');
+            }
+          }]}
+        >
+
+        </EventModalPage>
+      );
+      break;
+    case 'steal_cards':
+      pageComponent = (
+        <EventModalPage
+          page={3}
           text={
             <React.Fragment>
               As the enemy flees, they drop some <span className='yellow'>cards</span> from their deck!

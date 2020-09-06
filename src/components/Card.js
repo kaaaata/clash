@@ -155,6 +155,7 @@ export const Card = ({
   isFaceDown,
   isInCardPile = false,
   shouldAnimateEntry = false,
+  shouldDisableZoom = false,
   isBlurred = false,
   isHidden = false,
   onClick,
@@ -182,16 +183,21 @@ export const Card = ({
     ` : 'position: relative;'}
     user-select: none;
     border-radius: 5px;
-    ${isInCardPile ? transformCss : `
+    ${isInCardPile ? `
+      transition: transform 0.2s ease-in;
+      ${transformCss}
+    ` : `
+      cursor: pointer;
+      transition: transform 0.1s ease-out;
       box-shadow: 2px 2px 3px ${colors.black};
 
-      &:hover {
-        z-index: ${zIndex.mouseEventArea5};
-        ${onClick ? 'transform: scale(1.25);' : transformCss}
-      }
+      ${shouldDisableZoom ? '' : `
+        &:hover {
+          z-index: ${zIndex.mouseEventArea5};
+          transform: scale(1.3);
+        }
+      `}
     `}
-    transition: transform ${onClick ? '0.1s' : '0.2s'} ease-out;
-    cursor: ${onClick ? 'pointer' : 'default'};
     ${isBlurred ? 'filter: blur(3px);' : ''}
     ${isHidden ? 'visibility: hidden;' : ''}
   `;

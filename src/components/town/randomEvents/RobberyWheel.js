@@ -10,7 +10,7 @@ import { CardLootModal } from '../../modals/CardLootModal';
 import { EventModal, EventModalPage } from '../../modals/EventModal';
 
 const wheelImages = [
-  { image: 'gold', width: 36, height: 36 },
+  { image: 'gold_without_padding', width: 36, height: 36 },
   { image: 'silver_bar', width: 36, height: 36 },
   { image: 'bomb', width: 36, height: 36 },
   { image: 'cursed_gold', width: 36, height: 50 },
