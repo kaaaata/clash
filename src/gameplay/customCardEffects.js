@@ -2,6 +2,7 @@ import { cardsArray } from '../cards/cards';
 import { addCardCopiesIntoPiles } from './addCardCopiesIntoPiles';
 import { playCard } from './playCard';
 import { actionGenerators } from './actionGenerators';
+import { logHealValue, logHealCard, logPlayCopyOfCard } from './battleLogGenerators';
 
 export const customCardEffects = {
   'Brawler': (state, card, player) => {
@@ -94,10 +95,18 @@ export const customCardEffects = {
 
     // COPIED AND PASTED HEAL CODE FROM playCard.js SO HEAL CAN HAPPEN AFTER CUSTOM EFFECT
     const totalHeal = Math.min(5, state[player].discard.length);
-    state.logs.push(`${player} heals ${totalHeal}`);
+    state.logs.push(logHealValue(
+      `${player} heals ${totalHeal}`,
+      player,
+      totalHeal
+    ));
     for (let i = 0; i < totalHeal; i++) {
       const healedCard = state[player].discard.getTopCard();
-      state.logs.push(`${player} heals ${healedCard.name}`);
+      state.logs.push(logHealCard(
+        `${player} heals ${healedCard.name}`,
+        player,
+        healedCard.name
+      ));
       state.renderActions.push([
         actionGenerators.removeCard(state, player, 'discard', 'top'),
         actionGenerators.addCard(state, healedCard, player, 'deck', 'random')
@@ -113,7 +122,11 @@ export const customCardEffects = {
         && !['legendary', 'crafted'].includes(card.rarity)
       )
     );
-    state.logs.push(`${player} plays a copy of ${randomCard.name}`);
+    state.logs.push(logPlayCopyOfCard(
+      `${player} plays a copy of ${randomCard.name}`,
+      player,
+      randomCard.name
+    ));
     playCard(state, randomCard, player);
   },
   'Jello Slime': (state, card, player) => {

@@ -16,6 +16,7 @@ import { Portrait } from '../Portrait';
 import { playFirstCardInRound } from '../../gameplay/playFirstCardInRound';
 import { BattleRewards } from './BattleRewards';
 import { CardPileModal } from './CardPileModal';
+import { BattleLog } from './BattleLog';
 
 const perspectiveCss = css`perspective: 2000px;`;
 
@@ -42,6 +43,7 @@ export const Battle = () => {
     }
 
     isAnimating = true;
+    dispatch(actions.setBattleLogs([]));
     const t0 = performance.now();
     renderActions = playFirstCardInRound(index);
     const t1 = performance.now();
@@ -90,6 +92,7 @@ export const Battle = () => {
 
       <CardPileModal />
       <BattleRewards />
+      <BattleLog />
     </div>
   );
 };

@@ -12,9 +12,9 @@ export const controller = isTestingEnabled ? {
   day: 9,
   // lives: 1,
   yourHand: [
-    genCraftedCard('Falchion', 'Gladius'),
-    genCraftedCard('Falchion', 'Gladius'),
-    genCraftedCard('Falchion', 'Gladius')
+    'Healing Potion',
+    'Falchion',
+    'Gladius'
   ],
   // yourDeck: ['Sword'],
   // yourDiscard: ['Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword'],

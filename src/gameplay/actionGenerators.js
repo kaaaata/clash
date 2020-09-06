@@ -2,6 +2,9 @@ import { actionKeys } from './actionKeys';
 
 export const actionGenerators = {
   // these functions mutate state and return actions.
+  // actionKey = redux action key
+  // payload = redux action payload
+  // to be executed in <Battle>
   addCardToStack: (state, card) => {
     state.stack.addCardToTop(card);
     return {

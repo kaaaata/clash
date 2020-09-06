@@ -11,8 +11,10 @@ const genInitialState = () => ({
   enemyBanish: controller.enemyBanish || [],
   enemyHand: [null, null, null],
   stack: [],
+  battleLogs: [],
 
-  activeModalCardPile: null
+  activeModalCardPile: null,
+  isBattleLogVisible: false,
 });
 
 export default (state = genInitialState(), action) => {
@@ -78,6 +80,12 @@ export default (state = genInitialState(), action) => {
       return {
         ...state,
         activeModalCardPile: action.payload
+      };
+    case 'SET_BATTLE_LOGS':
+      console.log('setting battle logs:', action.payload);
+      return {
+        ...state,
+        battleLogs: action.payload
       };
     default:
       return state;

@@ -3,14 +3,27 @@ import { cards } from '../cards/cards';
 import { createCard } from '../cards/createCard';
 import { customCardEffects } from './customCardEffects';
 import { addCardCopiesIntoPiles } from './addCardCopiesIntoPiles';
+import {
+  logHealValue,
+  logHealCard,
+  logPlayCopyOfCard,
+  logGainShields,
+  logReceiveDamage,
+  logReceiveFatalDamage,
+  logDiscardCard,
+  logTriggerDiscardEffect,
+  logTemporaryStatGain
+} from './battleLogGenerators';
 
 // can't move triggerDiscardEffect into new file because it calls playCard (import loop)
 const triggerDiscardEffect = (state, player) => {
   const { logs, renderActions } = state; // state gets mutated. only declare objects here!
   const discardedCard = state[player].discard.getTopCard();
-  logs.push(
-    `${player} triggers discard effect of ${discardedCard.name}`
-  );
+  logs.push(logTriggerDiscardEffect(
+    `${player} triggers discard effect of ${discardedCard.name}`,
+    player,
+    discardedCard.name
+  ));
 
   renderActions.push([
     actionGenerators.removeCard(state, player, 'discard', 'top'),
@@ -93,7 +106,11 @@ export const playCard = (state, card, player, location, index) => {
         totalShields += state[player].stats.defense;
       }
       if (!state.winner) {
-        logs.push(`${player} gains ${totalShields} shields`);
+        logs.push(logGainShields(
+          `${player} gains ${totalShields} shields`,
+          player,
+          totalShields
+        ));
       }
       if (totalDamageDealt === 0) {
         // if no damage is dealt, set shields independently of damage ticks.
@@ -103,18 +120,30 @@ export const playCard = (state, card, player, location, index) => {
     }
 
     if (attack) {
-      logs.push(`${opponent} receives ${totalDamageDealt} damage`);
+      logs.push(logReceiveDamage(
+        `${opponent} receives ${totalDamageDealt} damage`,
+        opponent,
+        totalDamageDealt
+      ));
     }
 
     for (let i = 0; i < totalDamageDealt; i++) {
       const removedCard = state[opponent].deck.getTopCard();
       if (!removedCard) {
-        logs.push(`${opponent} received fatal damage!`);
+        logs.push(logReceiveFatalDamage(
+          `${opponent} received fatal damage!`,
+          opponent
+        ));
         state.winner = player;
         break;
       }
       const destination = dealsBanishingDamage ? 'banish' : 'discard';
-      logs.push(`${opponent} ${dealsBanishingDamage ? 'banishes' : 'discards'} ${removedCard.name}`);
+      logs.push(logDiscardCard(
+        `${opponent} ${dealsBanishingDamage ? 'banishes' : 'discards'} ${removedCard.name}`,
+        opponent,
+        dealsBanishingDamage,
+        removedCard.name
+      ));
       const damageAction = [
         actionGenerators.removeCard(state, opponent, 'deck', 'top'),
         actionGenerators.addCard(state, removedCard, opponent, destination, 'top')
@@ -139,11 +168,19 @@ export const playCard = (state, card, player, location, index) => {
   
   if (!state.winner && heal) {
     const totalHeal = Math.min(heal, state[player].discard.length);
-    logs.push(`${player} heals ${totalHeal}`);
+    logs.push(logHealValue(
+      `${player} heals ${totalHeal}`,
+      player,
+      totalHeal
+    ));
 
     for (let i = 0; i < totalHeal; i++) {
       const healedCard = state[player].discard.getTopCard();
-      logs.push(`${player} heals ${healedCard.name}`);
+      logs.push(logHealCard(
+        `${player} heals ${healedCard.name}`,
+        player,
+        healedCard.name
+      ));
       renderActions.push([
         actionGenerators.removeCard(state, player, 'discard', 'top'),
         actionGenerators.addCard(state, healedCard, player, 'deck', 'random')
@@ -153,7 +190,11 @@ export const playCard = (state, card, player, location, index) => {
 
   if (!state.winner && healEnemy) {
     const totalHeal = Math.min(healEnemy, state[player].discard.length);
-    logs.push(`${opponent} heals ${totalHeal}`);
+    logs.push(logHealValue(
+      `${opponent} heals ${totalHeal}`,
+      opponent,
+      totalHeal
+    ));
 
     for (let i = 0; i < totalHeal; i++) {
       if (!state[opponent].discard.length) {
@@ -161,7 +202,11 @@ export const playCard = (state, card, player, location, index) => {
       }
 
       const healedCard = state[opponent].discard.getTopCard();
-      logs.push(`${opponent} heals ${healedCard}`);
+      logs.push(logHealCard(
+        `${opponent} heals ${healedCard.name}`,
+        player,
+        healedCard.name
+      ));
       renderActions.push([
         actionGenerators.removeCard(state, opponent, 'discard', 'top'),
         actionGenerators.addCard(state, healedCard, opponent, 'deck', 'random')
@@ -171,17 +216,29 @@ export const playCard = (state, card, player, location, index) => {
 
   if (!state.winner && damageSelf) {
     const totalSelfDamage = Math.min(damageSelf, state[player].deck.length);
-    logs.push(`${player} receives ${totalSelfDamage} damage`);
+    logs.push(logReceiveDamage(
+      `${player} receives ${totalSelfDamage} damage`,
+      player,
+      totalSelfDamage
+    ));
 
     for (let i = 0; i < totalSelfDamage; i++) {
       const removedCard = state[player].deck.getTopCard();
       if (!removedCard) {
-        logs.push(`${player} received fatal damage!`);
+        logs.push(logReceiveFatalDamage(
+          `${player} received fatal damage!`,
+          player
+        ));
         state.winner = opponent;
         break;
       }
       const destination = dealsBanishingDamage ? 'banish' : 'discard';
-      logs.push(`${player} ${dealsBanishingDamage ? 'banishes' : 'discards'}: ${removedCard.name}`);
+      logs.push(logDiscardCard(
+        `${player} ${dealsBanishingDamage ? 'banishes' : 'discards'}: ${removedCard.name}`,
+        player,
+        dealsBanishingDamage,
+        removedCard.name
+      ));
       renderActions.push([
         actionGenerators.removeCard(state, player, 'deck', 'top'),
         actionGenerators.addCard(state, removedCard, player, destination, 'top')
@@ -208,7 +265,11 @@ export const playCard = (state, card, player, location, index) => {
 
   if (!state.winner && playCopiesOfCards.length) {
     playCopiesOfCards.forEach(cardName => {
-      logs.push(`${player} plays a copy of ${cardName}`);
+      logs.push(logPlayCopyOfCard(
+        `${player} plays a copy of ${cardName}`,
+        player,
+        cardName
+      ));
       playCard(state, cards[cardName], player);
     });
   }
@@ -216,9 +277,12 @@ export const playCard = (state, card, player, location, index) => {
   if (!state.winner && statBonuses) {
     Object.keys(statBonuses).forEach(stat => {
       const amount = statBonuses[stat];
-      logs.push(
-        `${player} receives +${amount} ${stat[0].toUpperCase()}${stat.slice(1)} until end of battle`
-      );
+      logs.push(logTemporaryStatGain(
+        `${player} receives +${amount} ${stat[0].toUpperCase()}${stat.slice(1)} until end of battle`,
+        player,
+        amount,
+        stat
+      ));
     });
     renderActions.push([actionGenerators.setStats(state, player, statBonuses)]);
   }

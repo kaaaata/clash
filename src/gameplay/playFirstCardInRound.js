@@ -2,6 +2,7 @@ import { CardsArray } from './CardsArray';
 import { store } from '../stores/store';
 import { startTurn } from './startTurn';
 import { playCard } from './playCard';
+import { logPlayCard, logPlayerWins } from './battleLogGenerators';
 
 export const playFirstCardInRound = (index) => {
   const _state = {
@@ -38,42 +39,64 @@ export const playFirstCardInRound = (index) => {
   const { logs, renderActions } = state; // state gets mutated. only declare objects here!
 
   const card = state.you.hand[index];
-  logs.push(`you plays: ${card.name}`);
+  logs.push(logPlayCard(
+    `you plays: ${card.name}`,
+    'you',
+    card.name
+  ));
   // any function that uses stateCopy should put its reference as the first arg
   playCard(state, card, 'you', 'hand', index);
 
   if (state.winner) {
-    logs.push(`${state.winner} wins!`);
+    logs.push(logPlayerWins(
+      `${state.winner} wins!`,
+      state.winner
+    ));
     renderActions.push([{ actionKey: 'setWinner', payload: state[state.winner].name }]);
   } else {
     startTurn(state, 'enemy');
     if (state.winner) {
-      logs.push(`${state.winner} wins!`);
+      logs.push(logPlayerWins(
+        `${state.winner} wins!`,
+        state.winner
+      ));
       renderActions.push([{ actionKey: 'setWinner', payload: state[state.winner].name }]);
     } else {
       const enemyHandRandomCardIndex = ~~(Math.random() * 3);
       const enemyHandRandomCard = state.enemy.hand[enemyHandRandomCardIndex];
       // add placeholder
       state.enemy.hand[enemyHandRandomCardIndex] = {};
-      logs.push(`enemy plays: ${enemyHandRandomCard.name}`);
+      logs.push(logPlayCard(
+        `enemy plays: ${enemyHandRandomCard.name}`,
+        'enemy',
+        enemyHandRandomCard.name
+      ));
       playCard(state, enemyHandRandomCard, 'enemy', 'hand', enemyHandRandomCardIndex);
       if (state.winner) {
-        logs.push(`${state.winner} wins!`);
+        logs.push(logPlayerWins(
+          `${state.winner} wins!`,
+          state.winner
+        ));
         renderActions.push([{ actionKey: 'setWinner', payload: state[state.winner].name }]);
       } else {
         startTurn(state, 'you');
         if (state.winner) {
-          logs.push(`${state.winner} wins!`);
+          logs.push(logPlayerWins(
+            `${state.winner} wins!`,
+            state.winner
+          ));
           renderActions.push([{ actionKey: 'setWinner', payload: state[state.winner].name }]);
         }
       }
     }
   }
 
-  console.log(logs.map(log => log.startsWith('you')
-    ? `Player${log.slice(3)}`
-    : `${state.enemy.name}${log.slice(5)}`
+  console.log(logs.map(log => log.consoleLog.startsWith('you')
+    ? `Player${log.consoleLog.slice(3)}`
+    : `${state.enemy.name}${log.consoleLog.slice(5)}`
   ));
+
+  renderActions.push([{ actionKey: 'setBattleLogs', payload: logs }]);
 
   return renderActions;
 };

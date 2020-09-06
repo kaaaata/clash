@@ -1,5 +1,6 @@
 import { actionGenerators } from './actionGenerators';
 import { cards } from '../cards/cards';
+import { logShuffleCardIntoPile } from './battleLogGenerators';
 
 export const addCardCopiesIntoPiles = (
   state,
@@ -24,7 +25,12 @@ export const addCardCopiesIntoPiles = (
   renderActions.push([]);
 
   copies.forEach(({ card, pile, index = 'random' }) => {
-    logs.push(`${player} shuffles ${card} into their ${pile}`);
+    logs.push(logShuffleCardIntoPile(
+      `${player} shuffles ${card} into their ${pile}`,
+      player,
+      card,
+      pile, 
+    ));
     renderActions.push([
       actionGenerators.removeTopCardFromStack(state),
       actionGenerators.addCard(state, cards[card], player, pile, index)

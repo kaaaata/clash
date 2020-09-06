@@ -11,6 +11,7 @@ export const setStack = payload => ({ type: 'SET_STACK', payload });
 export const setBattleRewardCards = payload => ({ type: 'SET_BATTLE_REWARD_CARDS', payload });
 export const setBattleRewardGold = payload => ({ type: 'SET_BATTLE_REWARD_GOLD', payload });
 export const setActiveModalCardPile = payload => ({ type: 'SET_ACTIVE_MODAL_CARD_PILE', payload });
+export const setBattleLogs = payload => ({ type: 'SET_BATTLE_LOGS', payload });
 
 export const setEnemy = payload => ({ type: 'SET_ENEMY', payload });
 export const setYourShields = payload => ({ type: 'SET_YOUR_SHIELDS', payload });
