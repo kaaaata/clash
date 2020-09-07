@@ -1,142 +1,167 @@
 import React from 'react';
 import { css, jsx } from '@emotion/core'; /** @jsx jsx */
-import { useDispatch, useSelector, shallowEqual } from 'react-redux';
-import * as actions from '../../stores/actions';
-import {
-  YourDeck,
-  YourDiscard,
-  YourBanish,
-  EnemyDeck,
-  EnemyDiscard,
-  EnemyBanish,
-  YourHand,
-  EnemyHand,
-  Stack
-} from './CardPile';
-import { Portrait } from '../Portrait';
-import { playFirstCardInRound } from '../../gameplay/playFirstCardInRound';
-import { BattleRewards } from './BattleRewards';
-import { CardPileModal } from './CardPileModal';
-import { Button, FlexContainer, Text } from '../particles';
+import { useSelector, shallowEqual } from 'react-redux';
+import { Button, FlexContainer, Text, Spacer } from '../particles';
 import { useState } from 'react';
 import { Modal } from '../modals/Modal';
+import { logTurnBegins } from '../../gameplay/battleLogGenerators';
+import { BattleLogItem } from './BattleLogItem';
+import { colors } from '../styles';
 
 const testingLogs = [
   {
-    "type": "play_card",
-    "consoleLog": "you plays: Falchion",
-    "player": "you",
-    "card": "Falchion"
+    type: 'shuffle_card_into_pile',
+    player: 'you',
+    card: 'Gladius',
+    pile: 'discard'
   },
   {
-    "type": "receive_damage",
-    "consoleLog": "enemy receives 4 damage",
-    "player": "enemy",
-    "value": 4
+    type: 'heal_value',
+    player: 'you',
+    value: 3
   },
   {
-    "type": "discard_card",
-    "consoleLog": "enemy discards Defense Potion",
-    "player": "enemy",
-    "dealsBanishingDamage": false,
-    "card": "Defense Potion"
+    type: 'heal_card',
+    player: 'you',
+    card: 'Gladius'
   },
   {
-    "type": "trigger_discard_effect",
-    "consoleLog": "enemy triggers discard effect of Defense Potion",
-    "player": "enemy",
-    "card": "Defense Potion"
+    type: 'play_copy_of_card',
+    player: 'you',
+    card: 'Gladius'
   },
   {
-    "type": "temporary_stat_gain",
-    "consoleLog": "enemy receives +1 Defense until end of battle",
-    "player": "enemy",
-    "value": 1,
-    "stat": "defense"
+    type: 'gain_shields',
+    player: 'you',
+    value: 3
   },
   {
-    "type": "discard_card",
-    "consoleLog": "enemy discards Shield",
-    "player": "enemy",
-    "dealsBanishingDamage": false,
-    "card": "Shield"
+    type: 'receive_damage',
+    player: 'you',
+    value: 3
   },
   {
-    "type": "discard_card",
-    "consoleLog": "enemy discards Minor Healing Potion",
-    "player": "enemy",
-    "dealsBanishingDamage": false,
-    "card": "Minor Healing Potion"
+    type: 'receive_fatal_damage',
+    player: 'you'
   },
   {
-    "type": "trigger_discard_effect",
-    "consoleLog": "enemy triggers discard effect of Minor Healing Potion",
-    "player": "enemy",
-    "card": "Minor Healing Potion"
+    type: 'discard_card',
+    player: 'you',
+    dealsBanishingDamage: true,
+    card: 'Gladius'
   },
   {
-    "type": "heal_value",
-    "consoleLog": "enemy heals 1",
-    "player": "enemy",
-    "value": 1
+    type: 'discard_card',
+    player: 'you',
+    dealsBanishingDamage: false,
+    card: 'Gladius'
   },
   {
-    "type": "heal_card",
-    "consoleLog": "enemy heals Shield",
-    "player": "enemy",
-    "card": "Shield"
+    type: 'trigger_discard_effect',
+    player: 'you',
+    card: 'Gladius'
   },
   {
-    "type": "discard_card",
-    "consoleLog": "enemy discards Sword",
-    "player": "enemy",
-    "dealsBanishingDamage": false,
-    "card": "Sword"
+    type: 'temporary_stat_gain',
+    player: 'you',
+    value: 1,
+    stat: 'attack'
   },
   {
-    "type": "turn_begins",
-    "consoleLog": "enemy's turn begins",
-    "player": "enemy"
+    type: 'play_card',
+    player: 'you',
+    card: 'Gladius'
   },
   {
-    "type": "play_card",
-    "consoleLog": "enemy plays: Sword",
-    "player": "enemy",
-    "card": "Sword"
+    type: 'player_wins',
+    player: 'you'
   },
   {
-    "type": "receive_damage",
-    "consoleLog": "you receives 3 damage",
-    "player": "you",
-    "value": 3
+    type: 'turn_begins',
+    player: 'you'
   },
   {
-    "type": "discard_card",
-    "consoleLog": "you discards Cutlass",
-    "player": "you",
-    "dealsBanishingDamage": false,
-    "card": "Cutlass"
+    type: 'cant_draw_card',
+    player: 'you'
+  },
+  // 
+  {
+    type: 'shuffle_card_into_pile',
+    player: 'enemy',
+    card: 'Gladius',
+    pile: 'banish'
   },
   {
-    "type": "discard_card",
-    "consoleLog": "you discards Cutlass",
-    "player": "you",
-    "dealsBanishingDamage": false,
-    "card": "Cutlass"
+    type: 'heal_value',
+    player: 'enemy',
+    value: 3
   },
   {
-    "type": "discard_card",
-    "consoleLog": "you discards Sword",
-    "player": "you",
-    "dealsBanishingDamage": false,
-    "card": "Sword"
+    type: 'heal_card',
+    player: 'enemy',
+    card: 'Gladius'
   },
   {
-    "type": "turn_begins",
-    "consoleLog": "you's turn begins",
-    "player": "you"
+    type: 'play_copy_of_card',
+    player: 'enemy',
+    card: 'Gladius'
+  },
+  {
+    type: 'gain_shields',
+    player: 'enemy',
+    value: 3
+  },
+  {
+    type: 'receive_damage',
+    player: 'enemy',
+    value: 3
+  },
+  {
+    type: 'receive_fatal_damage',
+    player: 'enemy'
+  },
+  {
+    type: 'discard_card',
+    player: 'enemy',
+    dealsBanishingDamage: true,
+    card: 'Gladius'
+  },
+  {
+    type: 'discard_card',
+    player: 'enemy',
+    dealsBanishingDamage: false,
+    card: 'Gladius'
+  },
+  {
+    type: 'trigger_discard_effect',
+    player: 'enemy',
+    card: 'Gladius'
+  },
+  {
+    type: 'temporary_stat_gain',
+    player: 'enemy',
+    value: 1,
+    stat: 'attack'
+  },
+  {
+    type: 'play_card',
+    player: 'enemy',
+    card: 'Gladius'
+  },
+  {
+    type: 'player_wins',
+    player: 'enemy'
+  },
+  {
+    type: 'turn_begins',
+    player: 'enemy'
+  },
+  {
+    type: 'cant_draw_card',
+    player: 'enemy'
   }
 ];
+
 
 const battleLogButtonCss = css`
   position: absolute;
@@ -144,34 +169,33 @@ const battleLogButtonCss = css`
   left: 120px;
 `;
 const battleLogModalCss = css`
-  
+  overflow: scroll;
+  border-bottom: 5px solid ${colors.yellow};
+  height: 450px;
+  width: 1000px;
+
+  .text_container {
+    width: fit-content;
+    margin: auto;
+  }
 `;
 
-const BattleLogItem = (props) => {
-  let text = null;
-
-  switch (props.type) {
-    case 'shuffle_card_into_pile':
-      text = `${props.player} shuffles ${props.card} into their ${props.pile}`;
-      break;
-    default:
-      text = props.consoleLog;
-      break;
-  }
-
-  return (
-    <FlexContainer alignItems='center'>
-      <Text type='small'>{text}</Text>
-    </FlexContainer>
-  );
-};
-
 export const BattleLog = () => {
-  const { battleLogs, enemyName } = useSelector(state => ({
-    battleLogs: testingLogs,
-    enemyName: state.clashBattleStats.enemyName
-    // battleLogs: state.clashBattleCards.battleLogs
-  }), shallowEqual);
+  const { battleLogs } = useSelector(state => {
+    // move "your turn starts" to the beginning
+    const logs = [
+      // logTurnBegins("you's turn begins", 'you'),
+      // ...state.clashBattleCards.battleLogs.filter(i => (
+      //   !(i.type === 'turn_begins' && i.player === 'you')
+      // ))
+      ...testingLogs
+    ];
+    logs.forEach(i => {
+      i.player = i.player === 'you' ? 'Player' : state.clashBattleStats.enemyName
+    });
+
+    return { battleLogs: logs };
+  }, shallowEqual);
 
   const [isBattleLogModalOpen, setIsBattleLogModalOpen] = useState(true);
 
@@ -193,13 +217,12 @@ export const BattleLog = () => {
           shouldShowCloseButton={true}
         >
           <div css={battleLogModalCss}>
-            {battleLogs.map((log, index) => (
-              <BattleLogItem
-                key={index}
-                {...log}
-                player={log.player === 'you' ? 'Player' : enemyName}
-              />
-            ))}
+            <div className='text_container'>
+              {battleLogs.map((log, index) => (
+                <BattleLogItem key={index} index={index + 1} {...log} />
+              ))}
+              <Spacer height={30} />
+            </div>
           </div>
         </Modal>
       )}

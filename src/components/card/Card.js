@@ -130,8 +130,8 @@ const _Card = React.memo(
 
 export const Card = ({
   name,
-  x = 0,
-  y = 0,
+  x,
+  y,
   isFaceDown,
   isInCardPile = false,
   shouldDisableZoom = false,
@@ -144,7 +144,7 @@ export const Card = ({
   const cardCss = css`
     width: ${cardWidth}px;
     height: ${cardHeight}px;
-    ${x && y ? `
+    ${typeof x === 'number' && typeof y === 'number' ? `
       position: absolute;
       left: ${x}px;
       top: ${y}px;

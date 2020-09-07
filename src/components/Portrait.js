@@ -1,8 +1,9 @@
+import { useState, useEffect } from 'react';
 import { jsx } from '@emotion/core'; /** @jsx jsx */
 import { useSelector, shallowEqual } from 'react-redux';
 import { Image, Spacer, FlexContainer } from './particles';
 import { Attributes } from './Attributes';
-import { useState, useEffect } from 'react';
+import { Shields } from './Shields';
 import { portraitCss } from './portraitCss';
 
 export const Portrait = ({ player }) => {
@@ -31,14 +32,16 @@ export const Portrait = ({ player }) => {
   }, [isDead]);
 
   const shieldsDisplay = !!shields && (
-    <Image
-      className='shields'
-      src='defense.png'
-      width={72}
-      height={72}
-    >
-      <div className='number'>{shields}</div>
-    </Image>
+    <Shields
+      shields={shields}
+      imageProps={{
+        _css: `
+          position: absolute;
+          top: ${player === 'enemy' ? -10 : -25}px;
+          ${player === 'enemy' ? 'left: -15px;' : 'right: -15px;'}
+        `
+      }}
+    />
   );
 
   return (

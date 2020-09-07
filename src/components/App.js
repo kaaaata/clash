@@ -21,6 +21,7 @@ const appCss = css`
   .red { color: ${colors.red}; }
   .yellow { color: ${colors.yellow}; }
   .violet { color: ${colors.violet}; }
+  .greyDark { color: ${colors.greyDark}; }
   
   .bold { font-weight: bold; }
 `;
