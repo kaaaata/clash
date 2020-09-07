@@ -92,6 +92,13 @@ const townActions = keyBy([
     probability: 1,
     image: 'catherine_the_great',
     description: 'A very difficult random encounter!'
+  },
+  {
+    name: 'Treasure Chest',
+    energy: [6, 7, 8],
+    probability: 1,
+    image: 'chest',
+    description: 'A treasure chest! Contains treasure.'
   }
 ], 'name');
 const townActionPool = [];

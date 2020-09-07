@@ -96,7 +96,7 @@ export const playFirstCardInRound = (index) => {
     : `${state.enemy.name}${log.consoleLog.slice(5)}`
   ));
 
-  renderActions.push([{ actionKey: 'setBattleLogs', payload: logs }]);
+  renderActions[renderActions.length - 1].push({ actionKey: 'setBattleLogs', payload: logs });
 
   return renderActions;
 };

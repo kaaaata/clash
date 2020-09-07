@@ -12,15 +12,13 @@ export const controller = isTestingEnabled ? {
   day: 9,
   // lives: 1,
   yourHand: [
-    'Healing Potion',
-    'Falchion',
-    'Gladius'
+    'Falchion','Falchion','Falchion'
   ],
-  // yourDeck: ['Sword'],
+  yourDeck: ['Healing Potion', 'Sword', 'Sword', 'Sword'],
   // yourDiscard: ['Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword'],
   // yourBanish: ['Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword'],
-  // enemyHand: ['Dragon Blade', 'Dragon Blade', 'Dragon Blade'],
-  // enemyDeck: ['Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword'],
+  enemyHand: ['Falchion','Falchion','Falchion'],
+  enemyDeck: ['Healing Potion', 'Sword', 'Sword', 'Sword']
   // enemyDiscard: [],
   // enemyBanish: [],
   

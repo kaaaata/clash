@@ -44,7 +44,7 @@ const genCardDescription = ({
   healEnemy && `Heal enemy ${healEnemy}.`,
   damageSelf && `Deal ${damageSelf} to yourself.`,
   pierces && `Damage dealt pierces.`,
-  onDiscard && type !== 'potion' && (
+  onDiscard && (
     `On ${triggerDiscardOnPlay ? 'play or ' : ''}discard: ${genCardDescription(onDiscard)}`
   ),
   dealsBanishingDamage && 'Damage dealt banishes.',

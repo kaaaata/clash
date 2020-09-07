@@ -152,7 +152,7 @@ export const Shop = ({ closeModal }) => {
         <Spacer height={20} />
 
         <Text type='small' centered>
-          Note: all cards have a 5% chance to upgrade to the next rarity.
+          Note: all cards have a 10% chance to upgrade to the next rarity.
         </Text>
       </Modal>
 

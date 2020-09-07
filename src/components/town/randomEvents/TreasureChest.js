@@ -46,9 +46,9 @@ export const TreasureChest = ({ rng, closeModal }) => {
   } else if (rng < 0.5) {
     lootPack = 'diamond';
   } else if (rng < 0.6) {
-    lootText = <span className='yellow'>a gold bar!</span>
-    lootCb = () => dispatch(actions.adjustPlayerGoldBars(1));
-    greenText = `Receive 1 gold bar.`;
+    lootText = <span className='yellow'>two gold bars!</span>
+    lootCb = () => dispatch(actions.adjustPlayerGoldBars(2));
+    greenText = `Receive 2 gold bars.`;
   } else {
     const gold = random(50, 75);
     lootText = <span className='yellow'>{gold} gold!</span>

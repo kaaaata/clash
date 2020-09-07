@@ -148,46 +148,36 @@ export const allies = [
     image: 'fire_dragon',
     rarity: 'legendary',
     attack: 6,
-    defense: 0,
-    playCopiesOfCards: ['Super Fire'],
+    defense: 6,
     onDiscard: {
-      shuffleCardCopiesIntoOpponentsPiles: [
-        { card: 'Burn', pile: 'deck' },
-        { card: 'Burn', pile: 'deck' },
-        { card: 'Burn', pile: 'deck' }
-      ],
+      playCopiesOfCards: ['Super Fire']
     },
-    customDescription: 'Play a copy of Super Fire. If discarded, shuffle 3 copies of Burn into your opponent\'s deck.'
+    triggerDiscardOnPlay: true,
+    customDescription: 'Play a copy of Super Fire.'
   },
   {
     name: 'Catherine the Great',
     image: 'catherine_the_great',
     rarity: 'legendary',
     attack: 5,
-    defense: 3,
-    playCopiesOfCards: ['Healing Blade'],
+    defense: 7,
     onDiscard: {
-      shuffleCardCopiesIntoYourPiles: [
-        { card: 'Healing Blade', pile: 'deck' },
-        { card: 'Healing Blade', pile: 'deck' }
-      ],
+      playCopiesOfCards: ['Healing Blade']
     },
-    customDescription: 'Play a copy of Healing Blade. If discarded, shuffle 2 copies of Healing Blade into your deck.'
+    triggerDiscardOnPlay: true,
+    customDescription: 'Play a copy of Healing Blade.'
   },
   {
     name: 'Ice Queen',
     image: 'ice_queen',
     rarity: 'legendary',
-    attack: 5,
-    defense: 2,
-    playCopiesOfCards: ['Ice Blade'],
+    attack: 4,
+    defense: 8,
     onDiscard: {
-      shuffleCardCopiesIntoYourPiles: [
-        { card: 'Ice Blade', pile: 'deck' },
-        { card: 'Ice Blade', pile: 'deck' }
-      ],
+      playCopiesOfCards: ['Ice Blade']
     },
-    customDescription: 'Play a copy of Ice Blade. If discarded, shuffle 2 copies of Ice Blade into your deck.'
+    triggerDiscardOnPlay: true,
+    customDescription: 'Play a copy of Ice Blade.'
   }
 ].map(card => createCard({
   ...card,

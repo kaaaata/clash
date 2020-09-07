@@ -13,7 +13,7 @@ export const genPackCards = (pack) => {
   });
 
   for (let i = 0; i < packCards.length; i++) {
-    if (Math.random() < 0.05) {
+    if (Math.random() < 0.1) {
       packCards[i] = sample(lootableCardPool[upgradeRarity(packCards[i].rarity)]);
       i--;
     }

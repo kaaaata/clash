@@ -82,7 +82,7 @@ test('Banishes on play works (Healing Potion)', () => {
   simulatePlayCard(card);
   expect(state.you.banish.getRandomCardIndexByFilter(card => card.name === 'Healing Potion'))
     .not.toBe(-1);
-  expect(state.you.discard.length).toBe(10 - card.heal);
+  expect(state.you.discard.length).toBe(10 - card.onDiscard.heal);
 });
 
 test('Piercing damage aka "Pierces" works (Fire)', () => {

@@ -24,7 +24,7 @@ export const PileCard = ({
 
   return (
     <div css={pileCardCss}>
-      <Card {...cardProps} x={0} y={0} />
+      <Card {...cardProps} x={undefined} y={undefined} />
     </div>
   );
 };

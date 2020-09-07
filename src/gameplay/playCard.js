@@ -16,23 +16,22 @@ import {
 } from './battleLogGenerators';
 
 // can't move triggerDiscardEffect into new file because it calls playCard (import loop)
-const triggerDiscardEffect = (state, player) => {
+const triggerDiscardEffect = (state, card, player) => {
   const { logs, renderActions } = state; // state gets mutated. only declare objects here!
-  const discardedCard = state[player].discard.getTopCard();
   logs.push(logTriggerDiscardEffect(
-    `${player} triggers discard effect of ${discardedCard.name}`,
+    `${player} triggers discard effect of ${card.name}`,
     player,
-    discardedCard.name
+    card.name
   ));
 
   renderActions.push([
     actionGenerators.removeCard(state, player, 'discard', 'top'),
-    actionGenerators.addCardToStack(state, discardedCard)
+    actionGenerators.addCardToStack(state, card)
   ]);
 
   const mockCard = createCard({
-    name: discardedCard.name,
-    ...discardedCard.onDiscard,
+    name: card.name,
+    ...card.onDiscard,
     player,
     isMockCard: true
   });
@@ -43,17 +42,27 @@ const triggerDiscardEffect = (state, player) => {
     actionGenerators.removeTopCardFromStack(state),
     actionGenerators.addCard(
       state,
-      discardedCard,
+      card,
       player,
-      discardedCard.banishesOnPlay ? 'banish' : 'discard',
+      card.banishesOnPlay ? 'banish' : 'discard',
       'top'
     )
   ]);
 };
 
 // a player loses if they receive damage while deck size is 0, or they cannot draw a card.
-export const playCard = (state, card, player, location, index) => {
+export const playCard = (state, _card, player, location, index) => {
   const { logs, renderActions } = state; // state gets mutated. only declare objects here!
+
+  const card = createCard(_card);
+  if (card.triggerDiscardOnPlay && card.onDiscard) {
+    Object.keys(card.onDiscard).forEach(key => {
+      card[key] = card.onDiscard[key];
+    });
+    card.onDiscard = null;
+    card.triggerDiscardOnPlay = false;
+  }
+
   const {
     name,
     attack,
@@ -72,6 +81,7 @@ export const playCard = (state, card, player, location, index) => {
     shuffleCardCopiesIntoYourPiles,
     statBonuses
   } = card;
+
   const opponent = player === 'you' ? 'enemy' : 'you';
 
   if (state.winner) {
@@ -159,7 +169,7 @@ export const playCard = (state, card, player, location, index) => {
         if (state[opponent].deck.length || (
           removedCard.onDiscard.heal || removedCard.onDiscard.shuffleCardCopiesIntoYourPiles
         )) {
-          triggerDiscardEffect(state, opponent);
+          triggerDiscardEffect(state, removedCard, opponent);
           if (state.winner) break;
         }
       }
@@ -245,7 +255,7 @@ export const playCard = (state, card, player, location, index) => {
       ]);
 
       if (destination === 'discard' && removedCard.onDiscard) {
-        triggerDiscardEffect(state, player);
+        triggerDiscardEffect(state, removedCard, player);
         if (state.winner) break;
       }
     }

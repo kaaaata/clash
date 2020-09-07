@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { css, jsx } from '@emotion/core'; /** @jsx jsx */
 import { FlexContainer, Text } from '../particles';
 import { rarityColors } from '../../cards/rarity';

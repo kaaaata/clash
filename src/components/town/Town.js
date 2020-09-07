@@ -17,6 +17,7 @@ import {
   PurchaseCards
 } from './randomEvents';
 import { townCss } from './townCss';
+import { TreasureChest } from './randomEvents/TreasureChest';
 
 const genTownActionCardImage = (townAction, day) => {
   if (townAction.name === 'Next Day') {
@@ -32,6 +33,7 @@ const genTownActionCardImage = (townAction, day) => {
 
 export const Town = () => {
   const {
+    lives,
     energy,
     day,
     townActions,
@@ -49,8 +51,8 @@ export const Town = () => {
   
   const [townActionDescription, setTownActionDescription] = useState('Choose an action!');
   const [activeModal, setActiveModal] = useState(
-    // !!lives && [4, 7].includes(day) && lives > 0 ? 'Receive Blessing' : null
-    'Next Day'
+    !!lives && [4, 7].includes(day) && lives > 0 ? 'Receive Blessing' : null
+    // 'Next Day'
   );
 
   useEffect(() => {
@@ -137,6 +139,9 @@ export const Town = () => {
       break;
     case 'Donate a Card':
       modal = <RemoveCards closeModal={() => setActiveModal(null)} />;
+      break;
+    case 'Treasure Chest':
+      modal = <TreasureChest rng={Math.random()} closeModal={() => setActiveModal(null)} />;
       break;
     default:
       break;

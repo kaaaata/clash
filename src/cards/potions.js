@@ -5,7 +5,6 @@ export const potions = [
     name: 'Minor Healing Potion',
     image: 'minor_healing_potion',
     rarity: 'common',
-    heal: 2,
     onDiscard: {
       heal: 2
     }
@@ -14,7 +13,6 @@ export const potions = [
     name: 'Healing Potion',
     image: 'healing_potion',
     rarity: 'uncommon',
-    heal: 3,
     onDiscard: {
       heal: 3
     }
@@ -24,7 +22,6 @@ export const potions = [
     image: 'bomb',
     rarity: 'common',
     isToken: true,
-    damageSelf: 2,
     onDiscard: {
       damageSelf: 2
     }
@@ -34,7 +31,6 @@ export const potions = [
     image: 'burn',
     rarity: 'common',
     isToken: true,
-    damageSelf: 1,
     onDiscard: {
       damageSelf: 1
     }
@@ -49,7 +45,6 @@ export const potions = [
     name: 'Jello Slime',
     image: 'slime_potion',
     rarity: 'uncommon',
-    customEffect: true,
     onDiscard: {
       customEffect: true
     },
@@ -59,7 +54,6 @@ export const potions = [
     name: 'Attack Potion',
     image: 'attack_potion',
     rarity: 'rare',
-    statBonuses: { attack: 1 },
     onDiscard: {
       statBonuses: { attack: 1 }
     },
@@ -69,7 +63,6 @@ export const potions = [
     name: 'Magic Potion',
     image: 'magic_potion',
     rarity: 'rare',
-    statBonuses: { magic: 1 },
     onDiscard: {
       statBonuses: { magic: 1 }
     },
@@ -79,7 +72,6 @@ export const potions = [
     name: 'Defense Potion',
     image: 'defense_potion',
     rarity: 'rare',
-    statBonuses: { defense: 1 },
     onDiscard: {
       statBonuses: { defense: 1 }
     },
@@ -89,7 +81,6 @@ export const potions = [
     name: 'Golden Goblet',
     image: 'golden_goblet',
     rarity: 'legendary',
-    customEffect: true,
     onDiscard: {
       customEffect: true,
     },
