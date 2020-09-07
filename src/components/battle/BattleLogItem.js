@@ -24,30 +24,33 @@ const cardStringCss = css`
   }
 
   .card {
+    display: none;
     z-index: ${zIndex.mouseEventArea5};
+
+    &:hover {
+      display: none !important;
+    }
+  }
+
+  &:hover {
+    .card {
+      display: block;
+    }
   }
 `;
 
 const CardString = ({ card }) => {
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
     <span css={cardStringCss}>
-      <span
-        className={`card_string ${rarityColors[cards[card].rarity]}`}
-        onMouseEnter={() => setIsHovered(true)}
-        onMouseLeave={() => setIsHovered(false)}
-      >
+      <span className={`card_string ${rarityColors[cards[card].rarity]}`}>
         {card}
       </span>
-      {isHovered && (
-        <Card
-          name={card}
-          x={0}
-          y={20}
-          shouldDisableZoom
-        />
-      )}
+      <Card
+        name={card}
+        x={0}
+        y={20}
+        shouldDisableZoom
+      />
     </span>
   );
 };
