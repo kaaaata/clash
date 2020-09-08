@@ -12,8 +12,6 @@ import { CardViewModal } from './modals/CardViewModal';
 import { GameOver } from './modals/GameOver';
 
 export const TopNav = () => {
-  const [activeModal, setActiveModal] = useState(null);
-  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
   const {
     lives,
     gold,
@@ -38,6 +36,9 @@ export const TopNav = () => {
     shouldHideTopNav: ['story', 'main_menu', 'character_select'].includes(state.clashScene.scene)
   }), shallowEqual);
   const dispatch = useDispatch();
+
+  const [activeModal, setActiveModal] = useState('crafting');
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   useEffect(() => {
     if (!lives) {

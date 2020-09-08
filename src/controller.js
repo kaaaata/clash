@@ -6,9 +6,9 @@ const isTestingEnabled = true;
 // const isTestingEnabled = false;
 
 export const controller = isTestingEnabled ? {
-  // scene: 'main_menu',
-  // yourName: 'paladin',
-  // yourImage: 'paladin',
+  scene: 'town',
+  yourName: 'Paladin',
+  yourImage: 'paladin',
 
   // gold: 100,
   // goldBars: 10,

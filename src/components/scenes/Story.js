@@ -29,18 +29,24 @@ export const Story = ({ setScene }) => {
   const [step, setStep] = useState(1);
 
   return (
-    <div css={storyCss} onClick={() => step === 3 ? dispatch(actions.setScene('town')) : setStep(step + 1)}>
+    <div
+      css={storyCss}
+      onClick={() => step === 3
+          ? dispatch(actions.setScene('character_select'))
+          : setStep(step + 1)
+      }
+    >
       <Text type='header' centered>
         Your village is under attack by monsters!
       </Text>
       {step >= 2 && (
         <Text type='header' centered>
-          Use weapons, cast magic, and recruit allies, to fight them back!
+          Can you survive for 10 days and nights?!
         </Text>
       )}
       {step >= 3 && (
         <Text type='header' centered>
-          Can you survive for 10 days and nights?!
+          Only time will tell!!
         </Text>
       )}
       <Text className='click_to_continue' centered>

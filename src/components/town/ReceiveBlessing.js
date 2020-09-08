@@ -68,13 +68,13 @@ export const ReceiveBlessing = ({ closeModal }) => {
             },
             {
               name: 'Blessing of Wall Street',
-              greenText: 'Receive 300 gold.',
+              greenText: 'Receive 250 gold.',
               onClick: () => {
                 setFlavorText('richer');
                 dispatch(actions.addTownFeedText('Gold rains from the sky!'));
                 setPage('received_blessing');
-                dispatch(actions.addTownFeedText('Received blessing: 300 gold'));
-                dispatch(actions.adjustPlayerGold(300));
+                dispatch(actions.addTownFeedText('Received blessing: 250 gold'));
+                dispatch(actions.adjustPlayerGold(250));
               }
             }
           ]}

@@ -90,9 +90,10 @@ export const Battle = () => {
         <YourBanish />
       </div>
 
+      <BattleLog />
+      
       <CardPileModal />
       <BattleRewards />
-      <BattleLog />
     </div>
   );
 };

@@ -20,9 +20,9 @@ export const characters = [
     startingCards: ['Vampire', 'Orc Blade', 'Tentacles']
   },
   {
-    name: 'Cryopyromancer',
+    name: 'Elementalist',
     image: 'cryopyromancer',
-    startingCards: ['Cryopyromancer', 'Super Frost', 'Fire']
+    startingCards: ['Elementalist', 'Super Frost', 'Fire']
   },
   {
     name: 'Warlock',

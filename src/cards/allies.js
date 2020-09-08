@@ -129,7 +129,7 @@ export const allies = [
     dealsBanishingDamage: true
   },
   {
-    name: 'Cryopyromancer',
+    name: 'Elementalist',
     image: 'cryopyromancer',
     rarity: 'rare',
     attack: 1,

@@ -2,6 +2,7 @@ import { css, jsx } from '@emotion/core'; /** @jsx jsx */
 import { useDispatch } from 'react-redux';
 import * as actions from '../../stores/actions';
 import { Text, Spacer } from '../particles';
+import { colors } from '../styles';
 
 const mainMenuCss = css`
   .menu {
@@ -14,6 +15,35 @@ const mainMenuCss = css`
     }
   }
 `;
+const yellowUnderlineTextCss = css`
+  position: relative;
+  width: fit-content;
+  cursor: pointer;
+
+  .underline {
+    position: absolute;
+    height: 4px;
+    width: 0%;
+    transition: width 0.3s ease-out;
+    background: ${colors.yellow};
+  }
+
+  &:hover {
+    .underline {
+      width: 100%;
+    }
+  }
+`;
+
+const YellowUnderlineText = ({ text, onClick }) => (
+  <div
+    css={yellowUnderlineTextCss}
+    onClick={onClick}
+  >
+    <Text type='header'>{text}</Text>
+    <div className='underline' />
+  </div>
+);
 
 export const MainMenu = () => {
   const dispatch = useDispatch();
@@ -25,24 +55,12 @@ export const MainMenu = () => {
       <Spacer height={30} />
       <Text centered>A game by Catherine Han</Text>
       <div className='menu'>
-        <Text
-          type='header'
+        <YellowUnderlineText
+          text='Play'
           onClick={() => dispatch(actions.setScene('story'))}
         >
           Play
-        </Text>
-        <Text
-          type='header'
-          onClick={() => {}}
-        >
-          About
-        </Text>
-        <Text
-          type='header'
-          onClick={() => {}}
-        >
-          Credits
-        </Text>
+        </YellowUnderlineText>
       </div>
     </div>
   );

@@ -89,7 +89,7 @@ export const CharacterSelect = () => {
                 characters[selectedCharIndex].startingCards
               )}
             >
-              Continue to Town
+              <Text type='small'>Play as {characters[selectedCharIndex].name}</Text>
             </Button>
             <Spacer height={10} />
           </FlexContainer>

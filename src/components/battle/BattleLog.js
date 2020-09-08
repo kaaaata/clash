@@ -164,8 +164,9 @@ import { colors } from '../styles';
 
 const battleLogButtonCss = css`
   position: absolute;
-  top: 350px;
-  left: 120px;
+  top: 430px;
+  left: 40px;
+  width: 100px;
 `;
 const battleLogModalCss = css`
   overflow: scroll;
@@ -207,7 +208,7 @@ export const BattleLog = () => {
         onClick={() => setIsBattleLogModalOpen(true)}
         _css={battleLogButtonCss}
       >
-        Last Turn's Recap
+        Recap
       </Button>
 
       {isBattleLogModalOpen && (
