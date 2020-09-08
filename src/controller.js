@@ -6,19 +6,24 @@ const isTestingEnabled = true;
 // const isTestingEnabled = false;
 
 export const controller = isTestingEnabled ? {
-  gold: 100,
-  goldBars: 10,
-  energy: 10,
-  day: 9,
+  // scene: 'main_menu',
+  // yourName: 'paladin',
+  // yourImage: 'paladin',
+
+  // gold: 100,
+  // goldBars: 10,
+  // energy: 10,
+  // day: 9,
   // lives: 1,
-  yourHand: [
-    'Falchion','Falchion','Falchion'
-  ],
-  yourDeck: ['Healing Potion', 'Sword', 'Sword', 'Sword'],
+
+  // yourHand: [
+  //   'Falchion','Falchion','Falchion'
+  // ],
+  // yourDeck: ['Healing Potion', 'Sword', 'Sword', 'Sword'],
   // yourDiscard: ['Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword'],
   // yourBanish: ['Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword'],
-  enemyHand: ['Falchion','Falchion','Falchion'],
-  enemyDeck: ['Healing Potion', 'Sword', 'Sword', 'Sword']
+  // enemyHand: ['Falchion','Falchion','Falchion'],
+  // enemyDeck: ['Healing Potion', 'Sword', 'Sword', 'Sword']
   // enemyDiscard: [],
   // enemyBanish: [],
   

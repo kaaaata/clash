@@ -31,16 +31,16 @@ export const Story = ({ setScene }) => {
   return (
     <div css={storyCss} onClick={() => step === 3 ? dispatch(actions.setScene('town')) : setStep(step + 1)}>
       <Text type='header' centered>
-        Your village is under attack by monsters...
+        Your village is under attack by monsters!
       </Text>
       {step >= 2 && (
         <Text type='header' centered>
-          Can you survive for 12 days and nights...
+          Use weapons, cast magic, and recruit allies, to fight them back!
         </Text>
       )}
       {step >= 3 && (
         <Text type='header' centered>
-          And then defeat the Dragon?!
+          Can you survive for 10 days and nights?!
         </Text>
       )}
       <Text className='click_to_continue' centered>

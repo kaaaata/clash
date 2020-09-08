@@ -5,21 +5,21 @@ export const magic = [
     name: 'Fire',
     image: 'fire',
     rarity: 'common',
-    attack: 2,
+    attack: 1,
     defense: 0,
-    isCraftable: true
+    isCraftable: true,
+    shuffleCardCopiesIntoOpponentsPiles: [
+      { card: 'Burn', pile: 'deck' }
+    ],
+    customDescription: 'Shuffle a copy of Burn into your opponent\'s deck.'
   },
   {
     name: 'Frost',
     image: 'frost',
     rarity: 'common',
     attack: 2,
-    defense: 1,
-    isCraftable: true,
-    shuffleCardCopiesIntoOpponentsPiles: [
-      { card: 'Freeze', pile: 'deck' }
-    ],
-    customDescription: 'Shuffle a copy of Freeze into your opponent\'s deck.'
+    defense: 0,
+    isCraftable: true
   },
   {
     name: 'Tentacles',
@@ -53,20 +53,20 @@ export const magic = [
     name: 'Super Fire',
     image: 'double_fireball',
     rarity: 'uncommon',
-    attack: 4,
-    defense: 0
+    attack: 2,
+    defense: 0,
+    shuffleCardCopiesIntoOpponentsPiles: [
+      { card: 'Burn', pile: 'deck' },
+      { card: 'Burn', pile: 'deck' },
+    ],
+    customDescription: 'Shuffle 2 copies of Burn into your opponent\'s deck.'
   },
   {
     name: 'Super Frost',
     image: 'double_frost',
     rarity: 'uncommon',
     attack: 4,
-    defense: 2,
-    shuffleCardCopiesIntoOpponentsPiles: [
-      { card: 'Freeze', pile: 'deck' },
-      { card: 'Freeze', pile: 'deck' }
-    ],
-    customDescription: 'Shuffle two copies of Freeze into your opponent\'s deck.'
+    defense: 0
   },
   {
     name: 'Tome of Spells',

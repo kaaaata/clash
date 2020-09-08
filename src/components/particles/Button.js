@@ -17,7 +17,7 @@ export const Button = ({
     onMouseEnter={onMouseEnter}
     className={`button ${className}`}
     css={css`
-      background: ${isDisabled ? colors.greyDark : colors.slate};
+      background: ${isDisabled ? colors.greyDark : colors.slateLight};
       padding: 0 10px;
       height: 32px;
       line-height: 32px;
@@ -30,7 +30,7 @@ export const Button = ({
       cursor: ${isDisabled ? 'default' : 'pointer'};
   
       &:hover {
-        ${isDisabled ? '' : `background: ${colors.slateLight};`}
+        ${isDisabled ? '' : `background: ${colors.slate};`}
       }
 
       ${_css}

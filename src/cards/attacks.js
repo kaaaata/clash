@@ -128,8 +128,10 @@ export const attacks = [
     rarity: 'rare',
     attack: 2,
     defense: 5,
-    shuffleCardCopiesIntoOpponentsPiles: [{ card: 'Freeze', pile: 'deck' }],
-    customDescription: 'Shuffle a copy of Freeze into your opponent\'s deck.'
+    shuffleCardCopiesIntoYourPiles: [
+      { card: 'Super Frost', pile: 'deck' }
+    ],
+    customDescription: 'Shuffle a copy of Super Frost into your deck.'
   },
   {
     name: 'Forest Bow',

@@ -48,11 +48,8 @@ export const allies = [
     rarity: 'uncommon',
     attack: 3,
     defense: 1,
-    shuffleCardCopiesIntoOpponentsPiles: [
-      { card: 'Freeze', pile: 'deck' },
-      { card: 'Freeze', pile: 'deck' }
-    ],
-    customDescription: 'Shuffle 2 copies of Freeze into your opponent\'s deck.'
+    playCopiesOfCards: ['Frost'],
+    customDescription: 'Play a copy of Frost.'
   },
   {
     name: 'Hobgoblin',
@@ -135,13 +132,14 @@ export const allies = [
     name: 'Cryopyromancer',
     image: 'cryopyromancer',
     rarity: 'rare',
-    attack: 3,
-    defense: 3,
+    attack: 1,
+    defense: 1,
     shuffleCardCopiesIntoOpponentsPiles: [
       { card: 'Burn', pile: 'deck' },
-      { card: 'Freeze', pile: 'deck' }
+      { card: 'Burn', pile: 'deck' },
     ],
-    customDescription: 'Shuffle a copy of Burn and a copy of Freeze into your opponent\'s deck.'
+    playCopiesOfCards: ['Frost'],
+    customDescription: 'Play a copy of Frost. Shuffle 2 copies of Burn into your opponent\'s deck.'
   },
   {
     name: 'Fire Dragon',

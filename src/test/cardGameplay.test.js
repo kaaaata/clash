@@ -85,10 +85,10 @@ test('Banishes on play works (Healing Potion)', () => {
   expect(state.you.discard.length).toBe(10 - card.onDiscard.heal);
 });
 
-test('Piercing damage aka "Pierces" works (Fire)', () => {
+test('Piercing damage aka "Pierces" works (Frost)', () => {
   state.enemy.shields = 10;
   
-  const card = cards['Fire'];
+  const card = cards['Frost'];
   simulatePlayCard(card);
   expect(state.enemy.deck.length).toBe(10 - card.attack);
 });
@@ -135,7 +135,7 @@ test('Attacks are buffed by Attack, except when attack is 0 (Sword)', () => {
 test('Magics are buffed by Magic, except when attack is 0 (Fire)', () => {
   state.you.statBonuses.magic = 1;
 
-  const card1 = cards['Fire'];
+  const card1 = cards['Frost'];
   simulatePlayCard(card1);
   expect(state.enemy.deck.length).toBe(10 - (card1.attack + 1));
 

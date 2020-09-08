@@ -1,18 +1,17 @@
 import { css, jsx } from '@emotion/core'; /** @jsx jsx */
 import { useDispatch } from 'react-redux';
 import * as actions from '../../stores/actions';
-import { Text } from '../particles';
+import { Text, Spacer } from '../particles';
 
 const mainMenuCss = css`
-  .play {
+  .menu {
     position: absolute;
     left: 100px;
     top: 350px;
-  }
 
-  .title {
-    margin-top: 90px;
-    text-align: center;
+    & > div {
+      margin-bottom: 15px;
+    }
   }
 `;
 
@@ -21,16 +20,30 @@ export const MainMenu = () => {
 
   return (
     <div css={mainMenuCss}>
-      <Text type='title' className='title'>
-        12 Days Before the Dragon Attack
-      </Text>
-      <Text
-        type='header'
-        onClick={() => dispatch(actions.setScene('story'))}
-        className='play'
-      >
-        Play
-      </Text>
+      <Spacer height={90} />
+      <Text type='title' centered>Clash</Text>
+      <Spacer height={30} />
+      <Text centered>A game by Catherine Han</Text>
+      <div className='menu'>
+        <Text
+          type='header'
+          onClick={() => dispatch(actions.setScene('story'))}
+        >
+          Play
+        </Text>
+        <Text
+          type='header'
+          onClick={() => {}}
+        >
+          About
+        </Text>
+        <Text
+          type='header'
+          onClick={() => {}}
+        >
+          Credits
+        </Text>
+      </div>
     </div>
   );
 };

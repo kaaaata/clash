@@ -16,7 +16,7 @@ export const topNavCss = css`
 
   .left {
     .top_nav_portrait {
-      margin-right: 40px;
+      margin-right: 25px;
       flex: 0 0 auto;
     }
 

@@ -35,7 +35,7 @@ export const TopNav = () => {
     stats: state.clashBattleStats.yourStats,
     statBonuses: state.clashBattleStats.yourStatBonuses,
     canVisitShop: state.clashScene.canVisitShop,
-    shouldHideTopNav: ['story', 'main_menu'].includes(state.clashScene.scene)
+    shouldHideTopNav: ['story', 'main_menu', 'character_select'].includes(state.clashScene.scene)
   }), shallowEqual);
   const dispatch = useDispatch();
 
@@ -57,8 +57,9 @@ export const TopNav = () => {
           <Image
             className='top_nav_portrait'
             src={`${image}.png`}
-            width={20}
+            width={36}
             height={36}
+            size='contain'
           />
           <Attributes stats={stats} statBonuses={statBonuses} />
           <FlexContainer className='lives' alignItems='center'>

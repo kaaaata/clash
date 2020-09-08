@@ -2,11 +2,13 @@ import { createCard } from './createCard';
 
 export const potions = [
   {
-    name: 'Minor Healing Potion',
-    image: 'minor_healing_potion',
+    name: 'Burn',
+    image: 'burn',
     rarity: 'common',
+    isToken: true,
     onDiscard: {
-      heal: 2
+      damageSelf: 2,
+      pierces: true
     }
   },
   {
@@ -16,30 +18,6 @@ export const potions = [
     onDiscard: {
       heal: 3
     }
-  },
-  {
-    name: 'Bomb',
-    image: 'bomb',
-    rarity: 'common',
-    isToken: true,
-    onDiscard: {
-      damageSelf: 2
-    }
-  },
-  {
-    name: 'Burn',
-    image: 'burn',
-    rarity: 'common',
-    isToken: true,
-    onDiscard: {
-      damageSelf: 1
-    }
-  },
-  {
-    name: 'Freeze',
-    image: 'freeze',
-    rarity: 'common',
-    isToken: true
   },
   {
     name: 'Jello Slime',

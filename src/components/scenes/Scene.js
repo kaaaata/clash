@@ -2,6 +2,7 @@ import { css, jsx } from '@emotion/core'; /** @jsx jsx */
 import { MainMenu } from './MainMenu';
 import { Story } from './Story';
 import { Town } from '../town/Town';
+import { CharacterSelect } from './CharacterSelect';
 import { Battle } from '../battle/Battle';
 import { Spacer } from '../particles';
 import { useSelector, shallowEqual } from 'react-redux';
@@ -24,6 +25,9 @@ export const Scene = () => {
       break;
     case 'story':
       sceneComponent = <Story />;
+      break;
+    case 'character_select':
+      sceneComponent = <CharacterSelect />;
       break;
     case 'main_menu':
       sceneComponent = <MainMenu />;

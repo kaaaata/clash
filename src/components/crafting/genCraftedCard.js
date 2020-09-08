@@ -2,9 +2,9 @@ import { cards } from '../../cards/cards';
 import { createCard } from '../../cards/createCard';
 
 const twinCustomDescriptions = {
-  'Twin Fire Spears': 'Play two copies of Fire.',
-  'Twin Multishots': 'Play four copies of Arrow.',
-  'Twin Ice Blades': 'Shuffle two copies of Freeze into your opponent\'s deck.'
+  'Twin Fire Spears': 'Play 2 copies of Fire.',
+  'Twin Multishots': 'Play 4 copies of Arrow.',
+  'Twin Ice Blades': 'Shuffle 2 copies of Super Frost into your deck.'
 };
 
 export const genCraftedCard = (card1, card2) => {

@@ -96,19 +96,6 @@ const monstersTier2 = [
       'Falchion',
       'Falchion'
     ]
-  },
-  {
-    name: 'Cryopyromancer',
-    image: 'cryopyromancer',
-    stats: { attack: 0, magic: 0, defense: 1 },
-    deck: [
-      'Cryopyromancer',
-      'Fire',
-      'Burn',
-      'Freeze',
-      'Fire Spear',
-      'Ice Blade'
-    ]
   }
 ];
 

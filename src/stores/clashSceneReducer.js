@@ -1,5 +1,7 @@
+import { controller } from '../controller';
+
 const genInitialState = () => ({
-  scene: 'town',
+  scene: controller.scene || 'main_menu',
   canVisitShop: true
 });
 

@@ -1,8 +1,10 @@
-// for coding simplicity, stats can only go up (can't lose stats).
+import { controller } from '../controller';
+
+// for coding simplicity, stats can only go up (can't lose stats). (may change in the future)
 const initialState = {
   // persisted variables
-  yourName: 'Spear Goon',
-  yourImage: 'red_spear_guy',
+  yourName: controller.yourName || '',
+  yourImage: controller.yourImage || '',
   yourStats: { attack: 0, magic: 0, defense: 0 },
   yourStatBonuses: { attack: 0, magic: 0, defense: 0 },
 
@@ -21,6 +23,12 @@ const initialState = {
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case 'SET_PLAYER':
+      return {
+        ...state,
+        yourName: action.payload.name,
+        yourImage: action.payload.image
+      };
     case 'SET_ENEMY':
       return {
         ...state,
