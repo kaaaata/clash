@@ -11,9 +11,9 @@ export const controller = isTestingEnabled ? {
   yourImage: 'paladin',
 
   // gold: 100,
-  // goldBars: 10,
-  // energy: 10,
-  // day: 9,
+  goldBars: 10,
+  energy: 10,
+  day: 2,
   // lives: 1,
 
   // yourHand: [

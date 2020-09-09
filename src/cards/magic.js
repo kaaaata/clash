@@ -7,7 +7,6 @@ export const magic = [
     rarity: 'common',
     attack: 1,
     defense: 0,
-    isCraftable: true,
     shuffleCardCopiesIntoOpponentsPiles: [
       { card: 'Burn', pile: 'deck' }
     ],
@@ -18,8 +17,7 @@ export const magic = [
     image: 'frost',
     rarity: 'common',
     attack: 2,
-    defense: 0,
-    isCraftable: true
+    defense: 0
   },
   {
     name: 'Tentacles',
@@ -84,5 +82,6 @@ export const magic = [
 ].map(card => createCard({
   ...card,
   type: 'magic',
-  pierces: true
+  pierces: true,
+  isCraftable: card.rarity !== 'legendary' && !card.isToken
 }));

@@ -82,14 +82,14 @@ export const CharacterSelect = () => {
             </FlexContainer>
             <FlexItem />
             <Button
-              mini
+              type='mini'
               onClick={() => continueOnClick(
                 characters[selectedCharIndex].name,
                 characters[selectedCharIndex].image,
                 characters[selectedCharIndex].startingCards
               )}
             >
-              <Text type='small'>Play as {characters[selectedCharIndex].name}</Text>
+             Play as {characters[selectedCharIndex].name}
             </Button>
             <Spacer height={10} />
           </FlexContainer>

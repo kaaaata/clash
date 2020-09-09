@@ -2,15 +2,21 @@ import { css, jsx } from '@emotion/core'; /** @jsx jsx */
 import { colors } from '../styles';
 import { Text } from './Text';
 
+const buttonTypeWidths = {
+  default: '100%',
+  mini: '200px',
+  'fit-content': 'fit-content'
+};
+
 export const Button = ({
   onClick,
   onMouseEnter,
-  mini = false,
+  type = 'default', // 'default'|'mini'|'fit-content'
   isDisabled = false,
-  color,
+  textProps = {},
   className = '',
   _css = '',
-  children // String|Node
+  children
 }) => (
   <button
     onClick={isDisabled ? null : onClick}
@@ -24,9 +30,8 @@ export const Button = ({
       border-radius: 4px;
       border: none;
       outline: none;
-      width: ${mini ? '200px' : '100%'};
+      width: ${buttonTypeWidths[type]};
       color: ${colors.white};
-      text-align: ${mini ? 'center' : 'left'};
       cursor: ${isDisabled ? 'default' : 'pointer'};
   
       &:hover {
@@ -36,8 +41,13 @@ export const Button = ({
       ${_css}
     `}
   >
-    {typeof children === 'string' ? (
-      <Text type='small' inline color={color}>{children}</Text>
-    ) : children}
+    <Text
+      type='small'
+      centered
+      inline
+      {...textProps}
+    >
+      {children}
+    </Text>
   </button>
 );

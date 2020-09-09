@@ -80,19 +80,18 @@ export const EventModalPage = ({
             key={index}
             onClick={option.onClick}
             isDisabled={option.isDisabled}
+            textProps={{ type: 'mini' }}
             className='event_modal--fade_in'
           >
-            <Text type='mini'>
-              [{option.name}]
-              {option.redTextFirst
-                ? <span className='red'> {option.redText}</span>
-                : <span className='green'> {option.greenText}</span>
-              }
-              {option.redTextFirst
-                ? <span className='green'> {option.greenText}</span>
-                : <span className='red'> {option.redText}</span>
-              }
-            </Text>
+            [{option.name}]
+            {option.redTextFirst
+              ? <span className='red'> {option.redText}</span>
+              : <span className='green'> {option.greenText}</span>
+            }
+            {option.redTextFirst
+              ? <span className='green'> {option.greenText}</span>
+              : <span className='red'> {option.redText}</span>
+            }
           </Button>
         ))}
       </div>

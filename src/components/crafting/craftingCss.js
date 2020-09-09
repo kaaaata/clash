@@ -36,15 +36,11 @@ export const craftingCss = css`
     }
   }
 
-  button {
-    margin-right: 20px;
+  .upgrades {
+    width: 550px;
 
-    &:last-child {
-      margin-right: 0;
+    button {
+      margin-bottom: 5px;
     }
-  }
-
-  .recipes {
-    text-align: center;
   }
 `;

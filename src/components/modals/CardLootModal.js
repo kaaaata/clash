@@ -88,10 +88,10 @@ export const CardLootModal = ({
         {continueOptions.map(i => (
           <Button
             key={i.text}
-            mini
+            type='mini'
             isDisabled={i.text === 'Take All' && cardsTakenCount === maxCardsToTake}
             onClick={i.onClick}
-            color={i.color}
+            textProps={{ color: i.color }}
           >
             {i.text}
           </Button>

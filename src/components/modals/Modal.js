@@ -66,7 +66,7 @@ export const Modal = ({
         {modalTitle}
         <FlexItem className='modal_children_container'>{children}</FlexItem>
         {!halfModal && shouldShowCloseButton && closeModal && (
-          <Button mini onClick={closeModal}>{closeButtonText}</Button>
+          <Button type='mini' onClick={closeModal}>{closeButtonText}</Button>
         )}
       </FlexContainer>
     </div>

@@ -204,7 +204,6 @@ export const BattleLog = () => {
   return battleLogs.length > 1 ? (
     <React.Fragment>
       <Button
-        mini
         onClick={() => setIsBattleLogModalOpen(true)}
         _css={battleLogButtonCss}
       >

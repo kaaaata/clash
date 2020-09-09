@@ -27,7 +27,7 @@ export const Settings = ({ closeModal }) => {
           _css='height: 100%;'
         >
           <Button 
-            mini
+            type='mini'
             isDisabled={scene !== 'battle'}
             onClick={() => {
               dispatch(actions.setWinner(enemyName));
@@ -41,7 +41,7 @@ export const Settings = ({ closeModal }) => {
           
           {inDevelopment && (
             <Button
-              mini
+              type='mini'
               onClick={() => setIsAllCardsModalActive(true)}
             >
               View All Cards
@@ -50,7 +50,7 @@ export const Settings = ({ closeModal }) => {
 
           <Spacer height={20} />
 
-          <Button mini onClick={closeModal}>Back</Button>
+          <Button type='mini' onClick={closeModal}>Back</Button>
         </FlexContainer>
       </Modal>
       
