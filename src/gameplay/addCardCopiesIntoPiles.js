@@ -1,16 +1,24 @@
 import { actionGenerators } from './actionGenerators';
-import { cards } from '../cards/cards';
 import { logShuffleCardIntoPile } from './battleLogGenerators';
+import { cards } from '../cards/cards';
+import { createNewCard } from '../cards/createNewCard';
 
 export const addCardCopiesIntoPiles = (
   state,
-  copies, // [{ card:String, pile:String, index:(Number|'random') = 'random' }]
+  copies, // [{ cardName:String|undefined, cardId:String|undefined, pile:String, index:(Number|'random') = 'random' }]
   player,
   removeCardArgs // move cards b/t piles: { player, location, index }. shuffle cards into piles: undefined
 ) => {
   const { logs, renderActions } = state;
-  copies.forEach(({ card }) => {
-    const renderAction = [actionGenerators.addCardToStack(state, { state, ...cards[card], player })];
+  const cardIds = [];
+
+  copies.forEach(({ cardName, cardId }) => {
+    const _cardId = cardId || createNewCard(cardName);
+    cardIds.push(_cardId);
+    const renderAction = [actionGenerators.addCardToStack(
+      state,
+      { state, ...cards[_cardId], player }
+    )];
     if (removeCardArgs) {
       renderAction.push(actionGenerators.removeCard(
         state,
@@ -24,16 +32,16 @@ export const addCardCopiesIntoPiles = (
 
   renderActions.push([]);
 
-  copies.forEach(({ card, pile, index = 'random' }) => {
+  copies.forEach(({ cardName, cardId, pile, index = 'random' }, _index) => {
     logs.push(logShuffleCardIntoPile(
-      `${player} shuffles ${card} into their ${pile}`,
+      `${player} shuffles ${cardName || cards[cardId].name} (${cardIds[_index]}) into their ${pile}`,
       player,
-      card,
+      cardIds[_index],
       pile, 
     ));
     renderActions.push([
       actionGenerators.removeTopCardFromStack(state),
-      actionGenerators.addCard(state, cards[card], player, pile, index)
+      actionGenerators.addCard(state, cardIds[_index], player, pile, index)
     ]);
   });
 };

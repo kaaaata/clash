@@ -1,5 +1,3 @@
-import { createCard } from './createCard';
-
 export const magic = [
   {
     name: 'Fire',
@@ -42,8 +40,8 @@ export const magic = [
     attack: 3,
     defense: 0,
     shuffleCardCopiesIntoYourPiles: [
-      { card: 'Candy Corn', pile: 'discard', index: 'top' },
-      { card: 'Candy Corn', pile: 'discard', index: 'top' }
+      { cardName: 'Candy Corn', pile: 'discard', index: 'top' },
+      { cardName: 'Candy Corn', pile: 'discard', index: 'top' }
     ],
     customDescription: 'Add two copies of Candy Corn into your discard.'
   },
@@ -72,16 +70,16 @@ export const magic = [
     rarity: 'legendary',
     attack: 2,
     defense: 4,
-    customEffect: true,
     onDiscard: {
       customEffect: true
     },
     triggerDiscardOnPlay: true,
     customDescription: 'Shuffle 4 random non-legendary magic attacks into your deck.'
   }
-].map(card => createCard({
-  ...card,
-  type: 'magic',
-  pierces: true,
-  isCraftable: card.rarity !== 'legendary' && !card.isToken
-}));
+];
+
+magic.forEach(card => {
+  card.type = 'magic';
+  card.pierces = true;
+  card.isCraftable = card.rarity !== 'legendary' && !card.isToken;
+});

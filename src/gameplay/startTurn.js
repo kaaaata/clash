@@ -10,7 +10,7 @@ export const startTurn = (state, player) => {
 
   const startOfTurnActions = [actionGenerators.setShields(state, player, 0)];
   for (let i = 0; i < 3; i++) {
-    if (!state[player].hand[i].name) {
+    if (!state[player].hand[i]) {
       const cardToDraw = state[player].deck.getTopCard();
       if (!cardToDraw) {
         logs.push(logCantDrawCard(

@@ -1,5 +1,3 @@
-import { createCard } from './createCard';
-
 export const potions = [
   {
     name: 'Burn',
@@ -64,9 +62,10 @@ export const potions = [
     },
     customDescription: 'Shuffle 5 cards from your banish into your discard. Heal 5.'
   }
-].map(card => createCard({
-  ...card,
-  type: 'potion',
-  banishesOnPlay: true,
-  triggerDiscardOnPlay: true
-}));
+];
+
+potions.forEach(card => {
+  card.type = 'potion';
+  card.banishesOnPlay = true;
+  card.triggerDiscardOnPlay = true;
+});

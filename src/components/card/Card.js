@@ -3,6 +3,7 @@ import React from 'react'; // eslint-ignore-line
 import { css, jsx } from '@emotion/core'; /** @jsx jsx */
 import { cards } from '../../cards/cards';
 import { rarityColors } from '../../cards/rarity';
+import { blueprints } from '../../cards/blueprints';
 import { Image, Spacer, FlexContainer } from '../particles';
 import { colors, zIndex } from '../styles';
 import { _cardCss } from './cardCss';
@@ -12,8 +13,10 @@ export const cardWidth = 140;
 export const cardHeight = 190;
 
 const _Card = React.memo(
-  ({ name }) => {
+  ({ cardName, cardId }) => {
+    const card = cardName ? blueprints.allCardsObject[cardName] : cards[cardId];
     const {
+      name,
       image,
       imageSlant,
       craftedImage,
@@ -24,7 +27,7 @@ const _Card = React.memo(
       type,
       description,
       glow,
-    } = cards[name];
+    } = card;
 
     const cardArt = (
       <React.Fragment>
@@ -129,7 +132,8 @@ const _Card = React.memo(
 );
 
 export const Card = ({
-  name,
+  cardName,
+  cardId,
   x,
   y,
   isFaceDown,
@@ -175,7 +179,10 @@ export const Card = ({
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      {isFaceDown ? <_FaceDownCard /> : <_Card name={name} />}
+      {isFaceDown
+        ? <_FaceDownCard />
+        : <_Card cardName={cardName} cardId={cardId} />
+      }
     </div>
   );
 };

@@ -4,15 +4,16 @@ import { useDispatch } from 'react-redux';
 import * as actions from '../../../stores/actions';
 import { Image, FlexContainer } from '../../particles';
 import { colors } from '../../styles';
-import { genPackCards } from '../../shop/genPackCards';
+import { genPackCardNames } from '../../shop/genPackCardNames';
 import { packs } from '../../shop/packs';
 import { CardLootModal } from '../../modals/CardLootModal';
 import { EventModal, EventModalPage } from '../../modals/EventModal';
+import { createNewCard } from '../../../cards/createNewCard';
 
 const wheelImages = [
   { image: 'gold_without_padding', width: 36, height: 36 },
   { image: 'silver_bar', width: 36, height: 36 },
-  { image: 'bomb', width: 36, height: 36 },
+  { image: 'burn', width: 36, height: 36 },
   { image: 'cursed_gold', width: 36, height: 50 },
   { image: 'candy_corn', width: 45, height: 45 },
   { image: 'gold_bar', width: 36, height: 36 },
@@ -107,12 +108,12 @@ export const RobberyWheel = ({ rng, closeModal }) => {
     case 2:
       flavorText = (
         <React.Fragment>
-          You win a <span className='red'>Bomb!</span>
+          You get <span className='red'>burned!</span>
         </React.Fragment>
       );
-      continueBadText = 'Receive card: Bomb.'
+      continueBadText = 'Receive card: Burn.'
       continueOnClick = () => {
-        dispatch(actions.addCardsToCollection('Bomb'));
+        dispatch(actions.addCardsToCollection(createNewCard('Burn')));
         closeModal();
       };
       break;
@@ -136,7 +137,7 @@ export const RobberyWheel = ({ rng, closeModal }) => {
       );
       continueGoodText = 'Receive card: Candy Corn.'
       continueOnClick = () => {
-        dispatch(actions.addCardsToCollection('Candy Corn'));
+        dispatch(actions.addCardsToCollection(createNewCard('Candy Corn')));
         closeModal();
       };
       break;
@@ -190,7 +191,7 @@ export const RobberyWheel = ({ rng, closeModal }) => {
 
   return page === 'card_loot_modal' ? (
     <CardLootModal
-      cards={genPackCards(packs.silver)}
+      cardNames={genPackCardNames(packs.silver)}
       closeModal={closeModal}
     />
   ) : (

@@ -1,8 +1,8 @@
-export const logShuffleCardIntoPile = (consoleLog, player, card, pile) => ({
+export const logShuffleCardIntoPile = (consoleLog, player, cardId, pile) => ({
   type: 'shuffle_card_into_pile',
   consoleLog,
   player,
-  card,
+  cardId,
   pile
 });
 
@@ -13,18 +13,18 @@ export const logHealValue = (consoleLog, player, value) => ({
   value
 });
 
-export const logHealCard = (consoleLog, player, card) => ({
+export const logHealCard = (consoleLog, player, cardId) => ({
   type: 'heal_card',
   consoleLog,
   player,
-  card
+  cardId
 });
 
-export const logPlayCopyOfCard = (consoleLog, player, card) => ({
+export const logPlayCopyOfCard = (consoleLog, player, cardId) => ({
   type: 'play_copy_of_card',
   consoleLog,
   player,
-  card
+  cardId
 });
 
 export const logGainShields = (consoleLog, player, value) => ({
@@ -47,19 +47,19 @@ export const logReceiveFatalDamage = (consoleLog, player) => ({
   player
 });
 
-export const logDiscardCard = (consoleLog, player, dealsBanishingDamage, card) => ({
+export const logDiscardCard = (consoleLog, player, dealsBanishingDamage, cardId) => ({
   type: 'discard_card',
   consoleLog,
   player,
   dealsBanishingDamage,
-  card
+  cardId
 });
 
-export const logTriggerDiscardEffect = (consoleLog, player, card) => ({
+export const logTriggerDiscardEffect = (consoleLog, player, cardId) => ({
   type: 'trigger_discard_effect',
   consoleLog,
   player,
-  card
+  cardId
 });
 
 export const logTemporaryStatGain = (consoleLog, player, value, stat) => ({
@@ -70,11 +70,11 @@ export const logTemporaryStatGain = (consoleLog, player, value, stat) => ({
   stat
 });
 
-export const logPlayCard = (consoleLog, player, card) => ({
+export const logPlayCard = (consoleLog, player, cardId) => ({
   type: 'play_card',
   consoleLog,
   player,
-  card
+  cardId
 });
 
 export const logPlayerWins = (consoleLog, player) => ({

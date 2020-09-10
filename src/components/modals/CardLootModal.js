@@ -5,6 +5,8 @@ import * as actions from '../../stores/actions';
 import { Modal } from '../modals/Modal';
 import { FlexContainer, Spacer, Button, Text } from '../particles';
 import { Card } from '../card/Card';
+import { blueprints } from '../../cards/blueprints';
+import { createNewCard } from '../../cards/createNewCard';
 
 const cardLootModalCss = css`
   .card {
@@ -23,14 +25,15 @@ const continueOptionsCss = css`
 `;
 
 export const CardLootModal = ({
-  cards,
-  maxCardsToTake = cards.length,
+  cardNames,
+  cardIds,
+  maxCardsToTake = cardNames ? cardNames.length : cardIds.length,
   closeModal
 }) => {
   const dispatch = useDispatch();
 
-  const [selectedCards, setSelectedCards] = useState({});
-  const cardsTakenCount = Object.keys(selectedCards).length;
+  const [selectedCardIndices, setSelectedCardIndices] = useState({});
+  const cardsTakenCount = Object.keys(selectedCardIndices).length;
 
   const titleText = (
     <React.Fragment>
@@ -46,16 +49,20 @@ export const CardLootModal = ({
   );
 
   const continueOptions = [{ text: 'Done', color: 'green', onClick: closeModal }];
-  if (maxCardsToTake === cards.length) {
+  if (maxCardsToTake === (cardNames ? cardNames.length : cardIds.length)) {
     continueOptions.push({
       text: 'Take All',
       color: cardsTakenCount === maxCardsToTake ? 'red' : 'green',
       onClick: () => {
         if (cardsTakenCount < maxCardsToTake) {
-          dispatch(actions.addCardsToCollection(
-            cards.filter((_, index) => !selectedCards.hasOwnProperty(index))
+          dispatch(actions.addCardsToCollection((cardNames || cardIds)
+            .filter((_, index) => !selectedCardIndices.hasOwnProperty(index))
+            .map((cardNameOrId) => createNewCard(cardIds
+                ? cardNameOrId
+                : blueprints.allCardsObject[cardNameOrId]
+            ))
           ));
-          setSelectedCards({ 0: true, 1: true, 2: true, 3: true, 4: true });
+          setSelectedCardIndices({ 0: true, 1: true, 2: true, 3: true, 4: true });
           closeModal();
         }
       }
@@ -69,17 +76,21 @@ export const CardLootModal = ({
       transparent={false}
     >
       <FlexContainer justifyContent='center' css={cardLootModalCss}>
-        {cards.map((i, index) => (
+        {(cardNames || cardIds).map((cardNameOrId, index) => (
           <Card
             key={index}
-            name={i}
+            cardName={cardNames && cardNameOrId}
+            cardId={cardIds && cardNameOrId}
             onClick={() => {
               if (cardsTakenCount < maxCardsToTake) {
-                setSelectedCards({ ...selectedCards, [index]: true });
-                dispatch(actions.addCardsToCollection(i));
+                setSelectedCardIndices({ ...selectedCardIndices, [index]: true });
+                dispatch(actions.addCardsToCollection(createNewCard(cardIds
+                  ? cardNameOrId
+                  : blueprints.allCardsObject[cardNameOrId]
+                )));
               }
             }}
-            isHidden={selectedCards.hasOwnProperty(index)}
+            isHidden={selectedCardIndices.hasOwnProperty(index)}
           />
         ))}
       </FlexContainer>

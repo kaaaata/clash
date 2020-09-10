@@ -6,7 +6,7 @@ import { Modal } from '../modals/Modal';
 import { CardLootModal } from '../modals/CardLootModal';
 import { Spacer, Image, FlexContainer, Gold, Text } from '../particles';
 import { packs } from './packs';
-import { genPackCards } from './genPackCards';
+import { genPackCardNames } from './genPackCardNames';
 import { rarityColors } from '../../cards/rarity';
 import { cardWidth, cardHeight } from '../card/Card';
 
@@ -112,7 +112,7 @@ export const Shop = ({ closeModal }) => {
                       e.stopPropagation();
                       if (gold >= pack.cost) {
                         dispatch(actions.adjustPlayerGold(-1 * pack.cost));
-                        setCardLootModalCards(genPackCards(pack));
+                        setCardLootModalCards(genPackCardNames(pack));
                         setIsCardLootModalActive(true);
                       } else {
                         dispatch(actions.setToast('Not enough gold!'));
@@ -158,7 +158,7 @@ export const Shop = ({ closeModal }) => {
 
       {isCardLootModalActive && (
         <CardLootModal
-          cards={cardLootModalCards}
+          cardNames={cardLootModalCards}
           closeModal={() => setIsCardLootModalActive(false)}
         />
       )}

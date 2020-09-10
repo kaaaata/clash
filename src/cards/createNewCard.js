@@ -1,3 +1,8 @@
+import { cards } from './cards';
+import shortid from 'shortid';
+import { cloneDeep } from 'lodash';
+import { blueprints } from './blueprints';
+
 const cardTemplate = {
   name: '',
   image: '',
@@ -36,7 +41,6 @@ const genCardDescription = ({
   pierces,
   onDiscard,
   triggerDiscardOnPlay,
-  type,
   dealsBanishingDamage,
   customDescription
 }) => [
@@ -51,12 +55,21 @@ const genCardDescription = ({
   customDescription
 ].filter(Boolean).join(' ');
 
-export const createCard = (properties = {}) => {
-  const card = {
-    ...cardTemplate,
-    ...properties,
-    description: genCardDescription(properties)
-  };
+// creates a new card object, and links a unique id to it.
+export const createNewCard = (cardNameOrObject, customCardId) => {
+  const cardProperties = typeof cardNameOrObject === 'object'
+    ? cardNameOrObject
+    : blueprints.allCardsObject[cardNameOrObject];
 
-  return card;
+  const card = cloneDeep({
+    ...cardTemplate,
+    ...cardProperties,
+    description: genCardDescription(cardProperties)
+  });
+
+  const cardId = customCardId || shortid.generate();
+
+  cards[cardId] = card;
+
+  return cardId;
 };

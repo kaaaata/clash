@@ -46,26 +46,32 @@ const cardViewModalCss = css`
 export const CardViewModal = ({
   title,
   shouldShowCardCount = true,
-  cards,
+  cardNames,
+  cardIds,
   cardOnClick,
   closeModal,
   closeButtonText
-}) => (
-  <Modal
-    title={`${title}${shouldShowCardCount ? ` (${cards.length})` : ''}`}
-    closeModal={closeModal}
-    shouldCloseOnClick={false}
-    shouldShowCloseButton
-    closeButtonText={closeButtonText}
-  >
-    <div css={cardViewModalCss}>
-      {cards.map((card, index) => card ? (
-        <Card
-          key={index}
-          name={card}
-          onClick={cardOnClick ? () => cardOnClick(card, index) : null}
-        />
-      ) : <div key={index} css={css`display: none;`} />)}
-    </div>
-  </Modal>
-);
+}) => {
+  const cards = cardNames || cardIds;
+
+  return (
+    <Modal
+      title={`${title}${shouldShowCardCount ? ` (${cards.length})` : ''}`}
+      closeModal={closeModal}
+      shouldCloseOnClick={false}
+      shouldShowCloseButton
+      closeButtonText={closeButtonText}
+    >
+      <div css={cardViewModalCss}>
+        {cards.map((cardNameOrId, index) => cardNameOrId ? (
+          <Card
+            key={index}
+            cardName={cardNames && cardNameOrId}
+            cardId={cardIds && cardNameOrId}
+            onClick={cardOnClick ? () => cardOnClick(cardNameOrId, index) : null}
+          />
+        ) : <div key={index} css={css`display: none;`} />)}
+      </div>
+    </Modal>
+  );
+};

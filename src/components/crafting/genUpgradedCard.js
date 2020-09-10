@@ -1,5 +1,4 @@
-import { cards } from '../../cards/cards';
-import { createCard } from '../../cards/createCard';
+import { createNewCard } from '../../cards/createNewCard';
 
 export const genUpgradedCard = (card, upgrade) => {
   if (
@@ -11,8 +10,6 @@ export const genUpgradedCard = (card, upgrade) => {
   ) {
     return null;
   }
-
-  let result;
 
   const c = {};
   c.name = `${upgrade.prefix || ''}${card.name}${upgrade.suffix || ''}`;
@@ -44,10 +41,6 @@ export const genUpgradedCard = (card, upgrade) => {
     c[key] = [...card[key], ...upgrade[key]];
   });
   // statBonuses (currently no non-legendary attacks or magic attacks have statBonuses)
-
-  result = createCard(c);
-
-  cards[result.name] = result;
   
-  return result;
+  return createNewCard(c);
 };

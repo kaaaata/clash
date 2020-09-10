@@ -23,7 +23,7 @@ export const CardPileModal = () => {
   return activeModalCardPile ? (
     <CardViewModal
       title={cardPileModalNames[activeModalCardPile]}
-      cards={cards.reverse()}
+      cardIds={cards.reverse()}
       closeModal={() => dispatch(actions.setActiveModalCardPile(null))}
     />
   ) : null;

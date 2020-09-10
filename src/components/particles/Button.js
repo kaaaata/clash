@@ -19,8 +19,8 @@ export const Button = ({
   children
 }) => (
   <button
-    onClick={isDisabled ? null : onClick}
-    onMouseEnter={onMouseEnter}
+    onClick={isDisabled ? undefined : onClick}
+    onMouseEnter={isDisabled ? undefined : onMouseEnter}
     className={`button ${className}`}
     css={css`
       background: ${isDisabled ? colors.greyDark : colors.slateLight};

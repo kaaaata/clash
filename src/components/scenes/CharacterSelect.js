@@ -6,6 +6,7 @@ import { characters } from './characters';
 import { Card, cardWidth, cardHeight } from '../card/Card';
 import { colors } from '../styles';
 import * as actions from '../../stores/actions';
+import { createNewCard } from '../../cards/createNewCard';
 
 const characterSelectCss = css`
   .showcase {
@@ -49,9 +50,9 @@ export const CharacterSelect = () => {
   const dispatch = useDispatch();
   const [selectedCharIndex, setSelectedCharIndex] = useState(0);
 
-  const continueOnClick = (name, image, cards) => {
+  const continueOnClick = (name, image, cardNames) => {
     dispatch(actions.setPlayer({ name, image }));
-    dispatch(actions.addCardsToCollection(cards));
+    dispatch(actions.addCardsToCollection(cardNames.map(i => createNewCard(i))));
     dispatch(actions.setScene('town'));
   };
 
@@ -76,8 +77,8 @@ export const CharacterSelect = () => {
             <Text>Additional starting cards:&nbsp;</Text>
             <Spacer height={5} />
             <FlexContainer className='cards'>
-              {characters[selectedCharIndex].startingCards.map((i, index) => (
-                <Card key={index} name={i} />
+              {characters[selectedCharIndex].startingCards.map((cardName, index) => (
+                <Card key={index} cardName={cardName} />
               ))}
             </FlexContainer>
             <FlexItem />

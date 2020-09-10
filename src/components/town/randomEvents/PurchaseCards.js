@@ -5,6 +5,7 @@ import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { EventModal, EventModalPage } from '../../modals/EventModal';
 import { Spacer, Gold } from '../../particles';
 import { Card } from '../../card/Card';
+import { createNewCard } from '../../../cards/createNewCard';
 
 // the margin-top: -15px is a hack to fit all the content inside EventModal.
 // the line-height: 1 is a hack to disallow EventModal paragraph line height from impacting card text.
@@ -25,7 +26,7 @@ const cardWithPriceCss = (isHidden, isHovered) => css`
   }
 `;
 
-const CardWithPrice = ({ card, cost, canAfford }) => {
+const CardWithPrice = ({ cardName, cost, canAfford }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isPurchased, setIsPurchased] = useState(false);
   const dispatch = useDispatch();
@@ -36,11 +37,11 @@ const CardWithPrice = ({ card, cost, canAfford }) => {
       <Gold gold={cost} color={canAfford ? 'yellow' : 'red'} />
       <Spacer height={35} />
       <Card
-        name={card}
+        cardName={cardName}
         onClick={() => {
           if (canAfford) {
             dispatch(actions.adjustPlayerGold(-1 * cost));
-            dispatch(actions.addCardsToCollection(card));
+            dispatch(actions.addCardsToCollection(createNewCard(cardName)));
             setIsPurchased(true);
           } else {
             dispatch(actions.setToast('Not enough gold!'));
@@ -69,7 +70,7 @@ export const PurchaseCards = ({ title, image, closeModal }) => {
         text={cards.map((i, index) => (
           <CardWithPrice
             key={index}
-            card={i.name}
+            cardName={i.name}
             cost={i.cost}
             canAfford={gold >= i.cost}
           />

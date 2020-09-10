@@ -1,5 +1,5 @@
 import { monstersByTier } from '../monsters/monsters';
-import { cards } from '../cards/cards';
+import { blueprints } from '../cards/blueprints';
 
 test('all monsters are valid', () => {
   const errorMessages = [];
@@ -58,7 +58,7 @@ test('all monster deck preset cards exist', () => {
   Object.values(monstersByTier).forEach(monsters => {
     monsters.forEach((monster, index) => {
       monster.deck.forEach(card => {
-        const doesCardExist = cards.hasOwnProperty(card);
+        const doesCardExist = blueprints.allCardsObject.hasOwnProperty(card);
         if (!doesCardExist) {
           console.log('card does not exist:', card);
         }

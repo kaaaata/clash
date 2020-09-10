@@ -125,7 +125,7 @@ export const BattleRewards = () => {
     return (
       <CardLootModal
         maxCardsToTake={2}
-        cards={battleRewardCards}
+        cardIds={battleRewardCards}
         closeModal={returnToTown}
       />
     );

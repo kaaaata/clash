@@ -1,92 +1,84 @@
-import { cardsArray } from '../cards/cards';
 import { addCardCopiesIntoPiles } from './addCardCopiesIntoPiles';
 import { playCard } from './playCard';
 import { actionGenerators } from './actionGenerators';
 import { logHealValue, logHealCard, logPlayCopyOfCard } from './battleLogGenerators';
+import { blueprints } from '../cards/blueprints';
+import { cards } from '../cards/cards';
+import { createNewCard } from '../cards/createNewCard';
 
 export const customCardEffects = {
-  'Brawler': (state, card, player) => {
+  'Brawler': (state, player) => {
     // Shuffle a copy of a random non-legendary attack into your deck.
-    const attack = cardsArray.getRandomCardByFilter(
-      card => (
-        card.type === 'attack' 
-        && !['legendary', 'crafted'].includes(card.rarity)
-        && card.name !== 'Strange Key'
-      )
+    const attack = blueprints.attacks.getRandomCardByFilter(
+      card => card.rarity !== 'legendary'
     );
-    addCardCopiesIntoPiles(state, [{ card: attack.name, pile: 'deck' }], player);
+    addCardCopiesIntoPiles(state, [{ cardName: attack.name, pile: 'deck' }], player);
   },
-  'Minotaur': (state, card, player) => {
+  'Minotaur': (state, player) => {
     // Play 2 random attacks from your discard, then banish them.
     for (let i = 0; i < 2; i++) {
       const attackIndex = state[player].discard.getRandomCardIndexByFilter(
-        card => card.type === 'attack'
+        i => cards[i.card].type === 'attack'
       );
+      const cardId = createNewCard({
+        ...cards[state[player].discard[attackIndex]],
+        banishesOnPlay: true
+      });
       if (attackIndex !== -1) {
-        playCard(
-          state,
-          { ...state[player].discard[attackIndex], banishesOnPlay: true },
-          player,
-          'discard',
-          attackIndex
-        );
+        playCard(state, cardId, player, 'discard', attackIndex);
       }
     }
   },
-  'Mage': (state, card, player) => {
+  'Mage': (state, player) => {
     // Play 2 random magic attacks from your discard, then banish them.
     for (let i = 0; i < 2; i++) {
       const attackIndex = state[player].discard.getRandomCardIndexByFilter(
-        card => card.type === 'magic'
+        i => cards[i.card].type === 'magic'
       );
+      const cardId = createNewCard({
+        ...cards[state[player].discard[attackIndex]],
+        banishesOnPlay: true
+      });
       if (attackIndex !== -1) {
-        playCard(
-          state,
-          { ...state[player].discard[attackIndex], banishesOnPlay: true },
-          player,
-          'discard',
-          attackIndex
-        );
+        playCard(state, cardId, player, 'discard', attackIndex);
       }
     }
   },
-  'Recruiter': (state, card, player) => {
+  'Recruiter': (state, player) => {
     // Play a random ally from your discard pile, then banish it.
     const allyIndex = state[player].discard.getRandomCardIndexByFilter(
-      card => card.type === 'ally'
+      i => cards[i.card].type === 'ally'
     );
+    const cardId = createNewCard({
+      ...cards[state[player].discard[allyIndex]],
+      banishesOnPlay: true
+    });
     if (allyIndex !== -1) {
-      playCard(
-        state,
-        { ...state[player].discard[allyIndex], banishesOnPlay: true },
-        player,
-        'discard',
-        allyIndex
-      );
+      playCard(state, cardId, player, 'discard', allyIndex);
     }
   },
-  'Apothecary': (state, card, player) => {
+  'Apothecary': (state, player) => {
     // When played or discarded, shuffle a random potion from your banish into your deck.
     const potionIndex = state[player].banish.getRandomCardIndexByFilter(
-      card => card.type === 'potion' && !card.isToken
+      i => cards[i.card].type === 'potion' && !cards[i.card].isToken
     );
     if (potionIndex !== -1) {
       addCardCopiesIntoPiles(
         state,
-        [{ card: state[player].banish[potionIndex].name, pile: 'deck' }],
+        [{ cardId: state[player].banish[potionIndex], pile: 'deck' }],
         player,
         { player, location: 'banish', index: potionIndex }
       );
     }
   },
-  'Golden Goblet': (state, card, player) => {
+  'Golden Goblet': (state, player) => {
     // Shuffle 5 cards from your banish into your discard. Heal 5.
     for (let i = 0; i < 5; i++) {
       const banishCardIndex = state[player].banish.getRandomCardIndex();
       if (banishCardIndex !== -1) {
         addCardCopiesIntoPiles(
           state,
-          [{ card: state[player].banish[banishCardIndex].name, pile: 'discard' }],
+          [{ cardId: state[player].banish[banishCardIndex], pile: 'discard' }],
           player,
           { player, location: 'banish', index: banishCardIndex }
         );
@@ -101,38 +93,36 @@ export const customCardEffects = {
       totalHeal
     ));
     for (let i = 0; i < totalHeal; i++) {
-      const healedCard = state[player].discard.getTopCard();
+      const healedCardId = state[player].discard.getTopCard();
       state.logs.push(logHealCard(
-        `${player} heals ${healedCard.name}`,
+        `${player} heals ${cards[healedCardId].name} (${healedCardId})`,
         player,
-        healedCard.name
+        healedCardId
       ));
       state.renderActions.push([
         actionGenerators.removeCard(state, player, 'discard', 'top'),
-        actionGenerators.addCard(state, healedCard, player, 'deck', 'random')
+        actionGenerators.addCard(state, healedCardId, player, 'deck', 'random')
       ]);
     }
   },
-  'Magic Scroll': (state, card, player) => {
+  'Magic Scroll': (state, player) => {
     // Play a copy of a random non-legendary card.
-    const randomCard = cardsArray.getRandomCardByFilter(
-      card => (
-        !card.isToken
-        && card.name !== 'Magic Scroll'
-        && !['legendary', 'crafted'].includes(card.rarity)
+    const randomCardId = createNewCard(
+      blueprints.allCardsArray.getRandomCardByFilter(
+        card => card.name !== 'Magic Scroll' && card.rarity !== 'legendary'
       )
     );
     state.logs.push(logPlayCopyOfCard(
-      `${player} plays a copy of ${randomCard.name}`,
+      `${player} plays a copy of ${cards[randomCardId]}(${randomCardId})`,
       player,
-      randomCard.name
+      randomCardId
     ));
-    playCard(state, randomCard, player);
+    playCard(state, randomCardId, player);
   },
-  'Jello Slime': (state, card, player) => {
+  'Jello Slime': (state, player) => {
     // Shuffle 3 random common or uncommon cards into your deck.
     const copies = [1, 2, 3].map(i => ({
-      card: cardsArray.getRandomCardByFilter(
+      cardName: blueprints.allCardsArray.getRandomCardByFilter(
         card => (
           !card.isToken
           && card.name !== 'Jello Slime'
@@ -143,14 +133,14 @@ export const customCardEffects = {
     }));
     addCardCopiesIntoPiles(state, copies, player);
   },
-  'Tome of Spells': (state, card, player) => {
+  'Tome of Spells': (state, player) => {
     // When played or discarded, shuffle 4 random non-legendary magic attacks into your deck.
     const copies = [1, 2, 3, 4].map(i => ({
-      card: cardsArray.getRandomCardByFilter(
+      cardName: blueprints.allCardsArray.getRandomCardByFilter(
         card => (
           !card.isToken
           && card.type === 'magic'
-          && !['legendary', 'crafted'].includes(card.rarity)
+          && card.rarity !== 'legendary'
         )
       ).name,
       pile: 'deck'

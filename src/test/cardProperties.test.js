@@ -1,5 +1,6 @@
+import { blueprints } from '../cards/blueprints';
 import { cards } from '../cards/cards';
-import { createCard } from '../cards/createCard';
+import { createNewCard } from '../cards/createNewCard';
 
 test('all cards are valid', () => {
   const errorMessages = [];
@@ -36,11 +37,11 @@ test('all cards are valid', () => {
       errorMessages.push(`${name} has invalid heal ${card.heal}`);
     }
     if (typeof card.onDiscard === 'object' && card.onDiscard !== null) {
-      const mockCard = createCard({
+      const mockCardId = createNewCard({
         ...card.onDiscard,
         isMockCard: true
-      });
-      testIsCardValid(mockCard);
+      }, 'test_mock_card');
+      testIsCardValid(cards[mockCardId]);
     }
 
     // temporary rule until code is refactored to link customCardEffects to unique keys, not card names.
@@ -55,7 +56,7 @@ test('all cards are valid', () => {
     }
   };
 
-  Object.values(cards).forEach((card, index) => {
+  blueprints.allCardsArray.forEach((card, index) => {
     testIsCardValid(card, index);
   });
 

@@ -8,7 +8,7 @@ import { PileCard } from '../card/PileCard';
 import { useRef, useEffect } from 'react';
 
 const CardPile = ({
-  cards,
+  cardIds,
   x,
   y,
   themeColor,
@@ -20,7 +20,7 @@ const CardPile = ({
   
   const prevCardCountRef = useRef();
   useEffect(() => {
-    prevCardCountRef.current = cards.length;
+    prevCardCountRef.current = cardIds.length;
   });
   const prevCardCount = prevCardCountRef.current;
 
@@ -62,20 +62,20 @@ const CardPile = ({
       onClick={cardPileModal ? () => dispatch(actions.setActiveModalCardPile(cardPileModal)) : null}
     >
       <div className='outline' />
-      {cards.map((card, index) => (
-        (index >= cards.length - 2) ? (
+      {cardIds.map((cardId, index) => (
+        (index >= cardIds.length - 2) ? (
           <PileCard
             key={index}
             cardProps={{
-              name: card,
+              cardId,
               x,
               y: y - index,
               isInCardPile: true
             }}
             shouldAnimateEntry={
-              index === cards.length - 1 // only animate top card in pile
+              index === cardIds.length - 1 // only animate top card in pile
               && prevCardCount !== 'undefined' // no animation needed on first render ever
-              && prevCardCount < cards.length // only animate if card was added to pile
+              && prevCardCount < cardIds.length // only animate if card was added to pile
             }
           />
         ) : (
@@ -87,7 +87,7 @@ const CardPile = ({
         )
       ))}
       <div className='card_count'>
-        <div className='count'>{cards.length}</div>
+        <div className='count'>{cardIds.length}</div>
       </div>
     </div>
   );
@@ -95,13 +95,13 @@ const CardPile = ({
 
 // "countX", "countY" cannot be derived from "x", "y" because of perspective.
 export const YourDeck = () => {
-  const { cards } = useSelector(state => ({
-    cards: state.clashBattleCards.yourDeck,
+  const { cardIds } = useSelector(state => ({
+    cardIds: state.clashBattleCards.yourDeck,
   }), shallowEqual);
 
   return (
     <CardPile
-      cards={cards}
+      cardIds={cardIds}
       x={195}
       y={460}
       themeColor={colors.green}
@@ -112,13 +112,13 @@ export const YourDeck = () => {
 };
 
 export const YourDiscard = () => {
-  const { cards } = useSelector(state => ({
-    cards: state.clashBattleCards.yourDiscard,
+  const { cardIds } = useSelector(state => ({
+    cardIds: state.clashBattleCards.yourDiscard,
   }), shallowEqual);
 
   return (
     <CardPile
-      cards={cards}
+      cardIds={cardIds}
       x={835}
       y={460}
       themeColor={colors.red}
@@ -130,13 +130,13 @@ export const YourDiscard = () => {
 };
 
 export const YourBanish = () => {
-  const { cards } = useSelector(state => ({
-    cards: state.clashBattleCards.yourBanish,
+  const { cardIds } = useSelector(state => ({
+    cardIds: state.clashBattleCards.yourBanish,
   }), shallowEqual);
 
   return (
     <CardPile
-      cards={cards}
+      cardIds={cardIds}
       x={995}
       y={460}
       themeColor={colors.black}
@@ -148,16 +148,16 @@ export const YourBanish = () => {
 };
 
 export const YourHand = ({ cardOnClick }) => {
-  const { cards, winner } = useSelector(state => ({
-    cards: state.clashBattleCards.yourHand,
+  const { cardsIds, winner } = useSelector(state => ({
+    cardsIds: state.clashBattleCards.yourHand,
     winner: state.clashBattleStats.winner
   }), shallowEqual);
 
-  return cards.map((card, index) => (
-    card ? (
+  return cardsIds.map((cardId, index) => (
+    cardId ? (
       <Card
         key={index}
-        name={card}
+        cardId={cardId}
         x={370 + (cardWidth + 5) * index}
         y={475}
         onClick={() => {
@@ -171,13 +171,13 @@ export const YourHand = ({ cardOnClick }) => {
 };
 
 export const EnemyBanish = () => {
-  const { cards } = useSelector(state => ({
-    cards: state.clashBattleCards.enemyBanish,
+  const { cardIds } = useSelector(state => ({
+    cardIds: state.clashBattleCards.enemyBanish,
   }), shallowEqual);
 
   return (
     <CardPile
-      cards={cards}
+      cardIds={cardIds}
       x={64}
       y={55}
       themeColor={colors.black}
@@ -189,13 +189,13 @@ export const EnemyBanish = () => {
 };
 
 export const EnemyDiscard = () => {
-  const { cards } = useSelector(state => ({
-    cards: state.clashBattleCards.enemyDiscard,
+  const { cardIds } = useSelector(state => ({
+    cardIds: state.clashBattleCards.enemyDiscard,
   }), shallowEqual);
 
   return (
     <CardPile
-      cards={cards}
+      cardIds={cardIds}
       x={225}
       y={55}
       themeColor={colors.red}
@@ -207,13 +207,13 @@ export const EnemyDiscard = () => {
 };
 
 export const EnemyDeck = () => {
-  const { cards } = useSelector(state => ({
-    cards: state.clashBattleCards.enemyDeck,
+  const { cardIds } = useSelector(state => ({
+    cardIds: state.clashBattleCards.enemyDeck,
   }), shallowEqual);
 
   return (
     <CardPile
-      cards={cards}
+      cardIds={cardIds}
       x={865}
       y={55}
       themeColor={colors.green}
@@ -224,15 +224,15 @@ export const EnemyDeck = () => {
 };
 
 export const EnemyHand = () => {
-  const { cards } = useSelector(state => ({
-    cards: state.clashBattleCards.enemyHand,
+  const { cardIds } = useSelector(state => ({
+    cardIds: state.clashBattleCards.enemyHand,
   }), shallowEqual);
 
-  return cards.map((card, index) => (
-    card ? (
+  return cardIds.map((cardId, index) => (
+    cardId ? (
       <Card
         key={index}
-        name={card}
+        cardId={cardId}
         x={400 + (cardWidth + 5) * index}
         y={52}
         shouldDisableZoom
@@ -242,17 +242,17 @@ export const EnemyHand = () => {
 };
 
 export const Stack = () => {
-  const { cards } = useSelector(state => ({
-    cards: state.clashBattleCards.stack,
+  const { cardIds } = useSelector(state => ({
+    cardIds: state.clashBattleCards.stack,
   }), shallowEqual);
 
-  return cards.map((card, index) => (
+  return cardIds.map((cardId, index) => (
     <Card
       key={index}
-      name={card}
+      cardId={cardId}
       x={530 + index * 15}
       y={263}
-      isBlurred={cards.length >= 2 && index !== cards.length - 1}
+      isBlurred={cardIds.length >= 2 && index !== cardIds.length - 1}
     />
   ));
 };

@@ -1,5 +1,3 @@
-import { createCard } from './createCard';
-
 export const allies = [
   {
     name: 'Swordsman',
@@ -30,7 +28,7 @@ export const allies = [
     rarity: 'common',
     attack: 2,
     defense: 1,
-    shuffleCardCopiesIntoYourPiles: [{ card: 'Healing Blade', pile: 'deck' }],
+    shuffleCardCopiesIntoYourPiles: [{ cardName: 'Healing Blade', pile: 'deck' }],
     customDescription: 'Shuffle a copy of Healing Blade into your deck.'
   },
   {
@@ -93,7 +91,6 @@ export const allies = [
     rarity: 'uncommon',
     attack: 0,
     defense: 3,
-    customEffect: true,
     onDiscard: {
       customEffect: true
     },
@@ -177,7 +174,8 @@ export const allies = [
     triggerDiscardOnPlay: true,
     customDescription: 'Play a copy of Ice Blade.'
   }
-].map(card => createCard({
-  ...card,
-  type: 'ally'
-}));
+];
+
+allies.forEach(card => {
+  card.type = 'ally';
+});

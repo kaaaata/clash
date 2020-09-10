@@ -37,7 +37,7 @@ export const TopNav = () => {
   }), shallowEqual);
   const dispatch = useDispatch();
 
-  const [activeModal, setActiveModal] = useState('crafting');
+  const [activeModal, setActiveModal] = useState(null);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   useEffect(() => {
@@ -151,7 +151,7 @@ export const TopNav = () => {
       <div css={css`display: ${activeModal === 'collection' ? 'unset' : 'none'};`}>
         <CardViewModal
           title='Your Deck'
-          cards={deck}
+          cardIds={deck}
           closeModal={() => {
             setActiveModal(null);
             setIsSettingsOpen(false);
@@ -160,7 +160,7 @@ export const TopNav = () => {
       </div>
 
       <div css={css`display: ${activeModal === 'crafting' ? 'unset' : 'none'};`}>
-        <Crafting isOpen={activeModal === 'crafting'} />
+        <Crafting />
       </div>
 
       <div css={css`display: ${activeModal === 'shop' ? 'unset' : 'none'};`}>

@@ -39,14 +39,14 @@ const cardStringCss = css`
   }
 `;
 
-const CardString = ({ card }) => {
+const CardString = ({ cardId }) => {
   return (
     <span css={cardStringCss}>
-      <span className={`card_string ${rarityColors[cards[card].rarity]}`}>
-        {card}
+      <span className={`card_string ${rarityColors[cards[cardId].rarity]}`}>
+        {cards[cardId].name}
       </span>
       <Card
-        name={card}
+        cardId={cardId}
         x={0}
         y={20}
         shouldDisableZoom
@@ -62,7 +62,7 @@ export const BattleLogItem = (props) => {
     case 'shuffle_card_into_pile':
       text = (
         <React.Fragment>
-          <span className='yellow'>{props.index}.</span> {props.player} shuffles <CardString card={props.card} /> into their <span className={pileColorClassNames[props.pile]}>{props.pile}</span>
+          <span className='yellow'>{props.index}.</span> {props.player} shuffles <CardString cardId={props.cardId} /> into their <span className={pileColorClassNames[props.pile]}>{props.pile}</span>
         </React.Fragment>
       );
       break;
@@ -76,14 +76,14 @@ export const BattleLogItem = (props) => {
     case 'heal_card':
       text = (
         <React.Fragment>
-          <span className='yellow'>{props.index}.</span> {props.player} heals <CardString card={props.card} />
+          <span className='yellow'>{props.index}.</span> {props.player} heals <CardString cardId={props.cardId} />
         </React.Fragment>
       );
       break;
     case 'play_copy_of_card':
       text = (
         <React.Fragment>
-          <span className='yellow'>{props.index}.</span> {props.player} plays a <span className='yellow'>copy</span> of <CardString card={props.card} />
+          <span className='yellow'>{props.index}.</span> {props.player} plays a <span className='yellow'>copy</span> of <CardString cardId={props.cardId} />
         </React.Fragment>
       );
       break;
@@ -116,7 +116,7 @@ export const BattleLogItem = (props) => {
       );
       text = (
         <React.Fragment>
-          <span className='yellow'>{props.index}.</span> {props.player} {discardsOrBanishes} <CardString card={props.card} />
+          <span className='yellow'>{props.index}.</span> {props.player} {discardsOrBanishes} <CardString cardId={props.cardId} />
         </React.Fragment>
       );
       break;
@@ -124,7 +124,7 @@ export const BattleLogItem = (props) => {
     case 'trigger_discard_effect':
       text = (
         <React.Fragment>
-          <span className='yellow'>{props.index}.</span> {props.player} triggers <span className='yellow'>discard effect</span> of <CardString card={props.card} />
+          <span className='yellow'>{props.index}.</span> {props.player} triggers <span className='yellow'>discard effect</span> of <CardString cardId={props.cardId} />
         </React.Fragment>
       );
       break;
@@ -138,7 +138,7 @@ export const BattleLogItem = (props) => {
     case 'play_card':
       text = (
         <React.Fragment>
-          <span className='yellow'>{props.index}.</span> {props.player} plays <CardString card={props.card} />
+          <span className='yellow'>{props.index}.</span> {props.player} plays <CardString cardId={props.cardId} />
         </React.Fragment>
       );
       break;

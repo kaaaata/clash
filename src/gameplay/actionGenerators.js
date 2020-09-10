@@ -5,32 +5,32 @@ export const actionGenerators = {
   // actionKey = redux action key
   // payload = redux action payload
   // to be executed in <Battle>
-  addCardToStack: (state, card) => {
-    state.stack.addCardToTop(card);
+  addCardToStack: (state, cardId) => {
+    state.stack.addCardToTop(cardId);
     return {
       actionKey: 'setStack',
-      payload: state.stack.getCardNames()
+      payload: state.stack.getCardIds()
     };
   },
   removeTopCardFromStack: (state) => {
     state.stack.removeTopCard();
     return {
       actionKey: 'setStack',
-      payload: state.stack.getCardNames()
+      payload: state.stack.getCardIds()
     };
   },
-  addCard: (state, card, player, location, index) => {
+  addCard: (state, cardId, player, location, index) => {
     // index = number|'top'|'random'
     if (location === 'hand') {
-      state[player][location][index] = card;
+      state[player][location][index] = cardId;
     } else if (index === 'top') {
-      state[player][location].addCardToTop(card);
+      state[player][location].addCardToTop(cardId);
     } else if (index === 'random') {
-      state[player][location].addCardAtRandomIndex(card);
+      state[player][location].addCardAtRandomIndex(cardId);
     }
     return {
       actionKey: actionKeys[player][location],
-      payload: state[player][location].getCardNames()
+      payload: state[player][location].getCardIds()
     };
   },
   removeCard: (state, player, location, index) => {
@@ -46,7 +46,7 @@ export const actionGenerators = {
     }
     return {
       actionKey: actionKeys[player][location],
-      payload: state[player][location].getCardNames()
+      payload: state[player][location].getCardIds()
     };
   },
   setShields: (state, player, value) => {

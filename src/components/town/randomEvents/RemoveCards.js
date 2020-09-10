@@ -13,9 +13,9 @@ export const RemoveCards = ({ closeModal }) => {
     <CardViewModal
       title='Choose a card to remove'
       shouldShowCardCount={false}
-      cards={deck}
-      cardOnClick={(card) => {
-        dispatch(actions.removeCardsFromCollection(card));
+      cardIds={deck}
+      cardOnClick={(cardId) => {
+        dispatch(actions.removeCardsFromCollection(cardId));
         closeModal();
       }}
       closeModal={closeModal}

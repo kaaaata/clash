@@ -1,17 +1,19 @@
-import { genMonsterWaves } from '../monsters/genMonsterWaves';
 import { genMonsterGoldReward } from '../monsters/genMonsterGoldReward';
 import { genTownActions } from '../components/town/genTownActions';
 import { genPurchasableCards } from '../components/town/genPurchasableCards';
 import { controller } from '../controller';
+import { monstersByTier, eventMonsters } from '../monsters/monsters';
+import { sample } from 'lodash';
 
 const genInitialState = () => {
-  const monsterWaves = genMonsterWaves();
+  const dailyMonster = sample(monstersByTier[1]);
+
   return {
     energy: typeof controller.energy === 'number' ? controller.energy : 0,
     day: typeof controller.day === 'number' ? controller.day : 1,
-    monsterWaves,
+    dailyMonster,
     dailyMonsterGoldReward: genMonsterGoldReward(
-      monsterWaves[(typeof controller.day === 'number' ? controller.day : 1) - 1],
+      dailyMonster,
       false,
       typeof controller.day === 'number' ? controller.day : 1
     ),
@@ -35,13 +37,24 @@ export default (state = initialState, action) => {
       };
     case 'START_NEW_DAY': {
       const newDay = state.day + 1;
+      let dailyMonster;
+      if (newDay <= 3) {
+        dailyMonster = sample(monstersByTier[1]);
+      } else if (newDay <= 6) {
+        dailyMonster = sample(monstersByTier[2]);
+      } else if (newDay <= 9) {
+        dailyMonster = sample(monstersByTier[3]);
+      } else if (newDay === 10) {
+        dailyMonster = eventMonsters['Dragon'];
+      }
       return {
         ...state,
         energy: 10,
         day: newDay,
         canDoRandomEvent: true,
+        dailyMonster,
         dailyMonsterGoldReward: genMonsterGoldReward(
-          state.monsterWaves[newDay - 1],
+          dailyMonster,
           [3, 6, 9].includes(newDay),
           newDay
         ),

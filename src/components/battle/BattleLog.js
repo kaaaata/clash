@@ -8,160 +8,6 @@ import { logTurnBegins } from '../../gameplay/battleLogGenerators';
 import { BattleLogItem } from './BattleLogItem';
 import { colors } from '../styles';
 
-// const testingLogs = [
-//   {
-//     type: 'shuffle_card_into_pile',
-//     player: 'you',
-//     card: 'Gladius',
-//     pile: 'discard'
-//   },
-//   {
-//     type: 'heal_value',
-//     player: 'you',
-//     value: 3
-//   },
-//   {
-//     type: 'heal_card',
-//     player: 'you',
-//     card: 'Gladius'
-//   },
-//   {
-//     type: 'play_copy_of_card',
-//     player: 'you',
-//     card: 'Gladius'
-//   },
-//   {
-//     type: 'gain_shields',
-//     player: 'you',
-//     value: 3
-//   },
-//   {
-//     type: 'receive_damage',
-//     player: 'you',
-//     value: 3
-//   },
-//   {
-//     type: 'receive_fatal_damage',
-//     player: 'you'
-//   },
-//   {
-//     type: 'discard_card',
-//     player: 'you',
-//     dealsBanishingDamage: true,
-//     card: 'Gladius'
-//   },
-//   {
-//     type: 'discard_card',
-//     player: 'you',
-//     dealsBanishingDamage: false,
-//     card: 'Gladius'
-//   },
-//   {
-//     type: 'trigger_discard_effect',
-//     player: 'you',
-//     card: 'Gladius'
-//   },
-//   {
-//     type: 'temporary_stat_gain',
-//     player: 'you',
-//     value: 1,
-//     stat: 'attack'
-//   },
-//   {
-//     type: 'play_card',
-//     player: 'you',
-//     card: 'Gladius'
-//   },
-//   {
-//     type: 'player_wins',
-//     player: 'you'
-//   },
-//   {
-//     type: 'turn_begins',
-//     player: 'you'
-//   },
-//   {
-//     type: 'cant_draw_card',
-//     player: 'you'
-//   },
-//   // 
-//   {
-//     type: 'shuffle_card_into_pile',
-//     player: 'enemy',
-//     card: 'Gladius',
-//     pile: 'banish'
-//   },
-//   {
-//     type: 'heal_value',
-//     player: 'enemy',
-//     value: 3
-//   },
-//   {
-//     type: 'heal_card',
-//     player: 'enemy',
-//     card: 'Gladius'
-//   },
-//   {
-//     type: 'play_copy_of_card',
-//     player: 'enemy',
-//     card: 'Gladius'
-//   },
-//   {
-//     type: 'gain_shields',
-//     player: 'enemy',
-//     value: 3
-//   },
-//   {
-//     type: 'receive_damage',
-//     player: 'enemy',
-//     value: 3
-//   },
-//   {
-//     type: 'receive_fatal_damage',
-//     player: 'enemy'
-//   },
-//   {
-//     type: 'discard_card',
-//     player: 'enemy',
-//     dealsBanishingDamage: true,
-//     card: 'Gladius'
-//   },
-//   {
-//     type: 'discard_card',
-//     player: 'enemy',
-//     dealsBanishingDamage: false,
-//     card: 'Gladius'
-//   },
-//   {
-//     type: 'trigger_discard_effect',
-//     player: 'enemy',
-//     card: 'Gladius'
-//   },
-//   {
-//     type: 'temporary_stat_gain',
-//     player: 'enemy',
-//     value: 1,
-//     stat: 'attack'
-//   },
-//   {
-//     type: 'play_card',
-//     player: 'enemy',
-//     card: 'Gladius'
-//   },
-//   {
-//     type: 'player_wins',
-//     player: 'enemy'
-//   },
-//   {
-//     type: 'turn_begins',
-//     player: 'enemy'
-//   },
-//   {
-//     type: 'cant_draw_card',
-//     player: 'enemy'
-//   }
-// ];
-
 const battleLogButtonCss = css`
   position: absolute;
   top: 430px;
@@ -189,15 +35,12 @@ export const BattleLog = () => {
         !(i.type === 'turn_begins' && i.player === 'you')
       ))
     ];
-    // testingLogs
 
     return {
       battleLogs: logs,
       enemyName: state.clashBattleStats.enemyName
     };
   }, shallowEqual);
-
-  // console.log('battle logs rerendering', { battleLogs, enemyName });
 
   const [isBattleLogModalOpen, setIsBattleLogModalOpen] = useState(false);
 

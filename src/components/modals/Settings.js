@@ -4,7 +4,7 @@ import * as actions from '../../stores/actions';
 import { Modal } from './Modal';
 import { Spacer, Button, FlexContainer } from '../particles';
 import { CardViewModal } from './CardViewModal';
-import { cardsArray } from '../../cards/cards';
+import { blueprints } from '../../cards/blueprints';
 
 const inDevelopment = process.env.NODE_ENV !== 'production';
 
@@ -57,7 +57,7 @@ export const Settings = ({ closeModal }) => {
       {isAllCardsModalActive && inDevelopment && (
         <CardViewModal
           title='All Cards'
-          cards={cardsArray.map(card => card.name)}
+          cardNames={blueprints.allCardsArray.map(card => card.name)}
           closeModal={() => setIsAllCardsModalActive(false)}
         />
       )}

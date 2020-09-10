@@ -1,5 +1,6 @@
 import { startingDeck } from '../cards/startingDeck';
 import { controller } from '../controller';
+import { cards } from '../cards/cards';
 
 const genInitialState = () => ({
   lives: typeof controller.lives === 'number' ? controller.lives : 3,
@@ -39,11 +40,12 @@ export default (state = initialState, action) => {
       const removeCards = typeof action.payload === 'string'
         ? [action.payload]
         : action.payload;
-      removeCards.forEach(card => {
-        const spliceIndex = newDeck.indexOf(card);
+      removeCards.forEach(cardId => {
+        const spliceIndex = newDeck.indexOf(cardId);
         if (spliceIndex !== -1) {
           newDeck.splice(spliceIndex, 1);
         }
+        delete cards[cardId];
       });
       return {
         ...state,

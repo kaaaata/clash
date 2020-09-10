@@ -1,51 +1,50 @@
-import { CardsArray } from './CardsArray';
+import { CardIdsArray } from './CardIdsArray';
 import { store } from '../stores/store';
 import { startTurn } from './startTurn';
 import { playCard } from './playCard';
 import { logPlayCard, logPlayerWins } from './battleLogGenerators';
+import { cards } from '../cards/cards';
 
 export const playFirstCardInRound = (index) => {
-  const _state = {
-    clashBattleCards: store.getState().clashBattleCards,
-    clashBattleStats: store.getState().clashBattleStats
-  };
-  const { clashBattleCards, clashBattleStats } = _state;
+  const clashBattleCards = store.getState().clashBattleCards;
+  const clashBattleStats = store.getState().clashBattleStats;
+
   const state = {
     you: {
       name: clashBattleStats.yourName,
-      deck: CardsArray(clashBattleCards.yourDeck),
-      discard: CardsArray(clashBattleCards.yourDiscard),
-      banish: CardsArray(clashBattleCards.yourBanish),
-      hand: CardsArray(clashBattleCards.yourHand),
+      deck: CardIdsArray(clashBattleCards.yourDeck),
+      discard: CardIdsArray(clashBattleCards.yourDiscard),
+      banish: CardIdsArray(clashBattleCards.yourBanish),
+      hand: CardIdsArray(clashBattleCards.yourHand),
       shields: clashBattleStats.yourShields,
       statBonuses: clashBattleStats.yourStatBonuses,
       stats: clashBattleStats.yourStats
     },
     enemy: {
       name: clashBattleStats.enemyName,
-      deck: CardsArray(clashBattleCards.enemyDeck),
-      discard: CardsArray(clashBattleCards.enemyDiscard),
-      banish: CardsArray(clashBattleCards.enemyBanish),
-      hand: CardsArray(clashBattleCards.enemyHand),
+      deck: CardIdsArray(clashBattleCards.enemyDeck),
+      discard: CardIdsArray(clashBattleCards.enemyDiscard),
+      banish: CardIdsArray(clashBattleCards.enemyBanish),
+      hand: CardIdsArray(clashBattleCards.enemyHand),
       shields: clashBattleStats.enemyShields,
       statBonuses: clashBattleStats.enemyStatBonuses,
       stats: clashBattleStats.enemyStats
     },
-    stack: CardsArray(clashBattleCards.stack),
+    stack: CardIdsArray(clashBattleCards.stack),
     winner: clashBattleStats.winner,
     logs: [],
     renderActions: []
   };
   const { logs, renderActions } = state; // state gets mutated. only declare objects here!
 
-  const card = state.you.hand[index];
+  const cardId = state.you.hand[index];
   logs.push(logPlayCard(
-    `you plays: ${card.name}`,
+    `you plays: ${cards[cardId].name} (${cardId})`,
     'you',
-    card.name
+    cardId
   ));
   // any function that uses stateCopy should put its reference as the first arg
-  playCard(state, card, 'you', 'hand', index);
+  playCard(state, cardId, 'you', 'hand', index);
 
   if (state.winner) {
     logs.push(logPlayerWins(
@@ -63,15 +62,15 @@ export const playFirstCardInRound = (index) => {
       renderActions.push([{ actionKey: 'setWinner', payload: state[state.winner].name }]);
     } else {
       const enemyHandRandomCardIndex = ~~(Math.random() * 3);
-      const enemyHandRandomCard = state.enemy.hand[enemyHandRandomCardIndex];
+      const enemyHandRandomCardId = state.enemy.hand[enemyHandRandomCardIndex];
       // add placeholder
-      state.enemy.hand[enemyHandRandomCardIndex] = {};
+      state.enemy.hand[enemyHandRandomCardIndex] = null;
       logs.push(logPlayCard(
-        `enemy plays: ${enemyHandRandomCard.name}`,
+        `enemy plays: ${cards[enemyHandRandomCardId].name} (${enemyHandRandomCardId})`,
         'enemy',
-        enemyHandRandomCard.name
+        enemyHandRandomCardId
       ));
-      playCard(state, enemyHandRandomCard, 'enemy', 'hand', enemyHandRandomCardIndex);
+      playCard(state, enemyHandRandomCardId, 'enemy', 'hand', enemyHandRandomCardIndex);
       if (state.winner) {
         logs.push(logPlayerWins(
           `${state.winner} wins!`,

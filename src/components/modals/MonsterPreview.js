@@ -11,12 +11,20 @@ import { rarityColors } from '../../cards/rarity';
 import { sample } from 'lodash';
 import { controller } from '../../controller';
 import { effects } from '../styles';
+import { createNewCard } from '../../cards/createNewCard';
+import { blueprints } from '../../cards/blueprints';
 
-const CardsRarityString = ({ _cards, showCrafted }) => {
+const CardsRarityString = ({ cardNames, cardIds, showCrafted }) => {
   const rarityCounts = { common: 0, uncommon: 0, rare: 0, legendary: 0, crafted: 0 };
-  _cards.forEach(card => {
-    rarityCounts[cards[card].rarity]++;
-  });
+  if (cardNames) {
+    cardNames.forEach(cardName => {
+      rarityCounts[blueprints.allCardsObject[cardName].rarity]++;
+    });
+  } else {
+    cardIds.forEach(cardId => {
+      rarityCounts[cards[cardId].rarity]++;
+    })
+  }
 
   return (
     <React.Fragment>
@@ -45,7 +53,7 @@ export const MonsterPreview = ({
   const { deck, day, monster, monsterGoldReward } = useSelector(state => ({
     deck: state.clashPlayer.deck,
     day: state.clashTown.day,
-    monster: monsterOverride || state.clashTown.monsterWaves[state.clashTown.day - 1],
+    monster: monsterOverride || state.clashTown.dailyMonster,
     monsterGoldReward: monsterGoldRewardOverride || state.clashTown.dailyMonsterGoldReward
   }), shallowEqual);
   const dispatch = useDispatch();
@@ -55,8 +63,8 @@ export const MonsterPreview = ({
   });
 
   const isMonsterElite = !monsterOverride && [3, 6, 9].includes(day);
-  const yourDeck = shuffle(deck);
-  const enemyDeck = genMonsterDeck(monster.deck, day);
+  const yourDeck = shuffle(deck); // cardIds
+  const enemyDeckCardNames = genMonsterDeck(monster.deck, day); // cardNames
   const monsterStats = monster.stats;
   const monsterName = `${isMonsterElite ? `${genEliteMonsterPrefix()} ` : ''}${monster.name}`;
   if (isMonsterElite) {
@@ -64,6 +72,7 @@ export const MonsterPreview = ({
   }
 
   const battleOnClick = () => {
+    const enemyDeckIds = enemyDeckCardNames.map(cardName => createNewCard(cardName));
     dispatch(actions.setBattleInitialState());
     dispatch(actions.setEnemy({
       name: monsterName,
@@ -78,17 +87,25 @@ export const MonsterPreview = ({
       player: 'enemy',
       operation: 'set'
     }));
-    dispatch(actions.setYourDeck(controller.yourDeck || yourDeck.slice(0, yourDeck.length - 3)));
-    dispatch(actions.setEnemyDeck(controller.enemyDeck || enemyDeck.slice(0, enemyDeck.length - 2)));
-    dispatch(actions.setYourHand(controller.yourHand || yourDeck.slice(yourDeck.length - 3)));
-    dispatch(actions.setEnemyHand(controller.enemyHand || [...enemyDeck.slice(enemyDeck.length - 2), null]));
+    dispatch(actions.setYourDeck(
+      controller.yourDeck || yourDeck.slice(0, yourDeck.length - 3)
+    ));
+    dispatch(actions.setEnemyDeck(
+      controller.enemyDeck || enemyDeckIds.slice(0, enemyDeckIds.length - 2)
+    ));
+    dispatch(actions.setYourHand(
+      controller.yourHand || yourDeck.slice(yourDeck.length - 3)
+    ));
+    dispatch(actions.setEnemyHand(
+      controller.enemyHand || [...enemyDeckIds.slice(enemyDeckIds.length - 2), null]
+    ));
     dispatch(actions.setBattleRewardCards(
       isMonsterElite
         ? [
-          ...sampleSize(enemyDeck.filter(card => cards[card].rarity !== 'common'), 4),
-          ...sampleSize(enemyDeck.filter(card => cards[card].rarity === 'common'), 4)
+          ...sampleSize(enemyDeckIds.filter(cardId => cards[cardId].rarity !== 'common'), 4),
+          ...sampleSize(enemyDeckIds.filter(cardId => cards[cardId].rarity === 'common'), 4)
         ].slice(0, 4)
-        : sampleSize(enemyDeck, 4)
+        : sampleSize(enemyDeckIds, 4)
     ));
     dispatch(actions.setBattleRewardGold(monsterGoldReward));
     dispatch(actions.setScene('battle'));
@@ -99,9 +116,9 @@ export const MonsterPreview = ({
     <React.Fragment>
       You are attacked by: <span className='yellow'>{monsterName}!</span>
       <br /><br />
-      Enemy cards: <span className='bold yellow'>{enemyDeck.length}</span> <CardsRarityString _cards={enemyDeck} />
+      Enemy cards: <span className='bold yellow'>{enemyDeckCardNames.length}</span> <CardsRarityString cardNames={enemyDeckCardNames} />
       <br />
-      Your cards: <span className='bold yellow'>{yourDeck.length}</span> <CardsRarityString _cards={yourDeck} showCrafted />
+      Your cards: <span className='bold yellow'>{yourDeck.length}</span> <CardsRarityString cardIds={yourDeck} showCrafted />
       <br /><br />
       Victory: <span className='green'>gain {monsterGoldReward} gold</span> and <span className='green'>2 cards from the enemy's deck</span>
       <br />

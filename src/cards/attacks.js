@@ -1,5 +1,3 @@
-import { createCard } from './createCard';
-
 export const attacks = [
   {
     name: 'Sword',
@@ -129,7 +127,7 @@ export const attacks = [
     attack: 2,
     defense: 5,
     shuffleCardCopiesIntoYourPiles: [
-      { card: 'Super Frost', pile: 'deck' }
+      { cardName: 'Super Frost', pile: 'deck' }
     ],
     customDescription: 'Shuffle a copy of Super Frost into your deck.'
   },
@@ -153,8 +151,9 @@ export const attacks = [
     defense: 3,
     dealsBanishingDamage: true
   }
-].map(card => createCard({
-  ...card,
-  type: 'attack',
-  isCraftable: card.rarity !== 'legendary' && !card.isToken
-}));
+];
+
+attacks.forEach(card => {
+  card.type = 'attack';
+  card.isCraftable = card.rarity !== 'legendary' && !card.isToken;
+});

@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import {  useDispatch } from 'react-redux';
 import * as actions from '../../../stores/actions';
 import { rarityColors } from '../../../cards/rarity';
-import { lootableCardPool } from '../../../cards/cards';
 import { random, sample } from 'lodash';
 import { packs } from '../../shop/packs';
-import { genPackCards } from '../../shop/genPackCards';
+import { genPackCardNames } from '../../shop/genPackCardNames';
 import { CardLootModal } from '../../modals/CardLootModal';
 import { EventModal, EventModalPage } from '../../modals/EventModal';
+import { blueprints } from '../../../cards/blueprints';
 
 export const TreasureChest = ({ rng, closeModal }) => {
   const dispatch = useDispatch();
@@ -16,7 +16,7 @@ export const TreasureChest = ({ rng, closeModal }) => {
 
   let lootText;
   let lootCb;
-  let lootCards = [];
+  let lootCardNames = [];
   let lootPack;
   let greenText;
   
@@ -28,15 +28,18 @@ export const TreasureChest = ({ rng, closeModal }) => {
   } else if (rng < 0.15) {
     lootText = <span className={rarityColors.uncommon}>two uncommon cards!</span>
     lootCb = () => setPage('card_loot_modal');
-    lootCards = [sample(lootableCardPool.uncommon), sample(lootableCardPool.uncommon)];
+    lootCardNames = [
+      sample(blueprints.lootableCardsByRarity.uncommon).name,
+      sample(blueprints.lootableCardsByRarity.uncommon).name
+    ];
   } else if (rng < 0.25) {
     lootText = <span className={rarityColors.rare}>a rare card!</span>
     lootCb = () => setPage('card_loot_modal');
-    lootCards.push(sample(lootableCardPool.rare));
+    lootCardNames.push(sample(blueprints.lootableCardsByRarity.rare).name);
   } else if (rng < 0.3) {
     lootText = <span className={rarityColors.legendary}>a legendary card!</span>
     lootCb = () => setPage('card_loot_modal');
-    lootCards.push(sample(lootableCardPool.legendary));
+    lootCardNames.push(sample(blueprints.lootableCardsByRarity.legendary).name);
   } else if (rng < 0.35) {
     lootPack = 'bronze';
   } else if (rng < 0.4) {
@@ -59,16 +62,16 @@ export const TreasureChest = ({ rng, closeModal }) => {
   if (lootPack) {
     lootText = `a ${lootPack} pack!`;
     lootCb = () => setPage('card_loot_modal');
-    lootCards = genPackCards(packs[lootPack]);
+    lootCardNames = genPackCardNames(packs[lootPack]);
   }
 
-  if (lootCards.length) {
+  if (lootCardNames.length) {
     greenText = 'Select cards to keep.';
   }
 
   return page === 'card_loot_modal' ? (
     <CardLootModal
-      cards={lootCards}
+      cardNames={lootCardNames}
       closeModal={closeModal}
     />
   ) : (
@@ -90,7 +93,7 @@ export const TreasureChest = ({ rng, closeModal }) => {
           greenText,
           onClick: () => {
             lootCb();
-            if (!lootCards.length) {
+            if (!lootCardNames.length) {
               closeModal();
             }
           }

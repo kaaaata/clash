@@ -1,6 +1,6 @@
 // testing game variables
-import { cardsArray } from './cards/cards';
-import { genCraftedCard } from './components/crafting/genCraftedCard';
+// import { genCraftedCard } from './components/crafting/genCraftedCard';
+import { createNewCard } from './cards/createNewCard';
 
 const isTestingEnabled = true;
 // const isTestingEnabled = false;
@@ -10,71 +10,22 @@ export const controller = isTestingEnabled ? {
   yourName: 'Paladin',
   yourImage: 'paladin',
 
-  // gold: 100,
+  gold: 1000,
   goldBars: 10,
   energy: 10,
   day: 2,
   // lives: 1,
 
-  // yourHand: [
-  //   'Falchion','Falchion','Falchion'
-  // ],
-  // yourDeck: ['Healing Potion', 'Sword', 'Sword', 'Sword'],
-  // yourDiscard: ['Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword'],
-  // yourBanish: ['Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword'],
-  // enemyHand: ['Falchion','Falchion','Falchion'],
-  // enemyDeck: ['Healing Potion', 'Sword', 'Sword', 'Sword']
-  // enemyDiscard: [],
-  // enemyBanish: [],
+  yourHand: ['Magic Scroll', 'Sword', 'Sword'].map(i => createNewCard(i)),
+  // yourDeck: [].map(i => createNewCard(i)),
+  // yourDiscard: [].map(i => createNewCard(i)),
+  // yourBanish: [].map(i => createNewCard(i)),
+  // enemyHand: [].map(i => createNewCard(i)),
+  // enemyDeck: [].map(i => createNewCard(i)),
+  // enemyDiscard: [].map(i => createNewCard(i)),
+  // enemyBanish: [].map(i => createNewCard(i)),
   
   // startingDeck: [
-  //   genCraftedCard('Mace', 'Falchion'),
-  //   genCraftedCard('Fire Spear', 'Fire Spear'),
-  //   genCraftedCard('Multishot', 'Multishot'),
-  //   genCraftedCard('Ice Blade', 'Ice Blade'),
-  //   genCraftedCard('Healing Blade', 'Ice Blade'),
-  //   genCraftedCard('Healing Blade', 'Healing Blade'),
-  //   genCraftedCard('Sword', 'Greataxe'),
-  //   genCraftedCard('Falchion', 'Gladius'),
-  //   // 'Healing Potion',
-  //   // 'Fire',
-  //   // 'Fire',
-  //   // 'Mace',
-  //   // 'Mace',
-
-  //   // 'Frost',
-  
-  //   // 'Cutlass',
-  //   // 'Cutlass',
-  //   // 'Sword',
-  //   // 'Sword',
-  //   // 'Sword',
-
-  //   // 'Falchion',
-  //   // 'Mace',
-  //   // 'Minotaur',
-  //   // 'Cutlass',
-  //   // 'Fire',
-
-  //   // 'Falchion',
-  //   // 'Super Fire',
-  //   // 'Cutlass',
-  //   // 'Cutlass',
-  //   // 'Fire',
-  //   // 'Dragon Blade',
-  //   // 'Dragon Blade',
-  //   // 'Dragon Blade',
-  //   // 'Dragon Blade',
-  //   // 'Dragon Blade',
-  //   // 'Dragon Blade',
-  //   // 'Dragon Blade',
-  //   // 'Dragon Blade',
-  //   // 'Dragon Blade',
-  //   // 'Dragon Blade',
-  //   // 'Dragon Blade',
-  //   // 'Dragon Blade',
-  //   // 'Dragon Blade',
-  //   // 'Dragon Blade',
-  //   // 'Dragon Blade',
-  // ]
+    
+  // ].map(i => createNewCard(i))
 } : {};

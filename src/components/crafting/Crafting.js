@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { jsx } from '@emotion/core'; /** @jsx jsx */
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import * as actions from '../../stores/actions';
 import { Modal } from '../modals/Modal';
 import { Spacer, Image, FlexContainer, Text, Button } from '../particles';
 import { Card } from '../card/Card';
-import { CraftingCardSelectionModal } from './CraftingCardSelectionModal';
 import { craftingCss } from './craftingCss';
-import { isCraftValid } from './isCraftValid';
 import { genUpgradedCard } from './genUpgradedCard';
+import { CardViewModal } from '../modals/CardViewModal';
+import { createNewCard } from '../../cards/createNewCard';
+import { cards } from '../../cards/cards';
 
 const testUpgrades = [
   {
@@ -45,31 +46,17 @@ const testUpgrades = [
   },
 ];
 
-export const Crafting = ({ isOpen }) => {
-  const { goldBars } = useSelector(state => ({
-    goldBars: state.clashPlayer.goldBars
+export const Crafting = () => {
+  const { goldBars, deck } = useSelector(state => ({
+    goldBars: state.clashPlayer.goldBars,
+    deck: state.clashPlayer.deck
   }), shallowEqual);
   const dispatch = useDispatch();
 
   const [isCraftingInProgress, setIsCraftingInProgress] = useState(false);
-  const [card1, setCard1] = useState(null);
-  const [card2, setCard2] = useState(null);
-  const [isCardSelectModalOpen, setIsCardSelectModalOpen] = useState(null);
-
-  // useEffect(() => {
-  //   if (!isOpen) {
-  //     setCard1(null);
-  //     setCard2(null);
-  //     setCard3(null);
-  //     setCard1Index(-1);
-  //     setCard2Index(-1);
-  //     setCardSelectModal(null)
-  //   } else if (isCraftValid(card1, card2) && goldBars > 0) {
-  //     setCard3(genCraftedCard(card1, card2));
-  //   } else {
-  //     setCard3(null);
-  //   }
-  // }, [isOpen, card1, card2, goldBars]);
+  const [card1Id, setCard1Id] = useState(null);
+  const [card2Id, setCard2Id] = useState(null);
+  const [isCardSelectModalOpen, setIsCardSelectModalOpen] = useState(false);
   
   return (
     <React.Fragment>
@@ -77,14 +64,14 @@ export const Crafting = ({ isOpen }) => {
         <div css={craftingCss}>
           <FlexContainer justifyContent='center' alignItems='center'>
             <div
-              className={`card_slot pointer ${card1 ? 'green_border' : 'red_border'}`}
+              className={`card_slot pointer ${card1Id ? 'green_border' : 'red_border'}`}
               onClick={() => {
                 if (isCraftingInProgress) {
                   setIsCardSelectModalOpen(true);
                 }
               }}
             >
-              {card1 && !isCardSelectModalOpen && <Card name={card1} />}
+              {card1Id && !isCardSelectModalOpen && <Card cardId={card1Id} />}
             </div>
             <Text type='title'>+</Text>
             <FlexContainer
@@ -101,8 +88,8 @@ export const Crafting = ({ isOpen }) => {
               />
             </FlexContainer>
             <Text type='title'>=</Text>
-            <div className={`card_slot ${card2 ? 'green_border' : 'red_border'}`}>
-              {card2 && <Card name={card2} />}
+            <div className={`card_slot ${card2Id ? 'green_border' : 'red_border'}`}>
+              {card2Id && <Card name={card2Id} />}
             </div>
           </FlexContainer>
 
@@ -116,14 +103,15 @@ export const Crafting = ({ isOpen }) => {
                   isDisabled={false}
                   textProps={{ centered: false }}
                   onMouseEnter={() => {
-                    setCard2('Falchion');
+                    setCard2Id(`upgrade_preview_${index}`);
                   }}
                   onClick={() => {
+                    setCard1Id(null);
+                    setCard2Id(null);
+                    dispatch(actions.removeCardsFromCollection(card1Id));
+                    const upgradedCardId = createNewCard(cards[`upgrade_preview_${index}`]);
+                    dispatch(actions.addCardsToCollection(upgradedCardId));
                     setIsCraftingInProgress(false);
-                    setCard1(null);
-                    setCard2(null);
-                    dispatch(actions.removeCardsFromCollection(card1));
-                    dispatch(actions.addCardsToCollection(card2));
                   }}
                 >
                   [{i.name}] {i.description}
@@ -145,14 +133,23 @@ export const Crafting = ({ isOpen }) => {
       </Modal>
 
       {isCardSelectModalOpen && (
-        <CraftingCardSelectionModal
+        <CardViewModal
           title='Choose a card to upgrade'
-          cardOnClick={(card, index) => {
-            setCard1(card);
+          shouldShowCardCount={false}
+          cardIds={deck}
+          cardOnClick={(cardId) => {
+            setCard1Id(cardId);
+            testUpgrades.forEach((upgrade, index) => {
+              const upgradedCard = genUpgradedCard(cards[cardId], upgrade);
+              if (upgradedCard) {
+                createNewCard(upgradedCard, `upgrade_preview_${index}`);
+              }
+            });
             setIsCardSelectModalOpen(false);
           }}
           closeModal={() => setIsCardSelectModalOpen(false)}
-        />
+          closeButtonText='Cancel'
+      />
       )}
     </React.Fragment>
   );
