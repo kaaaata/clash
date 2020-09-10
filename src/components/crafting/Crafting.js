@@ -13,35 +13,31 @@ import { cards } from '../../cards/cards';
 
 const testUpgrades = [
   {
-    prefix: null,
-    suffix: 'of Sharpness',
     description: '+2 attack.',
     cardProperties: {
+      suffix: 'of Sharpness',
       attack: 2
     }
   },
   {
-    prefix: null,
-    suffix: 'of Sharpness',
+    description: '+2 defense.',
+    cardProperties: {
+      suffix: 'of Sturdiness',
+      defense: 2
+    }
+  },
+  {
     description: '+2 attack.',
     cardProperties: {
+      prefix: 'Sharp',
       attack: 2
     }
   },
   {
-    prefix: null,
-    suffix: 'of Sharpness',
-    description: '+2 attack.',
+    description: '+2 defense.',
     cardProperties: {
-      attack: 2
-    }
-  },
-  {
-    prefix: null,
-    suffix: 'of Sharpness',
-    description: '+2 attack.',
-    cardProperties: {
-      attack: 2
+      prefix: 'Sturdy',
+      defense: 2
     }
   },
 ];
@@ -63,17 +59,6 @@ export const Crafting = () => {
       <Modal title='Crafting'>
         <div css={craftingCss}>
           <FlexContainer justifyContent='center' alignItems='center'>
-            <div
-              className={`card_slot pointer ${card1Id ? 'green_border' : 'red_border'}`}
-              onClick={() => {
-                if (isCraftingInProgress) {
-                  setIsCardSelectModalOpen(true);
-                }
-              }}
-            >
-              {card1Id && !isCardSelectModalOpen && <Card cardId={card1Id} />}
-            </div>
-            <Text type='title'>+</Text>
             <FlexContainer
               justifyContent='center'
               alignItems='center'
@@ -87,9 +72,22 @@ export const Crafting = () => {
                 height={75}
               />
             </FlexContainer>
+            <Text type='title'>+</Text>
+            <div
+              className={`card_slot pointer ${card1Id ? 'green_border' : 'red_border'}`}
+              onClick={() => {
+                if (isCraftingInProgress) {
+                  setIsCardSelectModalOpen(true);
+                }
+              }}
+            >
+              {card1Id && !isCardSelectModalOpen && (
+                <Card cardId={card1Id} shouldDisableZoom />
+              )}
+            </div>
             <Text type='title'>=</Text>
             <div className={`card_slot ${card2Id ? 'green_border' : 'red_border'}`}>
-              {card2Id && <Card name={card2Id} />}
+              {card2Id && <Card cardId={card2Id} shouldDisableZoom />}
             </div>
           </FlexContainer>
 
@@ -100,8 +98,7 @@ export const Crafting = () => {
               {testUpgrades.map((i, index) => (
                 <Button
                   key={index}
-                  isDisabled={false}
-                  textProps={{ centered: false }}
+                  isDisabled={!card1Id || !cards[`upgrade_preview_${index}`]}
                   onMouseEnter={() => {
                     setCard2Id(`upgrade_preview_${index}`);
                   }}
@@ -114,7 +111,7 @@ export const Crafting = () => {
                     setIsCraftingInProgress(false);
                   }}
                 >
-                  [{i.name}] {i.description}
+                  [{i.cardProperties.prefix ? `${i.cardProperties.prefix}...` : `...${i.cardProperties.suffix}`}] {i.description}
                 </Button>
               ))}
             </div>
@@ -125,6 +122,7 @@ export const Crafting = () => {
                 dispatch(actions.adjustPlayerGoldBars(-1));
                 setIsCraftingInProgress(true);
               }}
+              centered
             >
               Upgrade a Card (costs 1 gold bar)
             </Button>
@@ -136,14 +134,11 @@ export const Crafting = () => {
         <CardViewModal
           title='Choose a card to upgrade'
           shouldShowCardCount={false}
-          cardIds={deck}
+          cardIds={deck.filter(cardId => cards[cardId].isCraftable)}
           cardOnClick={(cardId) => {
             setCard1Id(cardId);
             testUpgrades.forEach((upgrade, index) => {
-              const upgradedCard = genUpgradedCard(cards[cardId], upgrade);
-              if (upgradedCard) {
-                createNewCard(upgradedCard, `upgrade_preview_${index}`);
-              }
+              genUpgradedCard(cards[cardId], upgrade.cardProperties, `upgrade_preview_${index}`);
             });
             setIsCardSelectModalOpen(false);
           }}

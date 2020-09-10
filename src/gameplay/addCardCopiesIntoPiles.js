@@ -2,6 +2,7 @@ import { actionGenerators } from './actionGenerators';
 import { logShuffleCardIntoPile } from './battleLogGenerators';
 import { cards } from '../cards/cards';
 import { createNewCard } from '../cards/createNewCard';
+import shortid from 'shortid';
 
 export const addCardCopiesIntoPiles = (
   state,
@@ -11,14 +12,11 @@ export const addCardCopiesIntoPiles = (
 ) => {
   const { logs, renderActions } = state;
   const cardIds = [];
-
+  console.log(copies);
   copies.forEach(({ cardName, cardId }) => {
-    const _cardId = cardId || createNewCard(cardName);
+    const _cardId = cardId || createNewCard(cardName, `battle_${shortid.generate()}`);
     cardIds.push(_cardId);
-    const renderAction = [actionGenerators.addCardToStack(
-      state,
-      { state, ...cards[_cardId], player }
-    )];
+    const renderAction = [actionGenerators.addCardToStack(state, _cardId)];
     if (removeCardArgs) {
       renderAction.push(actionGenerators.removeCard(
         state,

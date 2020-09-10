@@ -18,7 +18,7 @@ export const CardIdsArray = (cardIds) => {
     return filteredCardsWithIndices.length ? sample(filteredCardsWithIndices).index : -1;
   };
 
-  arr.getCardIds = () => [...cardIds];
+  arr.getCardIds = () => [...arr];
 
   arr.removeTopCard = () => arr.pop();
 

@@ -1,3 +1,6 @@
+import { cardTemplate } from './cardTemplate';
+import { genCardDescription } from './genCardDescription';
+
 export const magic = [
   {
     name: 'Fire',
@@ -6,7 +9,7 @@ export const magic = [
     attack: 1,
     defense: 0,
     shuffleCardCopiesIntoOpponentsPiles: [
-      { card: 'Burn', pile: 'deck' }
+      { cardName: 'Burn', pile: 'deck' }
     ],
     customDescription: 'Shuffle a copy of Burn into your opponent\'s deck.'
   },
@@ -52,8 +55,8 @@ export const magic = [
     attack: 2,
     defense: 0,
     shuffleCardCopiesIntoOpponentsPiles: [
-      { card: 'Burn', pile: 'deck' },
-      { card: 'Burn', pile: 'deck' },
+      { cardName: 'Burn', pile: 'deck' },
+      { cardName: 'Burn', pile: 'deck' },
     ],
     customDescription: 'Shuffle 2 copies of Burn into your opponent\'s deck.'
   },
@@ -76,10 +79,14 @@ export const magic = [
     triggerDiscardOnPlay: true,
     customDescription: 'Shuffle 4 random non-legendary magic attacks into your deck.'
   }
-];
-
-magic.forEach(card => {
+].map(card => {
   card.type = 'magic';
   card.pierces = true;
   card.isCraftable = card.rarity !== 'legendary' && !card.isToken;
+
+  return {
+    ...cardTemplate,
+    ...card,
+    description: genCardDescription(card)
+  };
 });

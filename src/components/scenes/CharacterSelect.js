@@ -89,6 +89,7 @@ export const CharacterSelect = () => {
                 characters[selectedCharIndex].image,
                 characters[selectedCharIndex].startingCards
               )}
+              centered
             >
              Play as {characters[selectedCharIndex].name}
             </Button>

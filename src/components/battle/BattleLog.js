@@ -49,6 +49,7 @@ export const BattleLog = () => {
       <Button
         onClick={() => setIsBattleLogModalOpen(true)}
         _css={battleLogButtonCss}
+        centered
       >
         Recap
       </Button>

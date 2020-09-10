@@ -15,6 +15,7 @@ export const Button = ({
   isDisabled = false,
   textProps = {},
   className = '',
+  centered = false,
   _css = '',
   children
 }) => (
@@ -33,6 +34,7 @@ export const Button = ({
       width: ${buttonTypeWidths[type]};
       color: ${colors.white};
       cursor: ${isDisabled ? 'default' : 'pointer'};
+      ${centered ? '' : 'text-align: left;'}
   
       &:hover {
         ${isDisabled ? '' : `background: ${colors.slate};`}
@@ -43,7 +45,6 @@ export const Button = ({
   >
     <Text
       type='small'
-      centered
       inline
       {...textProps}
     >

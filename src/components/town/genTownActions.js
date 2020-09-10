@@ -23,20 +23,20 @@ export const genTownActions = () => {
 };
 
 const townActions = keyBy([
-  {
-    name: 'Make Money',
-    energy: [1, 2],
-    probability: 15,
-    image: 'gold_with_padding',
-    description: 'Earn some gold.'
-  },
-  {
-    name: 'Gold Bar',
-    energy: [2, 3, 4],
-    probability: 2,
-    image: 'gold_bar',
-    description: 'A free gold bar!'
-  },
+  // {
+  //   name: 'Make Money',
+  //   energy: [1, 2],
+  //   probability: 15,
+  //   image: 'gold_with_padding',
+  //   description: 'Earn some gold.'
+  // },
+  // {
+  //   name: 'Gold Bar',
+  //   energy: [2, 3, 4],
+  //   probability: 2,
+  //   image: 'gold_bar',
+  //   description: 'A free gold bar!'
+  // },
   {
     name: 'Blacksmith',
     energy: [2, 3, 4],

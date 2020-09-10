@@ -1,3 +1,5 @@
+import { cards } from '../cards/cards';
+
 const genInitialState = () => ({
   toast: '',
   flipper: false
@@ -20,18 +22,20 @@ export default (state = initialState, action) => {
         flipper: !state.flipper
       };
     case 'ADD_CARDS_TO_COLLECTION': {
-      const cards = typeof action.payload === 'string' ? [action.payload] : action.payload;
+      const cardIds = typeof action.payload === 'string' ? [action.payload] : action.payload;
+      const cardNames = cardIds.map(i => cards[i].name).join(', ');
       return {
         ...state,
-        toast: `Received ${cards.length === 1 ? 'card' : 'cards'}: ${cards.join(', ')}`,
+        toast: `Received ${cardIds.length === 1 ? 'card' : 'cards'}: ${cardNames}`,
         flipper: !state.flipper
       };
     }
     case 'REMOVE_CARDS_FROM_COLLECTION': {
-      const cards = typeof action.payload === 'string' ? [action.payload] : action.payload;
+      const cardIds = typeof action.payload === 'string' ? [action.payload] : action.payload;
+      const cardNames = cardIds.map(i => cards[i].name).join(', ');
       return {
         ...state,
-        toast: `Removed ${cards.length === 1 ? 'card' : 'cards'}: ${cards.join(', ')}`,
+        toast: `Removed ${cardIds.length === 1 ? 'card' : 'cards'}: ${cardNames}`,
         flipper: !state.flipper
       };
     }

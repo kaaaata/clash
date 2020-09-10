@@ -13,6 +13,7 @@ import { controller } from '../../controller';
 import { effects } from '../styles';
 import { createNewCard } from '../../cards/createNewCard';
 import { blueprints } from '../../cards/blueprints';
+import shortid from 'shortid';
 
 const CardsRarityString = ({ cardNames, cardIds, showCrafted }) => {
   const rarityCounts = { common: 0, uncommon: 0, rare: 0, legendary: 0, crafted: 0 };
@@ -72,8 +73,10 @@ export const MonsterPreview = ({
   }
 
   const battleOnClick = () => {
-    const enemyDeckIds = enemyDeckCardNames.map(cardName => createNewCard(cardName));
     dispatch(actions.setBattleInitialState());
+    const enemyDeckIds = enemyDeckCardNames.map(
+      cardName => createNewCard(cardName, `battle_${shortid.generate()}`)
+    );
     dispatch(actions.setEnemy({
       name: monsterName,
       image: monster.image,
@@ -88,16 +91,23 @@ export const MonsterPreview = ({
       operation: 'set'
     }));
     dispatch(actions.setYourDeck(
-      controller.yourDeck || yourDeck.slice(0, yourDeck.length - 3)
+      (controller.yourDeck || yourDeck.slice(0, yourDeck.length - 3))
+        .map(cardId => createNewCard(cards[cardId], `battle_${shortid.generate()}`))
     ));
     dispatch(actions.setEnemyDeck(
-      controller.enemyDeck || enemyDeckIds.slice(0, enemyDeckIds.length - 2)
+      (controller.enemyDeck || enemyDeckIds.slice(0, enemyDeckIds.length - 2))
+        .map(cardId => createNewCard(cards[cardId], `battle_${shortid.generate()}`))
     ));
     dispatch(actions.setYourHand(
-      controller.yourHand || yourDeck.slice(yourDeck.length - 3)
+      (controller.yourHand || yourDeck.slice(yourDeck.length - 3))
+        .map(cardId => createNewCard(cards[cardId], `battle_${shortid.generate()}`))
     ));
     dispatch(actions.setEnemyHand(
-      controller.enemyHand || [...enemyDeckIds.slice(enemyDeckIds.length - 2), null]
+      controller.enemyHand || [
+        ...enemyDeckIds.slice(enemyDeckIds.length - 2)
+          .map(cardId => createNewCard(cards[cardId], `battle_${shortid.generate()}`)),
+        null
+      ]
     ));
     dispatch(actions.setBattleRewardCards(
       isMonsterElite

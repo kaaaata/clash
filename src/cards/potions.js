@@ -1,3 +1,6 @@
+import { cardTemplate } from './cardTemplate';
+import { genCardDescription } from './genCardDescription';
+
 export const potions = [
   {
     name: 'Burn',
@@ -62,10 +65,14 @@ export const potions = [
     },
     customDescription: 'Shuffle 5 cards from your banish into your discard. Heal 5.'
   }
-];
-
-potions.forEach(card => {
+].map(card => {
   card.type = 'potion';
   card.banishesOnPlay = true;
   card.triggerDiscardOnPlay = true;
+
+  return {
+    ...cardTemplate,
+    ...card,
+    description: genCardDescription(card)
+  };
 });

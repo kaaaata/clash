@@ -63,8 +63,8 @@ export default (state = initialState, action) => {
         feed: [
           'It\'s a new day.',
           action.payload.feedInitialMessage,
-          [3, 6].includes(newDay) && 'Tonight, a boss enemy will attack!',
-          newDay === 9 && 'Tonight, the final boss will attack!'
+          [3, 6, 9].includes(newDay) && 'Tonight, an elite enemy will attack!',
+          newDay === 10 && 'Tonight, the final boss will attack!'
         ].filter(Boolean)
       };
     }

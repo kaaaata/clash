@@ -33,6 +33,7 @@ export const Settings = ({ closeModal }) => {
               dispatch(actions.setWinner(enemyName));
               closeModal();
             }}
+            centered
           >
             Concede Battle
           </Button>
@@ -43,6 +44,7 @@ export const Settings = ({ closeModal }) => {
             <Button
               type='mini'
               onClick={() => setIsAllCardsModalActive(true)}
+              centered
             >
               View All Cards
             </Button>
@@ -50,7 +52,13 @@ export const Settings = ({ closeModal }) => {
 
           <Spacer height={20} />
 
-          <Button type='mini' onClick={closeModal}>Back</Button>
+          <Button
+            type='mini'
+            onClick={closeModal}
+            centered
+          >
+            Back
+          </Button>
         </FlexContainer>
       </Modal>
       

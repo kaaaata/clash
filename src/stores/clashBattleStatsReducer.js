@@ -9,8 +9,8 @@ const initialState = {
   yourStatBonuses: { attack: 0, magic: 0, defense: 0 },
 
   // will be reset before each fight
-  enemyName: '',
-  enemyImage: '',
+  enemyName: controller.enemyName || '',
+  enemyImage: controller.enemyImage || '',
   enemyStats: { attack: 0, magic: 0, defense: 0 },
   enemyStatBonuses: { attack: 0, magic: 0, defense: 0 },
   enemyType: null,

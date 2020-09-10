@@ -14,6 +14,7 @@ import {
 } from './battleLogGenerators';
 import { cards } from '../cards/cards';
 import { createNewCard } from '../cards/createNewCard';
+import shortid from 'shortid';
 
 // can't move triggerDiscardEffect into new file because it calls playCard (import loop)
 const triggerDiscardEffect = (state, cardId, player) => {
@@ -277,7 +278,7 @@ export const playCard = (state, cardId, player, location, index) => {
 
   if (!state.winner && playCopiesOfCards.length) {
     playCopiesOfCards.forEach(cardName => {
-      const cardId = createNewCard(cardName);
+      const cardId = createNewCard(cardName, `battle_${shortid.generate()}`);
       logs.push(logPlayCopyOfCard(
         `${player} plays a copy of ${cardName} (${cardId})`,
         player,

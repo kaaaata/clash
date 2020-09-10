@@ -7,6 +7,7 @@ import { FlexContainer, Spacer, Button, Text } from '../particles';
 import { Card } from '../card/Card';
 import { blueprints } from '../../cards/blueprints';
 import { createNewCard } from '../../cards/createNewCard';
+import { cards } from '../../cards/cards';
 
 const cardLootModalCss = css`
   .card {
@@ -85,9 +86,9 @@ export const CardLootModal = ({
               if (cardsTakenCount < maxCardsToTake) {
                 setSelectedCardIndices({ ...selectedCardIndices, [index]: true });
                 dispatch(actions.addCardsToCollection(createNewCard(cardIds
-                  ? cardNameOrId
-                  : blueprints.allCardsObject[cardNameOrId]
-                )));
+                  ? cards[cardNameOrId]
+                  : blueprints.allCardsObject[cardNameOrId])
+                ));
               }
             }}
             isHidden={selectedCardIndices.hasOwnProperty(index)}
@@ -103,6 +104,7 @@ export const CardLootModal = ({
             isDisabled={i.text === 'Take All' && cardsTakenCount === maxCardsToTake}
             onClick={i.onClick}
             textProps={{ color: i.color }}
+            centered
           >
             {i.text}
           </Button>

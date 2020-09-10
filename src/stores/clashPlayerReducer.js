@@ -45,7 +45,7 @@ export default (state = initialState, action) => {
         if (spliceIndex !== -1) {
           newDeck.splice(spliceIndex, 1);
         }
-        delete cards[cardId];
+        // delete cards[cardId];
       });
       return {
         ...state,

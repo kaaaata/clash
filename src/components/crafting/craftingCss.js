@@ -40,7 +40,7 @@ export const craftingCss = css`
     width: 550px;
 
     button {
-      margin-bottom: 5px;
+      margin-bottom: 10px;
     }
   }
 `;

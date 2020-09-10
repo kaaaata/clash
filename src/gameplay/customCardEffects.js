@@ -5,6 +5,7 @@ import { logHealValue, logHealCard, logPlayCopyOfCard } from './battleLogGenerat
 import { blueprints } from '../cards/blueprints';
 import { cards } from '../cards/cards';
 import { createNewCard } from '../cards/createNewCard';
+import shortid from 'shortid';
 
 export const customCardEffects = {
   'Brawler': (state, player) => {
@@ -23,7 +24,7 @@ export const customCardEffects = {
       const cardId = createNewCard({
         ...cards[state[player].discard[attackIndex]],
         banishesOnPlay: true
-      });
+      }, `battle_${shortid.generate()}`);
       if (attackIndex !== -1) {
         playCard(state, cardId, player, 'discard', attackIndex);
       }
@@ -38,7 +39,7 @@ export const customCardEffects = {
       const cardId = createNewCard({
         ...cards[state[player].discard[attackIndex]],
         banishesOnPlay: true
-      });
+      }, `battle_${shortid.generate()}`);
       if (attackIndex !== -1) {
         playCard(state, cardId, player, 'discard', attackIndex);
       }
@@ -52,7 +53,7 @@ export const customCardEffects = {
     const cardId = createNewCard({
       ...cards[state[player].discard[allyIndex]],
       banishesOnPlay: true
-    });
+    }, `battle_${shortid.generate()}`);
     if (allyIndex !== -1) {
       playCard(state, cardId, player, 'discard', allyIndex);
     }
@@ -110,7 +111,8 @@ export const customCardEffects = {
     const randomCardId = createNewCard(
       blueprints.allCardsArray.getRandomCardByFilter(
         card => card.name !== 'Magic Scroll' && card.rarity !== 'legendary'
-      )
+      ),
+      `battle_${shortid.generate()}`
     );
     state.logs.push(logPlayCopyOfCard(
       `${player} plays a copy of ${cards[randomCardId]}(${randomCardId})`,

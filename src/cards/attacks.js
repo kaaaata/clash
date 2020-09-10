@@ -1,3 +1,6 @@
+import { cardTemplate } from './cardTemplate';
+import { genCardDescription } from './genCardDescription';
+
 export const attacks = [
   {
     name: 'Sword',
@@ -151,9 +154,13 @@ export const attacks = [
     defense: 3,
     dealsBanishingDamage: true
   }
-];
-
-attacks.forEach(card => {
+].map(card => {
   card.type = 'attack';
   card.isCraftable = card.rarity !== 'legendary' && !card.isToken;
+
+  return{
+    ...cardTemplate,
+    ...card,
+    description: genCardDescription(card)
+  };
 });

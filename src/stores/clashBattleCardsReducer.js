@@ -1,15 +1,16 @@
 import { controller } from '../controller';
+import { cards } from '../cards/cards';
 
 const genInitialState = () => ({
-  yourDeck: [],
+  yourDeck: controller.yourDeck || [],
   yourDiscard: controller.yourDiscard || [],
   yourBanish: controller.yourBanish || [],
-  yourHand: [null, null, null],
+  yourHand: controller.yourHand || [null, null, null],
   battleRewardCards: [],
-  enemyDeck: [],
+  enemyDeck: controller.enemyDeck || [],
   enemyDiscard: controller.enemyDiscard || [],
   enemyBanish: controller.enemyBanish || [],
-  enemyHand: [null, null, null],
+  enemyHand: controller.enemyHand || [null, null, null],
   stack: [],
   battleLogs: [],
 
@@ -75,6 +76,11 @@ export default (state = genInitialState(), action) => {
         battleRewardGold: action.payload
       };
     case 'SET_BATTLE_INITIAL_STATE':
+      Object.keys(cards).forEach(cardId => {
+        if (cardId.startsWith('battle')) {
+          delete cards[cardId];
+        }
+      });
       return genInitialState();
     case 'SET_ACTIVE_MODAL_CARD_PILE':
       return {
@@ -82,7 +88,6 @@ export default (state = genInitialState(), action) => {
         activeModalCardPile: action.payload
       };
     case 'SET_BATTLE_LOGS':
-      console.log('setting battle logs:', action.payload);
       return {
         ...state,
         battleLogs: action.payload

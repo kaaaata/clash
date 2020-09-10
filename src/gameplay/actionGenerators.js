@@ -38,7 +38,7 @@ export const actionGenerators = {
     if (!index && index !== 0) {
       return null;
     } else if (location === 'hand') {
-      state[player][location][index] = {};
+      state[player][location][index] = null;
     } else if (index === 'top') {
       state[player][location].removeTopCard();
     } else {

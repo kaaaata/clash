@@ -1,3 +1,6 @@
+import { cardTemplate } from './cardTemplate';
+import { genCardDescription } from './genCardDescription';
+
 export const allies = [
   {
     name: 'Swordsman',
@@ -132,8 +135,8 @@ export const allies = [
     attack: 1,
     defense: 1,
     shuffleCardCopiesIntoOpponentsPiles: [
-      { card: 'Burn', pile: 'deck' },
-      { card: 'Burn', pile: 'deck' },
+      { cardName: 'Burn', pile: 'deck' },
+      { cardName: 'Burn', pile: 'deck' },
     ],
     playCopiesOfCards: ['Frost'],
     customDescription: 'Play a copy of Frost. Shuffle 2 copies of Burn into your opponent\'s deck.'
@@ -174,8 +177,12 @@ export const allies = [
     triggerDiscardOnPlay: true,
     customDescription: 'Play a copy of Ice Blade.'
   }
-];
-
-allies.forEach(card => {
+].map(card => {
   card.type = 'ally';
+
+  return {
+    ...cardTemplate,
+    ...card,
+    description: genCardDescription(card)
+  };
 });
