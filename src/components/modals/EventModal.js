@@ -80,7 +80,6 @@ export const EventModalPage = ({
             key={index}
             onClick={option.onClick}
             isDisabled={option.isDisabled}
-            textProps={{ type: 'mini' }}
             className='event_modal--fade_in'
           >
             [{option.name}]

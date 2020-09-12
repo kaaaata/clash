@@ -10,37 +10,8 @@ import { genUpgradedCard } from './genUpgradedCard';
 import { CardViewModal } from '../modals/CardViewModal';
 import { createNewCard } from '../../cards/createNewCard';
 import { cards } from '../../cards/cards';
-
-const testUpgrades = [
-  {
-    description: '+2 attack.',
-    cardProperties: {
-      suffix: 'of Sharpness',
-      attack: 2
-    }
-  },
-  {
-    description: '+2 defense.',
-    cardProperties: {
-      suffix: 'of Sturdiness',
-      defense: 2
-    }
-  },
-  {
-    description: '+2 attack.',
-    cardProperties: {
-      prefix: 'Sharp',
-      attack: 2
-    }
-  },
-  {
-    description: '+2 defense.',
-    cardProperties: {
-      prefix: 'Sturdy',
-      defense: 2
-    }
-  },
-];
+import { basicUpgrades } from './upgrades';
+import { sampleSize } from 'lodash';
 
 export const Crafting = () => {
   const { goldBars, deck } = useSelector(state => ({
@@ -49,10 +20,12 @@ export const Crafting = () => {
   }), shallowEqual);
   const dispatch = useDispatch();
 
-  const [isCraftingInProgress, setIsCraftingInProgress] = useState(false);
+  const [availableUpgrades, setAvailableUpgrades] = useState(null);
   const [card1Id, setCard1Id] = useState(null);
   const [card2Id, setCard2Id] = useState(null);
   const [isCardSelectModalOpen, setIsCardSelectModalOpen] = useState(false);
+  
+  const isCraftingInProgress = !!availableUpgrades;
   
   return (
     <React.Fragment>
@@ -95,7 +68,7 @@ export const Crafting = () => {
 
           {isCraftingInProgress ? (
             <div className='upgrades'>
-              {testUpgrades.map((i, index) => (
+              {availableUpgrades.map((i, index) => (
                 <Button
                   key={index}
                   isDisabled={!card1Id || !cards[`upgrade_preview_${index}`]}
@@ -108,7 +81,7 @@ export const Crafting = () => {
                     dispatch(actions.removeCardsFromCollection(card1Id));
                     const upgradedCardId = createNewCard(cards[`upgrade_preview_${index}`]);
                     dispatch(actions.addCardsToCollection(upgradedCardId));
-                    setIsCraftingInProgress(false);
+                    setAvailableUpgrades(null);
                   }}
                 >
                   [{i.cardProperties.prefix ? `${i.cardProperties.prefix}...` : `...${i.cardProperties.suffix}`}] {i.description}
@@ -120,7 +93,7 @@ export const Crafting = () => {
               isDisabled={!goldBars}
               onClick={() => {
                 dispatch(actions.adjustPlayerGoldBars(-1));
-                setIsCraftingInProgress(true);
+                setAvailableUpgrades(sampleSize(basicUpgrades, 4));
               }}
               centered
             >
@@ -137,7 +110,7 @@ export const Crafting = () => {
           cardIds={deck.filter(cardId => cards[cardId].isCraftable)}
           cardOnClick={(cardId) => {
             setCard1Id(cardId);
-            testUpgrades.forEach((upgrade, index) => {
+            availableUpgrades.forEach((upgrade, index) => {
               genUpgradedCard(cards[cardId], upgrade.cardProperties, `upgrade_preview_${index}`);
             });
             setIsCardSelectModalOpen(false);

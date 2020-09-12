@@ -44,7 +44,7 @@ export const Button = ({
     `}
   >
     <Text
-      type='small'
+      type='mini'
       inline
       {...textProps}
     >
