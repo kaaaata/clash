@@ -31,8 +31,7 @@ export const allies = [
     rarity: 'common',
     attack: 2,
     defense: 1,
-    shuffleCardCopiesIntoYourPiles: [{ cardName: 'Healing Blade', pile: 'deck' }],
-    customDescription: 'Shuffle a copy of Healing Blade into your deck.'
+    shuffleCardCopiesIntoYourPiles: [{ cardName: 'Healing Blade', pile: 'deck' }]
   },
   {
     name: 'Mermaid',
@@ -49,8 +48,7 @@ export const allies = [
     rarity: 'uncommon',
     attack: 3,
     defense: 1,
-    playCopiesOfCards: ['Frost'],
-    customDescription: 'Play a copy of Frost.'
+    playCopiesOfCards: ['Frost']
   },
   {
     name: 'Hobgoblin',
@@ -58,8 +56,7 @@ export const allies = [
     rarity: 'uncommon',
     attack: 2,
     defense: 0,
-    playCopiesOfCards: ['Falchion'],
-    customDescription: 'Play a copy of Falchion.'
+    playCopiesOfCards: ['Falchion']
   },
   {
     name: 'Brawler',
@@ -76,8 +73,7 @@ export const allies = [
     rarity: 'uncommon',
     attack: 0,
     defense: 0,
-    playCopiesOfCards: ['Fire', 'Fire'],
-    customDescription: 'Play 2 copies of Fire.'
+    playCopiesOfCards: ['Fire', 'Fire']
   },
   {
     name: 'Mimic',
@@ -85,8 +81,7 @@ export const allies = [
     rarity: 'uncommon',
     attack: 2,
     defense: 2,
-    playCopiesOfCards: ['Tentacles', 'Tentacles'],
-    customDescription: 'Play 2 copies of Tentacles.'
+    playCopiesOfCards: ['Tentacles', 'Tentacles']
   },
   {
     name: 'Apothecary',
@@ -138,8 +133,7 @@ export const allies = [
       { cardName: 'Burn', pile: 'deck' },
       { cardName: 'Burn', pile: 'deck' },
     ],
-    playCopiesOfCards: ['Frost'],
-    customDescription: 'Play a copy of Frost. Shuffle 2 copies of Burn into your opponent\'s deck.'
+    playCopiesOfCards: ['Frost']
   },
   {
     name: 'Fire Dragon',
@@ -150,8 +144,7 @@ export const allies = [
     onDiscard: {
       playCopiesOfCards: ['Super Fire']
     },
-    triggerDiscardOnPlay: true,
-    customDescription: 'Play a copy of Super Fire.'
+    triggerDiscardOnPlay: true
   },
   {
     name: 'Catherine the Great',
@@ -162,8 +155,7 @@ export const allies = [
     onDiscard: {
       playCopiesOfCards: ['Healing Blade']
     },
-    triggerDiscardOnPlay: true,
-    customDescription: 'Play a copy of Healing Blade.'
+    triggerDiscardOnPlay: true
   },
   {
     name: 'Ice Queen',
@@ -174,8 +166,7 @@ export const allies = [
     onDiscard: {
       playCopiesOfCards: ['Ice Blade']
     },
-    triggerDiscardOnPlay: true,
-    customDescription: 'Play a copy of Ice Blade.'
+    triggerDiscardOnPlay: true
   }
 ].map(card => {
   card.type = 'ally';

@@ -1,6 +1,5 @@
 import { startingDeck } from '../cards/startingDeck';
 import { controller } from '../controller';
-import { cards } from '../cards/cards';
 
 const genInitialState = () => ({
   lives: typeof controller.lives === 'number' ? controller.lives : 3,

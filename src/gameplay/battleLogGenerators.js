@@ -94,3 +94,8 @@ export const logCantDrawCard = (consoleLog, player) => ({
   consoleLog,
   player
 });
+
+export const logRoundEnds = (consoleLog) => ({
+  type: 'round_ends',
+  consoleLog
+});

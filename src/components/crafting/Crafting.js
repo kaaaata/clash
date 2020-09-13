@@ -10,7 +10,7 @@ import { genUpgradedCard } from './genUpgradedCard';
 import { CardViewModal } from '../modals/CardViewModal';
 import { createNewCard } from '../../cards/createNewCard';
 import { cards } from '../../cards/cards';
-import { basicUpgrades } from './upgrades';
+import { upgrades } from './upgrades';
 import { sampleSize } from 'lodash';
 
 export const Crafting = () => {
@@ -46,20 +46,26 @@ export const Crafting = () => {
               />
             </FlexContainer>
             <Text type='title'>+</Text>
-            <div
+            <FlexContainer
               className={`card_slot pointer ${card1Id ? 'green_border' : 'red_border'}`}
+              justifyContent='center'
+              alignItems='center'
               onClick={() => {
                 if (isCraftingInProgress) {
                   setIsCardSelectModalOpen(true);
                 }
               }}
             >
-              {card1Id && !isCardSelectModalOpen && (
+              {(card1Id && !isCardSelectModalOpen) ? (
                 <Card cardId={card1Id} shouldDisableZoom />
+              ) : (
+                isCraftingInProgress ? (
+                  <Text type='mini'>(select a card)</Text>
+                ) : null
               )}
-            </div>
+            </FlexContainer>
             <Text type='title'>=</Text>
-            <div className={`card_slot ${card2Id ? 'green_border' : 'red_border'}`}>
+            <div className='card_slot'>
               {card2Id && <Card cardId={card2Id} shouldDisableZoom />}
             </div>
           </FlexContainer>
@@ -71,7 +77,12 @@ export const Crafting = () => {
               {availableUpgrades.map((i, index) => (
                 <Button
                   key={index}
-                  isDisabled={!card1Id || !cards[`upgrade_preview_${index}`]}
+                  isDisabled={
+                    !card1Id
+                    || !cards[`upgrade_preview_${index}`]
+                    || (i.cardProperties.prefix && cards[card1Id].prefix)
+                    || (i.cardProperties.suffix && cards[card1Id].suffix)
+                  }
                   onMouseEnter={() => {
                     setCard2Id(`upgrade_preview_${index}`);
                   }}
@@ -84,7 +95,7 @@ export const Crafting = () => {
                     setAvailableUpgrades(null);
                   }}
                 >
-                  [{i.cardProperties.prefix ? `${i.cardProperties.prefix}...` : `...${i.cardProperties.suffix}`}] {i.description}
+                  <span className='green'>[{i.cardProperties.prefix ? `${i.cardProperties.prefix}...` : `...${i.cardProperties.suffix}`}]</span> {i.description}
                 </Button>
               ))}
             </div>
@@ -93,13 +104,17 @@ export const Crafting = () => {
               isDisabled={!goldBars}
               onClick={() => {
                 dispatch(actions.adjustPlayerGoldBars(-1));
-                setAvailableUpgrades(sampleSize(basicUpgrades, 4));
+                setAvailableUpgrades(sampleSize(upgrades, 4));
               }}
               centered
             >
               Upgrade a Card (costs 1 gold bar)
             </Button>
           )}
+
+          <Spacer height={40} />
+
+          {isCraftingInProgress && <Text centered>Each card can have 1 prefix and 1 suffix.</Text>}
         </div>
       </Modal>
 

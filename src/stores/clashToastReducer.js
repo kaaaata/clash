@@ -16,11 +16,17 @@ export default (state = initialState, action) => {
         flipper: !state.flipper
       };
     case 'ADJUST_PLAYER_GOLD':
-      return {
+      return action.payload > 0 ? {
         ...state,
-        toast: `${action.payload > 0 ? 'Received' : 'Lost'}: ${Math.abs(action.payload)} gold`,
+        toast: `Received: ${action.payload} gold`,
         flipper: !state.flipper
-      };
+      } : state;
+    case 'ADJUST_PLAYER_GOLD_BARS':
+      return action.payload > 0 ? {
+        ...state,
+        toast: `Received: ${action.payload} gold ${action.payload === 1 ? 'bar' : 'bars'}`,
+        flipper: !state.flipper
+      } : state;
     case 'ADD_CARDS_TO_COLLECTION': {
       const cardIds = typeof action.payload === 'string' ? [action.payload] : action.payload;
       const cardNames = cardIds.map(i => cards[i].name).join(', ');

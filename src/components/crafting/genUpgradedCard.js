@@ -1,6 +1,6 @@
 import { createNewCard } from '../../cards/createNewCard';
 
-export const genUpgradedCard = (card, upgrade, cardId) => {
+export const genUpgradedCard = (card, upgrade, cardIdOverride) => {
   if (
     !card
     || (card.prefix && upgrade.prefix)
@@ -14,7 +14,7 @@ export const genUpgradedCard = (card, upgrade, cardId) => {
   }
 
   const c = {};
-  c.name = `${upgrade.prefix || ''} ${card.name} ${upgrade.suffix || ''}`;
+  c.name = `${upgrade.prefix || ''} ${card.name} ${upgrade.suffix || ''}`.trim();
   c.image = card.image;
   c.imageSlant = card.imageSlant;
   c.isCraftable = card.isCraftable;
@@ -45,6 +45,9 @@ export const genUpgradedCard = (card, upgrade, cardId) => {
   // statBonuses (currently no non-legendary attacks or magic attacks have statBonuses)
   c.prefix = card.prefix || upgrade.prefix;
   c.suffix = card.suffix || upgrade.suffix;
+  console.log('asdf', {
+    card, upgrade, c
+  });
   
-  return createNewCard(c, cardId);
+  return createNewCard(c, cardIdOverride);
 };

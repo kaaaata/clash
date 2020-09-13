@@ -163,6 +163,13 @@ export const BattleLogItem = (props) => {
         </React.Fragment>
       );
       break;
+    case 'round_ends':
+      text = (
+        <React.Fragment>
+          <span className='yellow'>End of round.</span>
+        </React.Fragment>
+      );
+      break;
     default:
       text = JSON.stringify(props);
       break;

@@ -71,8 +71,7 @@ export const attacks = [
     rarity: 'uncommon',
     attack: 2,
     defense: 1,
-    playCopiesOfCards: ['Fire'],
-    customDescription: 'Play a copy of Fire.'
+    playCopiesOfCards: ['Fire']
   },
   {
     name: 'Multishot',
@@ -80,8 +79,7 @@ export const attacks = [
     rarity: 'uncommon',
     attack: 0,
     defense: 0,
-    playCopiesOfCards: ['Arrow', 'Arrow'],
-    customDescription: 'Play two copies of Arrow.'
+    playCopiesOfCards: ['Arrow', 'Arrow']
   },
   {
     name: 'Shield',
@@ -131,8 +129,7 @@ export const attacks = [
     defense: 5,
     shuffleCardCopiesIntoYourPiles: [
       { cardName: 'Super Frost', pile: 'deck' }
-    ],
-    customDescription: 'Shuffle a copy of Super Frost into your deck.'
+    ]
   },
   {
     name: 'Forest Bow',
@@ -143,7 +140,7 @@ export const attacks = [
     defense: 0,
     playCopiesOfCards: ['Arrow', 'Arrow', 'Arrow'],
     statBonuses: { attack: 1 },
-    customDescription: 'Play 3 copies of Arrow. Gain +1 attack for the rest of the battle.'
+    customDescription: 'Gain +1 attack for the rest of the battle.'
   },
   {
     name: 'Dragon Blade',
@@ -158,7 +155,7 @@ export const attacks = [
   card.type = 'attack';
   card.isCraftable = card.rarity !== 'legendary' && !card.isToken;
 
-  return{
+  return {
     ...cardTemplate,
     ...card,
     description: genCardDescription(card)

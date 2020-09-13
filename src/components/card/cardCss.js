@@ -102,5 +102,6 @@ export const _cardCss = (rarityColor) => css`
     position: relative;
     background: rgba(0, 0, 0, 0.2);
     flex-grow: 1;
+    overflow-y: scroll;
   }
 `;

@@ -7,6 +7,7 @@ export const craftingCss = css`
     width: ${cardWidth}px;
     height: ${cardHeight}px;
     border: 2px solid ${colors.grey};
+    box-shadow: 0 0 20px ${colors.grey};
     margin: 0 15px;
     box-sizing: content-box;
 
@@ -26,12 +27,12 @@ export const craftingCss = css`
     }
 
     &.green_border {
-      border-color: ${colors.green};
+      border: 2px solid ${colors.green};
       box-shadow: 0 0 20px ${colors.green};
     }
 
     &.red_border {
-      border-color: ${colors.red};
+      border: 2px solid ${colors.red};
       box-shadow: 0 0 20px ${colors.red};
     }
   }

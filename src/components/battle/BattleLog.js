@@ -4,7 +4,7 @@ import { useSelector, shallowEqual } from 'react-redux';
 import { Button, Spacer } from '../particles';
 import { useState } from 'react';
 import { Modal } from '../modals/Modal';
-import { logTurnBegins } from '../../gameplay/battleLogGenerators';
+import { logRoundEnds, logTurnBegins } from '../../gameplay/battleLogGenerators';
 import { BattleLogItem } from './BattleLogItem';
 import { colors } from '../styles';
 
@@ -33,7 +33,8 @@ export const BattleLog = () => {
       logTurnBegins("you's turn begins", 'you'),
       ...state.clashBattleCards.battleLogs.filter(i => (
         !(i.type === 'turn_begins' && i.player === 'you')
-      ))
+      )),
+      logRoundEnds('end of round')
     ];
 
     return {

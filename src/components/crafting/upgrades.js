@@ -33,7 +33,7 @@ import { flatten } from 'lodash';
 //   suffix: '' // upgrade suffix
 // };
 
-const _basicUpgrades = [
+const _upgrades = [
   {
     description: '+2 attack.',
     cardProperties: {
@@ -84,17 +84,36 @@ const _basicUpgrades = [
       pierces: true
     }
   },
-  // {
-  //   description: 'Play a copy of Frost',
-  //   cardProperties: {
-  //     prefix: 'Frosty',
-  //     suffix: 'of Frost',
-  //     playCopiesOfCards: ['Frost']
-  //   }
-  // },
+  {
+    description: 'Play a copy of Frost.',
+    cardProperties: {
+      prefix: 'Frosty',
+      suffix: 'of Frost',
+      playCopiesOfCards: ['Frost'],
+      customDescription: 'Play a copy of Frost.'
+    }
+  },
+  {
+    description: 'Play a copy of Saber.',
+    cardProperties: {
+      prefix: 'Fencer\'s',
+      suffix: 'of Fencing',
+      playCopiesOfCards: ['Saber'],
+      customDescription: 'Play a copy of Saber.'
+    }
+  },
+  {
+    description: 'Shuffle a copy of Burn into your opponent\'s deck.',
+    cardProperties: {
+      prefix: 'Burninating',
+      suffix: 'of Burninating',
+      shuffleCardCopiesIntoOpponentsPiles: [{ cardName: 'Burn', pile: 'deck' }],
+      customDescription: 'Shuffle a copy of Burn into your opponent\'s deck.'
+    }
+  },
 ];
 
-export const basicUpgrades = flatten(_basicUpgrades.map(i => [
+export const upgrades = flatten(_upgrades.map(i => [
   { ...i, cardProperties: { ...i.cardProperties, prefix: null } },
   { ...i, cardProperties: { ...i.cardProperties, suffix: null } },
 ]));

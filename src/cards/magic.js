@@ -10,8 +10,7 @@ export const magic = [
     defense: 0,
     shuffleCardCopiesIntoOpponentsPiles: [
       { cardName: 'Burn', pile: 'deck' }
-    ],
-    customDescription: 'Shuffle a copy of Burn into your opponent\'s deck.'
+    ]
   },
   {
     name: 'Frost',
@@ -45,8 +44,7 @@ export const magic = [
     shuffleCardCopiesIntoYourPiles: [
       { cardName: 'Candy Corn', pile: 'discard', index: 'top' },
       { cardName: 'Candy Corn', pile: 'discard', index: 'top' }
-    ],
-    customDescription: 'Add two copies of Candy Corn into your discard.'
+    ]
   },
   {
     name: 'Super Fire',
@@ -57,8 +55,7 @@ export const magic = [
     shuffleCardCopiesIntoOpponentsPiles: [
       { cardName: 'Burn', pile: 'deck' },
       { cardName: 'Burn', pile: 'deck' },
-    ],
-    customDescription: 'Shuffle 2 copies of Burn into your opponent\'s deck.'
+    ]
   },
   {
     name: 'Super Frost',

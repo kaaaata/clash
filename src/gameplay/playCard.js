@@ -61,7 +61,7 @@ export const playCard = (state, cardId, player, location, index) => {
     const mockCardId = createNewCard({
       name: card.name,
       ...card.onDiscard,
-      isMockCard: true,
+      isMockCard: true
     }, 'mock_card');
     playCard(state, mockCardId, player);
   }
