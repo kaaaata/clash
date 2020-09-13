@@ -159,7 +159,7 @@ const _eventMonsters = [
   {
     name: 'Treasure Slime',
     image: 'treasure_slime_monster',
-    stats: { attack: 0, magic: 1, defense: 0 },
+    stats: { attack: 0, magic: 0, defense: 0 },
     deck: [
       'Jello Slime',
       'Tentacles',
@@ -172,12 +172,14 @@ const _eventMonsters = [
   {
     name: 'Catherine the Great',
     image: 'catherine_the_great',
-    stats: { attack: 2, magic: 0, defense: 1 },
+    stats: { attack: 1, magic: 1, defense: 1 },
     deck: [
       'Catherine the Great',
       'Shield',
       'Longsword',
-      'Orc Blade'
+      'Orc Blade',
+      'Healing Blade',
+      'Paladin'
     ]
   },
   {

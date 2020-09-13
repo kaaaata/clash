@@ -34,6 +34,7 @@ export const ReceiveBlessing = ({ closeModal }) => {
                   player: 'you',
                   operation: 'adjust'
                 }));
+                dispatch(actions.setBlessingReceived());
               }
             },
             {
@@ -49,6 +50,7 @@ export const ReceiveBlessing = ({ closeModal }) => {
                   player: 'you',
                   operation: 'adjust'
                 }));
+                dispatch(actions.setBlessingReceived());
               }
             },
             {
@@ -64,6 +66,7 @@ export const ReceiveBlessing = ({ closeModal }) => {
                   player: 'you',
                   operation: 'adjust'
                 }));
+                dispatch(actions.setBlessingReceived());
               }
             },
             {
@@ -75,6 +78,7 @@ export const ReceiveBlessing = ({ closeModal }) => {
                 setPage('received_blessing');
                 dispatch(actions.addTownFeedText('Received blessing: 250 gold'));
                 dispatch(actions.adjustPlayerGold(250));
+                dispatch(actions.setBlessingReceived());
               }
             }
           ]}

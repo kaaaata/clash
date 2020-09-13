@@ -45,7 +45,7 @@ export const BattleLog = () => {
 
   const [isBattleLogModalOpen, setIsBattleLogModalOpen] = useState(false);
 
-  return battleLogs.length > 1 ? (
+  return battleLogs.length > 2 ? (
     <React.Fragment>
       <Button
         onClick={() => setIsBattleLogModalOpen(true)}

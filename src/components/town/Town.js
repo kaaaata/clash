@@ -38,22 +38,25 @@ export const Town = () => {
     day,
     townActions,
     completedTownActions,
-    feed
+    feed,
+    receivedBlessings
   } = useSelector(state => ({
     lives: state.clashPlayer.lives,
     energy: state.clashTown.energy,
     day: state.clashTown.day,
     townActions: state.clashTown.townActions,
     completedTownActions: state.clashTown.completedTownActions,
-    feed: state.clashTown.feed
+    feed: state.clashTown.feed,
+    receivedBlessings: state.clashTown.receivedBlessings
   }), shallowEqual);
   const dispatch = useDispatch();
   
+  const canReceiveBlessing = !!lives
+    && [4, 7, 10].includes(day)
+    && !receivedBlessings[day];
+
   const [townActionDescription, setTownActionDescription] = useState('Choose an action!');
-  const [activeModal, setActiveModal] = useState(
-    !!lives && [4, 7, 10].includes(day) && lives > 0 ? 'Receive Blessing' : null
-    // 'Next Day'
-  );
+  const [activeModal, setActiveModal] = useState(canReceiveBlessing ? 'Receive Blessing' : null);
 
   useEffect(() => {
     if (feed.length) {

@@ -45,9 +45,6 @@ export const genUpgradedCard = (card, upgrade, cardIdOverride) => {
   // statBonuses (currently no non-legendary attacks or magic attacks have statBonuses)
   c.prefix = card.prefix || upgrade.prefix;
   c.suffix = card.suffix || upgrade.suffix;
-  console.log('asdf', {
-    card, upgrade, c
-  });
   
   return createNewCard(c, cardIdOverride);
 };

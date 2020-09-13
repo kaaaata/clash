@@ -12,7 +12,7 @@ export const addCardCopiesIntoPiles = (
 ) => {
   const { logs, renderActions } = state;
   const cardIds = [];
-  console.log(copies);
+
   copies.forEach(({ cardName, cardId }) => {
     const _cardId = cardId || createNewCard(cardName, `battle_${shortid.generate()}`);
     cardIds.push(_cardId);

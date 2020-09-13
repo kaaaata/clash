@@ -18,6 +18,7 @@ export const townCss = css`
 
   .updates {
     padding-right: 40px;
+    width: 250px;
 
     .feed {
       overflow: scroll;

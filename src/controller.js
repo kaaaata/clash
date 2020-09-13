@@ -6,8 +6,8 @@ import { createNewCard } from './cards/createNewCard';
 import { cards } from './cards/cards';
 import { blueprints } from './cards/blueprints';
 
-const isTestingEnabled = true;
-// const isTestingEnabled = false;
+// const isTestingEnabled = true;
+const isTestingEnabled = false;
 
 // const upgradedCard = genUpgradedCard(
 //   blueprints.allCardsObject['Sword'],
@@ -30,7 +30,7 @@ export const controller = isTestingEnabled ? {
   gold: 1000,
   goldBars: 10,
   energy: 10,
-  day: 2,
+  day: 3,
   // lives: 1,
 
   // yourHand: [doubleUpgradedCard],
@@ -39,7 +39,7 @@ export const controller = isTestingEnabled ? {
   // yourDiscard: [].map(i => createNewCard(i)),
   // yourBanish: [].map(i => createNewCard(i)),
   // enemyHand: ['Sword', 'Sword', 'Sword'].map(i => createNewCard(i)),
-  // enemyDeck: [].map(i => createNewCard(i)),
+  enemyDeck: [].map(i => createNewCard(i)),
   // enemyDiscard: [].map(i => createNewCard(i)),
   // enemyBanish: [].map(i => createNewCard(i)),
   

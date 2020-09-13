@@ -15,7 +15,6 @@ export const RemoveCards = ({ closeModal }) => {
       shouldShowCardCount={false}
       cardIds={deck}
       cardOnClick={(cardId) => {
-        console.log(window.cards[cardId]);
         dispatch(actions.removeCardsFromCollection(cardId));
         closeModal();
       }}

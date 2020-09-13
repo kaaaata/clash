@@ -44,7 +44,7 @@ export const genCardDescription = ({
   shuffleCardCopiesIntoOpponentsPiles,
   customDescription
 }) => [
-  pierces && `Damage dealt pierces.`,
+  pierces && `Damage dealt is unpreventable.`,
   dealsBanishingDamage && 'Damage dealt banishes.',
   heal && `Heal ${heal}.`,
   healEnemy && `Heal enemy ${healEnemy}.`,

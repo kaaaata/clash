@@ -82,6 +82,8 @@ export const Shop = ({ closeModal }) => {
                     onClick={() => {
                       if (energy === 10) {
                         dispatch(actions.setToast('Already at full energy!'));
+                      } else if (gold < pack.cost) {
+                        dispatch(actions.setToast('Not enough gold!'));
                       } else {
                         dispatch(actions.adjustPlayerGold(-1 * pack.cost));
                         dispatch(actions.adjustPlayerEnergy(10));
