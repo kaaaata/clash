@@ -17,7 +17,7 @@ export const ReceiveBlessing = ({ closeModal }) => {
           page={1}
           text={(
             <React.Fragment>
-              You've defeated an <span className='yellow'>elite monster!</span> The cat gods descend from cat heaven to bestow an almighty <span className='blue'>blessing</span> upon your head!
+              You fought an <span className='yellow'>elite monster,</span> and lived to tell the tale! The cat gods descend from cat heaven to bestow an almighty <span className='blue'>blessing</span> upon your head!
             </React.Fragment>
           )}
           options={[

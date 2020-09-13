@@ -13,7 +13,7 @@ import { cards } from '../../cards/cards';
 import { upgrades } from './upgrades';
 import { sampleSize } from 'lodash';
 
-export const Crafting = () => {
+export const Crafting = ({ closeModal }) => {
   const { goldBars, deck } = useSelector(state => ({
     goldBars: state.clashPlayer.goldBars,
     deck: state.clashPlayer.deck
@@ -29,7 +29,12 @@ export const Crafting = () => {
   
   return (
     <React.Fragment>
-      <Modal title='Crafting'>
+      <Modal
+        title='Crafting'
+        closeModal={closeModal}
+        shouldCloseOnClick={false}
+        shouldShowCloseButton
+      >
         <div css={craftingCss}>
           <FlexContainer justifyContent='center' alignItems='center'>
             <FlexContainer
@@ -112,7 +117,7 @@ export const Crafting = () => {
             </Button>
           )}
 
-          <Spacer height={40} />
+          <Spacer height={30} />
 
           {isCraftingInProgress && <Text centered>Each card can have 1 prefix and 1 suffix.</Text>}
         </div>
