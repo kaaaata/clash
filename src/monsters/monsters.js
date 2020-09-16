@@ -68,9 +68,9 @@ const monstersTier2 = [
     name: 'Evil Slime',
     image: 'evil_slime',
     stats: { attack: 0, magic: 0, defense: 0 },
-    deck: ['Evil Slime', ...Array(15).fill('Rock'), ...Array(9).fill('Greataxe')],
-    wave2AdditionalCards: ['Rock', 'Rock', 'Rock', 'Greataxe', 'Greataxe'],
-    eliteAdditionalCards: ['Evil Slime', 'Rock', 'Rock', 'Rock', 'Greataxe']
+    deck: ['Evil Slime', ...Array(15).fill('Blank'), ...Array(9).fill('Greataxe')],
+    wave2AdditionalCards: ['Blank', 'Blank', 'Blank', 'Greataxe', 'Greataxe'],
+    eliteAdditionalCards: ['Evil Slime', 'Blank', 'Blank', 'Blank', 'Greataxe']
   }
 ];
 

@@ -5,3 +5,4 @@ export { RemoveCards } from './RemoveCards';
 export { FreeGold } from './FreeGold';
 export { GoldBar } from './GoldBar';
 export { PurchaseCards } from './PurchaseCards';
+export { DancingLady } from './DancingLady';

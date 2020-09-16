@@ -14,7 +14,8 @@ import {
   RemoveCards,
   FreeGold,
   GoldBar,
-  PurchaseCards
+  PurchaseCards,
+  DancingLady
 } from './randomEvents';
 import { townCss } from './townCss';
 import { TreasureChest } from './randomEvents/TreasureChest';
@@ -145,6 +146,9 @@ export const Town = () => {
       break;
     case 'Treasure Chest':
       modal = <TreasureChest rng={Math.random()} closeModal={() => setActiveModal(null)} />;
+      break;
+    case 'Dancing Lady':
+      modal = <DancingLady closeModal={() => setActiveModal(null)} />;
       break;
     default:
       break;

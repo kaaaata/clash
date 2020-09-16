@@ -29,7 +29,7 @@ const toastCss = css`
   }
 
   &.toast_animation {
-    animation: fadeOut 3s;
+    animation: fadeOut 4s;
     animation-fill-mode: forwards;
   }
 `;

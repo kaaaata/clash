@@ -3,8 +3,8 @@ import { genCardDescription } from './genCardDescription';
 
 export const attacks = [
   {
-    name: 'Rock',
-    image: 'rock',
+    name: 'Blank',
+    image: 'blank',
     rarity: 'common',
     isToken: true,
     customDescription: 'This card does nothing!'

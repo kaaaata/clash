@@ -66,7 +66,7 @@ export const allies = [
     defense: 0,
     shuffleCardCopiesIntoYourPiles: [
       { cardName: 'Greataxe', pile: 'deck' },
-      { cardName: 'Rock', pile: 'deck' },
+      { cardName: 'Blank', pile: 'deck' },
     ]
   },
   {
