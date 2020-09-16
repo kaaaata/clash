@@ -3,18 +3,20 @@ import { css, jsx } from '@emotion/core'; /** @jsx jsx */
 import { Modal } from './Modal';
 import { FlexContainer, Image, Button, Text } from '../particles';
 import { effects } from '../styles';
+import { CardsTooltipWrapper } from '../card/CardsTooltipWrapper';
 
 const eventModalPageCss = css`
   flex-grow: 1;
 
-  button {
+  .cards_tooltip_wrapper {
     margin-bottom: 10px;
+    display: block;
 
     &:last-child {
       margin-bottom: 0;
     }
   }
-
+  
   .event_modal--fade_in {
     opacity: 0;
     transition: opacity 1s ease-out;
@@ -43,7 +45,8 @@ export const EventModalPage = ({
       greenText:String,
       redText:String,
       redTextFirst: bool,
-      onClick:Func
+      onClick:Func,
+      cardTooltips:Array[cardName:String]
     }]
   }] */
 }) => {
@@ -76,22 +79,28 @@ export const EventModalPage = ({
       </Text>
       <div>
         {options.map((option, index) => (
-          <Button
-            key={index}
-            onClick={option.onClick}
-            isDisabled={option.isDisabled}
+          <CardsTooltipWrapper
+            cardNames={option.cardTooltips}
+            bottomAlign={false}
+            leftAlign={false}
             className='event_modal--fade_in'
           >
-            [{option.name}]
-            {option.redTextFirst
-              ? <span className='red'> {option.redText}</span>
-              : <span className='green'> {option.greenText}</span>
-            }
-            {option.redTextFirst
-              ? <span className='green'> {option.greenText}</span>
-              : <span className='red'> {option.redText}</span>
-            }
-          </Button>
+            <Button
+              key={index}
+              onClick={option.onClick}
+              isDisabled={option.isDisabled}
+            >
+              [{option.name}]
+              {option.redTextFirst
+                ? <span className='red'> {option.redText}</span>
+                : <span className='green'> {option.greenText}</span>
+              }
+              {option.redTextFirst
+                ? <span className='green'> {option.greenText}</span>
+                : <span className='red'> {option.redText}</span>
+              }
+            </Button>
+          </CardsTooltipWrapper>
         ))}
       </div>
     </FlexContainer>

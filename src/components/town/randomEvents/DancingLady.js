@@ -28,6 +28,7 @@ export const DancingLady = ({ closeModal }) => {
             {
               name: 'Dance of Peace',
               greenText: 'Add 4 copies of Blank into your deck.',
+              cardTooltips: ['Blank'],
               onClick: () => {
                 dispatch(actions.addCardsToCollection(
                   ['Blank', 'Blank', 'Blank', 'Blank'].map(i => createNewCard(i))
@@ -39,6 +40,7 @@ export const DancingLady = ({ closeModal }) => {
               name: 'Dance of Rage',
               redText: 'and a copy of Burn into your deck.',
               greenText: 'Add a copy of Super Fire',
+              cardTooltips: ['Super Fire', 'Burn'],
               onClick: () => {
                 dispatch(actions.addCardsToCollection(
                   ['Super Fire', 'Burn'].map(i => createNewCard(i))

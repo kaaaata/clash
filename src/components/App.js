@@ -11,9 +11,13 @@ const appCss = css`
   user-select: none;
   position: relative;
 
-  font-family: 'Cabin', sans-serif;
   color: ${colors.white};
   letter-spacing: 0.3px;
+  font-family: 'Cabin', sans-serif;
+
+  button {
+    font-family: 'Cabin', sans-serif;
+  }
 
   .sand { color: ${colors.sand}; }
   .green { color: ${colors.green}; }

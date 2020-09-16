@@ -82,6 +82,7 @@ export const RobberyWheel = ({ rng, closeModal }) => {
   let continueGoodText;
   let continueBadText;
   let continueOnClick;
+  let cardTooltips;
 
   switch (selectedOptionIndex) {
     case 0:
@@ -111,7 +112,8 @@ export const RobberyWheel = ({ rng, closeModal }) => {
           You get <span className='red'>burned!</span>
         </React.Fragment>
       );
-      continueBadText = 'Receive card: Burn.'
+      continueBadText = 'Add a copy of Burn into your deck.';
+      cardTooltips = ['Burn'];
       continueOnClick = () => {
         dispatch(actions.addCardsToCollection(createNewCard('Burn')));
         closeModal();
@@ -135,7 +137,8 @@ export const RobberyWheel = ({ rng, closeModal }) => {
           You win some <span className='green'>candy corn!</span>
         </React.Fragment>
       );
-      continueGoodText = 'Receive card: Candy Corn.'
+      continueGoodText = 'Add a copy of Candy Corn into your deck.';
+      cardTooltips = ['Candy Corn'];
       continueOnClick = () => {
         dispatch(actions.addCardsToCollection(createNewCard('Candy Corn')));
         closeModal();
@@ -220,7 +223,8 @@ export const RobberyWheel = ({ rng, closeModal }) => {
             name: 'Continue',
             greenText: continueGoodText,
             redText: continueBadText,
-            onClick: continueOnClick
+            onClick: continueOnClick,
+            cardTooltips: cardTooltips
           }
         ]}
       />

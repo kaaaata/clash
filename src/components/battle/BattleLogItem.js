@@ -1,10 +1,7 @@
 import React from 'react';
 import { css, jsx } from '@emotion/core'; /** @jsx jsx */
 import { FlexContainer, Text } from '../particles';
-import { rarityColors } from '../../cards/rarity';
-import { cards } from '../../cards/cards';
-import { Card } from '../card/Card';
-import { zIndex } from '../styles';
+import { CardNameWithTooltip } from '../card/CardNameWithTooltip';
 
 const pileColorClassNames = {
   deck: '',
@@ -15,45 +12,6 @@ const pileColorClassNames = {
 const battleLogItemCss = css`
   height: 30px;
 `;
-const cardStringCss = css`
-  position: relative;
-
-  .card_string {
-    text-decoration: underline;
-    cursor: pointer;
-  }
-
-  .card {
-    display: none;
-    z-index: ${zIndex.mouseEventArea5};
-
-    &:hover {
-      display: none !important;
-    }
-  }
-
-  &:hover {
-    .card {
-      display: block;
-    }
-  }
-`;
-
-const CardString = ({ cardId }) => {
-  return (
-    <span css={cardStringCss}>
-      <span className={`card_string ${rarityColors[cards[cardId].rarity]}`}>
-        {cards[cardId].name}
-      </span>
-      <Card
-        cardId={cardId}
-        x={0}
-        y={20}
-        shouldDisableZoom
-      />
-    </span>
-  );
-};
 
 export const BattleLogItem = (props) => {
   let text = null;
@@ -62,7 +20,7 @@ export const BattleLogItem = (props) => {
     case 'shuffle_card_into_pile':
       text = (
         <React.Fragment>
-          <span className='yellow'>{props.index}.</span> {props.player} shuffles <CardString cardId={props.cardId} /> into their <span className={pileColorClassNames[props.pile]}>{props.pile}</span>
+          <span className='yellow'>{props.index}.</span> {props.player} shuffles <CardNameWithTooltip cardId={props.cardId} /> into their <span className={pileColorClassNames[props.pile]}>{props.pile}</span>
         </React.Fragment>
       );
       break;
@@ -76,14 +34,14 @@ export const BattleLogItem = (props) => {
     case 'heal_card':
       text = (
         <React.Fragment>
-          <span className='yellow'>{props.index}.</span> {props.player} heals <CardString cardId={props.cardId} />
+          <span className='yellow'>{props.index}.</span> {props.player} heals <CardNameWithTooltip cardId={props.cardId} />
         </React.Fragment>
       );
       break;
     case 'play_copy_of_card':
       text = (
         <React.Fragment>
-          <span className='yellow'>{props.index}.</span> {props.player} plays a <span className='yellow'>copy</span> of <CardString cardId={props.cardId} />
+          <span className='yellow'>{props.index}.</span> {props.player} plays a <span className='yellow'>copy</span> of <CardNameWithTooltip cardId={props.cardId} />
         </React.Fragment>
       );
       break;
@@ -116,7 +74,7 @@ export const BattleLogItem = (props) => {
       );
       text = (
         <React.Fragment>
-          <span className='yellow'>{props.index}.</span> {props.player} {discardsOrBanishes} <CardString cardId={props.cardId} />
+          <span className='yellow'>{props.index}.</span> {props.player} {discardsOrBanishes} <CardNameWithTooltip cardId={props.cardId} />
         </React.Fragment>
       );
       break;
@@ -124,7 +82,7 @@ export const BattleLogItem = (props) => {
     case 'trigger_discard_effect':
       text = (
         <React.Fragment>
-          <span className='yellow'>{props.index}.</span> {props.player} triggers <span className='yellow'>discard effect</span> of <CardString cardId={props.cardId} />
+          <span className='yellow'>{props.index}.</span> {props.player} triggers <span className='yellow'>discard effect</span> of <CardNameWithTooltip cardId={props.cardId} />
         </React.Fragment>
       );
       break;
@@ -138,7 +96,7 @@ export const BattleLogItem = (props) => {
     case 'play_card':
       text = (
         <React.Fragment>
-          <span className='yellow'>{props.index}.</span> {props.player} plays <CardString cardId={props.cardId} />
+          <span className='yellow'>{props.index}.</span> {props.player} plays <CardNameWithTooltip cardId={props.cardId} />
         </React.Fragment>
       );
       break;
