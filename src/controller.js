@@ -30,7 +30,7 @@ export const controller = isTestingEnabled ? {
   gold: 1000,
   goldBars: 10,
   energy: 10,
-  day: 3,
+  day: 9,
   // lives: 1,
 
   // yourHand: [doubleUpgradedCard],

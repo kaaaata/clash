@@ -320,10 +320,14 @@ test('CUSTOM CARD EFFECT (Golden Goblet)', () => {
   expect(state.you.deck.length).toBe(15);
 });
 
-test('CUSTOM CARD EFFECT (Jello Slime)', () => {
-  simulatePlayCard({ cardName: 'Jello Slime' });
+test('CUSTOM CARD EFFECT (Viking Slime)', () => {
+  simulatePlayCard({ cardName: 'Viking Slime' });
   expect(state.you.deck.length).toBe(13)
-  expect(state.you.deck.filter(i => ['common', 'uncommon'].includes(cards[i].rarity)).length)
+  expect(state.you.deck.filter(i => (
+    ['common', 'uncommon'].includes(cards[i].rarity)
+    && cards[i].type === 'attack'
+    && !cards[i].isToken
+  )).length)
     .toBe(state.you.deck.length);
 });
 

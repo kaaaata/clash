@@ -21,13 +21,13 @@ export const potions = [
     }
   },
   {
-    name: 'Jello Slime',
+    name: 'Viking Slime',
     image: 'slime_potion',
     rarity: 'uncommon',
     onDiscard: {
       customEffect: true
     },
-    customDescription: 'Shuffle 3 random common or uncommon cards into your deck.'
+    customDescription: 'Shuffle 3 random common or uncommon attack cards into your deck.'
   },
   {
     name: 'Attack Potion',

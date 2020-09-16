@@ -9,149 +9,71 @@ const monstersTier1 = [
     name: 'Minotaur',
     image: 'minotaur',
     stats: { attack: 0, magic: 0, defense: 0 },
-    deck: [
-      'Minotaur'
-    ]
+    deck: ['Minotaur'],
+    wave2AdditionalCards: ['Orc Blade'],
+    eliteAdditionalCards: ['Orc Blade']
   },
   {
     name: 'Slime',
     image: 'basic_slime',
     stats: { attack: 0, magic: 0, defense: 0 },
-    deck: []
+    deck: [],
+    wave2AdditionalCards: [],
+    eliteAdditionalCards: []
   },
   {
     name: 'Fire Slime',
     image: 'fire_slime',
     stats: { attack: 0, magic: 0, defense: 0 },
-    deck: [
-      'Fire',
-      'Fire'
-    ]
+    deck: ['Fire', 'Fire', 'Fire', 'Fire'],
+    wave2AdditionalCards: ['Super Fire'],
+    eliteAdditionalCards: ['Fire Spear']
   },
   {
     name: 'Tentacle Monster',
     image: 'tentacles',
     stats: { attack: 0, magic: 0, defense: 0 },
-    deck: [
-      'Tentacles',
-      'Tentacles'
-    ]
+    deck: ['Tentacles', 'Tentacles', 'Tentacles'],
+    wave2AdditionalCards: ['Mimic'],
+    eliteAdditionalCards: ['Candy Corn']
   }
 ];
 
 const monstersTier2 = [
   {
-    name: 'Jello Slime',
+    name: 'Viking Slime',
     image: 'slime_potion',
     stats: { attack: 0, magic: 0, defense: 1 },
-    deck: [
-      'Jello Slime',
-      'Shield',
-      'Shield',
-      'Healing Potion'
-    ]
+    deck: ['Viking Slime', 'Shield', 'Shield', 'Healing Potion'],
+    wave2AdditionalCards: ['Longsword'],
+    eliteAdditionalCards: ['Falchion']
   },
   {
     name: 'Demonic Slime',
     image: 'demonic_slime',
-    stats: { attack: 1, magic: 0, defense: 0 },
-    deck: [
-      'Vampire',
-      'Minotaur',
-      'Orc Blade',
-      'Mace',
-      'Mace'
-    ]
-  },
-  {
-    name: 'Warlock',
-    image: 'crazy_mage',
     stats: { attack: 0, magic: 1, defense: 0 },
-    deck: [
-      'Warlock',
-      'Fire',
-      'Fire',
-      'Candy Corn'
-    ]
-  },
-  {
-    name: 'Mermaid',
-    image: 'mermaid',
-    stats: { attack: 0, magic: 1, defense: 0 },
-    deck: [
-      'Mermaid',
-      'Mermaid',
-      'Magic Scroll',
-      'Magic Scroll',
-      'Mage'
-    ]
+    deck: ['Mage', 'Candy Corn', 'Candy Corn', 'Magic Scroll', 'Tentacles', 'Tentacles', 'Tentacles', 'Tentacles', 'Tentacles'],
+    wave2AdditionalCards: ['Super Frost'],
+    eliteAdditionalCards: ['Healing Potion']
   },
   {
     name: 'Hobgoblin',
     image: 'hobgoblin',
     stats: { attack: 1, magic: 0, defense: 0 },
-    deck: [
-      'Hobgoblin',
-      'Falchion',
-      'Falchion',
-      'Falchion'
-    ]
+    deck: ['Hobgoblin', 'Falchion', 'Falchion', 'Falchion'],
+    wave2AdditionalCards: ['Lotus'],
+    eliteAdditionalCards: ['Orc Blade']
   }
 ];
 
 const monstersTier3 = [
   {
-    name: 'Ice Queen',
-    image: 'ice_queen',
-    stats: { attack: 1, magic: 0, defense: 1 },
-    deck: [
-      'Ice Queen',
-      'Ice Blade',
-      'Ice Blade',
-      'Healing Blade',
-      'Shield'
-    ]
-  },
-  {
     name: 'Mimic',
     image: 'mimic',
     stats: { attack: 0, magic: 1, defense: 1 },
-    deck: [
-      'Mimic',
-      'Tentacles',
-      'Tentacles',
-      'Candy Corn',
-      'Fire',
-      'Shield',
-      'Shield'
-    ]
-  },
-  {
-    name: 'Ice Whelp',
-    image: 'ice_whelp',
-    stats: { attack: 2, magic: 0, defense: 0 },
-    deck: [
-      'Ice Queen',
-      'Ice Whelp',
-      'Ice Whelp',
-      'Ice Blade',
-      'Shield'
-    ]
-  },
-  {
-    name: 'Vine Slime',
-    image: 'vine_slime',
-    stats: { attack: 1, magic: 1, defense: 0 },
-    deck: [
-      'Jello Slime',
-      'Jello Slime',
-      'Tentacles',
-      'Tentacles',
-      'Tentacles',
-      'Candy Corn',
-      'Shield',
-      'Frost'
-    ]
+    deck: ['Dragon Blade', 'Greataxe', 'Attack Potion', 'Magic Scroll', 'Magic Scroll', 'Magic Scroll', 'Super Frost', 'Super Frost', 'Super Frost'],
+    wave2AdditionalCards: ['Magic Scroll'],
+    eliteAdditionalCards: ['Super Frost']
   }
 ];
 
@@ -160,38 +82,19 @@ const _eventMonsters = [
     name: 'Treasure Slime',
     image: 'treasure_slime_monster',
     stats: { attack: 0, magic: 0, defense: 0 },
-    deck: [
-      'Jello Slime',
-      'Tentacles',
-      'Tentacles',
-      'Tentacles',
-      'Fire',
-      'Candy Corn'
-    ]
+    deck: ['Viking Slime']
   },
   {
     name: 'Catherine the Great',
     image: 'catherine_the_great',
     stats: { attack: 1, magic: 1, defense: 1 },
-    deck: [
-      'Catherine the Great',
-      'Shield',
-      'Longsword',
-      'Orc Blade',
-      'Healing Blade',
-      'Paladin'
-    ]
+    deck: ['Catherine the Great', 'Shield', 'Longsword', 'Healing Blade', 'Paladin']
   },
   {
     name: 'Dragon',
     image: 'fire_dragon',
     stats: { attack: 2, magic: 2, defense: 2 },
-    deck: [
-      'Fire Dragon',
-      'Fire Spear',
-      'Fire',
-      'Super Fire',
-    ]
+    deck: ['Fire Dragon', 'Fire Spear', 'Fire', 'Super Fire']
   }
 ];
 

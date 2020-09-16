@@ -121,13 +121,13 @@ export const customCardEffects = {
     ));
     playCard(state, randomCardId, player);
   },
-  'Jello Slime': (state, player) => {
+  'Viking Slime': (state, player) => {
     // Shuffle 3 random common or uncommon cards into your deck.
     const copies = [1, 2, 3].map(i => ({
       cardName: blueprints.allCardsArray.getRandomCardByFilter(
         card => (
           !card.isToken
-          && card.name !== 'Jello Slime'
+          && card.type === 'attack'
           && ['common', 'uncommon'].includes(card.rarity)
         )
       ).name,

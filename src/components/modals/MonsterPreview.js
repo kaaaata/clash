@@ -8,12 +8,13 @@ import { genEliteMonsterPrefix } from '../../monsters/genEliteMonsterPrefix';
 import { EventModal, EventModalPage } from '../modals/EventModal';
 import { cards } from '../../cards/cards';
 import { rarityColors } from '../../cards/rarity';
-import { sample } from 'lodash';
 import { controller } from '../../controller';
 import { effects } from '../styles';
 import { createNewCard } from '../../cards/createNewCard';
 import { blueprints } from '../../cards/blueprints';
 import shortid from 'shortid';
+import { FlexContainer, Image } from '../particles';
+import { Attributes } from '../Attributes';
 
 const CardsRarityString = ({ cardNames, cardIds, showCrafted }) => {
   const rarityCounts = { common: 0, uncommon: 0, rare: 0, legendary: 0, crafted: 0 };
@@ -51,27 +52,24 @@ export const MonsterPreview = ({
   closeModal,
   retreatText = 'Retreat'
 }) => {
-  const { deck, day, monster, monsterGoldReward } = useSelector(state => ({
+  const { deck, day, monster, monsterGoldReward, enemyStatBonuses } = useSelector(state => ({
     deck: state.clashPlayer.deck,
     day: state.clashTown.day,
     monster: monsterOverride || state.clashTown.dailyMonster,
-    monsterGoldReward: monsterGoldRewardOverride || state.clashTown.dailyMonsterGoldReward
+    monsterGoldReward: monsterGoldRewardOverride || state.clashTown.dailyMonsterGoldReward,
+    enemyStatBonuses: state.clashBattleStats.enemyStatBonuses
   }), shallowEqual);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(actions.setCanVisitShop(false));
   });
-
+  
   const isMonsterElite = !monsterOverride && [3, 6, 9].includes(day);
   const yourDeck = shuffle(deck); // cardIds
   const enemyDeckCardNames = genMonsterDeck(monster.deck, day); // cardNames
-  const monsterStats = monster.stats;
   const monsterName = `${isMonsterElite ? `${genEliteMonsterPrefix()} ` : ''}${monster.name}`;
-  if (isMonsterElite) {
-    monsterStats[sample('attack', 'defense', 'magic')]++;
-  }
-
+  
   const battleOnClick = () => {
     dispatch(actions.setBattleInitialState());
     const enemyDeckIds = enemyDeckCardNames.map(
@@ -82,10 +80,10 @@ export const MonsterPreview = ({
       image: monster.image,
       type: monster.type,
       isEnemyElite: isMonsterElite,
-      stats: monsterStats
+      stats: monster.stats
     }));
     dispatch(actions.setStats({
-      stats: monsterStats,
+      stats: monster.stats,
       type: 'stats',
       player: 'enemy',
       operation: 'set'
@@ -136,14 +134,26 @@ export const MonsterPreview = ({
     </React.Fragment>
   );
 
+  const imageComponentOverride = (
+    <FlexContainer flexDirection='column' alignItems='center'>
+      <Image
+        src={`${monster.image}.png`}
+        height={270}
+        width={300}
+        size='contain'
+        _css={isMonsterElite
+          ? `${effects.rainbow} animation: rainbow 5s infinite;`
+          : ''
+        }
+      />
+      <Attributes stats={monster.stats} statBonuses={enemyStatBonuses} />
+    </FlexContainer>
+  );
+
   return (
     <EventModal
       title={title}
-      image={monster.image}
-      imageContainerCss={isMonsterElite
-        ? `${effects.rainbow} animation: rainbow 5s infinite;`
-        : ''
-      }
+      imageComponentOverride={imageComponentOverride}
     >
       <EventModalPage
         key={1}

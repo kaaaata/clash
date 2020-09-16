@@ -102,18 +102,21 @@ export const EventModal = ({
   title,
   image,
   imageContainerCss = '',
+  imageComponentOverride = null,
   children // <EventModalPage>
 }) => (
   <Modal halfModal title={title}>
     <FlexContainer justifyContent='flex-start' _css={eventModalCss}>
       <div css={css`${imageContainerCss} flex: none; margin-right: 30px;`}>
-        <Image
-          src={`${image}.png`}
-          height={300}
-          width={300}
-          size='contain'
-          className='main_image'
-        />
+        {imageComponentOverride || (
+          <Image
+            src={`${image}.png`}
+            height={300}
+            width={300}
+            size='contain'
+            className='main_image'
+          />
+        )}
       </div>
       {children}
     </FlexContainer>
