@@ -23,6 +23,7 @@ export const genUpgradedCard = (card, upgrade, cardIdOverride) => {
   c.defense = card.defense + (upgrade.defense || 0);
   c.heal = card.heal + (upgrade.heal || 0);
   c.healEnemy = card.healEnemy + (upgrade.healEnemy || 0);
+  c.drain = card.drain || upgrade.drain;
   // onDiscard (currently no non-legendary attacks or magic attacks have onDiscard)
   c.type = upgrade.type || card.type;
   c.customDescription = [

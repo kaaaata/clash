@@ -97,7 +97,7 @@ const _Card = ({ cardName, cardId }) => {
 
   return (
     <Image
-      src='rock.png'
+      src='rock_background.png'
       width={cardWidth}
       height={cardWidth}
       _css={_cardCss(colors[rarityColors[rarity]])}

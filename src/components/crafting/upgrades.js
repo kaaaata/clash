@@ -90,7 +90,6 @@ const _upgrades = [
       prefix: 'Frosty',
       suffix: 'of Frost',
       playCopiesOfCards: ['Frost'],
-      customDescription: 'Play a copy of Frost.'
     }
   },
   {
@@ -99,7 +98,6 @@ const _upgrades = [
       prefix: 'Fencer\'s',
       suffix: 'of Fencing',
       playCopiesOfCards: ['Saber'],
-      customDescription: 'Play a copy of Saber.'
     }
   },
   {
@@ -108,7 +106,14 @@ const _upgrades = [
       prefix: 'Burninating',
       suffix: 'of Burninating',
       shuffleCardCopiesIntoOpponentsPiles: [{ cardName: 'Burn', pile: 'deck' }],
-      customDescription: 'Shuffle a copy of Burn into your opponent\'s deck.'
+    }
+  },
+  {
+    description: 'Heal 1 for each point of damage dealt.',
+    cardProperties: {
+      prefix: 'Vampire\'s',
+      suffix: 'of the Vampire',
+      drain: true
     }
   },
 ];

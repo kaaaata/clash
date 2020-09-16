@@ -34,6 +34,7 @@ const genShuffleCardCopiesIntoPilesDescription = (shuffleCardCopiesIntoPiles, pl
 export const genCardDescription = ({
   heal,
   healEnemy,
+  drain,
   damageSelf,
   pierces,
   onDiscard,
@@ -48,6 +49,7 @@ export const genCardDescription = ({
   dealsBanishingDamage && 'Damage dealt banishes.',
   heal && `Heal ${heal}.`,
   healEnemy && `Heal enemy ${healEnemy}.`,
+  drain && `Heal 1 for each point of damage dealt.`,
   damageSelf && `Deal ${damageSelf} to yourself.`,
   onDiscard && (
     `On ${triggerDiscardOnPlay ? 'play or ' : ''}discard: ${genCardDescription(onDiscard)}`

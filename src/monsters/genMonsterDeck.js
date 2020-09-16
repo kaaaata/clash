@@ -34,11 +34,20 @@ const deckSizeByDay = {
   10: 60 // final boss
 };
 
-export const genMonsterDeck = (deck, day) => {
-  const commonCardsToAdd = Math.max(0, deckSizeByDay[day] - deck.length);
+export const genMonsterDeck = (monster, day) => {
+  const { deck, wave2AdditionalCards, eliteAdditionalCards, autofill = true } = monster;
+  let result = [...deck];
 
-  return shuffle([
-    ...deck,
-    ...range(0, commonCardsToAdd).map(i => sample(commonAttacks).name)
-  ]);
+  if ([2, 5, 8].includes(day)) {
+    result = result.concat(wave2AdditionalCards);
+  }
+  if ([3, 6, 9].includes(day)) {
+    result = result.concat(eliteAdditionalCards);
+  }
+  if (autofill) {
+    const numCardsToAutofill = Math.max(0, deckSizeByDay[day] - deck.length);
+    result = result.concat(range(0, numCardsToAutofill).map(i => sample(commonAttacks).name));
+  }
+
+  return shuffle(result);
 };

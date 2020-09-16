@@ -59,6 +59,17 @@ export const allies = [
     playCopiesOfCards: ['Falchion']
   },
   {
+    name: 'Evil Slime',
+    image: 'evil_slime',
+    rarity: 'uncommon',
+    attack: 4,
+    defense: 0,
+    shuffleCardCopiesIntoYourPiles: [
+      { cardName: 'Greataxe', pile: 'deck' },
+      { cardName: 'Rock', pile: 'deck' },
+    ]
+  },
+  {
     name: 'Brawler',
     image: 'brawler',
     rarity: 'uncommon',
@@ -103,6 +114,14 @@ export const allies = [
     defense: 0,
     customEffect: true,
     customDescription: 'Play 2 random attacks from your discard, then banish them.'
+  },
+  {
+    name: 'Water Slime',
+    image: 'water_slime',
+    rarity: 'rare',
+    attack: 3,
+    defense: 3,
+    drain: true
   },
   {
     name: 'Mage',

@@ -36,7 +36,7 @@ const triggerDiscardEffect = (state, cardId, player) => {
     name: card.name,
     ...card.onDiscard,
     isMockCard: true
-  }, 'mock_card');
+  }, `battle_${shortid.generate()}`);
   playCard(state, mockCardId, player);
 
   renderActions.push([
@@ -54,24 +54,14 @@ const triggerDiscardEffect = (state, cardId, player) => {
 // a player loses if they receive damage while deck size is 0, or they cannot draw a card.
 export const playCard = (state, cardId, player, location, index) => {
   const { logs, renderActions } = state; // state gets mutated. only declare objects here!
-
   const card = cards[cardId];
-
-  if (card.triggerDiscardOnPlay && card.onDiscard) {
-    const mockCardId = createNewCard({
-      name: card.name,
-      ...card.onDiscard,
-      isMockCard: true
-    }, 'mock_card');
-    playCard(state, mockCardId, player);
-  }
-
   const {
     name,
     attack,
     defense,
     heal,
     healEnemy,
+    drain,
     damageSelf,
     dealsBanishingDamage,
     banishesOnPlay,
@@ -84,8 +74,8 @@ export const playCard = (state, cardId, player, location, index) => {
     shuffleCardCopiesIntoYourPiles,
     statBonuses
   } = card;
-
   const opponent = player === 'you' ? 'enemy' : 'you';
+  let drainValue = 0;
 
   if (state.winner) {
     return;
@@ -100,6 +90,15 @@ export const playCard = (state, cardId, player, location, index) => {
 
   if (!state.winner) {
     renderActions.push([]);
+  }
+
+  if (!state.winner && card.triggerDiscardOnPlay && card.onDiscard) {
+    const mockCardId = createNewCard({
+      name: card.name,
+      ...card.onDiscard,
+      isMockCard: true
+    }, `battle_${shortid.generate()}`);
+    playCard(state, mockCardId, player);
   }
 
   if (!state.winner && typeof attack === 'number') {
@@ -161,6 +160,9 @@ export const playCard = (state, cardId, player, location, index) => {
         actionGenerators.removeCard(state, opponent, 'deck', 'top'),
         actionGenerators.addCard(state, removedCardId, opponent, destination, 'top')
       ];
+      if (drain) {
+        drainValue++;
+      }
       if (i === 0) {
         // if damage is dealt, set the shields on the same tick as the first instance of damage.
         // otherwise, set shields independently of damage ticks (above)
@@ -176,54 +178,6 @@ export const playCard = (state, cardId, player, location, index) => {
           if (state.winner) break;
         }
       }
-    }
-  }
-  
-  if (!state.winner && heal) {
-    const totalHeal = Math.min(heal, state[player].discard.length);
-    logs.push(logHealValue(
-      `${player} heals ${totalHeal}`,
-      player,
-      totalHeal
-    ));
-
-    for (let i = 0; i < totalHeal; i++) {
-      const healedCardId = state[player].discard.getTopCard();
-      logs.push(logHealCard(
-        `${player} heals ${cards[healedCardId].name} (${healedCardId})`,
-        player,
-        healedCardId
-      ));
-      renderActions.push([
-        actionGenerators.removeCard(state, player, 'discard', 'top'),
-        actionGenerators.addCard(state, healedCardId, player, 'deck', 'random')
-      ]);
-    }
-  }
-
-  if (!state.winner && healEnemy) {
-    const totalHeal = Math.min(healEnemy, state[player].discard.length);
-    logs.push(logHealValue(
-      `${opponent} heals ${totalHeal}`,
-      opponent,
-      totalHeal
-    ));
-
-    for (let i = 0; i < totalHeal; i++) {
-      if (!state[opponent].discard.length) {
-        break;
-      }
-
-      const healedCardId = state[opponent].discard.getTopCard();
-      logs.push(logHealCard(
-        `${opponent} heals ${cards[healedCardId].name} (${healedCardId})`,
-        player,
-        healedCardId
-      ));
-      renderActions.push([
-        actionGenerators.removeCard(state, opponent, 'discard', 'top'),
-        actionGenerators.addCard(state, healedCardId, opponent, 'deck', 'random')
-      ]);
     }
   }
 
@@ -256,11 +210,64 @@ export const playCard = (state, cardId, player, location, index) => {
         actionGenerators.removeCard(state, player, 'deck', 'top'),
         actionGenerators.addCard(state, removedCardId, player, destination, 'top')
       ]);
+      if (drain) {
+        drainValue++;
+      }
 
       if (destination === 'discard' && cards[removedCardId].onDiscard) {
         triggerDiscardEffect(state, removedCardId, player);
         if (state.winner) break;
       }
+    }
+  }
+  
+  [drainValue, heal].forEach(healProperty => {
+    if (!state.winner && healProperty) {
+      const totalHeal = Math.min(healProperty, state[player].discard.length);
+      logs.push(logHealValue(
+        `${player} heals ${totalHeal}`,
+        player,
+        totalHeal
+      ));
+  
+      for (let i = 0; i < totalHeal; i++) {
+        const healedCardId = state[player].discard.getTopCard();
+        logs.push(logHealCard(
+          `${player} heals ${cards[healedCardId].name} (${healedCardId})`,
+          player,
+          healedCardId
+        ));
+        renderActions.push([
+          actionGenerators.removeCard(state, player, 'discard', 'top'),
+          actionGenerators.addCard(state, healedCardId, player, 'deck', 'random')
+        ]);
+      }
+    }
+  });
+
+  if (!state.winner && healEnemy) {
+    const totalHeal = Math.min(healEnemy, state[player].discard.length);
+    logs.push(logHealValue(
+      `${opponent} heals ${totalHeal}`,
+      opponent,
+      totalHeal
+    ));
+
+    for (let i = 0; i < totalHeal; i++) {
+      if (!state[opponent].discard.length) {
+        break;
+      }
+
+      const healedCardId = state[opponent].discard.getTopCard();
+      logs.push(logHealCard(
+        `${opponent} heals ${cards[healedCardId].name} (${healedCardId})`,
+        player,
+        healedCardId
+      ));
+      renderActions.push([
+        actionGenerators.removeCard(state, opponent, 'discard', 'top'),
+        actionGenerators.addCard(state, healedCardId, opponent, 'deck', 'random')
+      ]);
     }
   }
 

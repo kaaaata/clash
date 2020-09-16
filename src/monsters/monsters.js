@@ -62,7 +62,15 @@ const monstersTier2 = [
     stats: { attack: 1, magic: 0, defense: 0 },
     deck: ['Hobgoblin', 'Falchion', 'Falchion', 'Falchion'],
     wave2AdditionalCards: ['Lotus'],
-    eliteAdditionalCards: ['Orc Blade']
+    eliteAdditionalCards: ['Hobgoblin']
+  },
+  {
+    name: 'Evil Slime',
+    image: 'evil_slime',
+    stats: { attack: 0, magic: 0, defense: 0 },
+    deck: ['Evil Slime', ...Array(15).fill('Rock'), ...Array(9).fill('Greataxe')],
+    wave2AdditionalCards: ['Rock', 'Rock', 'Rock', 'Greataxe', 'Greataxe'],
+    eliteAdditionalCards: ['Evil Slime', 'Rock', 'Rock', 'Rock', 'Greataxe']
   }
 ];
 
@@ -74,6 +82,40 @@ const monstersTier3 = [
     deck: ['Dragon Blade', 'Greataxe', 'Attack Potion', 'Magic Scroll', 'Magic Scroll', 'Magic Scroll', 'Super Frost', 'Super Frost', 'Super Frost'],
     wave2AdditionalCards: ['Magic Scroll'],
     eliteAdditionalCards: ['Super Frost']
+  },
+  {
+    name: 'Water Slime',
+    image: 'water_slime',
+    stats: { attack: 0, magic: 0, defense: 0 },
+    deck: [
+      'Water Slime',
+      'Healing Blade',
+      'Super Frost',
+      'Mermaid',
+      'Ice Whelp',
+
+      'Healing Potion',
+      'Healing Potion',
+      'Healing Potion',
+      'Healing Potion',
+      'Healing Potion',
+
+      'Magic Potion',
+      'Ice Blade',
+      'Frost',
+      'Frost',
+      'Frost',
+
+      'Frost',
+      'Frost',
+      'Healing Potion',
+      'Magic Scroll',
+      'Magic Scroll',
+      'Apothecary'
+    ],
+    wave2AdditionalCards: ['Frost', 'Frost', 'Healing Potion'],
+    eliteAdditionalCards: ['Water Slime', 'Apothecary'],
+    autofill: false
   }
 ];
 

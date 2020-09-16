@@ -76,6 +76,45 @@ test('Healing and heal enemy works (Mermaid)', () => {
   expect(state.enemy.discard.length).toBe(10 - card.healEnemy);
 });
 
+test('Drain works (Water Slime)', () => {
+  const card = blueprints.allCardsObject['Water Slime'];
+  simulatePlayCard({ cardName: 'Water Slime' });
+  // the +1 at the end is because the played card gets discarded
+  expect(state.you.discard.length).toBe(10 - card.attack + 1);
+  expect(state.you.deck.length).toBe(10 + card.attack);
+
+  resetState();
+
+  state.enemy.shields = 1;
+  simulatePlayCard({ cardName: 'Water Slime' });
+  // the +1 at the end is because the played card gets discarded
+  expect(state.you.discard.length).toBe(10 - (card.attack - state.enemy.shields) + 1);
+  expect(state.you.deck.length).toBe(10 + (card.attack - state.enemy.shields));
+
+  resetState();
+
+  const card1 = createNewCard({
+    damageSelf: 3,
+    isMockCard: true,
+    drain: true,
+  }, 'test_mock_card');
+  simulatePlayCard({ cardId: card1 });
+  expect(state.you.discard.length).toBe(10);
+  expect(state.you.deck.length).toBe(10);
+
+  resetState();
+
+  state.you.shields = 1;
+  const card2 = createNewCard({
+    damageSelf: 3,
+    isMockCard: true,
+    drain: true,
+  }, 'test_mock_card');
+  simulatePlayCard({ cardId: card2 });
+  expect(state.you.discard.length).toBe(10);
+  expect(state.you.deck.length).toBe(10);
+});
+
 test('Shield works (Cutlass, Sword)', () => {
   const slash = blueprints.allCardsObject['Cutlass'];
   const strike = blueprints.allCardsObject['Sword'];

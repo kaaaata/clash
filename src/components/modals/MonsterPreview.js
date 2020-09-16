@@ -55,7 +55,7 @@ export const MonsterPreview = ({
   const { deck, day, monster, monsterGoldReward, enemyStatBonuses } = useSelector(state => ({
     deck: state.clashPlayer.deck,
     day: state.clashTown.day,
-    monster: monsterOverride || state.clashTown.dailyMonster,
+    monster: controller.monsterOverride || monsterOverride || state.clashTown.dailyMonster,
     monsterGoldReward: monsterGoldRewardOverride || state.clashTown.dailyMonsterGoldReward,
     enemyStatBonuses: state.clashBattleStats.enemyStatBonuses
   }), shallowEqual);
@@ -67,7 +67,7 @@ export const MonsterPreview = ({
   
   const isMonsterElite = !monsterOverride && [3, 6, 9].includes(day);
   const yourDeck = shuffle(deck); // cardIds
-  const enemyDeckCardNames = genMonsterDeck(monster.deck, day); // cardNames
+  const enemyDeckCardNames = genMonsterDeck(monster, day); // monster.deck cardNames
   const monsterName = `${isMonsterElite ? `${genEliteMonsterPrefix()} ` : ''}${monster.name}`;
   
   const battleOnClick = () => {

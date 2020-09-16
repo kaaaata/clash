@@ -11,6 +11,7 @@ export const cardTemplate = {
   defense: 0,
   heal: 0,
   healEnemy: 0,
+  drain: false,
   onDiscard: null,
   type: '',
   description: '', // procedurally generated. may include customDescription at the end.

@@ -5,14 +5,15 @@ import { upgrades } from './components/crafting/upgrades';
 import { createNewCard } from './cards/createNewCard';
 import { cards } from './cards/cards';
 import { blueprints } from './cards/blueprints';
+import { monstersByTier } from './monsters/monsters';
 
 const isTestingEnabled = true;
 // const isTestingEnabled = false;
 
-// const upgradedCard = genUpgradedCard(
-//   blueprints.allCardsObject['Sword'],
-//   upgrades[upgrades.length - 1].cardProperties
-// );
+const upgradedCard = genUpgradedCard(
+  blueprints.allCardsObject['Sword'],
+  upgrades[upgrades.length - 1].cardProperties
+);
 
 // const doubleUpgradedCard = genUpgradedCard(
 //   cards[upgradedCard],
@@ -24,8 +25,7 @@ export const controller = isTestingEnabled ? {
 
   yourName: 'Paladin',
   yourImage: 'paladin',
-  enemyName: 'Slime',
-  enemyImage: 'basic_slime',
+  monsterOverride: monstersByTier[3].filter(i => i.name === 'Water Slime')[0],
 
   gold: 1000,
   goldBars: 10,
@@ -33,13 +33,13 @@ export const controller = isTestingEnabled ? {
   day: 9,
   // lives: 1,
 
-  // yourHand: [doubleUpgradedCard],
-  // yourHand: ['Sword', 'Sword', 'Sword'].map(i => createNewCard(i)),
+  yourHand: [upgradedCard, upgradedCard, upgradedCard],
+  // yourHand: ['Sword', 'Water Slime', 'Evil Slime'].map(i => createNewCard(i)),
   // yourDeck: ['Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword'].map(i => createNewCard(i)),
-  // yourDiscard: [].map(i => createNewCard(i)),
+  yourDiscard: ['Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword'].map(i => createNewCard(i)),
   // yourBanish: [].map(i => createNewCard(i)),
   // enemyHand: ['Sword', 'Sword', 'Sword'].map(i => createNewCard(i)),
-  enemyDeck: [].map(i => createNewCard(i)),
+  // enemyDeck: [].map(i => createNewCard(i)),
   // enemyDiscard: [].map(i => createNewCard(i)),
   // enemyBanish: [].map(i => createNewCard(i)),
   
