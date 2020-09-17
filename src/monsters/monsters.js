@@ -44,7 +44,7 @@ const monstersTier2 = [
     name: 'Viking Slime',
     image: 'slime_potion',
     stats: { attack: 0, magic: 0, defense: 1 },
-    deck: ['Viking Slime', 'Shield', 'Shield', 'Healing Potion'],
+    deck: ['Viking Slime', 'Viking Slime', 'Shield', 'Shield', 'Healing Potion'],
     wave2AdditionalCards: ['Longsword'],
     eliteAdditionalCards: ['Falchion']
   },
@@ -52,7 +52,7 @@ const monstersTier2 = [
     name: 'Demonic Slime',
     image: 'demonic_slime',
     stats: { attack: 0, magic: 1, defense: 0 },
-    deck: ['Mage', 'Candy Corn', 'Candy Corn', 'Magic Scroll', 'Tentacles', 'Tentacles', 'Tentacles', 'Tentacles', 'Tentacles'],
+    deck: ['Mage', 'Mage', 'Candy Corn', 'Candy Corn', 'Magic Scroll', 'Tentacles', 'Tentacles', 'Tentacles', 'Tentacles', 'Tentacles'],
     wave2AdditionalCards: ['Super Frost'],
     eliteAdditionalCards: ['Healing Potion']
   },
@@ -60,17 +60,18 @@ const monstersTier2 = [
     name: 'Hobgoblin',
     image: 'hobgoblin',
     stats: { attack: 1, magic: 0, defense: 0 },
-    deck: ['Hobgoblin', 'Falchion', 'Falchion', 'Falchion'],
+    deck: ['Hobgoblin', 'Hobgoblin', 'Falchion', 'Falchion', 'Falchion'],
     wave2AdditionalCards: ['Lotus'],
     eliteAdditionalCards: ['Hobgoblin']
   },
   {
     name: 'Evil Slime',
     image: 'evil_slime',
-    stats: { attack: 0, magic: 0, defense: 0 },
-    deck: ['Evil Slime', ...Array(15).fill('Blank'), ...Array(9).fill('Greataxe')],
-    wave2AdditionalCards: ['Blank', 'Blank', 'Blank', 'Greataxe', 'Greataxe'],
-    eliteAdditionalCards: ['Evil Slime', 'Blank', 'Blank', 'Blank', 'Greataxe']
+    stats: { attack: 2, magic: 0, defense: 0 },
+    deck: ['Evil Slime', 'Evil Slime', ...Array(8).fill('Blank'), ...Array(12).fill('Orc Blade')],
+    wave2AdditionalCards: ['Blank', 'Blank', 'Orc Blade', 'Orc Blade', 'Orc Blade'],
+    eliteAdditionalCards: ['Evil Slime', 'Blank', 'Blank', 'Orc Blade', 'Orc Blade'],
+    autofill: false
   }
 ];
 

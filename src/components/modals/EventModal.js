@@ -80,13 +80,13 @@ export const EventModalPage = ({
       <div>
         {options.map((option, index) => (
           <CardsTooltipWrapper
+            key={index}
             cardNames={option.cardTooltips}
             bottomAlign={false}
             leftAlign={false}
             className='event_modal--fade_in'
           >
             <Button
-              key={index}
               onClick={option.onClick}
               isDisabled={option.isDisabled}
             >

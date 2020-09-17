@@ -4,6 +4,7 @@ import { startTurn } from './startTurn';
 import { playCard } from './playCard';
 import { logPlayCard, logPlayerWins } from './battleLogGenerators';
 import { cards } from '../cards/cards';
+import { selectEnemyCardToPlay } from './selectEnemyCardToPlay';
 
 export const playFirstCardInRound = (index) => {
   const clashBattleCards = store.getState().clashBattleCards;
@@ -61,8 +62,8 @@ export const playFirstCardInRound = (index) => {
       ));
       renderActions.push([{ actionKey: 'setWinner', payload: state[state.winner].name }]);
     } else {
-      const enemyHandRandomCardIndex = ~~(Math.random() * 3);
-      const enemyHandRandomCardId = state.enemy.hand[enemyHandRandomCardIndex];
+      const enemyHandRandomCardId = selectEnemyCardToPlay(state.enemy.hand);
+      const enemyHandRandomCardIndex = state.enemy.hand.indexOf(enemyHandRandomCardId);
       // add placeholder
       state.enemy.hand[enemyHandRandomCardIndex] = null;
       logs.push(logPlayCard(

@@ -45,9 +45,9 @@ export const genMonsterDeck = (monster, day) => {
     result = result.concat(eliteAdditionalCards);
   }
   if (autofill) {
-    const numCardsToAutofill = Math.max(0, deckSizeByDay[day] - deck.length);
+    const numCardsToAutofill = Math.max(0, deckSizeByDay[day] - result.length);
     result = result.concat(range(0, numCardsToAutofill).map(i => sample(commonAttacks).name));
   }
-
+  
   return shuffle(result);
 };
