@@ -36,8 +36,8 @@ export const BattleRewards = () => {
   const returnToTown = () => {
     const townFeedMessage = didPlayerWin
       ? `You defeated: ${enemyName}!`
-      : `You were defeated by: ${enemyName}!`
-    if (enemyType === 'wave') {
+      : `You were defeated by: ${enemyName}! You lose 1 life.`
+    if (enemyType === 'wave' && didPlayerWin) {
       dispatch(actions.startNewDay({ feedInitialMessage: townFeedMessage }));
     } else {
       dispatch(actions.addTownFeedText(townFeedMessage));
