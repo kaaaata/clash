@@ -3,22 +3,23 @@ import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../stores/actions';
 import { CardViewModal } from '../modals/CardViewModal';
 
-const cardPileModalNames = {
-  enemyDiscard: 'Enemy Discard',
-  enemyBanish: 'Enemy Banish',
-  yourDiscard: 'Your Discard',
-  yourBanish: 'Your Banish'
-};
-
 export const CardPileModal = () => {
-  const { activeModalCardPile, cards } = useSelector(state => ({
+  const { activeModalCardPile, cards, enemyName } = useSelector(state => ({
     activeModalCardPile: state.clashBattleCards.activeModalCardPile,
     cards: state.clashBattleCards.activeModalCardPile
       ? state.clashBattleCards[state.clashBattleCards.activeModalCardPile]
-      : []
+      : [],
+    enemyName: state.clashBattleStats.enemyName
   }), (oldState, newState) => oldState.activeModalCardPile === newState.activeModalCardPile);
   // only rerender when user clicks pile. cards changing while modal is open don't cause rerender
   const dispatch = useDispatch();
+
+  const cardPileModalNames = {
+    enemyDiscard: `${enemyName}'s Discard`,
+    enemyBanish: `${enemyName}'s Banish`,
+    yourDiscard: 'Your Discard',
+    yourBanish: 'Your Banish'
+  };
 
   return activeModalCardPile ? (
     <CardViewModal

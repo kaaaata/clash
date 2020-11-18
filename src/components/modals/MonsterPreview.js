@@ -93,7 +93,7 @@ export const MonsterPreview = ({
         .map(cardId => createNewCard(cards[cardId], `battle_${shortid.generate()}`))
     ));
     dispatch(actions.setEnemyDeck(
-      (controller.enemyDeck || enemyDeckIds.slice(0, enemyDeckIds.length - 2))
+      (controller.enemyDeck || enemyDeckIds.slice(0, enemyDeckIds.length - 3))
         .map(cardId => createNewCard(cards[cardId], `battle_${shortid.generate()}`))
     ));
     dispatch(actions.setYourHand(
@@ -102,9 +102,8 @@ export const MonsterPreview = ({
     ));
     dispatch(actions.setEnemyHand(
       controller.enemyHand || [
-        ...enemyDeckIds.slice(enemyDeckIds.length - 2)
-          .map(cardId => createNewCard(cards[cardId], `battle_${shortid.generate()}`)),
-        null
+        ...enemyDeckIds.slice(enemyDeckIds.length - 3)
+          .map(cardId => createNewCard(cards[cardId], `battle_${shortid.generate()}`))
       ]
     ));
     dispatch(actions.setBattleRewardCards(
@@ -118,7 +117,7 @@ export const MonsterPreview = ({
     dispatch(actions.setBattleRewardGold(monsterGoldReward));
     dispatch(actions.setScene('battle'));
   };
-  // battleOnClick();
+  battleOnClick();
 
   const text = (
     <React.Fragment>

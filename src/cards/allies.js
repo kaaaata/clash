@@ -51,6 +51,13 @@ export const allies = [
     playCopiesOfCards: ['Frost']
   },
   {
+    name: 'Lich',
+    image: 'lich',
+    rarity: 'uncommon',
+    attack: 3,
+    defense: 3
+  },
+  {
     name: 'Hobgoblin',
     image: 'hobgoblin',
     rarity: 'uncommon',
