@@ -8,7 +8,8 @@ const genInitialState = () => {
   const dailyMonster = sample(monstersByTier[1]);
 
   return {
-    energy: 0,
+    energy: 1,
+    energyReserved: 9,
     day: 1,
     dailyMonster,
     // note: gold reward will be less if day is set thru Flow
@@ -30,9 +31,19 @@ export default (state = initialState, action) => {
     case 'SET_PLAYER_ENERGY':
       return {
         ...state,
-        energy: action.payload
+        energy: Math.max(0, Math.min((10 - state.energyReserved), action.payload))
       };
     case 'ADJUST_PLAYER_ENERGY':
+      return {
+        ...state,
+        energy: Math.max(0, Math.min((10 - state.energyReserved), state.energy + action.payload))
+      };
+    case 'SET_PLAYER_ENERGY_RESERVED':
+      return {
+        ...state,
+        energyReserved: action.payload
+      };
+    case 'ADJUST_PLAYER_ENERGY_RESERVED':
       return {
         ...state,
         energy: Math.max(0, Math.min(10, state.energy + action.payload))
@@ -56,7 +67,8 @@ export default (state = initialState, action) => {
       }
       return {
         ...state,
-        energy: 10,
+        energy: 9 - state.energyReserved,
+        energyReserved: state.energyReserved + 1,
         day: newDay,
         canDoRandomEvent: true,
         dailyMonster,

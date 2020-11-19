@@ -19,6 +19,7 @@ export const Flow = () => (
     <OnOffSwitch name='skipIntro' description='Skip intro & character select?' />
     <InputSwitch name='gold' description='Starting gold:' type='number' />
     <InputSwitch name='energy' description='Starting energy:' type='number' />
+    <InputSwitch name='energyReserved' description='Energy reserved:' type='number' />
     <InputSwitch name='day' description='Starting day:' type='number' />
     <InputSwitch name='lives' description='Starting lives:' type='number' />
     <InputSwitch name='monsterOverride' description='Monster override:' type='string' />

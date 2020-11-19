@@ -49,6 +49,9 @@ export const App = () => {
     if (window.flow.gold_toggle && typeof window.flow.gold_value === 'number') {
       dispatch(actions.setPlayerGold(window.flow.gold_value));
     }
+    if (window.flow.energyReserved_toggle && typeof window.flow.energyReserved_value === 'number') {
+      dispatch(actions.setPlayerEnergyReserved(window.flow.energyReserved_value));
+    }
     if (window.flow.energy_toggle && typeof window.flow.energy_value === 'number') {
       dispatch(actions.setPlayerEnergy(window.flow.energy_value));
     }

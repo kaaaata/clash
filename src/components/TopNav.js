@@ -16,6 +16,7 @@ export const TopNav = () => {
     lives,
     gold,
     energy,
+    energyReserved,
     deck,
     image,
     stats,
@@ -26,6 +27,7 @@ export const TopNav = () => {
     lives: state.clashPlayer.lives,
     gold: state.clashPlayer.gold,
     energy: state.clashTown.energy,
+    energyReserved: state.clashTown.energyReserved,
     deck: state.clashPlayer.deck,
     image: state.clashBattleStats.yourImage,
     stats: state.clashBattleStats.yourStats,
@@ -82,10 +84,11 @@ export const TopNav = () => {
             height={25}
             className='energy'
           />
-          <div css={energyMeterCss}>
+          <FlexContainer _css={energyMeterCss} justifyContent='space-between'>
             <div className='fill' css={css`width: ${100 * energy / 10}%;`} />
+            <div className='reserved' css={css`width: ${100 * energyReserved / 10}%;`} />
             <Text type='mini' className='energy_count'>{energy} / 10</Text>
-          </div>
+          </FlexContainer>
         </FlexContainer>
 
         <FlexContainer className='right' justifyContent='flex-end' alignItems='center'>
