@@ -5,6 +5,10 @@ import { InputSwitch } from './InputSwitch';
 
 const flowCss = css`
   margin: 40px;
+
+  .input {
+    width: 200px;
+  }
 `;
 
 export const Flow = () => (
@@ -17,5 +21,6 @@ export const Flow = () => (
     <InputSwitch name='energy' description='Starting energy:' type='number' />
     <InputSwitch name='day' description='Starting day:' type='number' />
     <InputSwitch name='lives' description='Starting lives:' type='number' />
+    <InputSwitch name='monsterOverride' description='Monster override:' type='string' />
   </div>
 );

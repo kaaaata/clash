@@ -169,3 +169,10 @@ export const monstersByTier = {
 };
 
 export const eventMonsters = keyBy(_eventMonsters, 'name');
+
+export const allMonsters = [
+  ...monstersByTier[1],
+  ...monstersByTier[2],
+  ...monstersByTier[3],
+  ..._eventMonsters
+];

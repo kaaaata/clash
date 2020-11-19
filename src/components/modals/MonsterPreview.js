@@ -5,6 +5,7 @@ import * as actions from '../../stores/actions';
 import { shuffle, sampleSize } from 'lodash';
 import { genMonsterDeck } from '../../monsters/genMonsterDeck';
 import { genEliteMonsterPrefix } from '../../monsters/genEliteMonsterPrefix';
+import { allMonsters } from '../../monsters/monsters';
 import { EventModal, EventModalPage } from '../modals/EventModal';
 import { cards } from '../../cards/cards';
 import { rarityColors } from '../../cards/rarity';
@@ -52,13 +53,18 @@ export const MonsterPreview = ({
   closeModal,
   retreatText = 'Retreat'
 }) => {
-  const { deck, day, monster, monsterGoldReward, enemyStatBonuses } = useSelector(state => ({
-    deck: state.clashPlayer.deck,
-    day: state.clashTown.day,
-    monster: controller.monsterOverride || monsterOverride || state.clashTown.dailyMonster,
-    monsterGoldReward: monsterGoldRewardOverride || state.clashTown.dailyMonsterGoldReward,
-    enemyStatBonuses: state.clashBattleStats.enemyStatBonuses
-  }), shallowEqual);
+  const { deck, day, monster, monsterGoldReward, enemyStatBonuses } = useSelector(state => {
+    const flowMonsterOverride = allMonsters.filter(
+      i => i.name === (window.flow.monsterOverride_toggle && window.flow.monsterOverride_value)
+    )[0];
+    return {
+      deck: state.clashPlayer.deck,
+      day: state.clashTown.day,
+      monster: flowMonsterOverride || monsterOverride || state.clashTown.dailyMonster,
+      monsterGoldReward: monsterGoldRewardOverride || state.clashTown.dailyMonsterGoldReward,
+      enemyStatBonuses: state.clashBattleStats.enemyStatBonuses
+    };
+  }, shallowEqual);
   const dispatch = useDispatch();
 
   useEffect(() => {
