@@ -13,7 +13,7 @@ export const attacks = [
     name: 'Sword',
     image: 'strike',
     rarity: 'common',
-    attack: 2,
+    attack: 3,
     defense: 0
   },
   {
@@ -21,7 +21,7 @@ export const attacks = [
     image: 'slash',
     imageSlant: 1,
     rarity: 'common',
-    attack: 2,
+    attack: 3,
     defense: 1
   },
   {
@@ -29,7 +29,7 @@ export const attacks = [
     image: 'crush',
     imageSlant: 1,
     rarity: 'common',
-    attack: 3,
+    attack: 2,
     defense: 0
   },
   {
@@ -37,8 +37,8 @@ export const attacks = [
     image: 'parry',
     imageSlant: 1,
     rarity: 'common',
-    attack: 1,
-    defense: 2
+    attack: 2,
+    defense: 1
   },
   {
     name: 'Arrow',
@@ -52,7 +52,7 @@ export const attacks = [
     name: 'Orc Blade',
     image: 'piercing_blow',
     rarity: 'uncommon',
-    attack: 3,
+    attack: 4,
     defense: 0,
     dealsBanishingDamage: true
   },
@@ -61,7 +61,7 @@ export const attacks = [
     image: 'slice',
     imageSlant: 1,
     rarity: 'uncommon',
-    attack: 4,
+    attack: 5,
     defense: 0
   },
   {
@@ -69,15 +69,15 @@ export const attacks = [
     image: 'two_handed_strike',
     imageSlant: 1,
     rarity: 'uncommon',
-    attack: 4,
+    attack: 5,
     defense: 1
   },
   {
     name: 'Fire Spear',
     image: 'fire_spear',
     rarity: 'uncommon',
-    attack: 2,
-    defense: 1,
+    attack: 3,
+    defense: 0,
     playCopiesOfCards: ['Fire']
   },
   {
@@ -92,29 +92,29 @@ export const attacks = [
     name: 'Shield',
     image: 'block',
     rarity: 'uncommon',
-    attack: 1,
-    defense: 4
+    attack: 2,
+    defense: 5
   },
   {
     name: 'Lotus',
     image: 'lotus',
     rarity: 'uncommon',
-    attack: 3,
-    defense: 2
+    attack: 4,
+    defense: 3
   },
   {
     name: 'Greataxe',
     image: 'sunder',
     imageSlant: 1,
     rarity: 'rare',
-    attack: 5,
+    attack: 7,
     defense: 0
   },
   {
     name: 'Gladius',
     image: 'darksteel_sword',
     rarity: 'rare',
-    attack: 4,
+    attack: 6,
     defense: 1,
     dealsBanishingDamage: true
   },
@@ -123,8 +123,8 @@ export const attacks = [
     image: 'fat_blue_sword',
     imageSlant: 1,
     rarity: 'rare',
-    attack: 3,
-    defense: 0,
+    attack: 4,
+    defense: 1,
     heal: 3
   },
   {
@@ -132,8 +132,8 @@ export const attacks = [
     image: 'ice_sword',
     imageSlant: 1,
     rarity: 'rare',
-    attack: 2,
-    defense: 5,
+    attack: 4,
+    defense: 4,
     shuffleCardCopiesIntoYourPiles: [
       { cardName: 'Super Frost', pile: 'deck' }
     ]
@@ -154,8 +154,8 @@ export const attacks = [
     image: 'dragon_blade',
     imageSlant: 1,
     rarity: 'legendary',
-    attack: 6,
-    defense: 3,
+    attack: 7,
+    defense: 7,
     dealsBanishingDamage: true
   }
 ].map(card => {

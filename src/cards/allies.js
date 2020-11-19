@@ -6,15 +6,23 @@ export const allies = [
     name: 'Swordsman',
     image: 'soldier',
     rarity: 'common',
-    attack: 3,
-    defense: 1
+    attack: 4,
+    defense: 0
   },
   {
     name: 'Spearman',
     image: 'red_spear_guy',
     rarity: 'common',
-    attack: 2,
+    attack: 3,
     defense: 2
+  },
+  {
+    name: 'Mimic',
+    image: 'mimic',
+    rarity: 'common',
+    attack: 1,
+    defense: 1,
+    playCopiesOfCards: ['Tentacles']
   },
   {
     name: 'Recruiter',
@@ -30,7 +38,7 @@ export const allies = [
     image: 'paladin',
     rarity: 'common',
     attack: 2,
-    defense: 1,
+    defense: 2,
     shuffleCardCopiesIntoYourPiles: [{ cardName: 'Healing Blade', pile: 'deck' }]
   },
   {
@@ -46,7 +54,7 @@ export const allies = [
     name: 'Ice Whelp',
     image: 'ice_whelp',
     rarity: 'uncommon',
-    attack: 3,
+    attack: 1,
     defense: 1,
     playCopiesOfCards: ['Frost']
   },
@@ -54,8 +62,8 @@ export const allies = [
     name: 'Lich',
     image: 'lich',
     rarity: 'uncommon',
-    attack: 3,
-    defense: 3
+    attack: 4,
+    defense: 4
   },
   {
     name: 'Hobgoblin',
@@ -74,32 +82,17 @@ export const allies = [
     shuffleCardCopiesIntoYourPiles: [
       { cardName: 'Greataxe', pile: 'deck' },
       { cardName: 'Blank', pile: 'deck' },
+      { cardName: 'Blank', pile: 'deck' },
     ]
   },
   {
     name: 'Brawler',
     image: 'brawler',
     rarity: 'uncommon',
-    attack: 3,
+    attack: 4,
     defense: 2,
     customEffect: true,
     customDescription: 'Shuffle a copy of a random non-legendary attack into your deck.'
-  },
-  {
-    name: 'Warlock',
-    image: 'crazy_mage',
-    rarity: 'uncommon',
-    attack: 0,
-    defense: 0,
-    playCopiesOfCards: ['Fire', 'Fire']
-  },
-  {
-    name: 'Mimic',
-    image: 'mimic',
-    rarity: 'uncommon',
-    attack: 2,
-    defense: 2,
-    playCopiesOfCards: ['Tentacles', 'Tentacles']
   },
   {
     name: 'Apothecary',
@@ -114,11 +107,19 @@ export const allies = [
     customDescription: 'Shuffle a random potion from your banish into your deck.'
   },
   {
+    name: 'Warlock',
+    image: 'crazy_mage',
+    rarity: 'rare',
+    attack: 1,
+    defense: 1,
+    playCopiesOfCards: ['Fire', 'Fire']
+  },
+  {
     name: 'Minotaur',
     image: 'minotaur',
     rarity: 'rare',
-    attack: 0,
-    defense: 0,
+    attack: 1,
+    defense: 1,
     customEffect: true,
     customDescription: 'Play 2 random attacks from your discard, then banish them.'
   },
@@ -126,16 +127,16 @@ export const allies = [
     name: 'Water Slime',
     image: 'water_slime',
     rarity: 'rare',
-    attack: 3,
-    defense: 3,
+    attack: 4,
+    defense: 2,
     drain: true
   },
   {
     name: 'Mage',
     image: 'mage',
     rarity: 'rare',
-    attack: 0,
-    defense: 0,
+    attack: 1,
+    defense: 1,
     customEffect: true,
     customDescription: 'Play 2 random magic attacks from your discard, then banish them.'
   },
@@ -143,8 +144,8 @@ export const allies = [
     name: 'Vampire',
     image: 'vampire',
     rarity: 'rare',
-    attack: 4,
-    defense: 1,
+    attack: 6,
+    defense: 2,
     damageSelf: 1,
     banishes: true,
     dealsBanishingDamage: true

@@ -76,7 +76,7 @@ const _upgrades = [
     }
   },
   {
-    description: 'Damage dealt is unpreventable.',
+    description: 'Damage dealt bypasses shields.',
     cardProperties: {
       prefix: 'Piercing',
       suffix: 'of Piercing',

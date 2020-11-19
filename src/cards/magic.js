@@ -6,7 +6,7 @@ export const magic = [
     name: 'Fire',
     image: 'fire',
     rarity: 'common',
-    attack: 1,
+    attack: 2,
     defense: 0,
     shuffleCardCopiesIntoOpponentsPiles: [
       { cardName: 'Burn', pile: 'deck' }
@@ -16,14 +16,14 @@ export const magic = [
     name: 'Frost',
     image: 'frost',
     rarity: 'common',
-    attack: 2,
+    attack: 3,
     defense: 0
   },
   {
     name: 'Tentacles',
     image: 'tentacles',
     rarity: 'common',
-    attack: 2,
+    attack: 3,
     defense: 1
   },
   {
@@ -39,7 +39,7 @@ export const magic = [
     name: 'Candy Corn',
     image: 'candy_corn',
     rarity: 'uncommon',
-    attack: 3,
+    attack: 4,
     defense: 0,
     shuffleCardCopiesIntoYourPiles: [
       { cardName: 'Candy Corn', pile: 'discard', index: 'top' },
@@ -50,7 +50,7 @@ export const magic = [
     name: 'Super Fire',
     image: 'double_fireball',
     rarity: 'uncommon',
-    attack: 2,
+    attack: 3,
     defense: 0,
     shuffleCardCopiesIntoOpponentsPiles: [
       { cardName: 'Burn', pile: 'deck' },
@@ -61,15 +61,15 @@ export const magic = [
     name: 'Super Frost',
     image: 'double_frost',
     rarity: 'uncommon',
-    attack: 4,
+    attack: 5,
     defense: 0
   },
   {
     name: 'Tome of Spells',
     image: 'book',
     rarity: 'legendary',
-    attack: 2,
-    defense: 4,
+    attack: 5,
+    defense: 5,
     onDiscard: {
       customEffect: true
     },
