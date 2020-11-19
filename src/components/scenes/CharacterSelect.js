@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 import { Image, Spacer, FlexContainer, Text, Button, FlexItem } from '../particles';
 import { characters } from './characters';
 import { Card, cardWidth, cardHeight } from '../card/Card';
-import { colors } from '../styles';
 import * as actions from '../../stores/actions';
 import { createNewCard } from '../../cards/createNewCard';
 
@@ -36,8 +35,6 @@ const characterSelectCss = css`
       }
 
       &:hover {
-        border-bottom: 3px solid ${colors.yellow};
-
         .image {
           transform: scale(1.15);
         }

@@ -57,8 +57,7 @@ export const Town = () => {
     && !receivedBlessings[day];
 
   const [townActionDescription, setTownActionDescription] = useState('Choose an action!');
-  // const [activeModal, setActiveModal] = useState(canReceiveBlessing ? 'Receive Blessing' : null);
-  const [activeModal, setActiveModal] = useState('Next Day');
+  const [activeModal, setActiveModal] = useState(canReceiveBlessing ? 'Receive Blessing' : null);
 
   useEffect(() => {
     if (feed.length) {

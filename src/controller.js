@@ -7,8 +7,8 @@ import { cards } from './cards/cards';
 import { blueprints } from './cards/blueprints';
 import { monstersByTier } from './monsters/monsters';
 
-const isTestingEnabled = true;
-// const isTestingEnabled = false;
+// const isTestingEnabled = true;
+const isTestingEnabled = false;
 
 const upgradedCard = genUpgradedCard(
   blueprints.allCardsObject['Sword'],
