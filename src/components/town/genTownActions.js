@@ -31,11 +31,11 @@ const townActions = keyBy([
     description: 'Earn some gold.'
   },
   {
-    name: 'Gold Bar',
-    energy: [2, 3, 4],
-    probability: 2,
-    image: 'gold_bar',
-    description: 'A free gold bar!'
+    name: 'Extra Life',
+    energy: [4, 5, 6],
+    probability: 1,
+    image: 'life',
+    description: 'An extra life!'
   },
   {
     name: 'Blacksmith',

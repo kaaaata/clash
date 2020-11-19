@@ -1,7 +1,5 @@
-import { controller } from '../controller';
-
 const genInitialState = () => ({
-  scene: controller.scene || 'main_menu',
+  scene: 'main_menu',
   canVisitShop: true
 });
 

@@ -14,8 +14,7 @@ import { upgrades } from './upgrades';
 import { sampleSize } from 'lodash';
 
 export const Crafting = ({ closeModal }) => {
-  const { goldBars, deck } = useSelector(state => ({
-    goldBars: state.clashPlayer.goldBars,
+  const { deck } = useSelector(state => ({
     deck: state.clashPlayer.deck
   }), shallowEqual);
   const dispatch = useDispatch();
@@ -37,20 +36,6 @@ export const Crafting = ({ closeModal }) => {
       >
         <div css={craftingCss}>
           <FlexContainer justifyContent='center' alignItems='center'>
-            <FlexContainer
-              justifyContent='center'
-              alignItems='center'
-              className={
-                `gold_bar_slot ${isCraftingInProgress ? 'green_border' : 'red_border faded'}`
-              }
-            >
-              <Image
-                src='gold_bar.png'
-                width={75}
-                height={75}
-              />
-            </FlexContainer>
-            <Text type='title'>+</Text>
             <FlexContainer
               className={`card_slot pointer ${card1Id ? 'green_border' : 'red_border'}`}
               justifyContent='center'
@@ -106,14 +91,12 @@ export const Crafting = ({ closeModal }) => {
             </div>
           ) : (
             <Button
-              isDisabled={!goldBars}
               onClick={() => {
-                dispatch(actions.adjustPlayerGoldBars(-1));
                 setAvailableUpgrades(sampleSize(upgrades, 4));
               }}
               centered
             >
-              Upgrade a Card (costs 1 gold bar)
+              Upgrade a Card
             </Button>
           )}
 

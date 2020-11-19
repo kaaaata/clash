@@ -3,22 +3,22 @@ import { useDispatch } from 'react-redux';
 import * as actions from '../../../stores/actions';
 import { EventModal, EventModalPage } from '../../modals/EventModal';
 
-export const GoldBar = ({ closeModal }) => {
+export const ExtraLife = ({ closeModal }) => {
   const dispatch = useDispatch();
 
   return (
     <EventModal
-      title='Gold Bar'
-      image='gold_bar'
+      title='Extra Life'
+      image='life'
     >
       <EventModalPage
         page={1}
-        text='You find a gold bar!'
+        text='You find an extra life!'
         options={[{
           name: 'Continue',
-          greenText: 'Receive 1 gold bar.',
+          greenText: 'Receive 1 life.',
           onClick: () => {
-            dispatch(actions.adjustPlayerGoldBars(1));
+            dispatch(actions.adjustPlayerLives(1));
             closeModal();
           }
         }]}

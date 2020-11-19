@@ -1,5 +1,4 @@
 // testing game variables
-// import { genCraftedCard } from './components/crafting/genCraftedCard';
 import { genUpgradedCard } from './components/crafting/genUpgradedCard';
 import { upgrades } from './components/crafting/upgrades';
 import { createNewCard } from './cards/createNewCard';
@@ -7,8 +6,8 @@ import { cards } from './cards/cards';
 import { blueprints } from './cards/blueprints';
 import { monstersByTier } from './monsters/monsters';
 
-// const isTestingEnabled = true;
-const isTestingEnabled = false;
+const isControllerEnabled = true;
+// const isControllerEnabled = false;
 
 const upgradedCard = genUpgradedCard(
   blueprints.allCardsObject['Sword'],
@@ -20,57 +19,32 @@ const upgradedCard = genUpgradedCard(
 //   upgrades[upgrades.length - 2].cardProperties
 // );
 
-export const controller = isTestingEnabled ? {
-  scene: 'town',
-
-  yourName: 'Paladin',
-  yourImage: 'paladin',
-  monsterOverride: monstersByTier[1].filter(i => i.name === 'Fire Slime')[0],
-
-  gold: 1000,
-  goldBars: 10,
-  energy: 10,
-  day: 2,
-  // lives: 1,
-
+export const controller = isControllerEnabled ? {
   // yourHand: [upgradedCard, upgradedCard, upgradedCard],
-  yourHand: ['Shield', 'Minotaur', 'Mace'].map(i => createNewCard(i)),
+  yourHand: ['Lich', 'Lich', 'Lich'].map(i => createNewCard(i)),
   yourDeck: [
-    'Healing Potion',
-    'Fire',
-    'Fire',
-    'Mace',
-    'Mace',
-  
-    'Cutlass',
-    'Cutlass',
-    'Sword',
-    'Sword',
-    'Sword',
+    'Dragon Blade',
+    'Dragon Blade',
+    'Dragon Blade',
+    'Dragon Blade',
+    'Dragon Blade',
 
-    'Falchion',
-    // 'Gladius',
-    'Mace',
-    // 'Mace',
-    // 'Mace',
+    'Dragon Blade',
+    'Dragon Blade',
+    'Dragon Blade',
+    'Dragon Blade',
+    'Dragon Blade',
 
-    // 'Paladin',
-    // 'Healing Blade',
-    // 'Longsword',
-    // 'Attack Potion',
-    // 'Frost',
-
-    // 'Sword',
-    // 'Cutlass',
+    'Dragon Blade',
+    'Dragon Blade',
+    'Dragon Blade',
+    'Dragon Blade',
+    'Dragon Blade',
   ].map(i => createNewCard(i)),
-  // yourDiscard: ['Sword', 'Sword', 'Sword', 'Sword', 'Sword', 'Sword'].map(i => createNewCard(i)),
+  // yourDiscard: [].map(i => createNewCard(i)),
   // yourBanish: [].map(i => createNewCard(i)),
   // enemyHand: [].map(i => createNewCard(i)),
   // enemyDeck: [].map(i => createNewCard(i)),
   // enemyDiscard: [].map(i => createNewCard(i)),
   // enemyBanish: [].map(i => createNewCard(i)),
-  
-  // startingDeck: [
-    
-  // ].map(i => createNewCard(i))
 } : {};

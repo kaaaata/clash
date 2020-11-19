@@ -21,10 +21,10 @@ export default (state = initialState, action) => {
         toast: `Received: ${action.payload} gold`,
         flipper: !state.flipper
       } : state;
-    case 'ADJUST_PLAYER_GOLD_BARS':
+    case 'ADJUST_PLAYER_LIVES':
       return action.payload > 0 ? {
         ...state,
-        toast: `Received: ${action.payload} gold ${action.payload === 1 ? 'bar' : 'bars'}`,
+        toast: `Received: ${action.payload} ${[-1, 1].includes(action.payload) ? 'life' : 'lives'}`,
         flipper: !state.flipper
       } : state;
     case 'ADD_CARDS_TO_COLLECTION': {

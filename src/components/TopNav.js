@@ -15,7 +15,6 @@ export const TopNav = () => {
   const {
     lives,
     gold,
-    goldBars,
     energy,
     deck,
     image,
@@ -26,7 +25,6 @@ export const TopNav = () => {
   } = useSelector(state => ({
     lives: state.clashPlayer.lives,
     gold: state.clashPlayer.gold,
-    goldBars: state.clashPlayer.goldBars,
     energy: state.clashTown.energy,
     deck: state.clashPlayer.deck,
     image: state.clashBattleStats.yourImage,
@@ -108,18 +106,6 @@ export const TopNav = () => {
               ))}
             </div>
             <Text className='deck_count'>{deck.length}</Text>
-          </FlexContainer>
-          <FlexContainer className='gold_bar' alignItems='center' justifyContent='flex-start'>
-            <Image
-              src='gold_bar.png'
-              width={35}
-              height={35}
-              onClick={() => {
-                setActiveModal(activeModal === 'crafting' ? null : 'crafting');
-                setIsSettingsOpen(false);
-              }}
-            />
-            <Text color='yellow'>{goldBars}</Text>
           </FlexContainer>
           <Gold gold={gold} />
           <Image

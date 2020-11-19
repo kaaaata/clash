@@ -16,7 +16,7 @@ const wheelImages = [
   { image: 'burn', width: 36, height: 36 },
   { image: 'cursed_gold', width: 36, height: 50 },
   { image: 'candy_corn', width: 45, height: 45 },
-  { image: 'gold_bar', width: 36, height: 36 },
+  { image: 'life', width: 36, height: 36 },
 ];
 
 const robberyWheelCss = css`
@@ -147,12 +147,12 @@ export const RobberyWheel = ({ rng, closeModal }) => {
     case 5:
       flavorText = (
         <React.Fragment>
-          You win a <span className='yellow'>gold bar!</span>
+          You win a <span className='green'>life!</span>
         </React.Fragment>
       );
-      continueGoodText = 'Receive 1 gold bar.'
+      continueGoodText = 'Receive 1 life.'
       continueOnClick = () => {
-        dispatch(actions.adjustPlayerGoldBars(1));
+        dispatch(actions.adjustPlayerLives(1));
         closeModal();
       };
       break;

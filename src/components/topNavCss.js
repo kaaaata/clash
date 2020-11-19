@@ -48,20 +48,11 @@ export const topNavCss = css`
       }
     }
 
-    .gold_bar {
-      width: 70px;
-
-      .image {
-        margin-right: 7px;
-        ${effects.hoverScale()}
-      }
-    }
-
     .gold {
       justify-content: flex-start;
       flex: 0 0 auto;
       width: 110px;
-      margin-left: 20px;
+      margin-left: 30px;
     }
 
     .shop {
@@ -70,11 +61,12 @@ export const topNavCss = css`
       text-align: center;
       color: ${colors.yellow};  
       ${effects.hoverScale()}
+      margin-left: 10px;
     }
   
     .settings {
       ${effects.hoverScale()}
-      margin-left: 20px;
+      margin-left: 40px;
     }
   }
 `;

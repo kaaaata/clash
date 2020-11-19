@@ -7,8 +7,7 @@ import { TreasureChest } from './TreasureChest';
 import { EventModal, EventModalPage } from '../../modals/EventModal';
 
 export const TreasureSlime = ({ rng, closeModal }) => {
-  const { hasGoldBar, gold } = useSelector(state => ({
-    hasGoldBar: state.clashPlayer.goldBars > 0,
+  const { gold } = useSelector(state => ({
     gold: state.clashPlayer.gold
   }), shallowEqual);
   const dispatch = useDispatch();
@@ -30,17 +29,6 @@ export const TreasureSlime = ({ rng, closeModal }) => {
           }
           options={[
             {
-              name: 'Give Gold Bar',
-              isDisabled: !hasGoldBar,
-              redText: hasGoldBar ? 'Lose 1 gold bar.' : 'Requires 1 gold bar.',
-              greenText: hasGoldBar ? 'Open the chest.' : '',
-              redTextFirst: true,
-              onClick: () => {
-                setPage('give_gold_bar');
-                dispatch(actions.adjustPlayerGoldBars(-1));
-              }
-            },
-            {
               name: 'Give Gold',
               isDisabled: gold < 100,
               redText: gold < 100 ? 'Requires: 100 gold.' : 'Lose 100 gold.',
@@ -61,25 +49,6 @@ export const TreasureSlime = ({ rng, closeModal }) => {
               onClick: () => setPage('leave')
             }
           ]}
-        />
-      );
-      break;
-    case 'give_gold_bar':
-      pageComponent = (
-        <EventModalPage
-          page={2}
-          text={
-            <React.Fragment>
-              You toss the slime a <span className='yellow'>gold bar</span>. Extending a <span className='violet'>slimy tentacle</span>, the slime accepts your payment.
-              <br /><br />
-              Magically, the chest is <span className='green'>unlocked!</span>
-            </React.Fragment>
-          }
-          options={[{
-            name: 'Continue',
-            greenText: 'Open the chest.',
-            onClick: () => setPage('treasure_chest')
-          }]}
         />
       );
       break;

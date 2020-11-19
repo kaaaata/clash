@@ -1,7 +1,6 @@
 import { genMonsterGoldReward } from '../monsters/genMonsterGoldReward';
 import { genTownActions } from '../components/town/genTownActions';
 import { genPurchasableCards } from '../components/town/genPurchasableCards';
-import { controller } from '../controller';
 import { monstersByTier, eventMonsters } from '../monsters/monsters';
 import { sample } from 'lodash';
 
@@ -12,11 +11,8 @@ const genInitialState = () => {
     energy: 0,
     day: 1,
     dailyMonster,
-    dailyMonsterGoldReward: genMonsterGoldReward(
-      dailyMonster,
-      false,
-      typeof controller.day === 'number' ? controller.day : 1
-    ),
+    // note: gold reward will be less if day is set thru Flow
+    dailyMonsterGoldReward: genMonsterGoldReward(dailyMonster, false, 1),
     receivedBlessings: { 4: false, 7: false, 10: false },
     townActions: genTownActions(),
     purchasableCards: [],

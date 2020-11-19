@@ -25,7 +25,6 @@ export const setPlayerLives = payload => ({ type: 'SET_PLAYER_LIVES', payload })
 export const adjustPlayerLives = payload => ({ type: 'ADJUST_PLAYER_LIVES', payload });
 export const setPlayerGold = payload => ({ type: 'SET_PLAYER_GOLD', payload });
 export const adjustPlayerGold = payload => ({ type: 'ADJUST_PLAYER_GOLD', payload });
-export const adjustPlayerGoldBars = payload => ({ type: 'ADJUST_PLAYER_GOLD_BARS', payload });
 export const setPlayerEnergy = payload => ({ type: 'SET_PLAYER_ENERGY', payload });
 export const adjustPlayerEnergy = payload => ({ type: 'ADJUST_PLAYER_ENERGY', payload });
 export const addCardsToCollection = payload => ({ type: 'ADD_CARDS_TO_COLLECTION', payload });

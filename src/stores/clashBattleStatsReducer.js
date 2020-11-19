@@ -1,16 +1,14 @@
-import { controller } from '../controller';
-
 // for coding simplicity, stats can only go up (can't lose stats). (may change in the future)
 const initialState = {
   // persisted variables
-  yourName: controller.yourName || '',
-  yourImage: controller.yourImage || '',
+  yourName: '',
+  yourImage: '',
   yourStats: { attack: 0, magic: 0, defense: 0 },
   yourStatBonuses: { attack: 0, magic: 0, defense: 0 },
 
   // will be reset before each fight
-  enemyName: controller.enemyName || '',
-  enemyImage: controller.enemyImage || '',
+  enemyName: '',
+  enemyImage: '',
   enemyStats: { attack: 0, magic: 0, defense: 0 },
   enemyStatBonuses: { attack: 0, magic: 0, defense: 0 },
   enemyType: null,

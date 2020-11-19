@@ -13,7 +13,7 @@ import {
   CatherineTheGreat,
   RemoveCards,
   FreeGold,
-  GoldBar,
+  ExtraLife,
   PurchaseCards,
   DancingLady
 } from './randomEvents';
@@ -81,8 +81,8 @@ export const Town = () => {
     case 'Make Money':
       modal = <FreeGold closeModal={() => setActiveModal(null)} />;
       break;
-    case 'Gold Bar':
-      modal = <GoldBar closeModal={() => setActiveModal(null)} />;
+    case 'Extra Life':
+      modal = <ExtraLife closeModal={() => setActiveModal(null)} />;
       break;
     case 'Receive Blessing':
       modal = <ReceiveBlessing closeModal={() => setActiveModal(null)} />;
