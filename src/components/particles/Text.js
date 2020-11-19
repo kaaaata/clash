@@ -57,11 +57,17 @@ export const Text = ({
   </div>
 );
 
-export const Input = ({ type = 'normal', value, onChange, children }) => (
+export const Input = ({
+  type = 'normal',
+  value,
+  onChange,
+  isDisabled = false
+}) => (
   <input
     className='input'
     value={value}
     onChange={onChange}
+    disabled={isDisabled}
     css={css`
       ${textCss[type]}
       display: inline;

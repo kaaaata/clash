@@ -8,7 +8,7 @@ export const genTownActions = () => {
     const action = townActions[sample(townActionPool)];
     actions.push({
       ...action,
-      energy: sample(action.energy)
+      energy: action.energy
     });
   }
 
@@ -25,84 +25,84 @@ export const genTownActions = () => {
 const townActions = keyBy([
   {
     name: 'Make Money',
-    energy: [1, 2],
+    energy: 1,
     probability: 15,
     image: 'gold_with_padding',
     description: 'Earn some gold.'
   },
   {
     name: 'Extra Life',
-    energy: [4, 5, 6],
+    energy: 6,
     probability: 1,
     image: 'life',
     description: 'An extra life!'
   },
   {
     name: 'Blacksmith',
-    energy: [2, 3, 4],
+    energy: 2,
     probability: 1,
     image: 'dwarf',
     description: 'Purchase attack cards.'
   },
   {
     name: 'Mage',
-    energy: [2, 3, 4],
+    energy: 2,
     probability: 1,
     image: 'mage',
     description: 'Purchase magic attack cards.'
   },
   {
     name: 'Apothecary',
-    energy: [2, 3, 4],
+    energy: 2,
     probability: 1,
     image: 'alchemist',
     description: 'Purchase potion cards.'
   },
   {
     name: 'Recruiter',
-    energy: [2, 3, 4],
+    energy: 2,
     probability: 1,
     image: 'shop_girl',
     description: 'Purchase ally cards.'
   },
   {
     name: 'Donate a Card',
-    energy: [0],
+    energy: 0,
     probability: 2,
     image: 'weapons_guy',
     description: 'Remove a card from your deck.'
   },
   {
     name: 'Goblin\'s Game',
-    energy: [4, 5, 6],
+    energy: 3,
     probability: 2,
     image: 'goblin_boss',
     description: 'Spin the goblin\'s wheel!'
   },
   {
     name: 'Treasure Slime',
-    energy: [4, 5, 6],
+    energy: 4,
     probability: 2,
     image: 'treasure_slime_monster',
     description: 'A random encounter!'
   },
   {
     name: 'Challenge Battle',
-    energy: [4, 5, 6],
+    energy: 4,
     probability: 1,
     image: 'catherine_the_great',
     description: 'A very difficult random encounter!'
   },
   {
     name: 'Treasure Chest',
-    energy: [6, 7, 8],
+    energy: 5,
     probability: 1,
     image: 'chest',
     description: 'A treasure chest! Contains treasure.'
   },
   {
     name: 'Dancing Lady',
-    energy: [4, 5, 6],
+    energy: 4,
     probability: 1,
     image: 'dancing_lady',
     description: 'A random encounter!'

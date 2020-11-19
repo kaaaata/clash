@@ -37,7 +37,6 @@ const appCss = css`
 export const App = () => {
   const dispatch = useDispatch();
 
-  console.log('app rerender')
   window.flow = {};
   if (JSON.parse(window.localStorage.getItem('clash_isFlowEnabled_toggle'))) {
     Object.entries(window.localStorage).forEach(i => {

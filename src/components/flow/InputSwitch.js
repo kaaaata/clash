@@ -33,11 +33,9 @@ export const InputSwitch = ({
   return (
     <div css={inputSwitchCss}>
       <Text>{description}</Text>
-      <Input value={inputText} onChange={e => {
+      <Input value={inputText} isDisabled={!isOn} onChange={e => {
         const newText = e.target.value;
         setInputText(newText);
-        setIsOn(false);
-        window.localStorage.setItem(`clash_${name}_toggle`, JSON.stringify(false));
         window.localStorage.setItem(
           `clash_${name}_value`,
           JSON.stringify(type === 'string' ? newText : parseInt(newText)));
