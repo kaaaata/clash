@@ -1,9 +1,11 @@
+import React from 'react';
 import { css, jsx } from '@emotion/core'; /** @jsx jsx */
 import { BackgroundImage } from './scenes/BackgroundImage';
 import { Scene } from './scenes/Scene';
 import { TopNav } from './TopNav';
 import { Toasts } from './Toasts';
 import { colors } from './styles';
+import { Flow } from './flow/Flow';
 
 const appCss = css`
   width: 1200px;
@@ -30,11 +32,27 @@ const appCss = css`
   .bold { font-weight: bold; }
 `;
 
-export const App = () => (
-  <main id='app' css={appCss}>
-    <BackgroundImage />
-    <Scene />
-    <TopNav />
-    <Toasts />
-  </main>
-);
+export const App = () => {
+  console.log('app rerender')
+  window.flow = {};
+  if (JSON.parse(window.localStorage.getItem('clash_isFlowEnabled'))) {
+    Object.entries(window.localStorage).forEach(i => {
+      if (i[0].startsWith('clash_')) {
+        window.flow[i[0].slice('clash_'.length)] = JSON.parse(i[1]);
+      }
+    })
+  }
+
+ return (
+    <main id='app' css={appCss}>
+      {window.location.pathname === '/flow' ? <Flow /> : (
+        <React.Fragment>
+          <BackgroundImage />
+          <Scene />
+          <TopNav />
+          <Toasts />
+        </React.Fragment>
+      )}
+    </main>
+  );
+};

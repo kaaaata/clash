@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { jsx, css } from '@emotion/core'; /** @jsx jsx */
 import { useDispatch } from 'react-redux';
 import { Image, Spacer, FlexContainer, Text, Button, FlexItem } from '../particles';
@@ -53,6 +53,16 @@ export const CharacterSelect = () => {
     dispatch(actions.setScene('town'));
   };
 
+  useEffect(() => {
+    if (window.flow.skipIntro) {
+      continueOnClick(
+        characters[0].name,
+        characters[0].image,
+        characters[0].startingCards
+      )
+    }
+  })
+
   return (
     <div css={characterSelectCss}>
       <Spacer height={20} />
@@ -81,12 +91,12 @@ export const CharacterSelect = () => {
             <FlexItem />
             <Button
               type='mini'
+              centered
               onClick={() => continueOnClick(
                 characters[selectedCharIndex].name,
                 characters[selectedCharIndex].image,
                 characters[selectedCharIndex].startingCards
               )}
-              centered
             >
              Play as {characters[selectedCharIndex].name}
             </Button>

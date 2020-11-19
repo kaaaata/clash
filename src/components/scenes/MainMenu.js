@@ -1,4 +1,5 @@
 import { css, jsx } from '@emotion/core'; /** @jsx jsx */
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import * as actions from '../../stores/actions';
 import { Text, Spacer } from '../particles';
@@ -47,6 +48,12 @@ const YellowUnderlineText = ({ text, onClick }) => (
 
 export const MainMenu = () => {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (window.flow.skipIntro) {
+      dispatch(actions.setScene('character_select'))
+    }
+  })
 
   return (
     <div css={mainMenuCss}>
