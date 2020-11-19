@@ -15,13 +15,15 @@ const onOffSwitchCss = css`
 `;
 
 export const OnOffSwitch = ({ name, description }) => {
-  const [isOn, setIsOn] = useState(JSON.parse(window.localStorage.getItem(`clash_${name}`)));
+  const [isOn, setIsOn] = useState(
+    JSON.parse(window.localStorage.getItem(`clash_${name}_toggle`)) || false
+  );
 
   return (
     <div css={onOffSwitchCss}>
       <Text>{description}</Text>
       <OnOffButton isOn={isOn} onClick={() => {
-        window.localStorage.setItem(`clash_${name}`, JSON.stringify(!isOn));
+        window.localStorage.setItem(`clash_${name}_toggle`, JSON.stringify(!isOn));
         setIsOn(!isOn);
       }} />
     </div>

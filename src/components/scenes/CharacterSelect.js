@@ -54,7 +54,7 @@ export const CharacterSelect = () => {
   };
 
   useEffect(() => {
-    if (window.flow.skipIntro) {
+    if (window.flow.skipIntro_toggle) {
       continueOnClick(
         characters[0].name,
         characters[0].image,

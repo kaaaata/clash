@@ -1,5 +1,7 @@
 import React from 'react';
 import { css, jsx } from '@emotion/core'; /** @jsx jsx */
+import { useDispatch } from 'react-redux';
+import * as actions from '../stores/actions';
 import { BackgroundImage } from './scenes/BackgroundImage';
 import { Scene } from './scenes/Scene';
 import { TopNav } from './TopNav';
@@ -33,14 +35,20 @@ const appCss = css`
 `;
 
 export const App = () => {
+  const dispatch = useDispatch();
+
   console.log('app rerender')
   window.flow = {};
-  if (JSON.parse(window.localStorage.getItem('clash_isFlowEnabled'))) {
+  if (JSON.parse(window.localStorage.getItem('clash_isFlowEnabled_toggle'))) {
     Object.entries(window.localStorage).forEach(i => {
       if (i[0].startsWith('clash_')) {
         window.flow[i[0].slice('clash_'.length)] = JSON.parse(i[1]);
       }
     })
+
+    if (window.flow.gold_toggle && typeof window.flow.gold_value === 'number') {
+      dispatch(actions.setPlayerGold(window.flow.gold_value));
+    }
   }
 
  return (

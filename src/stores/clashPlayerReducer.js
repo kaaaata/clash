@@ -3,7 +3,7 @@ import { controller } from '../controller';
 
 const genInitialState = () => ({
   lives: typeof controller.lives === 'number' ? controller.lives : 3,
-  gold: typeof controller.gold === 'number' ? controller.gold : 25,
+  gold: 25,
   goldBars: typeof controller.goldBars === 'number' ? controller.goldBars : 0,
   deck: startingDeck
 });
@@ -16,6 +16,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         lives: Math.max(0, Math.min(3, state.lives + action.payload))
+      };
+    case 'SET_PLAYER_GOLD':
+      return {
+        ...state,
+        gold: action.payload
       };
     case 'ADJUST_PLAYER_GOLD':
       return {

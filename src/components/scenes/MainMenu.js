@@ -50,7 +50,7 @@ export const MainMenu = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (window.flow.skipIntro) {
+    if (window.flow.skipIntro_toggle) {
       dispatch(actions.setScene('character_select'))
     }
   })

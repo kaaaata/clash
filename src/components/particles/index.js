@@ -5,4 +5,5 @@ export { FlexContainer } from './FlexContainer';
 export { FlexItem } from './FlexItem';
 export { Button } from './Button';
 export { Text } from './Text';
+export { Input } from './Text';
 export { Gold } from './Gold';

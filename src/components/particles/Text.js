@@ -56,3 +56,16 @@ export const Text = ({
     {children}
   </div>
 );
+
+export const Input = ({ type = 'normal', value, onChange, children }) => (
+  <input
+    className='input'
+    value={value}
+    onChange={onChange}
+    css={css`
+      ${textCss[type]}
+      display: inline;
+      text-shadow: none;
+    `}
+  />
+);

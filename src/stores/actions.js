@@ -22,6 +22,7 @@ export const setBattleInitialState = payload => ({ type: 'SET_BATTLE_INITIAL_STA
 export const setWinner = payload => ({ type: 'SET_WINNER', payload });
 
 export const adjustPlayerLives = payload => ({ type: 'ADJUST_PLAYER_LIVES', payload });
+export const setPlayerGold = payload => ({ type: 'SET_PLAYER_GOLD', payload });
 export const adjustPlayerGold = payload => ({ type: 'ADJUST_PLAYER_GOLD', payload });
 export const adjustPlayerGoldBars = payload => ({ type: 'ADJUST_PLAYER_GOLD_BARS', payload });
 export const adjustPlayerEnergy = payload => ({ type: 'ADJUST_PLAYER_ENERGY', payload });
