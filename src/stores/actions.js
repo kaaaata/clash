@@ -21,15 +21,18 @@ export const setStats = payload => ({ type: 'SET_STATS', payload });
 export const setBattleInitialState = payload => ({ type: 'SET_BATTLE_INITIAL_STATE', payload });
 export const setWinner = payload => ({ type: 'SET_WINNER', payload });
 
+export const setPlayerLives = payload => ({ type: 'SET_PLAYER_LIVES', payload });
 export const adjustPlayerLives = payload => ({ type: 'ADJUST_PLAYER_LIVES', payload });
 export const setPlayerGold = payload => ({ type: 'SET_PLAYER_GOLD', payload });
 export const adjustPlayerGold = payload => ({ type: 'ADJUST_PLAYER_GOLD', payload });
 export const adjustPlayerGoldBars = payload => ({ type: 'ADJUST_PLAYER_GOLD_BARS', payload });
+export const setPlayerEnergy = payload => ({ type: 'SET_PLAYER_ENERGY', payload });
 export const adjustPlayerEnergy = payload => ({ type: 'ADJUST_PLAYER_ENERGY', payload });
 export const addCardsToCollection = payload => ({ type: 'ADD_CARDS_TO_COLLECTION', payload });
 export const removeCardsFromCollection = payload => ({
   type: 'REMOVE_CARDS_FROM_COLLECTION', payload
 });
+export const setDay = payload => ({ type: 'SET_DAY', payload });
 
 export const setTownActionCompleted = payload => ({ type: 'SET_TOWN_ACTION_COMPLETED', payload });
 export const setTownPurchasableCards = payload => ({ type: 'SET_TOWN_PURCHASABLE_CARDS', payload });

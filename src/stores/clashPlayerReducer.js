@@ -2,7 +2,7 @@ import { startingDeck } from '../cards/startingDeck';
 import { controller } from '../controller';
 
 const genInitialState = () => ({
-  lives: typeof controller.lives === 'number' ? controller.lives : 3,
+  lives: 3,
   gold: 25,
   goldBars: typeof controller.goldBars === 'number' ? controller.goldBars : 0,
   deck: startingDeck
@@ -12,6 +12,11 @@ const initialState = genInitialState();
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case 'SET_PLAYER_LIVES':
+      return {
+        ...state,
+        lives: action.payload
+      };
     case 'ADJUST_PLAYER_LIVES':
       return {
         ...state,

@@ -14,5 +14,8 @@ export const Flow = () => (
     <OnOffSwitch name='isFlowEnabled' description='Is Flow enabled?' />
     <OnOffSwitch name='skipIntro' description='Skip intro & character select?' />
     <InputSwitch name='gold' description='Starting gold:' type='number' />
+    <InputSwitch name='energy' description='Starting energy:' type='number' />
+    <InputSwitch name='day' description='Starting day:' type='number' />
+    <InputSwitch name='lives' description='Starting lives:' type='number' />
   </div>
 );

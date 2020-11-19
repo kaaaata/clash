@@ -9,8 +9,8 @@ const genInitialState = () => {
   const dailyMonster = sample(monstersByTier[1]);
 
   return {
-    energy: typeof controller.energy === 'number' ? controller.energy : 0,
-    day: typeof controller.day === 'number' ? controller.day : 1,
+    energy: 0,
+    day: 1,
     dailyMonster,
     dailyMonsterGoldReward: genMonsterGoldReward(
       dailyMonster,
@@ -31,10 +31,20 @@ const initialState = genInitialState();
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case 'SET_PLAYER_ENERGY':
+      return {
+        ...state,
+        energy: action.payload
+      };
     case 'ADJUST_PLAYER_ENERGY':
       return {
         ...state,
         energy: Math.max(0, Math.min(10, state.energy + action.payload))
+      };
+    case 'SET_DAY':
+      return {
+        ...state,
+        day: action.payload
       };
     case 'START_NEW_DAY': {
       const newDay = state.day + 1;

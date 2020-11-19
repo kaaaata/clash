@@ -49,6 +49,15 @@ export const App = () => {
     if (window.flow.gold_toggle && typeof window.flow.gold_value === 'number') {
       dispatch(actions.setPlayerGold(window.flow.gold_value));
     }
+    if (window.flow.energy_toggle && typeof window.flow.energy_value === 'number') {
+      dispatch(actions.setPlayerEnergy(window.flow.energy_value));
+    }
+    if (window.flow.day_toggle && typeof window.flow.day_value === 'number') {
+      dispatch(actions.setDay(window.flow.day_value));
+    }
+    if (window.flow.lives_toggle && typeof window.flow.lives_value === 'number') {
+      dispatch(actions.setPlayerLives(window.flow.lives_value));
+    }
   }
 
  return (
