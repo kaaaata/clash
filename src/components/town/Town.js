@@ -57,6 +57,14 @@ export const Town = () => {
   );
 
   useEffect(() => {
+    // auto scroll feed to bottom when it updates
+    if (feed.length) {
+      const feedEl = document.querySelector('.feed');
+      feedEl.scrollTop = feedEl.scrollHeight;
+    }
+  }, [feed.length]);
+
+  useEffect(() => {
     if (window.flow.testTownEvent_toggle && typeof window.flow.testTownEvent_value === 'string') {
       const testTownEvent = window.flow.testTownEvent_value;
       if (testTownEvent === 'Mage') {
@@ -70,13 +78,12 @@ export const Town = () => {
       }
       setActiveModal(testTownEvent);
     }
+  }, [dispatch]);
 
-    // auto scroll feed to bottom when it updates
-    if (feed.length) {
-      const feedEl = document.querySelector('.feed');
-      feedEl.scrollTop = feedEl.scrollHeight;
-    }
-  }, [feed.length, dispatch])
+  const closeModal = () => {
+    setActiveModal(null);
+    dispatch(actions.setCanVisitShop(true));
+  };
 
   let daySuffix = 'th';
   if (day === 1) {
@@ -90,31 +97,31 @@ export const Town = () => {
   let modal;
   switch (activeModal) {
     case 'Gather Gold':
-      modal = <FreeGold closeModal={() => setActiveModal(null)} />;
+      modal = <FreeGold closeModal={closeModal} />;
       break;
     case 'Upgrade a Card':
-      modal = <Crafting closeModal={() => setActiveModal(null)} />;
+      modal = <Crafting closeModal={closeModal} />;
       break;
     case 'Extra Life':
-      modal = <ExtraLife closeModal={() => setActiveModal(null)} />;
+      modal = <ExtraLife closeModal={closeModal} />;
       break;
     case 'Next Day':
       modal = (
         <MonsterPreview
           title={`It's the end of the ${day}${daySuffix} day.`}
           retreatText='Back to Town'
-          closeModal={() => setActiveModal(null)}
+          closeModal={closeModal}
         />
       );
       break;
     case 'Goblin\'s Game':
-      modal = <RobberyWheel rng={Math.random()} closeModal={() => setActiveModal(null)} />;
+      modal = <RobberyWheel rng={Math.random()} closeModal={closeModal} />;
       break;
     case 'Treasure Slime':
-      modal = <TreasureSlime rng={Math.random()} closeModal={() => setActiveModal(null)} />;
+      modal = <TreasureSlime rng={Math.random()} closeModal={closeModal} />;
       break;
     case 'Challenge Battle':
-      modal = <CatherineTheGreat closeModal={() => setActiveModal(null)} />;
+      modal = <CatherineTheGreat closeModal={closeModal} />;
       break;
     case 'Blacksmith':
       modal = (
@@ -123,7 +130,7 @@ export const Town = () => {
           image='dwarf_event'
           cardNames={purchasableCards.map(card => card.name)}
           cardCosts={purchasableCards.map(card => card.cost)}
-          closeModal={() => setActiveModal(null)}
+          closeModal={closeModal}
         />
       );
       break;
@@ -134,7 +141,7 @@ export const Town = () => {
           image='recruiter_event'
           cardNames={purchasableCards.map(card => card.name)}
           cardCosts={purchasableCards.map(card => card.cost)}
-          closeModal={() => setActiveModal(null)}
+          closeModal={closeModal}
         />
       );
       break;
@@ -145,7 +152,7 @@ export const Town = () => {
           image='mage_event'
           cardNames={purchasableCards.map(card => card.name)}
           cardCosts={purchasableCards.map(card => card.cost)}
-          closeModal={() => setActiveModal(null)}
+          closeModal={closeModal}
         />
       );
       break;
@@ -156,18 +163,18 @@ export const Town = () => {
           image='alchemist_event'
           cardNames={purchasableCards.map(card => card.name)}
           cardCosts={purchasableCards.map(card => card.cost)}
-          closeModal={() => setActiveModal(null)}
+          closeModal={closeModal}
         />
       );
       break;
     case 'Donate a Card':
-      modal = <RemoveCards closeModal={() => setActiveModal(null)} />;
+      modal = <RemoveCards closeModal={closeModal} />;
       break;
     case 'Treasure Chest':
-      modal = <TreasureChest rng={Math.random()} closeModal={() => setActiveModal(null)} />;
+      modal = <TreasureChest rng={Math.random()} closeModal={closeModal} />;
       break;
     case 'Dancing Lady':
-      modal = <DancingLady closeModal={() => setActiveModal(null)} />;
+      modal = <DancingLady closeModal={closeModal} />;
       break;
     default:
       break;
@@ -209,6 +216,7 @@ export const Town = () => {
                 onMouseEnter={() => setTownActionDescription(i.description) }
                 onClick={() => {
                   if (energy >= i.energy) {
+                    dispatch(actions.setCanVisitShop(false));
                     if (i.name !== 'Next Day') {
                       dispatch(actions.setTownActionCompleted(index));
                       dispatch(actions.adjustPlayerEnergy(-1 * i.energy));

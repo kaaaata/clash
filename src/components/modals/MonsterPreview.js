@@ -66,10 +66,6 @@ export const MonsterPreview = ({
     };
   }, shallowEqual);
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(actions.setCanVisitShop(false));
-  });
   
   const isMonsterElite = !monsterOverride && [3, 6, 9].includes(day);
   const yourDeck = shuffle(deck); // cardIds
@@ -175,10 +171,7 @@ export const MonsterPreview = ({
           },
           {
             name: retreatText,
-            onClick: () => {
-              closeModal();
-              dispatch(actions.setCanVisitShop(true));
-            }
+            onClick: closeModal
           }
         ]}
       />
