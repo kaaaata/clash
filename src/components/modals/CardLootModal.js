@@ -44,7 +44,7 @@ export const CardLootModal = ({
     </React.Fragment>
   );
 
-  const continueOptions = [{ name: 'Done', greenText: continueText, onClick: closeModal }];
+  const continueOptions = [{ name: 'Continue', greenText: continueText, onClick: closeModal }];
   if (shouldShowTakeAllButton) {
     continueOptions.unshift({
       name: 'Take All',
