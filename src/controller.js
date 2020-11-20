@@ -44,7 +44,7 @@ export const controller = isControllerEnabled ? {
   // yourDiscard: [].map(i => createNewCard(i)),
   // yourBanish: [].map(i => createNewCard(i)),
   // enemyHand: [].map(i => createNewCard(i)),
-  // enemyDeck: [].map(i => createNewCard(i)),
+  enemyDeck: [].map(i => createNewCard(i)),
   // enemyDiscard: [].map(i => createNewCard(i)),
   // enemyBanish: [].map(i => createNewCard(i)),
 } : {};

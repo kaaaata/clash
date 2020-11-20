@@ -19,7 +19,7 @@ export const packs = {
       common: 3
     },
     cost: 50,
-    image: 'bronze_bar'
+    image: 'bronze_pack'
   },
   silver: {
     name: 'Silver Pack',
@@ -30,7 +30,7 @@ export const packs = {
       common: 2
     },
     cost: 75,
-    image: 'silver_bar'
+    image: 'silver_pack'
   },
   gold: {
     name: 'Gold Pack',
@@ -41,7 +41,7 @@ export const packs = {
       common: 1
     },
     cost: 100,
-    image: 'gold_bar'
+    image: 'gold_pack'
   },
   diamond: {
     name: 'Diamond Pack',
@@ -52,6 +52,6 @@ export const packs = {
       common: 0
     },
     cost: 200,
-    image: 'ruby'
+    image: 'diamond_pack'
   }
 };

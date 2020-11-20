@@ -12,7 +12,7 @@ import { createNewCard } from '../../../cards/createNewCard';
 
 const wheelImages = [
   { image: 'gold_without_padding', width: 36, height: 36 },
-  { image: 'silver_bar', width: 36, height: 36 },
+  { image: 'silver_pack', width: 28, height: 40 },
   { image: 'burn', width: 36, height: 36 },
   { image: 'cursed_gold', width: 36, height: 50 },
   { image: 'candy_corn', width: 45, height: 45 },
@@ -194,6 +194,7 @@ export const RobberyWheel = ({ rng, closeModal }) => {
 
   return page === 'card_loot_modal' ? (
     <CardLootModal
+      image={packs.silver.image}
       cardNames={genPackCardNames(packs.silver)}
       closeModal={closeModal}
     />
@@ -224,7 +225,7 @@ export const RobberyWheel = ({ rng, closeModal }) => {
             greenText: continueGoodText,
             redText: continueBadText,
             onClick: continueOnClick,
-            cardTooltips: cardTooltips
+            cardTooltips
           }
         ]}
       />

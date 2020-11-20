@@ -14,7 +14,7 @@ export const TreasureChest = ({ rng, closeModal }) => {
 
   const [page, setPage] = useState('default');
 
-  let lootText;
+  let lootText = '';
   let lootCb;
   let lootCardNames = [];
   let lootPack;
@@ -61,12 +61,9 @@ export const TreasureChest = ({ rng, closeModal }) => {
     lootCardNames = genPackCardNames(packs[lootPack]);
   }
 
-  if (lootCardNames.length) {
-    greenText = 'Select cards to keep.';
-  }
-
   return page === 'card_loot_modal' ? (
     <CardLootModal
+      image='treasure_chest'
       cardNames={lootCardNames}
       closeModal={closeModal}
     />

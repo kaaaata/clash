@@ -38,7 +38,6 @@ export const setDay = payload => ({ type: 'SET_DAY', payload });
 export const setTownActionCompleted = payload => ({ type: 'SET_TOWN_ACTION_COMPLETED', payload });
 export const setTownPurchasableCards = payload => ({ type: 'SET_TOWN_PURCHASABLE_CARDS', payload });
 export const addTownFeedText = payload => ({ type: 'ADD_TOWN_FEED_TEXT', payload });
-export const setBlessingReceived = payload => ({ type: 'SET_BLESSING_RECEIVED', payload });
 
 export const setScene = payload => ({ type: 'SET_SCENE', payload });
 export const startNewDay = payload => ({ type: 'START_NEW_DAY', payload });

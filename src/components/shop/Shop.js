@@ -59,6 +59,7 @@ export const Shop = ({ closeModal }) => {
 
   const [isCardLootModalActive, setIsCardLootModalActive] = useState(null);
   const [cardLootModalCards, setCardLootModalCards] = useState([]);
+  const [cardLootModalImage, setCardLootModalImage] = useState(null);
   
   return (
     <React.Fragment>
@@ -67,6 +68,7 @@ export const Shop = ({ closeModal }) => {
         closeModal={closeModal}
         shouldCloseOnClick={false}
         shouldShowCloseButton={true}
+        closeButtonText='Back to Town'
       >
         <FlexContainer css={shopCss}>
           {Object.keys(packs).map(i => {
@@ -106,7 +108,7 @@ export const Shop = ({ closeModal }) => {
                 ) : (
                   <Image
                     key={i}
-                    src='pack.png'
+                    src={`${pack.image}.png`}
                     width={cardWidth}
                     height={cardHeight}
                     className='pack'
@@ -115,20 +117,13 @@ export const Shop = ({ closeModal }) => {
                       if (gold >= pack.cost) {
                         dispatch(actions.adjustPlayerGold(-1 * pack.cost));
                         setCardLootModalCards(genPackCardNames(pack));
+                        setCardLootModalImage(pack.image);
                         setIsCardLootModalActive(true);
                       } else {
                         dispatch(actions.setToast('Not enough gold!'));
                       }
                     }}
-                  >
-                    <Spacer height={55} />
-                    <Image
-                      src={`${pack.image}.png`}
-                      width={75}
-                      height={75}
-                      className='gem'
-                    />
-                  </Image>
+                  />
                 )}
                 <Spacer height={30} />
                 <FlexContainer alignItems='center' flexDirection='column'>
@@ -160,6 +155,7 @@ export const Shop = ({ closeModal }) => {
 
       {isCardLootModalActive && (
         <CardLootModal
+          image={cardLootModalImage}
           cardNames={cardLootModalCards}
           closeModal={() => setIsCardLootModalActive(false)}
         />

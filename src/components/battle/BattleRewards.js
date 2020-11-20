@@ -68,7 +68,7 @@ export const BattleRewards = () => {
             onClick: () => {
               if (didPlayerWin) {
                 dispatch(actions.adjustPlayerGold(battleRewardGold));
-                setPage('steal_cards');
+                setPage('card_loot_modal');
               } else {
                 dispatch(actions.adjustPlayerLives(-1));
                 returnToTown();
@@ -78,19 +78,19 @@ export const BattleRewards = () => {
         />
       );
       break;
-    case 'steal_cards':
+    case 'crafting':
       pageComponent = (
         <EventModalPage
           page={2}
           text={
             <React.Fragment>
-              As the enemy flees, they drop some <span className='yellow'>cards</span> from their deck!
+              Crafting??
             </React.Fragment>
           }
           options={[{
             name: 'Continue',
-            greenText: 'Take up to 2 cards from the enemy\'s deck.',
-            onClick: () => setPage('card_loot_modal')
+            greenText: 'Green Text?!',
+            onClick: returnToTown
           }]}
         />
       );
@@ -102,9 +102,12 @@ export const BattleRewards = () => {
   if (page === 'card_loot_modal') {
     return (
       <CardLootModal
+        title='The enemy dropped some cards! Select cards to keep'
+        image={winnerImage}
         maxCardsToTake={2}
+        showCounter
         cardIds={battleRewardCards}
-        closeModal={returnToTown}
+        closeModal={() => setPage('crafting')}
       />
     );
   } else if (didPlayerWin || didPlayerLose) {

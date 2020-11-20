@@ -115,10 +115,10 @@ export const MonsterPreview = ({
     dispatch(actions.setBattleRewardCards(
       isMonsterElite
         ? [
-          ...sampleSize(enemyDeckIds.filter(cardId => cards[cardId].rarity !== 'common'), 4),
-          ...sampleSize(enemyDeckIds.filter(cardId => cards[cardId].rarity === 'common'), 4)
-        ].slice(0, 4)
-        : sampleSize(enemyDeckIds, 4)
+          ...sampleSize(enemyDeckIds.filter(cardId => cards[cardId].rarity !== 'common'), 3),
+          ...sampleSize(enemyDeckIds.filter(cardId => cards[cardId].rarity === 'common'), 3)
+        ].slice(0, 3)
+        : sampleSize(enemyDeckIds, 3)
     ));
     dispatch(actions.setBattleRewardGold(monsterGoldReward));
     dispatch(actions.setScene('battle'));
@@ -153,6 +153,12 @@ export const MonsterPreview = ({
       <Attributes stats={monster.stats} statBonuses={enemyStatBonuses} />
     </FlexContainer>
   );
+
+  useEffect(() => {
+    if (window.flow.skipToBattle_toggle) {
+      battleOnClick();
+    }
+  });
 
   return (
     <EventModal

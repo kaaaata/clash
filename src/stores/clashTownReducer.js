@@ -14,7 +14,6 @@ const genInitialState = () => {
     dailyMonster,
     // note: gold reward will be less if day is set thru Flow
     dailyMonsterGoldReward: genMonsterGoldReward(dailyMonster, false, 1),
-    receivedBlessings: { 4: false, 7: false, 10: false },
     townActions: genTownActions(),
     purchasableCards: [],
     completedTownActions: {},
@@ -77,7 +76,6 @@ export default (state = initialState, action) => {
           [3, 6, 9].includes(newDay),
           newDay
         ),
-        receivedBlessings: { 4: false, 7: false, 10: false },
         townActions: genTownActions(),
         completedTownActions: {},
         feed: [
@@ -114,14 +112,6 @@ export default (state = initialState, action) => {
       return {
         ...state,
         purchasableCards: genPurchasableCards(action.payload)
-      };
-    case 'SET_BLESSING_RECEIVED':
-      return {
-        ...state,
-        receivedBlessings: {
-          ...state.receivedBlessings,
-          [state.day]: true
-        }
       };
     case 'RESET_GAME':
       return genInitialState();

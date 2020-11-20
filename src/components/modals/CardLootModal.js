@@ -1,59 +1,54 @@
 import React, { useState } from 'react';
-import { css, jsx } from '@emotion/core'; /** @jsx jsx */
-import { useDispatch } from 'react-redux';
+import { jsx } from '@emotion/core'; /** @jsx jsx */
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import * as actions from '../../stores/actions';
-import { Modal } from '../modals/Modal';
-import { FlexContainer, Spacer, Button, Text } from '../particles';
-import { Card } from '../card/Card';
+import { EventModal, EventModalPage } from './EventModal';
+import { Text } from '../particles';
 import { blueprints } from '../../cards/blueprints';
 import { createNewCard } from '../../cards/createNewCard';
-import { cards } from '../../cards/cards';
-
-const cardLootModalCss = css`
-  .card {
-    margin: 10px;
-  }
-`;
-
-const continueOptionsCss = css`
-  button {
-    margin-right: 10px;
-
-    &:last-child {
-      margin-right: 0;
-    }
-  }
-`;
+import { EventModalLootableCard } from './EventModalLootableCard';
 
 export const CardLootModal = ({
+  title = 'Choose cards to keep',
+  image,
   cardNames,
   cardIds,
+  cardCosts = [],
   maxCardsToTake = cardNames ? cardNames.length : cardIds.length,
+  continueText,
+  showCounter = false,
   closeModal
 }) => {
+  const { gold } = useSelector(state => ({
+    gold: state.clashPlayer.gold
+  }), shallowEqual);
   const dispatch = useDispatch();
 
   const [selectedCardIndices, setSelectedCardIndices] = useState({});
   const cardsTakenCount = Object.keys(selectedCardIndices).length;
+  const shouldShowTakeAllButton = !cardCosts.length
+    && maxCardsToTake >= (cardNames ? cardNames.length : cardIds.length);
 
   const titleText = (
     <React.Fragment>
-      Choose cards to keep&nbsp;
-      <Text
-        type='header'
-        inline
-        color={cardsTakenCount === maxCardsToTake ? 'red' : 'green'}
-      >
-        ({cardsTakenCount}/{maxCardsToTake})
-      </Text>
+      {title}
+      {showCounter && (
+        <Text
+          type='header'
+          inline
+          color={cardsTakenCount === maxCardsToTake ? 'red' : 'green'}
+        >
+          &nbsp;({cardsTakenCount}/{maxCardsToTake})
+        </Text>
+      )}
     </React.Fragment>
   );
 
-  const continueOptions = [{ text: 'Done', color: 'green', onClick: closeModal }];
-  if (maxCardsToTake === (cardNames ? cardNames.length : cardIds.length)) {
-    continueOptions.push({
-      text: 'Take All',
-      color: cardsTakenCount === maxCardsToTake ? 'red' : 'green',
+  const continueOptions = [{ name: 'Done', greenText: continueText, onClick: closeModal }];
+  if (shouldShowTakeAllButton) {
+    continueOptions.unshift({
+      name: 'Take All',
+      isDisabled: cardsTakenCount === maxCardsToTake,
       onClick: () => {
         if (cardsTakenCount < maxCardsToTake) {
           dispatch(actions.addCardsToCollection((cardNames || cardIds)
@@ -71,45 +66,27 @@ export const CardLootModal = ({
   }
 
   return (
-    <Modal
-      halfModal
+    <EventModal
       title={titleText}
-      transparent={false}
+      image={image}
     >
-      <FlexContainer justifyContent='center' css={cardLootModalCss}>
-        {(cardNames || cardIds).map((cardNameOrId, index) => (
-          <Card
+      <EventModalPage
+        page={1}
+        text={(cardNames || cardIds).map((cardNameOrId, index) => (
+          <EventModalLootableCard
             key={index}
             cardName={cardNames && cardNameOrId}
             cardId={cardIds && cardNameOrId}
-            onClick={() => {
-              if (cardsTakenCount < maxCardsToTake) {
-                setSelectedCardIndices({ ...selectedCardIndices, [index]: true });
-                dispatch(actions.addCardsToCollection(createNewCard(cardIds
-                  ? cards[cardNameOrId]
-                  : blueprints.allCardsObject[cardNameOrId])
-                ));
-              }
-            }}
-            isHidden={selectedCardIndices.hasOwnProperty(index)}
+            cost={cardCosts[index]}
+            canAfford={typeof cardCosts[index] !== 'number' || gold >= cardCosts[index]}
+            canTake={cardsTakenCount < maxCardsToTake}
+            takeCardCb={() => setSelectedCardIndices({
+              ...selectedCardIndices, [index]: true
+            })}
           />
         ))}
-      </FlexContainer>
-      <Spacer height={30} />
-      <FlexContainer justifyContent='center' css={continueOptionsCss}>
-        {continueOptions.map(i => (
-          <Button
-            key={i.text}
-            type='mini'
-            isDisabled={i.text === 'Take All' && cardsTakenCount === maxCardsToTake}
-            onClick={i.onClick}
-            textProps={{ color: i.color }}
-            centered
-          >
-            {i.text}
-          </Button>
-        ))}
-      </FlexContainer>
-    </Modal>
+        options={continueOptions}
+      />
+    </EventModal>
   );
 };

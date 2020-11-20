@@ -1,3 +1,5 @@
+import { omit } from 'lodash';
+
 const genPlayCopiesOfCardsDescription = (playCopiesOfCards) => {
   const copyCounts = {};
   playCopiesOfCards.forEach(cardName => {
@@ -45,14 +47,16 @@ export const genCardDescription = ({
   shuffleCardCopiesIntoOpponentsPiles,
   customDescription
 }) => [
-  pierces && `Damage dealt bypasses shields.`,
+  (pierces || (onDiscard && onDiscard.pierces)) && `Damage dealt bypasses shields.`,
   dealsBanishingDamage && 'Damage dealt banishes.',
   heal && `Heal ${heal}.`,
   healEnemy && `Heal enemy ${healEnemy}.`,
   drain && `Heal 1 for each point of damage dealt.`,
   damageSelf && `Deal ${damageSelf} to yourself.`,
   onDiscard && (
-    `On ${triggerDiscardOnPlay ? 'play or ' : ''}discard: ${genCardDescription(onDiscard)}`
+    `On ${triggerDiscardOnPlay ? 'play or ' : ''}discard: ${
+      genCardDescription(omit(onDiscard, 'pierces'))
+    }`
   ),
   playCopiesOfCards && genPlayCopiesOfCardsDescription(playCopiesOfCards),
   shuffleCardCopiesIntoYourPiles && genShuffleCardCopiesIntoPilesDescription(

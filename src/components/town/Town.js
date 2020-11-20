@@ -4,7 +4,6 @@ import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import * as actions from '../../stores/actions';
 import { Spacer, FlexContainer, Text, FlexItem } from '../particles';
 import { TownActionCard } from './TownActionCard';
-import { ReceiveBlessing } from './ReceiveBlessing';
 import { Timeline } from './Timeline';
 import { MonsterPreview } from '../modals/MonsterPreview';
 import {
@@ -14,9 +13,9 @@ import {
   RemoveCards,
   FreeGold,
   ExtraLife,
-  PurchaseCards,
   DancingLady
 } from './randomEvents';
+import { CardLootModal } from '../modals/CardLootModal';
 import { townCss } from './townCss';
 import { TreasureChest } from './randomEvents/TreasureChest';
 
@@ -34,38 +33,49 @@ const genTownActionCardImage = (townAction, day) => {
 
 export const Town = () => {
   const {
-    lives,
     energy,
     day,
     townActions,
+    purchasableCards,
     completedTownActions,
-    feed,
-    receivedBlessings
+    feed
   } = useSelector(state => ({
     lives: state.clashPlayer.lives,
     energy: state.clashTown.energy,
     day: state.clashTown.day,
+    purchasableCards: state.clashTown.purchasableCards,
     townActions: state.clashTown.townActions,
     completedTownActions: state.clashTown.completedTownActions,
-    feed: state.clashTown.feed,
-    receivedBlessings: state.clashTown.receivedBlessings
+    feed: state.clashTown.feed
   }), shallowEqual);
   const dispatch = useDispatch();
-  
-  const canReceiveBlessing = !!lives
-    && [4, 7, 10].includes(day)
-    && !receivedBlessings[day];
 
   const [townActionDescription, setTownActionDescription] = useState('Choose an action!');
-  const [activeModal, setActiveModal] = useState(canReceiveBlessing ? 'Receive Blessing' : null);
+  const [activeModal, setActiveModal] = useState(
+    window.flow.skipToBattle_toggle ? 'Next Day' : null
+  );
 
   useEffect(() => {
+    if (window.flow.testTownEvent_toggle && typeof window.flow.testTownEvent_value === 'string') {
+      const testTownEvent = window.flow.testTownEvent_value;
+      if (testTownEvent === 'Mage') {
+        dispatch(actions.setTownPurchasableCards('magic'));
+      } else if (testTownEvent === 'Apothecary') {
+        dispatch(actions.setTownPurchasableCards('potions'));
+      } else if (testTownEvent === 'Blacksmith') {
+        dispatch(actions.setTownPurchasableCards('attacks'));
+      } else if (testTownEvent === 'Recruiter') {
+        dispatch(actions.setTownPurchasableCards('allies'));
+      }
+      setActiveModal(testTownEvent);
+    }
+
+    // auto scroll feed to bottom when it updates
     if (feed.length) {
-      // auto scroll feed to bottom when it updates
       const feedEl = document.querySelector('.feed');
       feedEl.scrollTop = feedEl.scrollHeight;
     }
-  }, [feed.length])
+  }, [feed.length, dispatch])
 
   let daySuffix = 'th';
   if (day === 1) {
@@ -83,9 +93,6 @@ export const Town = () => {
       break;
     case 'Extra Life':
       modal = <ExtraLife closeModal={() => setActiveModal(null)} />;
-      break;
-    case 'Receive Blessing':
-      modal = <ReceiveBlessing closeModal={() => setActiveModal(null)} />;
       break;
     case 'Next Day':
       modal = (
@@ -107,36 +114,44 @@ export const Town = () => {
       break;
     case 'Blacksmith':
       modal = (
-        <PurchaseCards
+        <CardLootModal
           title='Blacksmith'
           image='dwarf_event'
+          cardNames={purchasableCards.map(card => card.name)}
+          cardCosts={purchasableCards.map(card => card.cost)}
           closeModal={() => setActiveModal(null)}
         />
       );
       break;
     case 'Recruiter':
       modal = (
-        <PurchaseCards
+        <CardLootModal
           title='Recruiter'
           image='recruiter_event'
+          cardNames={purchasableCards.map(card => card.name)}
+          cardCosts={purchasableCards.map(card => card.cost)}
           closeModal={() => setActiveModal(null)}
         />
       );
       break;
     case 'Mage':
       modal = (
-        <PurchaseCards
+        <CardLootModal
           title='Mage'
           image='mage_event'
+          cardNames={purchasableCards.map(card => card.name)}
+          cardCosts={purchasableCards.map(card => card.cost)}
           closeModal={() => setActiveModal(null)}
         />
       );
       break;
     case 'Apothecary':
       modal = (
-        <PurchaseCards
+        <CardLootModal
           title='Apothecary'
           image='alchemist_event'
+          cardNames={purchasableCards.map(card => card.name)}
+          cardCosts={purchasableCards.map(card => card.cost)}
           closeModal={() => setActiveModal(null)}
         />
       );

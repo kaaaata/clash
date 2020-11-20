@@ -17,6 +17,8 @@ export const Flow = () => (
     <Spacer height={40} />
     <OnOffSwitch name='isFlowEnabled' description='Is Flow enabled?' />
     <OnOffSwitch name='skipIntro' description='Skip intro & character select?' />
+    <OnOffSwitch name='skipToBattle' description='Skip straight to battle when in town?' />
+    <InputSwitch name='testTownEvent' description='Render this town event when in town:' type='string' />
     <InputSwitch name='gold' description='Starting gold:' type='number' />
     <InputSwitch name='energy' description='Starting energy:' type='number' />
     <InputSwitch name='energyReserved' description='Energy reserved:' type='number' />
