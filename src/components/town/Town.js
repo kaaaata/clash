@@ -78,7 +78,7 @@ export const Town = () => {
   
   let modal;
   switch (activeModal) {
-    case 'Make Money':
+    case 'Gather Gold':
       modal = <FreeGold closeModal={() => setActiveModal(null)} />;
       break;
     case 'Extra Life':
@@ -186,10 +186,7 @@ export const Town = () => {
                 image={genTownActionCardImage(i, day)}
                 energy={i.energy}
                 canAfford={energy >= i.energy}
-                isDisabled={
-                  (day === 1 && i.name !== 'Next Day')
-                  || completedTownActions[index]
-                }
+                isDisabled={energy < i.energy || completedTownActions[index]}
                 onMouseEnter={() => setTownActionDescription(i.description) }
                 onClick={() => {
                   if (energy >= i.energy) {
