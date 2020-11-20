@@ -15,6 +15,7 @@ import {
   ExtraLife,
   DancingLady
 } from './randomEvents';
+import { Crafting } from '../crafting/Crafting';
 import { CardLootModal } from '../modals/CardLootModal';
 import { townCss } from './townCss';
 import { TreasureChest } from './randomEvents/TreasureChest';
@@ -90,6 +91,9 @@ export const Town = () => {
   switch (activeModal) {
     case 'Gather Gold':
       modal = <FreeGold closeModal={() => setActiveModal(null)} />;
+      break;
+    case 'Upgrade a Card':
+      modal = <Crafting closeModal={() => setActiveModal(null)} />;
       break;
     case 'Extra Life':
       modal = <ExtraLife closeModal={() => setActiveModal(null)} />;

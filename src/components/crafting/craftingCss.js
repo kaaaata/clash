@@ -3,6 +3,12 @@ import { colors } from '../styles';
 import { cardWidth, cardHeight } from '../card/Card';
 
 export const craftingCss = css`
+  height: 100%;
+
+  .container {
+    height: 100%;
+  }
+
   .card_slot {
     width: ${cardWidth}px;
     height: ${cardHeight}px;

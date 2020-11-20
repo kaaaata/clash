@@ -1,16 +1,20 @@
 import { sample, keyBy } from 'lodash';
 
-// generate 8 random town actions (the last one is always "next day").
+// generate 8 random town actions
+// at least one action is "upgrade a card"
+// the last action is "next day"
 export const genTownActions = () => {
   const actions = [];
 
-  for (let i = 0; i < 7; i++) {
+  for (let i = 0; i < 6; i++) {
     const action = townActions[sample(townActionPool)];
     actions.push({
       ...action,
       energy: action.energy
     });
   }
+
+  actions.push(townActions['Upgrade a Card']);
 
   actions.push({
     name: 'Next Day',
@@ -27,6 +31,13 @@ const townActions = keyBy([
     name: 'Gather Gold',
     energy: 1,
     probability: 15,
+    image: 'gold_with_padding',
+    description: 'Earn some gold.'
+  },
+  {
+    name: 'Upgrade a Card',
+    energy: 2,
+    probability: 1,
     image: 'gold_with_padding',
     description: 'Earn some gold.'
   },
@@ -68,21 +79,21 @@ const townActions = keyBy([
   {
     name: 'Donate a Card',
     energy: 0,
-    probability: 2,
+    probability: 1,
     image: 'weapons_guy',
     description: 'Remove a card from your deck.'
   },
   {
     name: 'Goblin\'s Game',
     energy: 3,
-    probability: 2,
+    probability: 1,
     image: 'goblin_boss',
     description: 'Spin the goblin\'s wheel!'
   },
   {
     name: 'Treasure Slime',
     energy: 4,
-    probability: 2,
+    probability: 1,
     image: 'treasure_slime_monster',
     description: 'A random encounter!'
   },

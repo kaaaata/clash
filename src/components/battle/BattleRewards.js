@@ -78,18 +78,17 @@ export const BattleRewards = () => {
         />
       );
       break;
-    case 'crafting':
+    case 'energy_reservation':
       pageComponent = (
         <EventModalPage
           page={2}
           text={
             <React.Fragment>
-              Crafting??
+              Energy Reservation Management Modal
             </React.Fragment>
           }
           options={[{
             name: 'Continue',
-            greenText: 'Green Text?!',
             onClick: returnToTown
           }]}
         />
@@ -107,7 +106,7 @@ export const BattleRewards = () => {
         maxCardsToTake={2}
         showCounter
         cardIds={battleRewardCards}
-        closeModal={() => setPage('crafting')}
+        closeModal={() => setPage('energy_reservation')}
       />
     );
   } else if (didPlayerWin || didPlayerLose) {
