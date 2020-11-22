@@ -1,5 +1,4 @@
 import { css, jsx } from '@emotion/core'; /** @jsx jsx */
-import { multiply } from 'lodash';
 import { Spacer, FlexContainer, Text, Button, FlexItem } from '../particles';
 import { colors } from '../styles';
 

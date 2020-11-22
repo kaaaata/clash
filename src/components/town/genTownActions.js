@@ -1,12 +1,13 @@
 import { sample, keyBy } from 'lodash';
 
 // generate 8 random town actions
+// at least one action is "gather gold"
 // at least one action is "upgrade a card"
 // the last action is "next day"
 export const genTownActions = () => {
   const actions = [];
 
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < 5; i++) {
     const action = townActions[sample(townActionPool)];
     actions.push({
       ...action,
@@ -14,6 +15,7 @@ export const genTownActions = () => {
     });
   }
 
+  actions.push(townActions['Gather Gold']);
   actions.push(townActions['Upgrade a Card']);
 
   actions.push({
@@ -30,7 +32,7 @@ const townActions = keyBy([
   {
     name: 'Gather Gold',
     energy: 1,
-    weight: 20,
+    weight: 17,
     image: 'gold_with_padding',
     description: 'Earn some gold.'
   },

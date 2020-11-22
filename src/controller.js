@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 // testing game variables
 import { genUpgradedCard } from './components/crafting/genUpgradedCard';
 import { upgrades } from './components/crafting/upgrades';
@@ -9,10 +11,10 @@ import { monstersByTier } from './monsters/monsters';
 const isControllerEnabled = true;
 // const isControllerEnabled = false;
 
-const upgradedCard = genUpgradedCard(
-  blueprints.allCardsObject['Sword'],
-  upgrades[upgrades.length - 1].cardProperties
-);
+// const upgradedCard = genUpgradedCard(
+//   blueprints.allCardsObject['Sword'],
+//   upgrades[upgrades.length - 1].cardProperties
+// );
 
 // const doubleUpgradedCard = genUpgradedCard(
 //   cards[upgradedCard],
@@ -21,30 +23,30 @@ const upgradedCard = genUpgradedCard(
 
 export const controller = isControllerEnabled ? {
   // yourHand: [upgradedCard, upgradedCard, upgradedCard],
-  yourHand: ['Lich', 'Lich', 'Lich'].map(i => createNewCard(i)),
-  yourDeck: [
-    'Dragon Blade',
-    'Dragon Blade',
-    'Dragon Blade',
-    'Dragon Blade',
-    'Dragon Blade',
+  // yourHand: ['Lich', 'Lich', 'Lich'].map(i => createNewCard(i)),
+  // yourDeck: [
+  //   'Dragon Blade',
+  //   'Dragon Blade',
+  //   'Dragon Blade',
+  //   'Dragon Blade',
+  //   'Dragon Blade',
 
-    'Dragon Blade',
-    'Dragon Blade',
-    'Dragon Blade',
-    'Dragon Blade',
-    'Dragon Blade',
+  //   'Dragon Blade',
+  //   'Dragon Blade',
+  //   'Dragon Blade',
+  //   'Dragon Blade',
+  //   'Dragon Blade',
 
-    'Dragon Blade',
-    'Dragon Blade',
-    'Dragon Blade',
-    'Dragon Blade',
-    'Dragon Blade',
-  ].map(i => createNewCard(i)),
+  //   'Dragon Blade',
+  //   'Dragon Blade',
+  //   'Dragon Blade',
+  //   'Dragon Blade',
+  //   'Dragon Blade',
+  // ].map(i => createNewCard(i)),
   // yourDiscard: [].map(i => createNewCard(i)),
   // yourBanish: [].map(i => createNewCard(i)),
   // enemyHand: [].map(i => createNewCard(i)),
-  enemyDeck: [].map(i => createNewCard(i)),
+  // enemyDeck: [].map(i => createNewCard(i)),
   // enemyDiscard: [].map(i => createNewCard(i)),
   // enemyBanish: [].map(i => createNewCard(i)),
 } : {};
