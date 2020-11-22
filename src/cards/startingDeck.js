@@ -3,13 +3,19 @@ import { createNewCard } from './createNewCard';
 export const startingDeck = [
   'Healing Potion',
   'Frost',
+  'Frost',
   'Fire',
-  'Mace',
-  'Saber',
+  'Fire',
+
+  'Sword',
+  'Sword',
+  'Sword',
+  'Sword',
+  'Sword',
 
   'Cutlass',
-  'Sword',
-  'Sword',
-  'Sword',
-  'Sword',
+  'Cutlass',
+  'Cutlass',
+  'Cutlass',
+  'Cutlass',
 ].map(cardName => createNewCard(cardName));

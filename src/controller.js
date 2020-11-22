@@ -8,8 +8,8 @@ import { cards } from './cards/cards';
 import { blueprints } from './cards/blueprints';
 import { monstersByTier } from './monsters/monsters';
 
-const isControllerEnabled = true;
-// const isControllerEnabled = false;
+// const isControllerEnabled = true;
+const isControllerEnabled = false;
 
 // const upgradedCard = genUpgradedCard(
 //   blueprints.allCardsObject['Sword'],
@@ -23,30 +23,30 @@ const isControllerEnabled = true;
 
 export const controller = isControllerEnabled ? {
   // yourHand: [upgradedCard, upgradedCard, upgradedCard],
-  // yourHand: ['Lich', 'Lich', 'Lich'].map(i => createNewCard(i)),
-  // yourDeck: [
-  //   'Dragon Blade',
-  //   'Dragon Blade',
-  //   'Dragon Blade',
-  //   'Dragon Blade',
-  //   'Dragon Blade',
+  yourHand: ['Lich', 'Lich', 'Lich'].map(i => createNewCard(i)),
+  yourDeck: [
+    'Dragon Blade',
+    'Dragon Blade',
+    'Dragon Blade',
+    'Dragon Blade',
+    'Dragon Blade',
 
-  //   'Dragon Blade',
-  //   'Dragon Blade',
-  //   'Dragon Blade',
-  //   'Dragon Blade',
-  //   'Dragon Blade',
+    'Dragon Blade',
+    'Dragon Blade',
+    'Dragon Blade',
+    'Dragon Blade',
+    'Dragon Blade',
 
-  //   'Dragon Blade',
-  //   'Dragon Blade',
-  //   'Dragon Blade',
-  //   'Dragon Blade',
-  //   'Dragon Blade',
-  // ].map(i => createNewCard(i)),
+    'Dragon Blade',
+    'Dragon Blade',
+    'Dragon Blade',
+    'Dragon Blade',
+    'Dragon Blade',
+  ].map(i => createNewCard(i)),
   // yourDiscard: [].map(i => createNewCard(i)),
   // yourBanish: [].map(i => createNewCard(i)),
   // enemyHand: [].map(i => createNewCard(i)),
-  // enemyDeck: [].map(i => createNewCard(i)),
+  enemyDeck: [].map(i => createNewCard(i)),
   // enemyDiscard: [].map(i => createNewCard(i)),
   // enemyBanish: [].map(i => createNewCard(i)),
 } : {};

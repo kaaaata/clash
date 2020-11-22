@@ -34,13 +34,13 @@ export const BattleRewards = () => {
   const [page, setPage] = useState('default');
   
   const returnToTown = () => {
-    const townFeedMessage = didPlayerWin
-      ? `You defeated: ${enemyName}!`
-      : `You were defeated by: ${enemyName}! You lose 1 life.`
-    if (enemyType === 'wave' && didPlayerWin) {
-      dispatch(actions.startNewDay({ feedInitialMessage: townFeedMessage }));
+    if (!didPlayerWin) {
+      dispatch(actions.addTownFeedText(`You were defeated by: ${enemyName}! You lose 1 life.`));
+      dispatch(actions.adjustPlayerLives(-1));
+      dispatch(actions.setScene('town'));
+    } else if (enemyType === 'wave') {
+      dispatch(actions.startNewDay());
     } else {
-      dispatch(actions.addTownFeedText(townFeedMessage));
       dispatch(actions.setScene('town'));
     }
     dispatch(actions.setCanVisitShop(true));
@@ -70,7 +70,6 @@ export const BattleRewards = () => {
                 dispatch(actions.adjustPlayerGold(battleRewardGold));
                 setPage('card_loot_modal');
               } else {
-                dispatch(actions.adjustPlayerLives(-1));
                 returnToTown();
               }
             }
@@ -84,13 +83,19 @@ export const BattleRewards = () => {
           page={2}
           text={
             <React.Fragment>
-              Energy Reservation Management Modal
+              I should prepare for tomorrow.
             </React.Fragment>
           }
-          options={[{
-            name: 'Continue',
-            onClick: returnToTown
-          }]}
+          options={[
+            {
+              name: 'Rest',
+              greenText: '-1 energy reserved.',
+              onClick: () => {
+                dispatch(actions.adjustPlayerEnergyReserved(-1));
+                returnToTown();
+              }
+            }
+          ]}
         />
       );
       break;
@@ -106,7 +111,13 @@ export const BattleRewards = () => {
         maxCardsToTake={2}
         showCounter
         cardIds={battleRewardCards}
-        closeModal={() => setPage('energy_reservation')}
+        closeModal={() => {
+          if (enemyType === 'wave') {
+            setPage('energy_reservation');
+          } else {
+            returnToTown();
+          }
+        }}
       />
     );
   } else if (didPlayerWin || didPlayerLose) {

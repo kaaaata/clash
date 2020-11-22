@@ -26,8 +26,11 @@ export const InputSwitch = ({
   const [isOn, setIsOn] = useState(
     JSON.parse(window.localStorage.getItem(`clash_${name}_toggle`)) || false
   );
+  const inputTextDefault = JSON.parse(window.localStorage.getItem(`clash_${name}_value`));
   const [inputText, setInputText] = useState(
-    JSON.parse(window.localStorage.getItem(`clash_${name}_value`)) || ''
+    inputTextDefault === 0 ? `${inputTextDefault}` : (
+      inputTextDefault || ''
+    )
   );
 
   return (

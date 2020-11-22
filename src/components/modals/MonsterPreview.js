@@ -54,13 +54,19 @@ export const MonsterPreview = ({
   retreatText = 'Retreat'
 }) => {
   const { deck, day, monster, monsterGoldReward, enemyStatBonuses } = useSelector(state => {
-    const flowMonsterOverride = allMonsters.filter(
-      i => i.name === (window.flow.monsterOverride_toggle && window.flow.monsterOverride_value)
-    )[0];
+    const day = state.clashTown.day;
+    const flowMonsterOverride = allMonsters.filter(i => i.name === (
+      ([1, 2, 3].includes(day)
+        && window.flow.monsterOverride1_toggle && window.flow.monsterOverride1_value)
+      || ([4, 5, 6].includes(day)  
+        && window.flow.monsterOverride2_toggle && window.flow.monsterOverride2_value)
+      || ([7, 8, 9].includes(day)
+        && window.flow.monsterOverride3_toggle && window.flow.monsterOverride3_value)
+    ))[0];
     return {
       deck: state.clashPlayer.deck,
-      day: state.clashTown.day,
-      monster: flowMonsterOverride || monsterOverride || state.clashTown.dailyMonster,
+      day,
+      monster: monsterOverride || flowMonsterOverride || state.clashTown.dailyMonster,
       monsterGoldReward: monsterGoldRewardOverride || state.clashTown.dailyMonsterGoldReward,
       enemyStatBonuses: state.clashBattleStats.enemyStatBonuses
     };

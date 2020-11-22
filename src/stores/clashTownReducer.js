@@ -9,7 +9,7 @@ const genInitialState = () => {
 
   return {
     energy: 0,
-    energyReserved: 10,
+    energyReserved: 9,
     day: 1,
     dailyMonster,
     // note: gold reward will be less if day is set thru Flow
@@ -40,13 +40,17 @@ export default (state = initialState, action) => {
     case 'SET_PLAYER_ENERGY_RESERVED':
       return {
         ...state,
-        energyReserved: action.payload
+        energyReserved: action.payload,
+        energy: action.payload
       };
-    case 'ADJUST_PLAYER_ENERGY_RESERVED':
+    case 'ADJUST_PLAYER_ENERGY_RESERVED': {
+      const newEnergyReserved = Math.max(0, Math.min(10, state.energyReserved + action.payload));
       return {
         ...state,
-        energy: Math.max(0, Math.min(10, state.energy + action.payload))
+        energyReserved: newEnergyReserved,
+        energy: 10 - newEnergyReserved
       };
+    }
     case 'SET_DAY':
       return {
         ...state,
@@ -66,8 +70,6 @@ export default (state = initialState, action) => {
       }
       return {
         ...state,
-        energy: state.day + 1,
-        energyReserved: state.energyReserved - 1,
         day: newDay,
         canDoRandomEvent: true,
         dailyMonster,
@@ -80,7 +82,7 @@ export default (state = initialState, action) => {
         completedTownActions: {},
         feed: [
           'It\'s a new day.',
-          action.payload.feedInitialMessage,
+          action.payload && action.payload.feedInitialMessage,
           [3, 6, 9].includes(newDay) && 'Tonight, an elite enemy will attack!',
           newDay === 10 && 'Tonight, the final boss will attack!'
         ].filter(Boolean)

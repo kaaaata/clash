@@ -133,6 +133,11 @@ export const Crafting = ({ closeModal }) => {
             setCard1Id(cardId);
             setCard2Id(null);
             setIsUpgradeLockedIn(false);
+            for (const k in cards) {
+              if (k.startsWith('upgrade_preview')) {
+                delete cards[k];
+              }
+            }
             availableUpgrades.forEach((upgrade, index) => {
               genUpgradedCard(cards[cardId], upgrade.cardProperties, `upgrade_preview_${index}`);
             });

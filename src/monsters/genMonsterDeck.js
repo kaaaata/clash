@@ -22,15 +22,15 @@ const commonAttacks = blueprints.lootableCardsByRarity.common.filter(
 );
 
 const deckSizeByDay = {
-  1: 10,
-  2: 15,
-  3: 20, // elite
-  4: 25,
-  5: 30,
-  6: 35, // elite
-  7: 40,
-  8: 45,
-  9: 50, // elite
+  1: 15,
+  2: 20,
+  3: 25, // elite
+  4: 30,
+  5: 35,
+  6: 40, // elite
+  7: 45,
+  8: 50,
+  9: 55, // elite
   10: 60 // final boss
 };
 

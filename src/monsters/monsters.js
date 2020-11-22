@@ -9,14 +9,14 @@ const monstersTier1 = [
     name: 'Minotaur',
     image: 'minotaur',
     stats: { attack: 0, magic: 0, defense: 0 },
-    deck: ['Minotaur'],
+    deck: ['Minotaur', 'Orc Blade'],
     wave2AdditionalCards: ['Orc Blade'],
     eliteAdditionalCards: ['Orc Blade']
   },
   {
     name: 'Slime',
     image: 'basic_slime',
-    stats: { attack: 0, magic: 0, defense: 0 },
+    stats: { attack: 0, magic: 0, defense: 1 },
     deck: [],
     wave2AdditionalCards: [],
     eliteAdditionalCards: []
@@ -25,7 +25,7 @@ const monstersTier1 = [
     name: 'Fire Slime',
     image: 'fire_slime',
     stats: { attack: 0, magic: 0, defense: 0 },
-    deck: ['Fire', 'Fire', 'Fire', 'Fire'],
+    deck: ['Fire', 'Fire', 'Fire', 'Fire', 'Fire'],
     wave2AdditionalCards: ['Super Fire'],
     eliteAdditionalCards: ['Fire Spear']
   },
@@ -33,7 +33,7 @@ const monstersTier1 = [
     name: 'Tentacle Monster',
     image: 'tentacles',
     stats: { attack: 0, magic: 0, defense: 0 },
-    deck: ['Tentacles', 'Tentacles', 'Tentacles'],
+    deck: ['Tentacles', 'Tentacles', 'Tentacles', 'Tentacles'],
     wave2AdditionalCards: ['Mimic'],
     eliteAdditionalCards: ['Candy Corn']
   }
