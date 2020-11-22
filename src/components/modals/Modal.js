@@ -1,4 +1,5 @@
 import { css, jsx } from '@emotion/core'; /** @jsx jsx */
+import { multiply } from 'lodash';
 import { Spacer, FlexContainer, Text, Button, FlexItem } from '../particles';
 import { colors } from '../styles';
 
@@ -47,6 +48,7 @@ export const Modal = ({
   shouldCloseOnClick = true,
   shouldShowCloseButton = false,
   closeButtonText = 'Back',
+  customCloseButton = null,
   children
 }) => {
   const modalTitle = title && (
@@ -54,6 +56,10 @@ export const Modal = ({
       {title}
       <Spacer height={30} />
     </Text>
+  );
+
+  const closeButton = !halfModal && shouldShowCloseButton && closeModal && (
+    <Button type='mini' onClick={closeModal} centered>{closeButtonText}</Button>
   );
 
   const modal = (
@@ -65,9 +71,7 @@ export const Modal = ({
       <FlexContainer alignItems='center' flexDirection='column' className='modal_content_container'>
         {modalTitle}
         <FlexItem className='modal_children_container'>{children}</FlexItem>
-        {!halfModal && shouldShowCloseButton && closeModal && (
-          <Button type='mini' onClick={closeModal} centered>{closeButtonText}</Button>
-        )}
+        {customCloseButton || closeButton}
       </FlexContainer>
     </div>
   );

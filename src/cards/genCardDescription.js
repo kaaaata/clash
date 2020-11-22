@@ -47,8 +47,8 @@ export const genCardDescription = ({
   shuffleCardCopiesIntoOpponentsPiles,
   customDescription
 }) => [
-  (pierces || (onDiscard && onDiscard.pierces)) && `Damage dealt bypasses shields.`,
-  dealsBanishingDamage && 'Damage dealt banishes.',
+  (pierces || (onDiscard && onDiscard.pierces)) && `Damage pierces shields.`,
+  dealsBanishingDamage && 'Damage banishes.',
   heal && `Heal ${heal}.`,
   healEnemy && `Heal enemy ${healEnemy}.`,
   drain && `Heal 1 for each point of damage dealt.`,

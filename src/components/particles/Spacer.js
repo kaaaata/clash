@@ -3,10 +3,10 @@ import { css, jsx } from '@emotion/core'; /** @jsx jsx */
 import { mq } from '../styles';
 
 export const Spacer = React.memo(
-  ({ height }) => (
+  ({ height, width }) => (
     <div css={css`
-      width: 100%;
-      ${mq.genResponsiveCss('height', height)}
+      ${height ? 'width: 100%;' : 'height: 100%;'}
+      ${height ? mq.genResponsiveCss('height', height) : mq.genResponsiveCss('width', width)}
     `} />
   )
 );

@@ -83,6 +83,7 @@ export const _cardCss = (rarityColor) => css`
     height: 2px;
     background: ${rarityColor};
     position: relative;
+    flex: none;
   }
 
   .flair {

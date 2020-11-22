@@ -68,7 +68,7 @@ const _upgrades = [
     }
   },
   {
-    description: 'Damage dealt banishes.',
+    description: 'Damage banishes.',
     cardProperties: {
       prefix: 'Banishing',
       suffix: 'of Banishing',
@@ -76,7 +76,7 @@ const _upgrades = [
     }
   },
   {
-    description: 'Damage dealt bypasses shields.',
+    description: 'Damage pierces shields.',
     cardProperties: {
       prefix: 'Piercing',
       suffix: 'of Piercing',

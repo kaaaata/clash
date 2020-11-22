@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { jsx } from '@emotion/core'; /** @jsx jsx */
+import { css, jsx } from '@emotion/core'; /** @jsx jsx */
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import * as actions from '../../stores/actions';
 import { Modal } from '../modals/Modal';
@@ -19,32 +19,37 @@ export const Crafting = ({ closeModal }) => {
   }), shallowEqual);
   const dispatch = useDispatch();
 
-  const [availableUpgrades, setAvailableUpgrades] = useState(null);
+  const [availableUpgrades] = useState(sampleSize(upgrades, 4));
   const [card1Id, setCard1Id] = useState(null);
   const [card2Id, setCard2Id] = useState(null);
   const [isUpgradeLockedIn, setIsUpgradeLockedIn] = useState(false);
   const [isCardSelectModalOpen, setIsCardSelectModalOpen] = useState(false);
-  
-  const isCraftingInProgress = !!availableUpgrades;
 
-  const closeModalCb = () => {
-    if (isUpgradeLockedIn) {
-      dispatch(actions.removeCardsFromCollection(card1Id));
-      const upgradedCardId = createNewCard(cards[card2Id]);
-      dispatch(actions.addCardsToCollection(upgradedCardId));
-    }
-
-    closeModal();
-  };
+  const closeButtons = (
+    <FlexContainer justifyContent='center' _css={css`width: 100%`}>
+      <Button type='mini' centered onClick={closeModal}>Exit</Button>
+      <Spacer width={20} />
+      <Button
+        type='mini'
+        centered
+        onClick={() => {
+          dispatch(actions.removeCardsFromCollection(card1Id));
+          dispatch(actions.addCardsToCollection(createNewCard(cards[card2Id])));
+          closeModal();
+        }}
+        isDisabled={!isUpgradeLockedIn}
+      >
+        Confirm Upgrade
+      </Button>
+    </FlexContainer>
+  );
   
   return (
     <React.Fragment>
       <Modal
         title='Upgrade a Card'
-        closeModal={closeModalCb}
         shouldCloseOnClick={false}
-        closeButtonText={isUpgradeLockedIn ? 'Confirm Upgrade' : 'Leave Without Upgrading'}
-        shouldShowCloseButton
+        customCloseButton={closeButtons}
       >
         <div css={craftingCss}>
           <FlexContainer
@@ -55,29 +60,19 @@ export const Crafting = ({ closeModal }) => {
             <section>
               <FlexContainer justifyContent='center' alignItems='center'>
                 <FlexContainer
-                  className={[
-                    'card_slot',
-                    isCraftingInProgress ? 'pointer' : '',
-                    isCraftingInProgress ? 'green_border' : 'red_border'
-                  ].filter(Boolean).join(' ')}
+                  className='card_slot pointer red_border'
                   justifyContent='center'
                   alignItems='center'
-                  onClick={() => {
-                    if (isCraftingInProgress) {
-                      setIsCardSelectModalOpen(true);
-                    }
-                  }}
+                  onClick={() => setIsCardSelectModalOpen(true)}
                 >
                   {(card1Id && !isCardSelectModalOpen)
                     ? <Card cardId={card1Id} shouldDisableZoom />
-                    : <Text type='mini'>({isCraftingInProgress ? 'select a card' : 'base card'})</Text>
+                    : <Text type='mini'>(select a card)</Text>
                   }
                 </FlexContainer>
                 <Text type='title'>&#8594;</Text>
                 <FlexContainer
-                  className={
-                    `card_slot ${(isCraftingInProgress && isUpgradeLockedIn) ? 'green_border' : 'red_border'}`
-                  }
+                  className={`card_slot ${isUpgradeLockedIn ? 'green_border' : 'red_border'}`}
                   justifyContent='center'
                   alignItems='center'
                 >
@@ -90,39 +85,35 @@ export const Crafting = ({ closeModal }) => {
 
               <Spacer height={40} />
 
-              {isCraftingInProgress ? (
-                <div className='upgrades'>
-                  {availableUpgrades.map((i, index) => (
-                    <Button
-                      key={index}
-                      isDisabled={
-                        !card1Id
-                        || !cards[`upgrade_preview_${index}`]
-                        || (i.cardProperties.prefix && cards[card1Id].prefix)
-                        || (i.cardProperties.suffix && cards[card1Id].suffix)
-                      }
-                      onMouseEnter={() => {
-                        if (!isUpgradeLockedIn) {
-                          setCard2Id(`upgrade_preview_${index}`);
-                        }
-                      }}
-                      onClick={() => {
+              <div className='upgrades'>
+                {availableUpgrades.map((i, index) => (
+                  <Button
+                    key={index}
+                    isDisabled={
+                      !card1Id // not sure why "Confirm Upgrade" bugs out without this line.
+                      || !cards[`upgrade_preview_${index}`]
+                      || (i.cardProperties.prefix && cards[card1Id].prefix)
+                      || (i.cardProperties.suffix && cards[card1Id].suffix)
+                    }
+                    onMouseEnter={() => {
+                      if (!isUpgradeLockedIn) {
                         setCard2Id(`upgrade_preview_${index}`);
-                        setIsUpgradeLockedIn(true);
-                      }}
-                    >
-                      <span className='green'>[{i.cardProperties.prefix ? `${i.cardProperties.prefix}...` : `...${i.cardProperties.suffix}`}]</span> {i.description}
-                    </Button>
-                  ))}
-                </div>
-              ) : (
-                <Button
-                  onClick={() => setAvailableUpgrades(sampleSize(upgrades, 4))}
-                  centered
-                >
-                  Reveal Upgrades
-                </Button>
-              )}
+                      }
+                    }}
+                    onClick={() => {
+                      setCard2Id(`upgrade_preview_${index}`);
+                      setIsUpgradeLockedIn(true);
+                    }}
+                  >
+                    <span className='green'>
+                      [{
+                        i.cardProperties.prefix
+                          ? `${i.cardProperties.prefix}...`
+                          : `...${i.cardProperties.suffix}`
+                      }]</span> {i.description}
+                  </Button>
+                ))}
+              </div>
             </section>
 
             <section>
