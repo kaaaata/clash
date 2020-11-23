@@ -26,5 +26,4 @@ export const startTurn = (state, player) => {
   }
 
   renderActions.push(startOfTurnActions);
-  renderActions.push([]);
 };
