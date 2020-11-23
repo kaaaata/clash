@@ -110,16 +110,16 @@ export const allies = [
     name: 'Warlock',
     image: 'crazy_mage',
     rarity: 'rare',
-    attack: 1,
-    defense: 1,
+    attack: 2,
+    defense: 0,
     playCopiesOfCards: ['Fire', 'Fire']
   },
   {
     name: 'Minotaur',
     image: 'minotaur',
     rarity: 'rare',
-    attack: 1,
-    defense: 1,
+    attack: 0,
+    defense: 0,
     customEffect: true,
     customDescription: 'Play 2 random attacks from your discard, then banish them.'
   },
@@ -127,16 +127,16 @@ export const allies = [
     name: 'Water Slime',
     image: 'water_slime',
     rarity: 'rare',
-    attack: 4,
-    defense: 2,
+    attack: 5,
+    defense: 1,
     drain: true
   },
   {
     name: 'Mage',
     image: 'mage',
     rarity: 'rare',
-    attack: 1,
-    defense: 1,
+    attack: 0,
+    defense: 0,
     customEffect: true,
     customDescription: 'Play 2 random magic attacks from your discard, then banish them.'
   },
@@ -154,13 +154,13 @@ export const allies = [
     name: 'Elementalist',
     image: 'cryopyromancer',
     rarity: 'rare',
-    attack: 1,
-    defense: 1,
+    attack: 0,
+    defense: 0,
     shuffleCardCopiesIntoOpponentsPiles: [
       { cardName: 'Burn', pile: 'deck' },
       { cardName: 'Burn', pile: 'deck' },
     ],
-    playCopiesOfCards: ['Frost']
+    playCopiesOfCards: ['Super Frost']
   },
   {
     name: 'Fire Dragon',
