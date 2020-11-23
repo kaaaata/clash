@@ -74,7 +74,7 @@ const CardPile = ({
             }}
             shouldAnimateEntry={
               index === cardIds.length - 1 // only animate top card in pile
-              && prevCardCount !== 'undefined' // no animation needed on first render ever
+              && prevCardCount !== 'undefined' // no animation on initial render
               && prevCardCount < cardIds.length // only animate if card was added to pile
             }
           />

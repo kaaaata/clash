@@ -14,7 +14,7 @@ const monstersTier1 = [
     eliteAdditionalCards: ['Orc Blade']
   },
   {
-    name: 'Slime',
+    name: 'Basic Slime',
     image: 'basic_slime',
     stats: { attack: 0, magic: 0, defense: 1 },
     deck: [],
