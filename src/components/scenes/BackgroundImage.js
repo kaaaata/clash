@@ -2,18 +2,19 @@ import { css, jsx } from '@emotion/core'; /** @jsx jsx */
 import { Image } from '../particles';
 import { useSelector, shallowEqual } from 'react-redux'
 
+// index = energy
 const rgbaFiltersByEnergy = [
-  'rgba(0, 0, 0, 0.16)',
   'rgba(0, 0, 0, 0.12)',
-  'rgba(0, 0, 0, 0.08)',
-  'rgba(0, 0, 0, 0.04)',
+  'rgba(0, 0, 0, 0.9)',
+  'rgba(0, 0, 0, 0.06)',
+  'rgba(0, 0, 0, 0.03)',
   'rgba(0, 0, 0, 0)',
-  'rgba(255, 255, 255, 0.04)',
-  'rgba(255, 255, 255, 0.08)',
+  'rgba(255, 255, 255, 0.03)',
+  'rgba(255, 255, 255, 0.06)',
+  'rgba(255, 255, 255, 0.09)',
   'rgba(255, 255, 255, 0.12)',
-  'rgba(255, 255, 255, 0.16)',
-  'rgba(255, 255, 255, 0.2)',
-  'rgba(255, 255, 255, 0.24)'
+  'rgba(255, 255, 255, 0.15)',
+  'rgba(255, 255, 255, 0.18)'
 ];
 
 const backgroundImageCss = css`
