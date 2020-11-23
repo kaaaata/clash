@@ -7,7 +7,7 @@ import { EventModal, EventModalPage } from '../../modals/EventModal';
 export const GatherGold = ({ closeModal }) => {
   const dispatch = useDispatch();
 
-  const goldEarned = random(20, 40);
+  const goldEarned = random(15, 30);
 
   return (
     <EventModal

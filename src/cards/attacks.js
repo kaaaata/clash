@@ -120,7 +120,7 @@ export const attacks = [
   },
   {
     name: 'Healing Blade',
-    image: 'fat_blue_sword',
+    image: 'healing_blade',
     imageSlant: 1,
     rarity: 'rare',
     attack: 4,
