@@ -250,7 +250,7 @@ test('Shuffle card copies into pile works (Paladin, Candy Corn)', () => {
 
 test('Discard effects work (Healing Potion, Falchion)', () => {
   state.you.deck = CardIdsArray(
-    ['Sword', 'Healing Potion', 'Sword', 'Sword', 'Sword'].map(i => createNewCard(i))
+    ['Sword', 'Sword', 'Healing Potion', 'Sword', 'Sword', 'Sword'].map(i => createNewCard(i))
   );
   state.you.discard = CardIdsArray([]);
   state.you.banish = CardIdsArray([]);
@@ -258,14 +258,14 @@ test('Discard effects work (Healing Potion, Falchion)', () => {
   const potion = blueprints.allCardsObject['Healing Potion'];
   simulatePlayCard({ cardName: 'Falchion', player: 'enemy' });
 
-  expect(state.you.discard.length).toBe(0);
+  expect(state.you.discard.length).toBe(1);
   expect(state.you.banish.length).toBe(1);
   expect(state.you.deck.length).toBe(potion.onDiscard.heal + 1);
 });
 
 test('Non-draw win conditions are working (Healing Potion, Falchion)', () => {
   state.you.deck = CardIdsArray(
-    ['Healing Potion', 'Sword', 'Sword', 'Sword'].map(i => createNewCard(i))
+    ['Sword', 'Healing Potion', 'Sword', 'Sword', 'Sword'].map(i => createNewCard(i))
   );
   simulatePlayCard({ cardName: 'Falchion', player: 'enemy' });
   expect(state.you.deck.length).toBe(3);
@@ -383,5 +383,5 @@ test('CUSTOM CARD EFFECT (Minotaur)', () => {
   expect(state.you.banish.length).toBe(12);
   expect(state.you.discard.length).toBe(9);
   expect(state.you.shields).toBe(2);
-  expect(state.enemy.deck.length).toBe(6);
+  expect(state.enemy.deck.length).toBe(4);
 });
