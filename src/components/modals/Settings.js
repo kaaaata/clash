@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { css, jsx } from '@emotion/core'; /** @jsx jsx */
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import * as actions from '../../stores/actions';
 import { Modal } from './Modal';
@@ -16,6 +17,10 @@ export const Settings = ({ closeModal }) => {
   const dispatch = useDispatch();
 
   const [isAllCardsModalActive, setIsAllCardsModalActive] = useState(false);
+  const [isBattleSpeedModalActive, setIsBattleSpeedModalActive] = useState(false);
+  const [battleSpeed, setBattleSpeed] = useState(
+    window.localStorage.getItem('clashsetting_battle_speed') || 'Normal'
+  );
 
   return (
     <React.Fragment>
@@ -54,6 +59,17 @@ export const Settings = ({ closeModal }) => {
 
           <Button
             type='mini'
+            isDisabled={scene === 'battle'}
+            onClick={() => setIsBattleSpeedModalActive(true)}
+            centered
+          >
+            Change Battle Speed
+          </Button>
+
+          <Spacer height={20} />
+
+          <Button
+            type='mini'
             onClick={closeModal}
             centered
           >
@@ -68,6 +84,41 @@ export const Settings = ({ closeModal }) => {
           cardNames={blueprints.allCardsArray.map(card => card.name)}
           closeModal={() => setIsAllCardsModalActive(false)}
         />
+      )}
+
+      {isBattleSpeedModalActive && (
+        <Modal
+          title='Battle Speed'
+          shouldCloseOnClick={false}
+          shouldShowCloseButton
+          closeModal={() => {
+            setIsBattleSpeedModalActive(false);
+            closeModal();
+          }}
+        >
+          <FlexContainer
+            flexDirection='column'
+            justifyContent='center'
+            alignItems='center'
+            _css={css`height: 100%;`}
+          >
+            {['Slow', 'Normal', 'Fast'].map(i => (
+              <React.Fragment key={i}>
+                <Button
+                  type='mini'
+                  onClick={() => {
+                    window.localStorage.setItem('clashsetting_battle_speed', i);
+                    setBattleSpeed(i);
+                  }}
+                  centered
+                >
+                  {i}{i === battleSpeed ? ' (selected)' : ''}
+                </Button>
+                <Spacer height={20} />
+              </React.Fragment>
+            ))}
+          </FlexContainer>
+        </Modal>
       )}
     </React.Fragment>
   );

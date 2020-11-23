@@ -5,6 +5,7 @@ import clashPlayerReducer from './clashPlayerReducer';
 import clashTownReducer from './clashTownReducer';
 import clashSceneReducer from './clashSceneReducer';
 import clashToastReducer from './clashToastReducer';
+import clashSettingsReducer from './clashSettingsReducer';
 
 export const store = createStore(combineReducers({
   clashBattleCards: clashBattleCardsReducer,
@@ -12,5 +13,6 @@ export const store = createStore(combineReducers({
   clashPlayer: clashPlayerReducer,
   clashTown: clashTownReducer,
   clashScene: clashSceneReducer,
-  clashToast: clashToastReducer
+  clashToast: clashToastReducer,
+  clashSettings: clashSettingsReducer
 }));

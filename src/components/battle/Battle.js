@@ -20,7 +20,16 @@ import { BattleLog } from './BattleLog';
 
 const perspectiveCss = css`perspective: 2000px;`;
 
+const battleSpeeds = {
+  'Slow': 750,
+  'Normal': 500,
+  'Fast': 250
+};
+
 export const Battle = () => {
+  const battleSpeedMs = battleSpeeds[
+    window.localStorage.getItem('clashsetting_battle_speed') || 'Normal'
+  ];
   const dispatch = useDispatch();
 
   let interval = null;
@@ -64,7 +73,7 @@ export const Battle = () => {
           clearInterval(interval);
           isAnimating = false;
         }
-      }, 500);
+      }, battleSpeedMs);
     } else {
       isAnimating = false;
     }
