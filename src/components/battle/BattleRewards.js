@@ -7,6 +7,7 @@ import { CardLootModal } from '../modals/CardLootModal';
 import { effects } from '../styles';
 import { packs } from '../shop/packs';
 import { genPackCardNames } from '../shop/genPackCardNames';
+import { genGuaranteedTownAction } from '../town/genTownActions';
 
 export const BattleRewards = () => {
   const {
@@ -81,7 +82,8 @@ export const BattleRewards = () => {
         />
       );
       break;
-    case 'energy_reservation':
+    case 'energy_reservation': {
+      const guaranteedTownAction = genGuaranteedTownAction();
       pageComponent = (
         <EventModalPage
           page={2}
@@ -93,9 +95,19 @@ export const BattleRewards = () => {
           options={[
             {
               name: 'Rest',
-              greenText: '-1 energy reserved.',
+              greenText: '-1 energy reserved. Gain 10 gold.',
               onClick: () => {
                 dispatch(actions.adjustPlayerEnergyReserved(-1));
+                dispatch(actions.adjustPlayerGold(10));
+                returnToTown();
+              },
+            },
+            {
+              name: 'Plan Ahead',
+              greenText: `-1 energy reserved. Guaranteed event tomorrow: ${guaranteedTownAction.name} (${guaranteedTownAction.energy} energy).`,
+              onClick: () => {
+                dispatch(actions.adjustPlayerEnergyReserved(-1));
+                dispatch(actions.setGuaranteedTownAction(guaranteedTownAction.name));
                 returnToTown();
               }
             }
@@ -103,6 +115,7 @@ export const BattleRewards = () => {
         />
       );
       break;
+    }
     default:
       break;
   }

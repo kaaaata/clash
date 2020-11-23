@@ -17,6 +17,7 @@ const genInitialState = () => {
     townActions: genTownActions(),
     purchasableCards: [],
     completedTownActions: {},
+    guaranteedTownAction: '',
     feed: [
       'Welcome to town!',
       'You are too tired from your long journey to do anything else today.'
@@ -78,7 +79,8 @@ export default (state = initialState, action) => {
           [3, 6, 9].includes(newDay),
           newDay
         ),
-        townActions: genTownActions(),
+        townActions: genTownActions(state.guaranteedTownAction),
+        guaranteedTownAction: '',
         completedTownActions: {},
         feed: [
           'It\'s a new day.',
@@ -102,6 +104,11 @@ export default (state = initialState, action) => {
         feed: newFeed
       };
     }
+    case 'SET_GUARANTEED_TOWN_ACTION':
+      return {
+        ...state,
+        guaranteedTownAction: action.payload
+      };
     case 'SET_TOWN_ACTION_COMPLETED':
       return {
         ...state,

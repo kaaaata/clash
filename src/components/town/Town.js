@@ -11,8 +11,7 @@ import {
   TreasureSlime,
   CatherineTheGreat,
   RemoveCards,
-  FreeGold,
-  ExtraLife,
+  GatherGold,
   DancingLady
 } from './randomEvents';
 import { Crafting } from '../crafting/Crafting';
@@ -97,13 +96,10 @@ export const Town = () => {
   let modal;
   switch (activeModal) {
     case 'Gather Gold':
-      modal = <FreeGold closeModal={closeModal} />;
+      modal = <GatherGold closeModal={closeModal} />;
       break;
     case 'Upgrade a Card':
       modal = <Crafting closeModal={closeModal} />;
-      break;
-    case 'Extra Life':
-      modal = <ExtraLife closeModal={closeModal} />;
       break;
     case 'Next Day':
       modal = (

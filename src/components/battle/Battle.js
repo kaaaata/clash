@@ -21,9 +21,9 @@ import { BattleLog } from './BattleLog';
 const perspectiveCss = css`perspective: 2000px;`;
 
 const battleSpeeds = {
-  'Slow': 750,
+  'Slow': 700,
   'Normal': 500,
-  'Fast': 250
+  'Fast': 300
 };
 
 export const Battle = () => {

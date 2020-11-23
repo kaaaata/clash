@@ -4,10 +4,14 @@ import { sample, keyBy } from 'lodash';
 // at least one action is "gather gold"
 // at least one action is "upgrade a card"
 // the last action is "next day"
-export const genTownActions = () => {
+export const genTownActions = (guaranteedTownAction = '') => {
   const actions = [];
 
-  for (let i = 0; i < 5; i++) {
+  if (guaranteedTownAction) {
+    actions.push(townActions[guaranteedTownAction]);
+  }
+
+  for (let i = 0; i < (guaranteedTownAction ? 4 : 5); i++) {
     const action = townActions[sample(townActionPool)];
     actions.push({
       ...action,
@@ -28,6 +32,12 @@ export const genTownActions = () => {
   return actions;
 };
 
+export const genGuaranteedTownAction = () => (
+  sample(Object.values(townActions).filter(
+    name => !['Gather Gold', 'Upgrade a Card'].includes(name)
+  ))
+);
+
 const townActions = keyBy([
   {
     name: 'Gather Gold',
@@ -42,13 +52,6 @@ const townActions = keyBy([
     weight: 4,
     image: 'gold_bar',
     description: 'Upgrade a card.'
-  },
-  {
-    name: 'Extra Life',
-    energy: 6,
-    weight: 1,
-    image: 'life',
-    description: 'An extra life!'
   },
   {
     name: 'Blacksmith',

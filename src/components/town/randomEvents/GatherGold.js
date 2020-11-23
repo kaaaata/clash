@@ -1,24 +1,27 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import * as actions from '../../../stores/actions';
+import { random } from 'lodash';
 import { EventModal, EventModalPage } from '../../modals/EventModal';
 
-export const ExtraLife = ({ closeModal }) => {
+export const GatherGold = ({ closeModal }) => {
   const dispatch = useDispatch();
+
+  const goldEarned = random(20, 40);
 
   return (
     <EventModal
-      title='Extra Life'
-      image='life'
+      title='Gather Gold'
+      image='gold_with_padding'
     >
       <EventModalPage
         page={1}
-        text='You find an extra life!'
+        text='You earn a little gold.'
         options={[{
           name: 'Continue',
-          greenText: 'Receive 1 life.',
+          greenText: goldEarned >= 0 && `Receive ${goldEarned} gold.`,
           onClick: () => {
-            dispatch(actions.adjustPlayerLives(1));
+            dispatch(actions.adjustPlayerGold(goldEarned));
             closeModal();
           }
         }]}
