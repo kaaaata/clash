@@ -9,7 +9,7 @@ import { createNewCard } from '../../cards/createNewCard';
 import { EventModalLootableCard } from './EventModalLootableCard';
 
 export const CardLootModal = ({
-  title = 'Choose cards to keep',
+  title = 'Select cards to keep',
   image,
   cardNames,
   cardIds,

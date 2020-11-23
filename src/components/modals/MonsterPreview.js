@@ -79,10 +79,16 @@ export const MonsterPreview = ({
   const monsterName = `${isMonsterElite ? `${genEliteMonsterPrefix()} ` : ''}${monster.name}`;
   
   const battleOnClick = () => {
-    dispatch(actions.setBattleInitialState());
+    Object.keys(cards).forEach(cardId => {
+      if (cardId.startsWith('battle')) {
+        delete cards[cardId];
+      }
+    });
     const enemyDeckIds = enemyDeckCardNames.map(
       cardName => createNewCard(cardName, `battle_${shortid.generate()}`)
     );
+    
+    dispatch(actions.setBattleInitialState());
     dispatch(actions.setEnemy({
       name: monsterName,
       image: monster.image,
@@ -134,7 +140,7 @@ export const MonsterPreview = ({
       <br />
       Your cards: <span className='bold yellow'>{yourDeck.length}</span> <CardsRarityString cardIds={yourDeck} showCrafted />
       <br /><br />
-      Victory: <span className='green'>gain {monsterGoldReward} gold</span> and <span className='green'>2 cards from the enemy's deck</span>
+      Victory: <span className='green'>gain {monsterGoldReward} gold</span> and {monster.type === 'wave' ? 'a ' : ''}<span className='green'>{monster.type === 'wave' ? '3 card draft' : "2 cards from the enemy's deck"}</span>
       <br />
       Defeat: <span className='red'>{day === 10 ? 'game over!' : 'lose 1 life.'}</span>
     </React.Fragment>

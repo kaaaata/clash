@@ -1,5 +1,4 @@
 import { controller } from '../controller';
-import { cards } from '../cards/cards';
 
 const genInitialState = () => ({
   yourDeck: controller.yourDeck || [],
@@ -76,11 +75,6 @@ export default (state = genInitialState(), action) => {
         battleRewardGold: action.payload
       };
     case 'SET_BATTLE_INITIAL_STATE':
-      Object.keys(cards).forEach(cardId => {
-        if (cardId.startsWith('battle')) {
-          delete cards[cardId];
-        }
-      });
       return genInitialState();
     case 'SET_ACTIVE_MODAL_CARD_PILE':
       return {

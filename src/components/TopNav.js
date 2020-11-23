@@ -86,7 +86,13 @@ export const TopNav = () => {
           />
           <FlexContainer _css={energyMeterCss} justifyContent='space-between'>
             <div className='fill' css={css`width: ${100 * energy / 10}%;`} />
-            <div className='reserved' css={css`width: ${100 * energyReserved / 10}%;`} />
+            <Image
+              src='rock_sliver.png'
+              width={300}
+              height={20}
+              className='reserved'
+              _css={`width: ${100 * energyReserved / 10}%;`}
+            />
             <Text type='mini' className='energy_count'>{energy} / 10</Text>
           </FlexContainer>
         </FlexContainer>

@@ -5,6 +5,8 @@ import * as actions from '../../stores/actions';
 import { EventModal, EventModalPage } from '../modals/EventModal';
 import { CardLootModal } from '../modals/CardLootModal';
 import { effects } from '../styles';
+import { packs } from '../shop/packs';
+import { genPackCardNames } from '../shop/genPackCardNames';
 
 export const BattleRewards = () => {
   const {
@@ -15,7 +17,8 @@ export const BattleRewards = () => {
     battleRewardCards,
     enemyType,
     isEnemyElite,
-    enemyName
+    enemyName,
+    day
   } = useSelector(state => ({
     didPlayerWin: state.clashBattleStats.winner
       && state.clashBattleStats.yourName === state.clashBattleStats.winner,
@@ -27,7 +30,8 @@ export const BattleRewards = () => {
     battleRewardCards: state.clashBattleCards.battleRewardCards,
     enemyType: state.clashBattleStats.enemyType,
     isEnemyElite: state.clashBattleStats.isEnemyElite,
-    enemyName: state.clashBattleStats.enemyName
+    enemyName: state.clashBattleStats.enemyName,
+    day: state.clashTown.day
   }), shallowEqual);
   const dispatch = useDispatch();
 
@@ -104,13 +108,30 @@ export const BattleRewards = () => {
   }
 
   if (page === 'card_loot_modal') {
+    let cardsProps = {};
+    let cardsLootFlavorText;
+    if (enemyType === 'wave') {
+      if ([1, 2].includes(day)) {
+        cardsProps.cardNames = genPackCardNames(packs.bronze);
+      } else if ([3, 4, 5].includes(day)) {
+        cardsProps.cardNames = genPackCardNames(packs.silver);
+      } else if ([6, 7, 8].includes(day)) {
+        cardsProps.cardNames = genPackCardNames(packs.gold);
+      } else if (day === '9') {
+        cardsProps.cardNames = genPackCardNames(packs.diamond);
+      }
+      cardsLootFlavorText = 'Card draft: select cards to keep';
+    } else {
+      cardsProps.cardIds = battleRewardCards;
+      cardsLootFlavorText = 'Take up to 2 cards from the enemy\'s deck!';
+    }
+
     return (
       <CardLootModal
-        title='The enemy dropped some cards! Select cards to keep'
+        title={cardsLootFlavorText}
         image={winnerImage}
         maxCardsToTake={2}
         showCounter
-        cardIds={battleRewardCards}
         closeModal={() => {
           if (enemyType === 'wave') {
             setPage('energy_reservation');
@@ -118,6 +139,7 @@ export const BattleRewards = () => {
             returnToTown();
           }
         }}
+        {...cardsProps}
       />
     );
   } else if (didPlayerWin || didPlayerLose) {

@@ -8,8 +8,8 @@ import { cards } from './cards/cards';
 import { blueprints } from './cards/blueprints';
 import { monstersByTier } from './monsters/monsters';
 
-// const isControllerEnabled = true;
-const isControllerEnabled = false;
+const isControllerEnabled = true;
+// const isControllerEnabled = false;
 
 // const upgradedCard = genUpgradedCard(
 //   blueprints.allCardsObject['Sword'],

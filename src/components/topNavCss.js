@@ -87,9 +87,6 @@ export const energyMeterCss = css`
   }
 
   .reserved {
-    background: url("assets/rock_sliver.png") no-repeat center center;
-    background-size: cover;
-    height: 100%;
     transition: width 1s ease-out;
   }
 

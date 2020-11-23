@@ -17,7 +17,9 @@ export const genPackCardNames = (pack) => {
       packCardNames[i] = sample(
         blueprints.lootableCardsByRarity[upgradeRarity(packCardNames[i].rarity)]
       ).name;
-      i--;
+
+      // to allow the same card to be upgraded multiple times, enable below line
+      // i--;
     }
   }
 
