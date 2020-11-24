@@ -44,7 +44,7 @@ const townActions = keyBy([
     energy: 1,
     weight: 17,
     image: 'gold_with_padding',
-    description: 'Earn some gold.'
+    description: 'Earn 15-30 gold.'
   },
   {
     name: 'Upgrade a Card',

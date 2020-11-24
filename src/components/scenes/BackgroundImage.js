@@ -5,7 +5,7 @@ import { useSelector, shallowEqual } from 'react-redux'
 // index = energy
 const rgbaFiltersByEnergy = [
   'rgba(0, 0, 0, 0.12)',
-  'rgba(0, 0, 0, 0.9)',
+  'rgba(0, 0, 0, 0.09)',
   'rgba(0, 0, 0, 0.06)',
   'rgba(0, 0, 0, 0.03)',
   'rgba(0, 0, 0, 0)',

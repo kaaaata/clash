@@ -133,7 +133,7 @@ export const BattleRewards = () => {
         cardsProps.cardNames = genPackCardNames(packs.silver);
       } else if ([6, 7, 8].includes(day)) {
         cardsProps.cardNames = genPackCardNames(packs.gold);
-      } else if (day === '9') {
+      } else if (day === 9) {
         cardsProps.cardNames = genPackCardNames(packs.diamond);
       }
       cardsLootFlavorText = 'Card draft: select cards to keep';

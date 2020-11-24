@@ -1,5 +1,6 @@
 import { keyBy } from 'lodash';
 
+// consult genMonsterDeck.js for monster deck sizes
 // tier 1: waves 1, 2, 3
 // tier 2: wave 4, 5, 6
 // tier 3: wave 7, 8, 9
@@ -9,33 +10,33 @@ const monstersTier1 = [
     name: 'Minotaur',
     image: 'minotaur',
     stats: { attack: 0, magic: 0, defense: 0 },
-    deck: ['Minotaur', 'Orc Blade'],
-    wave2AdditionalCards: ['Orc Blade'],
-    eliteAdditionalCards: ['Orc Blade']
+    deck: ['Minotaur', 'Orc Blade', 'Falchion'],
+    wave2AdditionalCards: ['Orc Blade', 'Orc Blade'],
+    eliteAdditionalCards: ['Orc Blade', 'Orc Blade']
   },
   {
     name: 'Basic Slime',
     image: 'basic_slime',
     stats: { attack: 0, magic: 0, defense: 1 },
-    deck: [],
-    wave2AdditionalCards: [],
-    eliteAdditionalCards: []
+    deck: ['Shield', 'Shield'],
+    wave2AdditionalCards: ['Shield', 'Shield'],
+    eliteAdditionalCards: ['Shield', 'Shield']
   },
   {
     name: 'Fire Slime',
     image: 'fire_slime',
     stats: { attack: 0, magic: 0, defense: 0 },
     deck: ['Fire', 'Fire', 'Fire', 'Fire', 'Fire'],
-    wave2AdditionalCards: ['Super Fire'],
-    eliteAdditionalCards: ['Fire Spear']
+    wave2AdditionalCards: ['Super Fire', 'Fire'],
+    eliteAdditionalCards: ['Fire Spear', 'Super Fire', 'Fire']
   },
   {
     name: 'Tentacle Monster',
     image: 'tentacles',
     stats: { attack: 0, magic: 0, defense: 0 },
-    deck: ['Tentacles', 'Tentacles', 'Tentacles', 'Tentacles'],
-    wave2AdditionalCards: ['Mimic'],
-    eliteAdditionalCards: ['Candy Corn']
+    deck: ['Tentacles', 'Tentacles', 'Tentacles', 'Tentacles', 'Tentacles'],
+    wave2AdditionalCards: ['Mimic', 'Candy Corn'],
+    eliteAdditionalCards: ['Mimic', 'Candy Corn']
   }
 ];
 
@@ -43,35 +44,34 @@ const monstersTier2 = [
   {
     name: 'Viking Slime',
     image: 'slime_potion',
-    stats: { attack: 0, magic: 0, defense: 1 },
-    deck: ['Viking Slime', 'Viking Slime', 'Shield', 'Shield', 'Healing Potion'],
-    wave2AdditionalCards: ['Longsword'],
-    eliteAdditionalCards: ['Falchion']
+    stats: { attack: 1, magic: 0, defense: 1 },
+    deck: ['Viking Slime', 'Viking Slime', 'Viking Slime', 'Viking Slime', 'Viking Slime', 'Shield'],
+    wave2AdditionalCards: ['Viking Slime', 'Viking Slime', 'Falchion'],
+    eliteAdditionalCards: ['Viking Slime', 'Viking Slime', 'Longsword']
   },
   {
     name: 'Demonic Slime',
     image: 'demonic_slime',
-    stats: { attack: 0, magic: 1, defense: 0 },
-    deck: ['Mage', 'Mage', 'Candy Corn', 'Candy Corn', 'Magic Scroll', 'Tentacles', 'Tentacles', 'Tentacles', 'Tentacles', 'Tentacles'],
-    wave2AdditionalCards: ['Super Frost'],
-    eliteAdditionalCards: ['Healing Potion']
+    stats: { attack: 0, magic: 1, defense: 1 },
+    deck: ['Mage', 'Mage', 'Candy Corn', 'Candy Corn', 'Magic Scroll', 'Tentacles', 'Tentacles', 'Tentacles', 'Tentacles', 'Tentacles', 'Healing Potion'],
+    wave2AdditionalCards: ['Super Frost', 'Super Fire', 'Mimic'],
+    eliteAdditionalCards: ['Super Frost', 'Healing Potion', 'Fire Spear']
   },
   {
     name: 'Hobgoblin',
     image: 'hobgoblin',
-    stats: { attack: 1, magic: 0, defense: 0 },
-    deck: ['Hobgoblin', 'Hobgoblin', 'Falchion', 'Falchion', 'Falchion'],
-    wave2AdditionalCards: ['Lotus'],
-    eliteAdditionalCards: ['Hobgoblin']
+    stats: { attack: 2, magic: 0, defense: 0 },
+    deck: ['Hobgoblin', 'Hobgoblin', 'Falchion', 'Falchion', 'Falchion', 'Orc Blade'],
+    wave2AdditionalCards: ['Lotus', 'Longsword', 'Orc Blade', 'Hobgoblin', 'Minotaur'],
+    eliteAdditionalCards: ['Hobgoblin', 'Orc Blade', 'Longsword']
   },
   {
     name: 'Evil Slime',
     image: 'evil_slime',
-    stats: { attack: 2, magic: 0, defense: 0 },
-    deck: ['Evil Slime', 'Evil Slime', ...Array(8).fill('Blank'), ...Array(12).fill('Orc Blade')],
-    wave2AdditionalCards: ['Blank', 'Blank', 'Orc Blade', 'Orc Blade', 'Orc Blade'],
-    eliteAdditionalCards: ['Evil Slime', 'Blank', 'Blank', 'Orc Blade', 'Orc Blade'],
-    autofill: false
+    stats: { attack: 0, magic: 0, defense: 2 },
+    deck: ['Evil Slime', 'Evil Slime', 'Evil Slime', 'Evil Slime', 'Minotaur', 'Evil Slime', 'Orc Blade', 'Orc Blade'],
+    wave2AdditionalCards: ['Orc Blade', 'Orc Blade', 'Evil Slime'],
+    eliteAdditionalCards: ['Evil Slime', 'Orc Blade', 'Orc Blade', 'Minotaur'],
   }
 ];
 
@@ -79,15 +79,15 @@ const monstersTier3 = [
   {
     name: 'Mimic',
     image: 'mimic',
-    stats: { attack: 0, magic: 1, defense: 1 },
-    deck: ['Dragon Blade', 'Greataxe', 'Attack Potion', 'Magic Scroll', 'Magic Scroll', 'Magic Scroll', 'Super Frost', 'Super Frost', 'Super Frost'],
-    wave2AdditionalCards: ['Magic Scroll'],
-    eliteAdditionalCards: ['Super Frost']
+    stats: { attack: 1, magic: 1, defense: 1 },
+    deck: ['Dragon Blade', 'Greataxe', 'Attack Potion', 'Magic Scroll', 'Magic Scroll', 'Magic Scroll', 'Super Frost', 'Super Frost', 'Super Frost', 'Mage', 'Mage'],
+    wave2AdditionalCards: ['Magic Scroll', 'Mage', 'Healing Potion'],
+    eliteAdditionalCards: ['Super Frost', 'Mage', 'Healing Potion']
   },
   {
     name: 'Water Slime',
     image: 'water_slime',
-    stats: { attack: 0, magic: 0, defense: 0 },
+    stats: { attack: 0, magic: 2, defense: 1 },
     deck: [
       'Water Slime',
       'Healing Blade',
@@ -114,9 +114,9 @@ const monstersTier3 = [
       'Magic Scroll',
       'Apothecary'
     ],
-    wave2AdditionalCards: ['Frost', 'Frost', 'Healing Potion'],
-    eliteAdditionalCards: ['Water Slime', 'Apothecary'],
-    autofill: false
+    wave2AdditionalCards: ['Frost', 'Frost', 'Healing Potion', 'Super Frost'],
+    eliteAdditionalCards: ['Water Slime', 'Apothecary', 'Super Frost'],
+    autofill: true
   }
 ];
 
@@ -124,13 +124,13 @@ const _eventMonsters = [
   {
     name: 'Treasure Slime',
     image: 'treasure_slime_monster',
-    stats: { attack: 0, magic: 0, defense: 0 },
+    stats: { attack: 1, magic: 1, defense: 1 },
     deck: ['Viking Slime']
   },
   {
     name: 'Catherine the Great',
     image: 'catherine_the_great',
-    stats: { attack: 1, magic: 1, defense: 1 },
+    stats: { attack: 2, magic: 2, defense: 2 },
     deck: ['Catherine the Great', 'Shield', 'Longsword', 'Healing Blade', 'Paladin']
   },
   {
