@@ -7,6 +7,8 @@ import { PileCardPlaceholder } from '../card/PileCardPlaceholder';
 import { PileCard } from '../card/PileCard';
 import { useRef, useEffect } from 'react';
 
+const inDevelopment = process.env.NODE_ENV !== 'production';
+
 const CardPile = ({
   cardIds,
   x,
@@ -107,6 +109,7 @@ export const YourDeck = () => {
       themeColor={colors.green}
       countX={175}
       countY={594}
+      cardPileModal={inDevelopment ? 'yourDeck' : null}
     />
   );
 };
@@ -219,6 +222,7 @@ export const EnemyDeck = () => {
       themeColor={colors.green}
       countX={876}
       countY={171}
+      cardPileModal={inDevelopment ? 'enemyDeck' : null}
     />
   );
 };

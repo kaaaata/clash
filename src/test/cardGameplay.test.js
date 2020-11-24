@@ -385,3 +385,15 @@ test('CUSTOM CARD EFFECT (Minotaur)', () => {
   expect(state.you.shields).toBe(2);
   expect(state.enemy.deck.length).toBe(4);
 });
+
+test('CUSTOM CARD EFFECT (Lich)', () => {
+  state.you.discard = CardIdsArray(Array(2).fill('Swordsman').map(i => createNewCard(i)));
+  simulatePlayCard({ cardName: 'Lich' });
+  expect(state.you.discard.length).toBe(1);
+  expect(state.you.deck.length).toBe(12);
+  expect(state.you.deck.filter(i => (
+    cards[i].name === 'Swordsman'
+    && cards[i].attack === 6
+  )).length)
+    .toBe(2);
+});

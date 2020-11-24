@@ -62,8 +62,10 @@ export const allies = [
     name: 'Lich',
     image: 'lich',
     rarity: 'uncommon',
-    attack: 4,
-    defense: 4
+    attack: 1,
+    defense: 4,
+    customEffect: true,
+    customDescription: 'Shuffle 2 random allies from your discard pile into your deck. They get +2/+2.'
   },
   {
     name: 'Hobgoblin',

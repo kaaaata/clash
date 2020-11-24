@@ -18,7 +18,9 @@ export const CardPileModal = () => {
     enemyDiscard: `${enemyName}'s Discard`,
     enemyBanish: `${enemyName}'s Banish`,
     yourDiscard: 'Your Discard',
-    yourBanish: 'Your Banish'
+    yourBanish: 'Your Banish',
+    yourDeck: 'Your Deck', // dev only
+    enemyDeck: 'Enemy Deck' // dev only
   };
 
   return activeModalCardPile ? (

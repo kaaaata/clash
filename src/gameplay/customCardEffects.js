@@ -148,5 +148,23 @@ export const customCardEffects = {
       pile: 'deck'
     }));
     addCardCopiesIntoPiles(state, copies, player);
+  },
+  'Lich': (state, player) => {
+    // Shuffle 2 random allies from your discard pile into your deck. They get +2/+2.
+    for (let i = 0; i < 2; i++) {
+      const discardAllyIndex = state[player].discard.getRandomCardIndexByFilter(
+        i => cards[i.card].type === 'ally'
+      );
+      if (discardAllyIndex !== -1) {
+        cards[state[player].discard[discardAllyIndex]].attack += 2;
+        cards[state[player].discard[discardAllyIndex]].defense += 2;
+        addCardCopiesIntoPiles(
+          state,
+          [{ cardId: state[player].discard[discardAllyIndex], pile: 'deck' }],
+          player,
+          { player, location: 'discard', index: discardAllyIndex }
+        );
+      }
+    }
   }
 };
