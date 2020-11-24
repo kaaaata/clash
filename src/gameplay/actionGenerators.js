@@ -64,7 +64,7 @@ export const actionGenerators = {
     return {
       actionKey: 'setStats',
       payload: {
-        stats: statBonuses,
+        stats: state[player].statBonuses,
         type: 'bonuses',
         player,
         operation: 'set'
