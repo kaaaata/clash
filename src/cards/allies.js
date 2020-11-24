@@ -54,8 +54,8 @@ export const allies = [
     name: 'Ice Whelp',
     image: 'ice_whelp',
     rarity: 'uncommon',
-    attack: 1,
-    defense: 1,
+    attack: 2,
+    defense: 3,
     playCopiesOfCards: ['Frost']
   },
   {

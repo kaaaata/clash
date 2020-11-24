@@ -1,9 +1,10 @@
 import { css, jsx } from '@emotion/core'; /** @jsx jsx */
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import * as actions from '../../stores/actions';
 import { Text, Spacer } from '../particles';
 import { colors } from '../styles';
+import { RulesModal } from '../modals/RulesModal';
 
 const mainMenuCss = css`
   .menu {
@@ -49,6 +50,8 @@ const YellowUnderlineText = ({ text, onClick }) => (
 export const MainMenu = () => {
   const dispatch = useDispatch();
 
+  const [isRulesModalActive, setIsRulesModalActive] = useState(false);
+
   useEffect(() => {
     if (window.flow.skipIntro_toggle) {
       dispatch(actions.setScene('character_select'))
@@ -68,7 +71,21 @@ export const MainMenu = () => {
         >
           Play
         </YellowUnderlineText>
+        <Spacer height={40} />
+        <YellowUnderlineText
+          text='Help'
+          onClick={() => setIsRulesModalActive(true)}
+        >
+          Play
+        </YellowUnderlineText>
       </div>
+
+      {isRulesModalActive && (
+        <RulesModal
+          isTopNavPresent={false}
+          closeModal={() => setIsRulesModalActive(false)}
+        />
+      )}
     </div>
   );
 };

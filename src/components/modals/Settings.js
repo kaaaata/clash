@@ -3,6 +3,7 @@ import { css, jsx } from '@emotion/core'; /** @jsx jsx */
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import * as actions from '../../stores/actions';
 import { Modal } from './Modal';
+import { RulesModal } from './RulesModal';
 import { Spacer, Button, FlexContainer } from '../particles';
 import { CardViewModal } from './CardViewModal';
 import { blueprints } from '../../cards/blueprints';
@@ -18,6 +19,7 @@ export const Settings = ({ closeModal }) => {
 
   const [isAllCardsModalActive, setIsAllCardsModalActive] = useState(false);
   const [isBattleSpeedModalActive, setIsBattleSpeedModalActive] = useState(false);
+  const [isRulesModalActive, setIsRulesModalActive] = useState(false);
   const [battleSpeed, setBattleSpeed] = useState(
     window.localStorage.getItem('clashsetting_battle_speed') || 'Normal'
   );
@@ -43,20 +45,18 @@ export const Settings = ({ closeModal }) => {
             Concede Battle
           </Button>
 
-          <Spacer height={20} />
+          <Spacer height={30} />
+
+          <Button 
+            type='mini'
+            onClick={() => setIsRulesModalActive(true)}
+            centered
+          >
+            Help
+          </Button>
+
+          <Spacer height={10} />
           
-          {inDevelopment && (
-            <Button
-              type='mini'
-              onClick={() => setIsAllCardsModalActive(true)}
-              centered
-            >
-              View All Cards
-            </Button>
-          )}
-
-          <Spacer height={20} />
-
           <Button
             type='mini'
             isDisabled={scene === 'battle'}
@@ -66,7 +66,17 @@ export const Settings = ({ closeModal }) => {
             Change Battle Speed
           </Button>
 
-          <Spacer height={20} />
+          <Spacer height={10} />
+
+          <Button
+            type='mini'
+            onClick={() => setIsAllCardsModalActive(true)}
+            centered
+          >
+            All Cards Gallery
+          </Button>
+
+          <Spacer height={30} />
 
           <Button
             type='mini'
@@ -86,15 +96,14 @@ export const Settings = ({ closeModal }) => {
         />
       )}
 
+      {isRulesModalActive && <RulesModal closeModal={() => setIsRulesModalActive(false)} />}
+
       {isBattleSpeedModalActive && (
         <Modal
           title='Battle Speed'
           shouldCloseOnClick={false}
           shouldShowCloseButton
-          closeModal={() => {
-            setIsBattleSpeedModalActive(false);
-            closeModal();
-          }}
+          closeModal={() => setIsBattleSpeedModalActive(false)}
         >
           <FlexContainer
             flexDirection='column'

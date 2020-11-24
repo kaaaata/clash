@@ -50,7 +50,7 @@ export const CardViewModal = ({
   cardIds,
   cardOnClick,
   closeModal,
-  closeButtonText
+  closeButtonText = 'Exit'
 }) => {
   const cards = cardNames || cardIds;
 

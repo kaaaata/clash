@@ -30,6 +30,7 @@ const appCss = css`
   .yellow { color: ${colors.yellow}; }
   .violet { color: ${colors.violet}; }
   .greyDark { color: ${colors.greyDark}; }
+  .black { color: ${colors.black}; }
   
   .bold { font-weight: bold; }
 `;

@@ -11,8 +11,8 @@ import { colors } from '../styles';
 const battleLogButtonCss = css`
   position: absolute;
   top: 430px;
-  left: 40px;
-  width: 100px;
+  left: 25px;
+  width: 150px;
 `;
 const battleLogModalCss = css`
   overflow: scroll;
@@ -49,10 +49,10 @@ export const BattleLog = () => {
     <React.Fragment>
       <Button
         onClick={() => setIsBattleLogModalOpen(true)}
-        _css={battleLogButtonCss}
         centered
+        _css={battleLogButtonCss}
       >
-        Recap
+        Last Turn's Recap
       </Button>
 
       {isBattleLogModalOpen && (
