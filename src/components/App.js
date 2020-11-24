@@ -9,6 +9,8 @@ import { Toasts } from './Toasts';
 import { colors } from './styles';
 import { Flow } from './flow/Flow';
 
+const inDevelopment = process.env.NODE_ENV !== 'production';
+
 const appCss = css`
   width: 1200px;
   height: 700px;
@@ -39,7 +41,7 @@ export const App = () => {
   const dispatch = useDispatch();
 
   window.flow = {};
-  if (JSON.parse(window.localStorage.getItem('clash_isFlowEnabled_toggle'))) {
+  if (inDevelopment && JSON.parse(window.localStorage.getItem('clash_isFlowEnabled_toggle'))) {
     Object.entries(window.localStorage).forEach(i => {
       if (i[0].startsWith('clash_')) {
         window.flow[i[0].slice('clash_'.length)] = JSON.parse(i[1]);

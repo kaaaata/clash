@@ -27,5 +27,6 @@ export const Flow = () => (
     <InputSwitch name='monsterOverride1' description='Wave 1-3 monster override:' type='string' />
     <InputSwitch name='monsterOverride2' description='Wave 4-6 monster override:' type='string' />
     <InputSwitch name='monsterOverride3' description='Wave 7-9 monster override:' type='string' />
+    <OnOffSwitch name='monsterOverride4' description='Dragon monster override' />
   </div>
 );

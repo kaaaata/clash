@@ -9,7 +9,7 @@ import { blueprints } from './cards/blueprints';
 import { monstersByTier } from './monsters/monsters';
 
 let isControllerEnabled = false;
-// isControllerEnabled = true;
+isControllerEnabled = true;
 
 const upgradedCard = genUpgradedCard(
   blueprints.allCardsObject['Sword'],
@@ -48,7 +48,7 @@ export const controller = isControllerEnabled ? {
   // yourDiscard: ['Saber', 'Saber', 'Swordsman', 'Frost'].map(i => createNewCard(i)),
   // yourBanish: [].map(i => createNewCard(i)),
   // enemyHand: ['Magic Potion', 'Magic Potion', 'Magic Potion'].map(i => createNewCard(i)),
-  // enemyDeck: [].map(i => createNewCard(i)),
+  enemyDeck: [].map(i => createNewCard(i)),
   // enemyDiscard: [].map(i => createNewCard(i)),
   // enemyBanish: [].map(i => createNewCard(i)),
 } : {};

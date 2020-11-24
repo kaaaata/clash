@@ -8,8 +8,6 @@ import { Spacer, Button, FlexContainer } from '../particles';
 import { CardViewModal } from './CardViewModal';
 import { blueprints } from '../../cards/blueprints';
 
-const inDevelopment = process.env.NODE_ENV !== 'production';
-
 export const Settings = ({ closeModal }) => {
   const { scene, enemyName } = useSelector(state => ({
     scene: state.clashScene.scene,
@@ -88,9 +86,9 @@ export const Settings = ({ closeModal }) => {
         </FlexContainer>
       </Modal>
       
-      {isAllCardsModalActive && inDevelopment && (
+      {isAllCardsModalActive && (
         <CardViewModal
-          title='All Cards'
+          title='All Cards Gallery'
           cardNames={blueprints.allCardsArray.map(card => card.name)}
           closeModal={() => setIsAllCardsModalActive(false)}
         />
