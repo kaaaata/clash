@@ -31,5 +31,5 @@ export const cardTemplate = {
   prefix: '', // upgrade prefix
   suffix: '', // upgrade suffix
 
-  battleMutatedProperties: { attack: false, magic: false, defense: false }
+  battleMutatedProperties: { attack: false, defense: false }
 };
