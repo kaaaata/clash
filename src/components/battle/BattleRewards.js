@@ -52,8 +52,10 @@ export const BattleRewards = () => {
   };
 
   let pageComponent;
+  let modalTitle;
   switch (page) {
     case 'default':
+      modalTitle = didPlayerWin ? 'Victory!' : 'Defeat!';
       pageComponent = (
         <EventModalPage
           page={1}
@@ -84,6 +86,7 @@ export const BattleRewards = () => {
       break;
     case 'energy_reservation': {
       const guaranteedTownAction = genGuaranteedTownAction();
+      modalTitle = 'Preparation';
       pageComponent = (
         <EventModalPage
           page={2}
@@ -158,7 +161,7 @@ export const BattleRewards = () => {
   } else if (didPlayerWin || didPlayerLose) {
     return (
       <EventModal
-        title={didPlayerWin ? 'Victory!' : 'Defeat!'}
+        title={modalTitle}
         image={winnerImage}
         imageContainerCss={isEnemyElite && didPlayerLose
           ? `${effects.rainbow} animation: rainbow 5s infinite;`

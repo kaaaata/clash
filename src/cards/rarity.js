@@ -1,5 +1,5 @@
 export const rarityColors = {
-  common: 'sand',
+  common: 'white',
   uncommon: 'green',
   rare: 'blue',
   legendary: 'red',

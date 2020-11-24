@@ -172,52 +172,53 @@ test('Stat bonuses works (Attack Potion, Magic Potion, Defense Potion, Falchion)
   expect(state.you.statBonuses.defense = 1);
 });
 
-test('Attacks are buffed by Attack, except when attack is 0 (Sword)', () => {
+test('Attacks are buffed by strength, even when attack is 0 (Sword)', () => {
   state.you.statBonuses.attack = 1;
-
   const card1 = blueprints.allCardsObject['Sword'];
   simulatePlayCard({ cardName: 'Sword' });
   expect(state.enemy.deck.length).toBe(10 - (card1.attack + 1));
 
   resetState();
 
+  state.you.statBonuses.attack = 1;
   const card2 = createNewCard({
     attack: 0,
-    isMockCard: true
+    isMockCard: true,
+    type: 'attack'
   }, 'test_mock_card');
   simulatePlayCard({ cardId: card2 });
-  expect(state.enemy.deck.length).toBe(10);
+  expect(state.enemy.deck.length).toBe(9);
 });
 
-test('Magics are buffed by Magic, except when attack is 0 (Fire)', () => {
+test('Magics are buffed by magic, even when attack is 0 (Fire)', () => {
   state.you.statBonuses.magic = 1;
-
   const card1 = blueprints.allCardsObject['Frost'];
   simulatePlayCard({ cardName: 'Frost' });
   expect(state.enemy.deck.length).toBe(10 - (card1.attack + 1));
 
   resetState();
 
+  state.you.statBonuses.magic = 1;
   const card2 = createNewCard({
     attack: 0,
     type: 'magic',
     isMockCard: true
   }, 'test_mock_card');
   simulatePlayCard({ cardId: card2 });
-  expect(state.enemy.deck.length).toBe(10);
+  expect(state.enemy.deck.length).toBe(9);
 });
 
-test('Shield is buffed by Defense, expect when defense is 0 (Cutlass, Sword)', () => {
+test('Shield is buffed by Defense, even when defense is 0 (Cutlass, Sword)', () => {
   state.you.statBonuses.defense = 1;
-
   const slash = blueprints.allCardsObject['Cutlass'];
   simulatePlayCard({ cardName: 'Cutlass' });
   expect(state.you.shields).toBe(slash.defense + 1);
 
   resetState();
 
+  state.you.statBonuses.defense = 1;
   simulatePlayCard({ cardName: 'Sword' });
-  expect(state.you.shields).toBe(0);
+  expect(state.you.shields).toBe(1);
 });
 
 test('Allies are not buffed by stats (Swordsman)', () => {

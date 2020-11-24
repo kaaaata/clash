@@ -103,7 +103,7 @@ export const playCard = (state, cardId, player, location, index) => {
 
   if (!state.winner && typeof attack === 'number') {
     let totalDamageDealt = attack;
-    if (attack && ['attack', 'magic'].includes(type)) {
+    if (['attack', 'magic'].includes(type)) {
       totalDamageDealt += state[player].statBonuses[type];
       totalDamageDealt += state[player].stats[type];
     }
@@ -111,23 +111,27 @@ export const playCard = (state, cardId, player, location, index) => {
       totalDamageDealt = Math.max(totalDamageDealt - state[opponent].shields, 0);
     }
 
-    let totalShields = state[player].shields + defense;
-    if (defense) {
+    let shieldsGained = defense;
+    if (typeof shieldsGained === 'number') {
       if (['attack', 'magic'].includes(type)) {
-        totalShields += state[player].statBonuses.defense;
-        totalShields += state[player].stats.defense;
+        shieldsGained += state[player].statBonuses.defense;
+        shieldsGained += state[player].stats.defense;
       }
-      if (!state.winner) {
+      if (!state.winner && shieldsGained) {
         logs.push(logGainShields(
-          `${player} gains ${totalShields} shields`,
+          `${player} gains ${shieldsGained} shield${shieldsGained === 1 ? '' : 's'}`,
           player,
-          totalShields
+          shieldsGained
         ));
       }
       if (totalDamageDealt === 0) {
         // if no damage is dealt, set shields independently of damage ticks.
         // otherwise, set the shields on the same tick as the first instance of damage. (below)
-        renderActions.push([actionGenerators.setShields(state, player, totalShields)]);
+        renderActions.push([actionGenerators.setShields(
+          state,
+          player,
+          state[player].shields + shieldsGained
+        )]);
       }
     }
 
@@ -166,7 +170,11 @@ export const playCard = (state, cardId, player, location, index) => {
       if (i === 0) {
         // if damage is dealt, set the shields on the same tick as the first instance of damage.
         // otherwise, set shields independently of damage ticks (above)
-        damageAction.push(actionGenerators.setShields(state, player, totalShields));
+        damageAction.push(actionGenerators.setShields(
+          state,
+          player,
+          state[player].shields + shieldsGained
+        ));
       }
       renderActions.push(damageAction);
 

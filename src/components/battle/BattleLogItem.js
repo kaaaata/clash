@@ -48,7 +48,7 @@ export const BattleLogItem = (props) => {
     case 'gain_shields':
       text = (
         <React.Fragment>
-          <span className='yellow'>{props.index}.</span> {props.player} gains <span className='violet'>{props.value} shields</span>
+          <span className='yellow'>{props.index}.</span> {props.player} gains <span className='blue'>{props.value} shield{props.value === 1 ? '' : 's'}</span>
         </React.Fragment>
       );
       break;
