@@ -30,6 +30,6 @@ export const cardTemplate = {
   statBonuses: null,
   prefix: '', // upgrade prefix
   suffix: '', // upgrade suffix
-
-  battleMutatedProperties: { attack: false, defense: false }
+  battleMutatedProperties: { attack: false, defense: false }, // green text for cards upgraded in battle
+  intrinsic: false // starts in hand, otherwise top of deck
 };

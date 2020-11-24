@@ -116,6 +116,14 @@ const _upgrades = [
       drain: true
     }
   },
+  {
+    description: 'Starts in your hand.',
+    cardProperties: {
+      prefix: 'Intrinsic',
+      suffix: 'of Intrinsicality',
+      intrinsic: true
+    }
+  }
 ];
 
 export const upgrades = flatten(_upgrades.map(i => [

@@ -45,8 +45,10 @@ export const genCardDescription = ({
   playCopiesOfCards,
   shuffleCardCopiesIntoYourPiles,
   shuffleCardCopiesIntoOpponentsPiles,
-  customDescription
+  customDescription,
+  intrinsic
 }) => [
+  intrinsic && 'Starts in your hand.',
   (pierces || (onDiscard && onDiscard.pierces)) && `Damage pierces shields.`,
   dealsBanishingDamage && 'Damage banishes.',
   heal && `Heal ${heal}.`,

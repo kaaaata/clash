@@ -11,10 +11,10 @@ import { monstersByTier } from './monsters/monsters';
 let isControllerEnabled = false;
 // isControllerEnabled = true;
 
-// const upgradedCard = genUpgradedCard(
-//   blueprints.allCardsObject['Sword'],
-//   upgrades[upgrades.length - 1].cardProperties
-// );
+const upgradedCard = genUpgradedCard(
+  blueprints.allCardsObject['Sword'],
+  upgrades[upgrades.length - 1].cardProperties
+);
 
 // const doubleUpgradedCard = genUpgradedCard(
 //   cards[upgradedCard],
@@ -23,29 +23,29 @@ let isControllerEnabled = false;
 
 export const controller = isControllerEnabled ? {
   // yourHand: [upgradedCard, upgradedCard, upgradedCard],
-  yourHand: ['Lich', 'Greataxe', 'Greataxe'].map(i => createNewCard(i)),
-  // yourDeck: [
-  //   'Dragon Blade',
-  //   'Dragon Blade',
-  //   'Dragon Blade',
-  //   'Dragon Blade',
-  //   'Dragon Blade',
+  // yourHand: ['Lich', 'Greataxe', 'Greataxe'].map(i => createNewCard(i)),
+  yourDeck: [
+    'Dragon Blade',
+    'Dragon Blade',
+    'Dragon Blade',
+    cards[upgradedCard],
+    cards[upgradedCard],
 
-  //   'Dragon Blade',
-  //   'Dragon Blade',
-  //   'Dragon Blade',
-  //   'Dragon Blade',
-  //   'Dragon Blade',
+    'Dragon Blade',
+    cards[upgradedCard],
+    cards[upgradedCard],
+    'Dragon Blade',
+    'Dragon Blade',
 
-  //   'Dragon Blade',
-  //   'Dragon Blade',
-  //   'Dragon Blade',
-  //   'Dragon Blade',
-  //   'Dragon Blade',
-  // ].map(i => createNewCard(i)),
+    'Dragon Blade',
+    'Dragon Blade',
+    'Dragon Blade',
+    'Dragon Blade',
+    'Dragon Blade',
+  ].map(i => createNewCard(i)),
   // yourDiscard: [].map(i => createNewCard(i)),
   // yourBanish: [].map(i => createNewCard(i)),
-  enemyHand: ['Greataxe', 'Mace', 'Mace'].map(i => createNewCard(i)),
+  // enemyHand: ['Greataxe', 'Mace', 'Mace'].map(i => createNewCard(i)),
   // enemyDeck: [].map(i => createNewCard(i)),
   // enemyDiscard: [].map(i => createNewCard(i)),
   // enemyBanish: [].map(i => createNewCard(i)),

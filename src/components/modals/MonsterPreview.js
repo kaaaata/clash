@@ -74,7 +74,7 @@ export const MonsterPreview = ({
   const dispatch = useDispatch();
   
   const isMonsterElite = !monsterOverride && [3, 6, 9].includes(day);
-  const yourDeck = shuffle(deck); // cardIds
+  const yourDeckIds = shuffle(deck); // cardIds
   const enemyDeckCardNames = genMonsterDeck(monster, day); // monster.deck cardNames
   const monsterName = `${isMonsterElite ? `${genEliteMonsterPrefix()} ` : ''}${monster.name}`;
   
@@ -87,7 +87,14 @@ export const MonsterPreview = ({
     const enemyDeckIds = enemyDeckCardNames.map(
       cardName => createNewCard(cardName, `battle_${shortid.generate()}`)
     );
-    
+
+    const yourDeckSorted = (controller.yourDeck || yourDeckIds)
+      .map(cardId => createNewCard(cards[cardId], `battle_${shortid.generate()}`))
+      .sort((a, b) => cards[a].intrinsic - cards[b].intrinsic);
+    const enemyDeckSorted = (controller.enemyDeck || enemyDeckIds)
+      .map(cardId => createNewCard(cards[cardId], `battle_${shortid.generate()}`))
+      .sort((a, b) => cards[a].intrinsic - cards[b].intrinsic);
+
     dispatch(actions.setBattleInitialState());
     dispatch(actions.setEnemy({
       name: monsterName,
@@ -102,23 +109,15 @@ export const MonsterPreview = ({
       player: 'enemy',
       operation: 'set'
     }));
-    dispatch(actions.setYourDeck(
-      (controller.yourDeck || yourDeck.slice(0, yourDeck.length - 3))
-        .map(cardId => createNewCard(cards[cardId], `battle_${shortid.generate()}`))
+    dispatch(actions.setYourDeck(yourDeckSorted.slice(0, yourDeckSorted.length - 3)));
+    dispatch(actions.setEnemyDeck(enemyDeckSorted.slice(0, enemyDeckSorted.length - 3)));
+    dispatch(actions.setYourHand(controller.yourHand
+      ? controller.yourHand.map(cardId => createNewCard(cards[cardId], `battle_${shortid.generate()}`))
+      : yourDeckSorted.slice(yourDeckSorted.length - 3)
     ));
-    dispatch(actions.setEnemyDeck(
-      (controller.enemyDeck || enemyDeckIds.slice(0, enemyDeckIds.length - 3))
-        .map(cardId => createNewCard(cards[cardId], `battle_${shortid.generate()}`))
-    ));
-    dispatch(actions.setYourHand(
-      (controller.yourHand || yourDeck.slice(yourDeck.length - 3))
-        .map(cardId => createNewCard(cards[cardId], `battle_${shortid.generate()}`))
-    ));
-    dispatch(actions.setEnemyHand(
-      controller.enemyHand || [
-        ...enemyDeckIds.slice(enemyDeckIds.length - 3)
-          .map(cardId => createNewCard(cards[cardId], `battle_${shortid.generate()}`))
-      ]
+    dispatch(actions.setEnemyHand(controller.enemyHand
+      ? controller.enemyHand.map(cardId => createNewCard(cards[cardId], `battle_${shortid.generate()}`))
+      : enemyDeckSorted.slice(enemyDeckSorted.length - 3)
     ));
     dispatch(actions.setBattleRewardCards(
       isMonsterElite
@@ -138,7 +137,7 @@ export const MonsterPreview = ({
       <br /><br />
       Enemy cards: <span className='bold yellow'>{enemyDeckCardNames.length}</span> <CardsRarityString cardNames={enemyDeckCardNames} />
       <br />
-      Your cards: <span className='bold yellow'>{yourDeck.length}</span> <CardsRarityString cardIds={yourDeck} showCrafted />
+      Your cards: <span className='bold yellow'>{yourDeckIds.length}</span> <CardsRarityString cardIds={yourDeckIds} showCrafted />
       <br /><br />
       Victory: <span className='green'>gain {monsterGoldReward} gold</span> and {monster.type === 'wave' ? 'a ' : ''}<span className='green'>{monster.type === 'wave' ? '3 card draft' : "2 cards from the enemy's deck"}</span>
       <br />

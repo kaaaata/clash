@@ -9,6 +9,7 @@ export const genUpgradedCard = (card, upgrade, cardIdOverride) => {
     || (card.dealsBanishingDamage && upgrade.dealsBanishingDamage)
     || (card.banishesOnPlay && upgrade.banishesOnPlay)
     || (card.triggerDiscardOnPlay && upgrade.triggerDiscardOnPlay)
+    || (card.intrinsic && upgrade.intrinsic)
   ) {
     return null;
   }
@@ -46,6 +47,7 @@ export const genUpgradedCard = (card, upgrade, cardIdOverride) => {
   // statBonuses (currently no non-legendary attacks or magic attacks have statBonuses)
   c.prefix = card.prefix || upgrade.prefix;
   c.suffix = card.suffix || upgrade.suffix;
+  c.intrinsic = card.intrinsic || upgrade.intrinsic;
   
   return createNewCard(c, cardIdOverride);
 };
