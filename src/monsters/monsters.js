@@ -10,7 +10,7 @@ const monstersTier1 = [
     name: 'Minotaur',
     image: 'minotaur',
     stats: { attack: 0, magic: 0, defense: 0 },
-    deck: ['Minotaur', 'Orc Blade', 'Falchion'],
+    deck: ['Minotaur', 'Falchion'],
     wave2AdditionalCards: ['Orc Blade', 'Orc Blade'],
     eliteAdditionalCards: ['Orc Blade', 'Orc Blade']
   },
@@ -45,9 +45,9 @@ const monstersTier2 = [
     name: 'Viking Slime',
     image: 'slime_potion',
     stats: { attack: 1, magic: 0, defense: 1 },
-    deck: ['Viking Slime', 'Viking Slime', 'Viking Slime', 'Viking Slime', 'Viking Slime', 'Shield'],
-    wave2AdditionalCards: ['Viking Slime', 'Viking Slime', 'Falchion'],
-    eliteAdditionalCards: ['Viking Slime', 'Viking Slime', 'Longsword']
+    deck: ['Viking Slime', 'Viking Slime', 'Viking Slime', 'Shield'],
+    wave2AdditionalCards: ['Viking Slime', 'Falchion'],
+    eliteAdditionalCards: ['Viking Slime', 'Longsword']
   },
   {
     name: 'Demonic Slime',
@@ -69,7 +69,7 @@ const monstersTier2 = [
     name: 'Evil Slime',
     image: 'evil_slime',
     stats: { attack: 0, magic: 0, defense: 2 },
-    deck: ['Evil Slime', 'Evil Slime', 'Evil Slime', 'Evil Slime', 'Minotaur', 'Evil Slime', 'Orc Blade', 'Orc Blade'],
+    deck: ['Evil Slime', 'Evil Slime', 'Evil Slime', 'Evil Slime', 'Minotaur'],
     wave2AdditionalCards: ['Orc Blade', 'Orc Blade', 'Evil Slime'],
     eliteAdditionalCards: ['Evil Slime', 'Orc Blade', 'Orc Blade', 'Minotaur'],
   }
@@ -96,10 +96,6 @@ const monstersTier3 = [
       'Ice Whelp',
 
       'Healing Potion',
-      'Healing Potion',
-      'Healing Potion',
-      'Healing Potion',
-      'Healing Potion',
 
       'Magic Potion',
       'Ice Blade',
@@ -114,9 +110,8 @@ const monstersTier3 = [
       'Magic Scroll',
       'Apothecary'
     ],
-    wave2AdditionalCards: ['Frost', 'Frost', 'Healing Potion', 'Super Frost'],
-    eliteAdditionalCards: ['Water Slime', 'Apothecary', 'Super Frost'],
-    autofill: true
+    wave2AdditionalCards: ['Frost', 'Frost', 'Super Frost'],
+    eliteAdditionalCards: ['Water Slime', 'Apothecary', 'Super Frost']
   }
 ];
 
