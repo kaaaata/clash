@@ -27,6 +27,7 @@ const _Card = ({ cardName, cardId }) => {
     type,
     description,
     glow,
+    battleMutatedProperties
   } = card;
 
   const cardArt = (
@@ -71,7 +72,9 @@ const _Card = ({ cardName, cardId }) => {
       width={20}
       height={20}
     >
-      <div className='number'>{attack}</div>
+      <div className={`number ${battleMutatedProperties.attack ? 'green' : ''}`}>
+        {attack}
+      </div>
     </Image>
   );
 
@@ -82,7 +85,9 @@ const _Card = ({ cardName, cardId }) => {
       width={20}
       height={20}
     >
-      <div className='number'>{defense}</div>
+      <div className={`number ${battleMutatedProperties.defense ? 'green' : ''}`}>
+        {defense}
+      </div>
     </Image>
   );
 

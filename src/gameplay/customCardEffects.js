@@ -158,6 +158,7 @@ export const customCardEffects = {
       if (discardAllyIndex !== -1) {
         cards[state[player].discard[discardAllyIndex]].attack += 2;
         cards[state[player].discard[discardAllyIndex]].defense += 2;
+        cards[state[player].discard[discardAllyIndex]].battleMutatedProperties.attack = true;
         addCardCopiesIntoPiles(
           state,
           [{ cardId: state[player].discard[discardAllyIndex], pile: 'deck' }],

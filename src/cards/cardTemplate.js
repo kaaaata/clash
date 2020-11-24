@@ -29,5 +29,7 @@ export const cardTemplate = {
   shuffleCardCopiesIntoOpponentsPiles: [],
   statBonuses: null,
   prefix: '', // upgrade prefix
-  suffix: '' // upgrade suffix
+  suffix: '', // upgrade suffix
+
+  battleMutatedProperties: { attack: false, magic: false, defense: false }
 };
