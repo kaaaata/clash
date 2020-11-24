@@ -39,7 +39,11 @@ export const BattleLogItem = (props) => {
       );
       break;
     case 'play_copy_of_card':
-      text = (
+      text = props.originPile ? (
+        <React.Fragment>
+          <span className='yellow'>{props.index}.</span> {props.player} plays <CardNameWithTooltip cardId={props.cardId} /> from {props.originPile}
+        </React.Fragment>
+      ) : (
         <React.Fragment>
           <span className='yellow'>{props.index}.</span> {props.player} plays a <span className='yellow'>copy</span> of <CardNameWithTooltip cardId={props.cardId} />
         </React.Fragment>

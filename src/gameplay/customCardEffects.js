@@ -21,11 +21,17 @@ export const customCardEffects = {
       const attackIndex = state[player].discard.getRandomCardIndexByFilter(
         i => cards[i.card].type === 'attack'
       );
-      const cardId = createNewCard({
-        ...cards[state[player].discard[attackIndex]],
-        banishesOnPlay: true
-      }, `battle_${shortid.generate()}`);
       if (attackIndex !== -1) {
+        const cardId = createNewCard({
+          ...cards[state[player].discard[attackIndex]],
+          banishesOnPlay: true
+        }, `battle_${shortid.generate()}`);
+        state.logs.push(logPlayCopyOfCard(
+          `${player} plays ${cards[cardId]}(${cardId})`,
+          player,
+          cardId,
+          "Player's discard"
+        ));
         playCard(state, cardId, player, 'discard', attackIndex);
       }
     }
@@ -36,11 +42,17 @@ export const customCardEffects = {
       const attackIndex = state[player].discard.getRandomCardIndexByFilter(
         i => cards[i.card].type === 'magic'
       );
-      const cardId = createNewCard({
-        ...cards[state[player].discard[attackIndex]],
-        banishesOnPlay: true
-      }, `battle_${shortid.generate()}`);
       if (attackIndex !== -1) {
+        const cardId = createNewCard({
+          ...cards[state[player].discard[attackIndex]],
+          banishesOnPlay: true
+        }, `battle_${shortid.generate()}`);
+        state.logs.push(logPlayCopyOfCard(
+          `${player} plays ${cards[cardId]}(${cardId})`,
+          player,
+          cardId,
+          "Player's discard"
+        ));
         playCard(state, cardId, player, 'discard', attackIndex);
       }
     }
@@ -50,11 +62,17 @@ export const customCardEffects = {
     const allyIndex = state[player].discard.getRandomCardIndexByFilter(
       i => cards[i.card].type === 'ally'
     );
-    const cardId = createNewCard({
-      ...cards[state[player].discard[allyIndex]],
-      banishesOnPlay: true
-    }, `battle_${shortid.generate()}`);
     if (allyIndex !== -1) {
+      const cardId = createNewCard({
+        ...cards[state[player].discard[allyIndex]],
+        banishesOnPlay: true
+      }, `battle_${shortid.generate()}`);
+      state.logs.push(logPlayCopyOfCard(
+        `${player} plays ${cards[cardId]}(${cardId})`,
+        player,
+        cardId,
+        "Player's discard"
+      ));
       playCard(state, cardId, player, 'discard', allyIndex);
     }
   },

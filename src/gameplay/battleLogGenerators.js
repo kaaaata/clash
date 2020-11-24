@@ -20,11 +20,12 @@ export const logHealCard = (consoleLog, player, cardId) => ({
   cardId
 });
 
-export const logPlayCopyOfCard = (consoleLog, player, cardId) => ({
+export const logPlayCopyOfCard = (consoleLog, player, cardId, originPile) => ({
   type: 'play_copy_of_card',
   consoleLog,
   player,
-  cardId
+  cardId,
+  originPile
 });
 
 export const logGainShields = (consoleLog, player, value) => ({
