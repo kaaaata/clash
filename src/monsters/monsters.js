@@ -132,7 +132,7 @@ const _eventMonsters = [
     name: 'The Evil Dragon',
     image: 'fire_dragon',
     stats: { attack: 2, magic: 2, defense: 2 },
-    deck: ['The Evil Dragon Jr.', 'Fire Spear', 'Fire', 'Super Fire']
+    deck: ['The Evil Dragon Jr.', 'The Evil Dragon Jr.', 'The Evil Dragon Jr.', 'Fire Spear', 'Fire Spear', 'Fire', 'Fire', 'Super Fire', 'Super Fire', 'Dragon Blade', 'Dragon Blade', 'Shield', 'Shield', 'Shield', 'Golden Goblet']
   }
 ];
 

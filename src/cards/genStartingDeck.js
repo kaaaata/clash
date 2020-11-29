@@ -4,8 +4,8 @@ export const genStartingDeck = () => [
   'Healing Potion',
   'Frost',
   'Frost',
-  'Fire',
-  'Swordsman',
+  'Frost',
+  'Sword',
 
   'Sword',
   'Sword',

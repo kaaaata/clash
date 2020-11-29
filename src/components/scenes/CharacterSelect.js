@@ -55,11 +55,14 @@ export const CharacterSelect = () => {
 
   useEffect(() => {
     if (window.flow.skipIntro_toggle) {
+      const character = characters.filter(
+        i => i.name === (window.flow.skipIntro_value || 'Paladin')
+      )[0];
       continueOnClick(
-        characters[0].name,
-        characters[0].image,
-        characters[0].startingCards
-      )
+        character.name,
+        character.image,
+        character.startingCards
+      );
     }
   })
 

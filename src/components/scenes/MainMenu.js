@@ -71,7 +71,7 @@ export const MainMenu = () => {
         >
           Play
         </YellowUnderlineText>
-        <Spacer height={40} />
+        <Spacer height={10} />
         <YellowUnderlineText
           text='Help'
           onClick={() => setIsRulesModalActive(true)}
