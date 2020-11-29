@@ -23,7 +23,7 @@ const storyCss = css`
   }
 `;
 
-export const Story = ({ setScene }) => {
+export const WinScreen = ({ setScene }) => {
   const dispatch = useDispatch();
 
   const [step, setStep] = useState(1);
@@ -32,21 +32,21 @@ export const Story = ({ setScene }) => {
     <div
       css={storyCss}
       onClick={() => step === 3
-        ? dispatch(actions.setScene('character_select'))
+        ? dispatch(actions.resetGame())
         : setStep(step + 1)
       }
     >
       <Text type='header' centered>
-        Your town is under attack by monsters!
+        Congratulations!
       </Text>
       {step >= 2 && (
         <Text type='header' centered>
-          Can you survive for 10 days and nights?!
+          You survived 10 days and nights, and defeated the evil Dragon.
         </Text>
       )}
       {step >= 3 && (
         <Text type='header' centered>
-          Only time will tell!!
+          Thanks for playing. I really do appreciate it. -Cat
         </Text>
       )}
       <Text className='click_to_continue' centered>

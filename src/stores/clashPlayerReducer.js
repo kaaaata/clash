@@ -1,9 +1,9 @@
-import { startingDeck } from '../cards/startingDeck';
+import { genStartingDeck } from '../cards/genStartingDeck';
 
 const genInitialState = () => ({
   lives: 3,
   gold: 25,
-  deck: startingDeck
+  deck: genStartingDeck()
 });
 
 const initialState = genInitialState();

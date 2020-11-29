@@ -142,7 +142,7 @@ export const MonsterPreview = ({
       <br /><br />
       Victory: <span className='green'>gain {monsterGoldReward} gold</span> and {monster.type === 'wave' ? 'a ' : ''}<span className='green'>{monster.type === 'wave' ? '3 card draft' : "2 cards from the enemy's deck"}</span>
       <br />
-      Defeat: <span className='red'>{day === 10 ? 'game over!' : 'lose 1 life.'}</span>
+      Defeat: <span className='red'>lose 1 life.</span>
     </React.Fragment>
   );
 

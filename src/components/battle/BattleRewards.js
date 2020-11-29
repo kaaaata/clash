@@ -56,7 +56,16 @@ export const BattleRewards = () => {
   switch (page) {
     case 'default':
       modalTitle = didPlayerWin ? 'Victory!' : 'Defeat!';
-      pageComponent = (
+      pageComponent = (day === 10 && didPlayerWin) ? (
+        <EventModalPage
+          page={1}
+          text='You Win!'
+          options={[{
+            name: 'Continue',
+            onClick: () => dispatch(actions.setScene('win_screen'))
+          }]}
+        />
+      ) : (
         <EventModalPage
           page={1}
           text={didPlayerWin ? (

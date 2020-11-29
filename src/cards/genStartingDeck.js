@@ -1,6 +1,6 @@
 import { createNewCard } from './createNewCard';
 
-export const startingDeck = [
+export const genStartingDeck = () => [
   'Healing Potion',
   'Frost',
   'Frost',

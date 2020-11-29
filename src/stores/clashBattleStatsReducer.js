@@ -1,5 +1,5 @@
 // for coding simplicity, stats can only go up (can't lose stats). (may change in the future)
-const initialState = {
+const genInitialState = () => ({
   // persisted variables
   yourName: '',
   yourImage: '',
@@ -17,9 +17,9 @@ const initialState = {
   yourShields: 0,
   winner: null,
   winnerImage: null
-};
+});
 
-export default (state = initialState, action) => {
+export default (state = genInitialState(), action) => {
   switch (action.type) {
     case 'SET_PLAYER':
       return {
@@ -90,6 +90,8 @@ export default (state = initialState, action) => {
         yourStatBonuses: { attack: 0, magic: 0, defense: 0 },
         enemyStatBonuses: { attack: 0, magic: 0, defense: 0 },
       };
+    case 'RESET_GAME':
+      return genInitialState();
     default:
       return state;
   }

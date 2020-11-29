@@ -6,6 +6,7 @@ import { CharacterSelect } from './CharacterSelect';
 import { Battle } from '../battle/Battle';
 import { Spacer } from '../particles';
 import { useSelector, shallowEqual } from 'react-redux';
+import { WinScreen } from './WinScreen';
 
 const sceneCss = css`
   width: 100%;
@@ -34,7 +35,10 @@ export const Scene = () => {
       break;
     case 'town':
       sceneComponent = <Town />;
-      break
+      break;
+    case 'win_screen':
+      sceneComponent = <WinScreen />;
+      break;
     default:
       sceneComponent = null;
       break;

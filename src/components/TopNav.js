@@ -42,10 +42,10 @@ export const TopNav = () => {
 
   useEffect(() => {
     if (!lives) {
-      setActiveModal('gameover');
+      setActiveModal(null);
       setIsSettingsOpen(false);
     }
-  }, [lives])
+  }, [lives]);
 
   return shouldHideTopNav ? null : (
     <React.Fragment>
@@ -162,7 +162,7 @@ export const TopNav = () => {
         <Shop closeModal={() => setActiveModal(null)} />
       </div>
 
-      <div css={css`display: ${activeModal === 'gameover' ? 'unset' : 'none'};`}>
+      <div css={css`display: ${!lives ? 'unset' : 'none'};`}>
         <GameOver />
       </div>
 
