@@ -165,7 +165,7 @@ export const allies = [
     playCopiesOfCards: ['Super Frost']
   },
   {
-    name: 'Fire Dragon',
+    name: 'The Evil Dragon Jr.',
     image: 'fire_dragon',
     rarity: 'legendary',
     attack: 6,

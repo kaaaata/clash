@@ -33,7 +33,7 @@ export const TopNav = () => {
     stats: state.clashBattleStats.yourStats,
     statBonuses: state.clashBattleStats.yourStatBonuses,
     canVisitShop: state.clashScene.canVisitShop,
-    shouldHideTopNav: ['story', 'main_menu', 'character_select'].includes(state.clashScene.scene)
+    shouldHideTopNav: ['story', 'main_menu', 'character_select', 'win_screen'].includes(state.clashScene.scene)
   }), shallowEqual);
   const dispatch = useDispatch();
 

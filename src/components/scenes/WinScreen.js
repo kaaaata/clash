@@ -13,7 +13,7 @@ const storyCss = css`
 
   .text {
     animation: fadeIn 0.75s ease-out;
-    padding: 50px;
+    padding: 30px;
 
     &.click_to_continue {
       position: absolute;
@@ -31,7 +31,7 @@ export const WinScreen = ({ setScene }) => {
   return (
     <div
       css={storyCss}
-      onClick={() => step === 3
+      onClick={() => step === 6
         ? dispatch(actions.resetGame())
         : setStep(step + 1)
       }
@@ -41,12 +41,27 @@ export const WinScreen = ({ setScene }) => {
       </Text>
       {step >= 2 && (
         <Text type='header' centered>
-          You survived 10 days and nights, and defeated the evil Dragon.
+          You survived 10 days and 10 nights.
         </Text>
       )}
       {step >= 3 && (
         <Text type='header' centered>
-          Thanks for playing. I really do appreciate it. -Cat
+          The Evil Dragon lies defeated.
+        </Text>
+      )}
+      {step >= 4 && (
+        <Text type='header' centered>
+          Your town is safe.
+        </Text>
+      )}
+      {step >= 5 && (
+        <Text type='header' centered>
+          What will you do next?!
+        </Text>
+      )}
+      {step >= 6 && (
+        <Text centered>
+          Thank you for playing!
         </Text>
       )}
       <Text className='click_to_continue' centered>

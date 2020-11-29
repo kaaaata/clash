@@ -41,7 +41,7 @@ export const Story = ({ setScene }) => {
       </Text>
       {step >= 2 && (
         <Text type='header' centered>
-          Can you survive for 10 days and nights?!
+          Can you survive for 10 days and 10 nights?!
         </Text>
       )}
       {step >= 3 && (

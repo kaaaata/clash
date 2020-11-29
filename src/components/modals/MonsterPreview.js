@@ -62,7 +62,7 @@ export const MonsterPreview = ({
         && window.flow.monsterOverride2_toggle && window.flow.monsterOverride2_value)
       || ([7, 8, 9].includes(day)
         && window.flow.monsterOverride3_toggle && window.flow.monsterOverride3_value)
-      || (day === 10 && window.flow.monsterOverride4_toggle && 'Dragon')
+      || (day === 10 && window.flow.monsterOverride4_toggle && 'The Evil Dragon')
     ))[0];
     return {
       deck: state.clashPlayer.deck,

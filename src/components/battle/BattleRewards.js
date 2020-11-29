@@ -59,7 +59,11 @@ export const BattleRewards = () => {
       pageComponent = (day === 10 && didPlayerWin) ? (
         <EventModalPage
           page={1}
-          text='You Win!'
+          text={
+            <React.Fragment>
+              <span className='red'>The Evil Dragon</span> collapses to the ground!
+            </React.Fragment>
+          }
           options={[{
             name: 'Continue',
             onClick: () => dispatch(actions.setScene('win_screen'))

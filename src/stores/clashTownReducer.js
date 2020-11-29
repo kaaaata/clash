@@ -67,7 +67,7 @@ export default (state = initialState, action) => {
       } else if (newDay <= 9) {
         dailyMonster = sample(monstersByTier[3]);
       } else if (newDay === 10) {
-        dailyMonster = eventMonsters['Dragon'];
+        dailyMonster = eventMonsters['The Evil Dragon'];
       }
       return {
         ...state,
