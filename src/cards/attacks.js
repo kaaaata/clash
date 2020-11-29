@@ -147,7 +147,7 @@ export const attacks = [
     defense: 0,
     playCopiesOfCards: ['Arrow', 'Arrow', 'Arrow'],
     statBonuses: { attack: 1 },
-    customDescription: 'Gain +1 attack for the rest of the battle.'
+    customDescription: 'Gain +1 strength for the rest of the battle.'
   },
   {
     name: 'Dragon Blade',

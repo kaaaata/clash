@@ -37,6 +37,8 @@ export const BattleRewards = () => {
   const dispatch = useDispatch();
 
   const [page, setPage] = useState('default');
+
+  const canReceiveBlessing = [3, 6, 9].includes(day);
   
   const returnToTown = () => {
     if (!didPlayerWin) {
@@ -105,10 +107,59 @@ export const BattleRewards = () => {
           page={2}
           text={
             <React.Fragment>
-              I should prepare for tomorrow.
+              {canReceiveBlessing
+                ? 'I learned something from that fight.'
+                : 'I should prepare for tomorrow.'
+              }
             </React.Fragment>
           }
-          options={[
+          options={canReceiveBlessing ? [
+            {
+              name: 'Power',
+              greenText: '-1 energy reserved. Gain +1 strength permanently.',
+              onClick: () => {
+                dispatch(actions.adjustPlayerEnergyReserved(-1));
+                dispatch(actions.setStats({
+                  stats: { attack: 1 },
+                  type: 'stats',
+                  player: 'you',
+                  operation: 'adjust'
+                }));
+                dispatch(actions.setToast('Received: +1 strength'));
+                returnToTown();
+              }
+            },
+            {
+              name: 'Acuity',
+              greenText: '-1 energy reserved. Gain +1 magic permanently.',
+              onClick: () => {
+                dispatch(actions.adjustPlayerEnergyReserved(-1));
+                dispatch(actions.setStats({
+                  stats: { magic: 1 },
+                  type: 'stats',
+                  player: 'you',
+                  operation: 'adjust'
+                }));
+                dispatch(actions.setToast('Received: +1 magic'));
+                returnToTown();
+              }
+            },
+            {
+              name: 'Endurance',
+              greenText: '-1 energy reserved. Gain +1 defense permanently.',
+              onClick: () => {
+                dispatch(actions.adjustPlayerEnergyReserved(-1));
+                dispatch(actions.setStats({
+                  stats: { defense: 1 },
+                  type: 'stats',
+                  player: 'you',
+                  operation: 'adjust'
+                }));
+                dispatch(actions.setToast('Received: +1 defense'));
+                returnToTown();
+              }
+            }
+          ] : [
             {
               name: 'Rest',
               greenText: '-1 energy reserved. Gain 10 gold.',

@@ -45,12 +45,12 @@ export default (state = initialState, action) => {
         flipper: !state.flipper
       };
     }
-    case 'ADJUST_PLAYER_ENERGY_RESERVED':
-      return {
-        ...state,
-        toast: `${action.payload > 0 ? '+' : ''}${action.payload} energy reserved`,
-        flipper: !state.flipper
-      };
+    // case 'ADJUST_PLAYER_ENERGY_RESERVED':
+    //   return {
+    //     ...state,
+    //     toast: `${action.payload > 0 ? '+' : ''}${action.payload} energy reserved`,
+    //     flipper: !state.flipper
+    //   };
     case 'RESET_GAME':
       return genInitialState();
     default:
