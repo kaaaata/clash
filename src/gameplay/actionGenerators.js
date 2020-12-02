@@ -5,6 +5,10 @@ export const actionGenerators = {
   // actionKey = redux action key
   // payload = redux action payload
   // to be executed in <Battle>
+  setCardPile: (state, player, pile) => ({
+    actionKey: actionKeys[player][pile],
+    payload: state[player][pile].getCardIds()
+  }),
   addCardToStack: (state, cardId) => {
     state.stack.addCardToTop(cardId);
     return {
@@ -19,34 +23,34 @@ export const actionGenerators = {
       payload: state.stack.getCardIds()
     };
   },
-  addCard: (state, cardId, player, location, index) => {
+  addCard: (state, cardId, player, pile, index) => {
     // index = number|'top'|'random'
-    if (location === 'hand') {
-      state[player][location][index] = cardId;
+    if (pile === 'hand') {
+      state[player][pile][index] = cardId;
     } else if (index === 'top') {
-      state[player][location].addCardToTop(cardId);
+      state[player][pile].addCardToTop(cardId);
     } else if (index === 'random') {
-      state[player][location].addCardAtRandomIndex(cardId);
+      state[player][pile].addCardAtRandomIndex(cardId);
     }
     return {
-      actionKey: actionKeys[player][location],
-      payload: state[player][location].getCardIds()
+      actionKey: actionKeys[player][pile],
+      payload: state[player][pile].getCardIds()
     };
   },
-  removeCard: (state, player, location, index) => {
+  removeCard: (state, player, pile, index) => {
     // index = number|'top'
     if (!index && index !== 0) {
       return null;
-    } else if (location === 'hand') {
-      state[player][location][index] = null;
+    } else if (pile === 'hand') {
+      state[player][pile][index] = null;
     } else if (index === 'top') {
-      state[player][location].removeTopCard();
+      state[player][pile].removeTopCard();
     } else {
-      state[player][location].removeCardAtIndex(index);
+      state[player][pile].removeCardAtIndex(index);
     }
     return {
-      actionKey: actionKeys[player][location],
-      payload: state[player][location].getCardIds()
+      actionKey: actionKeys[player][pile],
+      payload: state[player][pile].getCardIds()
     };
   },
   setShields: (state, player, value) => {

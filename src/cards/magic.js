@@ -79,7 +79,6 @@ export const magic = [
 ].map(card => {
   card.type = 'magic';
   card.pierces = true;
-  card.isCraftable = card.rarity !== 'legendary' && !card.isToken;
 
   return {
     ...cardTemplate,

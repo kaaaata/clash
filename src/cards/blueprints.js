@@ -23,7 +23,7 @@ export const blueprints = {
 blueprints.allCardsObject = keyBy(blueprints.allCardsArray, 'name');
 
 blueprints.lootableCards = blueprints.allCardsArray
-  .filter(card => card.type !== 'ally' && !card.isToken);
+  .filter(card => card.type !== 'ally' && !card.isToken && card.rarity !== 'special');
 
 blueprints.lootableCardsByRarity = {
   common: blueprints.lootableCards.filter(card => card.rarity === 'common'),

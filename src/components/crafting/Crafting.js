@@ -128,7 +128,9 @@ export const Crafting = ({ closeModal }) => {
         <CardViewModal
           title='Choose a card to upgrade'
           shouldShowCardCount={false}
-          cardIds={deck.filter(cardId => cards[cardId].isCraftable)}
+          cardIds={deck.filter(
+            cardId => cards[cardId].rarity !== 'legendary' && !cards[cardId].isToken
+          )}
           cardOnClick={(cardId) => {
             setCard1Id(cardId);
             setCard2Id(null);

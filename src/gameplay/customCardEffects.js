@@ -174,16 +174,52 @@ export const customCardEffects = {
         i => cards[i.card].type === 'ally'
       );
       if (discardAllyIndex !== -1) {
-        cards[state[player].discard[discardAllyIndex]].attack += 2;
-        cards[state[player].discard[discardAllyIndex]].defense += 2;
-        cards[state[player].discard[discardAllyIndex]].battleMutatedProperties.attack = true;
+        const oldCard = cards[state[player].discard[discardAllyIndex]];
+        const newCardId = createNewCard({
+          ...oldCard,
+          attack: oldCard.attack + 2,
+          defense: oldCard.defense + 2,
+          battleMutatedProperties: {
+            ...oldCard.battleMutatedProperties,
+            attack: true,
+            defense: true
+          }
+        }, `battle_${shortid.generate()}`);
         addCardCopiesIntoPiles(
           state,
-          [{ cardId: state[player].discard[discardAllyIndex], pile: 'deck' }],
+          [{ cardId: newCardId, pile: 'deck' }],
           player,
           { player, location: 'discard', index: discardAllyIndex }
         );
       }
     }
+  },
+  'Flowy Lady': (state, player) => {
+    // Give all Blanks in your deck, discard, hand, and banish +3/+3.
+    ['deck', 'discard', 'hand', 'banish'].forEach(pile => {
+      state[player][pile].forEach((cardId, index) => {
+        // empty slots in "hand" are null, to preserve spacing
+        if (cardId && cards[cardId].name === 'Blank') {
+          const oldCard = cards[cardId];
+          const newCardId = createNewCard({
+            ...oldCard,
+            attack: oldCard.attack + 3,
+            defense: oldCard.defense + 3,
+            battleMutatedProperties: {
+              ...oldCard.battleMutatedProperties,
+              attack: true,
+              defense: true
+            }
+          }, `battle_${shortid.generate()}`);
+          state[player][pile][index] = newCardId;
+        }
+      });
+    });
+    state.renderActions.push([
+      actionGenerators.setCardPile(state, 'you', 'deck'),
+      actionGenerators.setCardPile(state, 'you', 'discard'),
+      actionGenerators.setCardPile(state, 'you', 'hand'),
+      actionGenerators.setCardPile(state, 'you', 'banish')
+    ]);
   }
 };

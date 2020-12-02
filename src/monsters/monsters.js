@@ -92,7 +92,7 @@ const monstersTier3 = [
       'Water Slime',
       'Healing Blade',
       'Super Frost',
-      'Mermaid',
+      'Shaman',
       'Ice Whelp',
 
       'Healing Potion',

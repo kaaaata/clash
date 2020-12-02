@@ -5,10 +5,10 @@ import { allies } from '../../cards/allies';
 import { sample, random } from 'lodash';
 
 const cards = {
-  attacks: attacks.filter(card => !card.isToken),
-  magic: magic.filter(card => !card.isToken),
-  potions: potions.filter(card => !card.isToken),
-  allies: allies.filter(card => !card.isToken)
+  attacks: attacks.filter(card => !card.isToken && card.rarity !== 'special'),
+  magic: magic.filter(card => !card.isToken && card.rarity !== 'special'),
+  potions: potions.filter(card => !card.isToken && card.rarity !== 'special'),
+  allies: allies.filter(card => !card.isToken && card.rarity !== 'special')
 };
 
 export const genPurchasableCards = (type) => {

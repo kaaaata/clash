@@ -19,7 +19,7 @@ test('all cards are valid', () => {
       if (!card.image) {
         errorMessages.push(`${name} is missing image`);
       }
-      if (!['common', 'uncommon', 'rare', 'legendary'].includes(card.rarity)) {
+      if (!['common', 'uncommon', 'rare', 'legendary', 'special'].includes(card.rarity)) {
         errorMessages.push(`${name} has invalid rarity ${card.rarity}`);
       }
       if (!['attack', 'magic', 'potion', 'ally'].includes(card.type)) {

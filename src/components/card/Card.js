@@ -12,15 +12,17 @@ import { _FaceDownCard } from './_FaceDownCard';
 export const cardWidth = 140;
 export const cardHeight = 190;
 
+const cardsWithoutTopMargin = ['Catherine the Great', 'Flowy Lady', 'Shaman', 'Brawler'];
+
 // todo: is there a way to render fewer <_Card>? memoization?
 const _Card = ({ cardName, cardId }) => {
   const card = cardName ? blueprints.allCardsObject[cardName] : cards[cardId];
   const {
     name,
     image,
-    imageSlant,
-    craftedImage,
-    craftedImageSlant,
+    // imageSlant,
+    // craftedImage,
+    // craftedImageSlant,
     rarity,
     attack,
     defense,
@@ -34,7 +36,7 @@ const _Card = ({ cardName, cardId }) => {
     <React.Fragment>
       <Spacer height={90} />
       {glow && <div className={`glow glow_${glow}`} />}
-      {rarity === 'crafted' ? (
+      {/* {rarity === 'crafted' ? (
         <React.Fragment>
           <Image
             src={`${image}.png`}
@@ -51,17 +53,15 @@ const _Card = ({ cardName, cardId }) => {
             className={`card_art ${imageSlant === craftedImageSlant ? 'horizontal_flip' : ''}`}
           />
         </React.Fragment>
-      ) : (
-        <Image
-          src={`${image}.png`}
-          width='100%'
-          height={type === 'ally' ? 165 : 90}
-          size='contain'
-          className={`card_art ${type === 'ally' ? 'ally' : ''}`}
-          // adjust top margin for this single card which doesn't come with top whitespace...
-          _css={name === 'Catherine the Great' ? 'top: -6px !important;': ''}
-        />
-      )}
+      ) : ( */}
+      <Image
+        src={`${image}.png`}
+        width='100%'
+        height={type === 'ally' ? 165 : 90}
+        size='contain'
+        className={`card_art ${type === 'ally' ? 'ally' : ''}`}
+        _css={cardsWithoutTopMargin.includes(name) ? 'top: -6px !important;': ''}
+      />
     </React.Fragment>
   );
 

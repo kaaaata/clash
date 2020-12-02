@@ -10,6 +10,8 @@ export const playFirstCardInRound = (index) => {
   const clashBattleCards = store.getState().clashBattleCards;
   const clashBattleStats = store.getState().clashBattleStats;
 
+  // don't mutate state, unless through an actionGenerator.
+  // exception: OK to mutate state.winner, so playCard can return prematurely.
   const state = {
     you: {
       name: clashBattleStats.yourName,

@@ -44,7 +44,7 @@ const townActions = keyBy([
     energy: 1,
     weight: 17,
     image: 'gold_with_padding',
-    description: 'Earn 15-30 gold.'
+    description: 'Gather 15-30 gold.'
   },
   {
     name: 'Upgrade a Card',
@@ -55,28 +55,28 @@ const townActions = keyBy([
   },
   {
     name: 'Blacksmith',
-    energy: 2,
+    energy: 1,
     weight: 2,
     image: 'dwarf',
     description: 'Purchase attack cards.'
   },
   {
     name: 'Mage',
-    energy: 2,
+    energy: 1,
     weight: 2,
     image: 'mage',
     description: 'Purchase magic attack cards.'
   },
   {
     name: 'Apothecary',
-    energy: 2,
+    energy: 1,
     weight: 2,
     image: 'alchemist',
     description: 'Purchase potion cards.'
   },
   {
     name: 'Recruiter',
-    energy: 2,
+    energy: 1,
     weight: 2,
     image: 'shop_girl',
     description: 'Purchase ally cards.'
@@ -90,35 +90,28 @@ const townActions = keyBy([
   },
   {
     name: 'Goblin\'s Game',
-    energy: 3,
+    energy: 2,
     weight: 1,
     image: 'goblin_boss',
     description: 'Spin the goblin\'s wheel!'
   },
   {
-    name: 'Treasure Slime',
-    energy: 4,
-    weight: 1,
-    image: 'treasure_slime_monster',
-    description: 'A random encounter!'
-  },
-  {
     name: 'Challenge Battle',
-    energy: 4,
+    energy: 3,
     weight: 1,
     image: 'catherine_the_great',
     description: 'A very difficult random encounter!'
   },
   {
     name: 'Treasure Chest',
-    energy: 5,
+    energy: 3,
     weight: 1,
     image: 'chest',
     description: 'A treasure chest! Contains treasure.'
   },
   {
     name: 'Dancing Lady',
-    energy: 4,
+    energy: 3,
     weight: 1,
     image: 'dancing_lady',
     description: 'A random encounter!'

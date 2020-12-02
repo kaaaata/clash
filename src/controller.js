@@ -23,7 +23,7 @@ const upgradedCard = genUpgradedCard(
 
 export const controller = isControllerEnabled ? {
   // yourHand: [upgradedCard, upgradedCard, upgradedCard],
-  yourHand: ['Blank', 'Blank', 'Blank'].map(i => createNewCard(i)),
+  yourHand: ['Flowy Lady', 'Lich', 'Blank'].map(i => createNewCard(i)),
   // yourDeck: [
   //   // cards[upgradedCard],
     
@@ -45,11 +45,11 @@ export const controller = isControllerEnabled ? {
   //   'Dragon Blade',
   //   'Dragon Blade',
   // ].map(i => createNewCard(i)),
-  // yourDeck: [],
-  // yourDiscard: ['Saber', 'Saber', 'Swordsman', 'Frost'].map(i => createNewCard(i)),
-  // yourBanish: [].map(i => createNewCard(i)),
+  yourDeck: ['Blank', 'Blank', 'Blank', 'Blank', 'Blank', 'Blank', 'Blank'].map(i => createNewCard(i)),
+  yourDiscard: ['Blank', 'Paladin', 'Swordsman'].map(i => createNewCard(i)),
+  yourBanish: ['Blank'].map(i => createNewCard(i)),
   // enemyHand: ['Blank', 'Blank', 'Blank'].map(i => createNewCard(i)),
-  enemyDeck: [].map(i => createNewCard(i)),
+  // enemyDeck: [].map(i => createNewCard(i)),
   // enemyDiscard: [].map(i => createNewCard(i)),
   // enemyBanish: [].map(i => createNewCard(i)),
 } : {};

@@ -1,4 +1,3 @@
-// clash
 export const setYourDeck = payload => ({ type: 'SET_YOUR_DECK', payload });
 export const setYourDiscard = payload => ({ type: 'SET_YOUR_DISCARD', payload });
 export const setYourBanish = payload => ({ type: 'SET_YOUR_BANISH', payload });

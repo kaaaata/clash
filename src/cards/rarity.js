@@ -4,14 +4,15 @@ export const rarityColors = {
   rare: 'blue',
   legendary: 'red',
 
-  crafted: 'yellow'
+  special: 'yellow'
 };
 
 export const rarityScore = {
   common: 0,
   uncommon: 1,
   rare: 2,
-  legendary: 3
+  legendary: 3,
+  special: 4
 };
 
 export const upgradeRarity = (rarity) => {

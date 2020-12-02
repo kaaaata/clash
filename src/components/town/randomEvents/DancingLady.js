@@ -27,23 +27,23 @@ export const DancingLady = ({ closeModal }) => {
           options={[
             {
               name: 'Dance of Peace',
-              greenText: 'Add 4 copies of Blank into your deck.',
-              cardTooltips: ['Blank'],
+              greenText: 'Add a copy of Flowy Lady and 3 copies of Blank into your deck.',
+              cardTooltips: ['Flowy Lady', 'Blank'],
               onClick: () => {
                 dispatch(actions.addCardsToCollection(
-                  ['Blank', 'Blank', 'Blank', 'Blank'].map(i => createNewCard(i))
+                  ['Flowy Lady', 'Blank', 'Blank', 'Blank'].map(i => createNewCard(i))
                 ));
                 setPage('dance_of_peace');
               }
             },
             {
               name: 'Dance of Rage',
-              redText: 'and a copy of Burn into your deck.',
-              greenText: 'Add a copy of Super Fire',
-              cardTooltips: ['Super Fire', 'Burn'],
+              redText: 'and 2 copies of Burn into your deck.',
+              greenText: 'Add a copy of Dragon Blade',
+              cardTooltips: ['Dragon Blade', 'Burn'],
               onClick: () => {
                 dispatch(actions.addCardsToCollection(
-                  ['Super Fire', 'Burn'].map(i => createNewCard(i))
+                  ['Dragon Blade', 'Burn', 'Burn'].map(i => createNewCard(i))
                 ));
                 setPage('dance_of_rage');
               }

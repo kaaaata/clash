@@ -28,7 +28,6 @@
 //         name: `${attack.name} of Fire`,
 //         attack: attack.attack + 2,
 //         glow: 'red',
-//         isCraftable: false,
 //         pierces: true,
 //         type: 'magic'
 //       });
@@ -38,7 +37,6 @@
 //         name: `${attack.name} of Frost`,
 //         defense: attack.defense + 2,
 //         glow: 'blue',
-//         isCraftable: false,
 //         pierces: true,
 //         type: 'magic'
 //       });
@@ -67,7 +65,6 @@
 //     c.imageSlant = c1.imageSlant;
 //     c.craftedImage = c2.image;
 //     c.craftedImageSlant = c2.imageSlant;
-//     c.isCraftable = false;
 //     c.rarity = 'crafted';
 //     c.attack = c1.attack + c2.attack;
 //     c.defense = c1.defense + c2.defense;

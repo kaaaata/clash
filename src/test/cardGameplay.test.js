@@ -66,9 +66,9 @@ test('Damage and damage self works (Vampire)', () => {
   expect(state.you.discard.length).toBe(10 + 1);
 });
 
-test('Healing and heal enemy works (Mermaid)', () => {
-  const card = blueprints.allCardsObject['Mermaid'];
-  simulatePlayCard({ cardName: 'Mermaid' });
+test('Healing and heal enemy works (Shaman)', () => {
+  const card = blueprints.allCardsObject['Shaman'];
+  simulatePlayCard({ cardName: 'Shaman' });
   // the +1 at the end is because the played card gets discarded
   expect(state.you.discard.length).toBe(10 - card.heal + 1);
   expect(state.you.deck.length).toBe(10 + card.heal);
@@ -397,4 +397,41 @@ test('CUSTOM CARD EFFECT (Lich)', () => {
     && cards[i].attack === 6
   )).length)
     .toBe(2);
+});
+
+test('CUSTOM CARD EFFECT (Flowy Lady)', () => {
+  state.you.deck = CardIdsArray(['Blank'].map(i => createNewCard(i)));
+  state.you.discard = CardIdsArray(['Blank'].map(i => createNewCard(i)));
+  state.you.hand = CardIdsArray(['Blank', 'Blank', 'Blank'].map(i => createNewCard(i)));
+  state.you.banish = CardIdsArray(['Blank'].map(i => createNewCard(i)));
+  simulatePlayCard({ cardName: 'Flowy Lady' });
+  ['deck', 'discard', 'hand', 'banish'].forEach(pile => {
+    expect(state.you[pile].filter(i => (
+      cards[i]
+      && cards[i].name === 'Blank'
+      && cards[i].attack === 3
+      && cards[i].defense === 3
+    )).length)
+      .not.toBe(0);
+  });
+
+  resetState();
+
+  state.you.deck = CardIdsArray(['Blank', 'Flowy Lady'].map(i => createNewCard(i)));
+  state.you.discard = CardIdsArray(['Blank'].map(i => createNewCard(i)));
+  state.you.hand = CardIdsArray(['Blank', 'Blank', 'Blank'].map(i => createNewCard(i)));
+  state.you.banish = CardIdsArray(['Blank'].map(i => createNewCard(i)));
+  const card = createNewCard({
+    attack: 1,
+    isMockCard: true
+  }, 'test_mock_card');
+  simulatePlayCard({ cardId: card, player: 'enemy' });
+  ['deck', 'discard', 'hand', 'banish'].forEach(pile => {
+    expect(state.you[pile].filter(i => (
+      cards[i].name === 'Blank'
+      && cards[i].attack === 3
+      && cards[i].defense === 3
+    )).length)
+      .not.toBe(0);
+  });
 });

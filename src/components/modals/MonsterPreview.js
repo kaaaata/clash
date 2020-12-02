@@ -17,8 +17,8 @@ import shortid from 'shortid';
 import { FlexContainer, Image } from '../particles';
 import { Attributes } from '../Attributes';
 
-const CardsRarityString = ({ cardNames, cardIds, showCrafted }) => {
-  const rarityCounts = { common: 0, uncommon: 0, rare: 0, legendary: 0, crafted: 0 };
+const CardsRarityString = ({ cardNames, cardIds, showSpecial }) => {
+  const rarityCounts = { common: 0, uncommon: 0, rare: 0, legendary: 0, special: 0 };
   if (cardNames) {
     cardNames.forEach(cardName => {
       rarityCounts[blueprints.allCardsObject[cardName].rarity]++;
@@ -36,9 +36,9 @@ const CardsRarityString = ({ cardNames, cardIds, showCrafted }) => {
       ,&nbsp;{rarityCounts.rare} <span className={rarityColors.rare}>rare</span>
       ,&nbsp;{rarityCounts.uncommon} <span className={rarityColors.uncommon}>uncommon</span>
       ,&nbsp;{rarityCounts.common} <span className={rarityColors.common}>common</span>
-      {showCrafted && (
+      {showSpecial && (
         <React.Fragment>
-          ,&nbsp;{rarityCounts.crafted} <span className={rarityColors.crafted}>crafted</span>
+          ,&nbsp;{rarityCounts.special} <span className={rarityColors.special}>special</span>
         </React.Fragment>
       )}
       )
@@ -138,7 +138,7 @@ export const MonsterPreview = ({
       <br /><br />
       Enemy cards: <span className='bold yellow'>{enemyDeckCardNames.length}</span> <CardsRarityString cardNames={enemyDeckCardNames} />
       <br />
-      Your cards: <span className='bold yellow'>{yourDeckIds.length}</span> <CardsRarityString cardIds={yourDeckIds} showCrafted />
+      Your cards: <span className='bold yellow'>{yourDeckIds.length}</span> <CardsRarityString cardIds={yourDeckIds} showSpecial />
       <br /><br />
       Victory: <span className='green'>gain {monsterGoldReward} gold</span> and {monster.type === 'wave' ? 'a ' : ''}<span className='green'>{monster.type === 'wave' ? '3 card draft' : "2 cards from the enemy's deck"}</span>
       <br />

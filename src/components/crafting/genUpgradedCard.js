@@ -18,7 +18,6 @@ export const genUpgradedCard = (card, upgrade, cardIdOverride) => {
   c.name = `${upgrade.prefix || ''} ${card.name} ${upgrade.suffix || ''}`.trim();
   c.image = card.image;
   c.imageSlant = card.imageSlant;
-  c.isCraftable = card.isCraftable;
   c.rarity = card.rarity;
   c.attack = card.attack + (upgrade.attack || 0);
   c.defense = card.defense + (upgrade.defense || 0);

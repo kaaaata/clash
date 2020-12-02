@@ -160,7 +160,6 @@ export const attacks = [
   }
 ].map(card => {
   card.type = 'attack';
-  card.isCraftable = card.rarity !== 'legendary' && !card.isToken;
 
   return {
     ...cardTemplate,

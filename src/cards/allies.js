@@ -42,7 +42,7 @@ export const allies = [
     shuffleCardCopiesIntoYourPiles: [{ cardName: 'Healing Blade', pile: 'deck' }]
   },
   {
-    name: 'Mermaid',
+    name: 'Shaman',
     image: 'mermaid',
     rarity: 'uncommon',
     attack: 0,
@@ -195,6 +195,18 @@ export const allies = [
     onDiscard: {
       playCopiesOfCards: ['Ice Blade']
     },
+    triggerDiscardOnPlay: true
+  },
+  {
+    name: 'Flowy Lady',
+    image: 'flowy_lady',
+    rarity: 'special',
+    attack: 3,
+    defense: 3,
+    onDiscard: {
+      customEffect: true
+    },
+    customDescription: 'Give all copies of Blank in your deck, discard, hand, and banish +3/+3.',
     triggerDiscardOnPlay: true
   }
 ].map(card => {

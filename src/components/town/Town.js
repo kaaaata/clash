@@ -8,7 +8,6 @@ import { Timeline } from './Timeline';
 import { MonsterPreview } from '../modals/MonsterPreview';
 import {
   RobberyWheel,
-  TreasureSlime,
   CatherineTheGreat,
   RemoveCards,
   GatherGold,
@@ -112,9 +111,6 @@ export const Town = () => {
       break;
     case 'Goblin\'s Game':
       modal = <RobberyWheel rng={Math.random()} closeModal={closeModal} />;
-      break;
-    case 'Treasure Slime':
-      modal = <TreasureSlime rng={Math.random()} closeModal={closeModal} />;
       break;
     case 'Challenge Battle':
       modal = <CatherineTheGreat closeModal={closeModal} />;
