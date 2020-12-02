@@ -67,7 +67,7 @@ export const Town = () => {
       const testTownEvent = window.flow.testTownEvent_value;
       if (testTownEvent === 'Mage') {
         dispatch(actions.setTownPurchasableCards('magic'));
-      } else if (testTownEvent === 'Apothecary') {
+      } else if (testTownEvent === 'Alchemist') {
         dispatch(actions.setTownPurchasableCards('potions'));
       } else if (testTownEvent === 'Blacksmith') {
         dispatch(actions.setTownPurchasableCards('attacks'));
@@ -148,10 +148,10 @@ export const Town = () => {
         />
       );
       break;
-    case 'Apothecary':
+    case 'Alchemist':
       modal = (
         <CardLootModal
-          title='Apothecary'
+          title='Alchemist'
           image='alchemist_event'
           cardNames={purchasableCards.map(card => card.name)}
           cardCosts={purchasableCards.map(card => card.cost)}
@@ -215,7 +215,7 @@ export const Town = () => {
                     }
                     if (i.name === 'Mage') {
                       dispatch(actions.setTownPurchasableCards('magic'));
-                    } else if (i.name === 'Apothecary') {
+                    } else if (i.name === 'Alchemist') {
                       dispatch(actions.setTownPurchasableCards('potions'));
                     } else if (i.name === 'Blacksmith') {
                       dispatch(actions.setTownPurchasableCards('attacks'));

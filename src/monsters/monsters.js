@@ -108,10 +108,10 @@ const monstersTier3 = [
       'Healing Potion',
       'Magic Scroll',
       'Magic Scroll',
-      'Apothecary'
+      'Alchemist'
     ],
     wave2AdditionalCards: ['Frost', 'Frost', 'Super Frost'],
-    eliteAdditionalCards: ['Water Slime', 'Apothecary', 'Super Frost']
+    eliteAdditionalCards: ['Water Slime', 'Alchemist', 'Super Frost']
   }
 ];
 

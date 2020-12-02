@@ -5,9 +5,9 @@ export const characters = [
     startingCards: ['Paladin', 'Healing Blade', 'Longsword']
   },
   {
-    name: 'Apothecary',
+    name: 'Alchemist',
     image: 'alchemist',
-    startingCards: ['Apothecary', 'Healing Potion', 'Defense Potion']
+    startingCards: ['Alchemist', 'Healing Potion', 'Defense Potion']
   },
   {
     name: 'Mage',

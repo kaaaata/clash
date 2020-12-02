@@ -97,7 +97,7 @@ export const allies = [
     customDescription: 'Shuffle a copy of a random non-legendary attack into your deck.'
   },
   {
-    name: 'Apothecary',
+    name: 'Alchemist',
     image: 'alchemist',
     rarity: 'uncommon',
     attack: 0,

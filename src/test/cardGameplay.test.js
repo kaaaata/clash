@@ -339,10 +339,10 @@ test('CUSTOM CARD EFFECT (Recruiter, Mage)', () => {
     .not.toBe(-1);
 });
 
-test('CUSTOM CARD EFFECT (Apothecary, Healing Potion)', () => {
+test('CUSTOM CARD EFFECT (Alchemist, Healing Potion)', () => {
   state.you.banish.push(createNewCard('Healing Potion'));
 
-  simulatePlayCard({ cardName: 'Apothecary' });
+  simulatePlayCard({ cardName: 'Alchemist' });
   expect(state.you.banish.getRandomCardIndexByFilter(i => cards[i.card].name === 'Healing Potion'))
     .toBe(-1);
   expect(state.you.deck.getRandomCardIndexByFilter(i => cards[i.card].name === 'Healing Potion'))

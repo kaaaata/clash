@@ -68,7 +68,7 @@ const townActions = keyBy([
     description: 'Purchase magic attack cards.'
   },
   {
-    name: 'Apothecary',
+    name: 'Alchemist',
     energy: 1,
     weight: 2,
     image: 'alchemist',
