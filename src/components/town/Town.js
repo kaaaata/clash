@@ -109,7 +109,7 @@ export const Town = () => {
         />
       );
       break;
-    case 'Goblin\'s Game':
+    case 'Wheel of Robbery':
       modal = <RobberyWheel rng={Math.random()} closeModal={closeModal} />;
       break;
     case 'Challenge Battle':

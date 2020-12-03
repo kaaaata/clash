@@ -19,7 +19,7 @@ export const genTownActions = (guaranteedTownAction = '') => {
     });
   }
 
-  actions.push(townActions['Gather Gold']);
+  actions.push(townActions['Wheel of Robbery']);
   actions.push(townActions['Upgrade a Card']);
 
   actions.push({
@@ -89,7 +89,7 @@ const townActions = keyBy([
     description: 'Remove a card from your deck.'
   },
   {
-    name: 'Goblin\'s Game',
+    name: 'Wheel of Robbery',
     energy: 2,
     weight: 1,
     image: 'goblin_boss',

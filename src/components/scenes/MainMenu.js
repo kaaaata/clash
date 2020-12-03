@@ -63,7 +63,7 @@ export const MainMenu = () => {
       <Spacer height={90} />
       <Text type='title' centered>Clash</Text>
       <Spacer height={30} />
-      <Text centered>A game by Catherine Han</Text>
+      <Text centered>A game by KATA-</Text>
       <div className='menu'>
         <YellowUnderlineText
           text='Play'

@@ -16,7 +16,8 @@ const CardPile = ({
   themeColor,
   countX,
   countY,
-  cardPileModal
+  cardPileModal,
+  isFaceDown = false
 }) => {
   const dispatch = useDispatch();
   
@@ -72,7 +73,8 @@ const CardPile = ({
               cardId,
               x,
               y: y - index,
-              isInCardPile: true
+              isInCardPile: true,
+              isFaceDown
             }}
             shouldAnimateEntry={
               index === cardIds.length - 1 // only animate top card in pile
@@ -110,6 +112,7 @@ export const YourDeck = () => {
       countX={175}
       countY={594}
       cardPileModal={inDevelopment ? 'yourDeck' : null}
+      isFaceDown={!inDevelopment}
     />
   );
 };
@@ -223,6 +226,7 @@ export const EnemyDeck = () => {
       countX={876}
       countY={171}
       cardPileModal={inDevelopment ? 'enemyDeck' : null}
+      isFaceDown={!inDevelopment}
     />
   );
 };
@@ -240,6 +244,7 @@ export const EnemyHand = () => {
         x={400 + (cardWidth + 5) * index}
         y={52}
         shouldDisableZoom
+        isFaceDown={!inDevelopment}
       />
     ) : null
   ));
