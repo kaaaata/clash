@@ -67,7 +67,7 @@ export const App = () => {
 
  return (
     <main id='app' css={appCss}>
-      {window.location.pathname === '/flow' ? <Flow /> : (
+      {(window.location.pathname === '/flow' && inDevelopment) ? <Flow /> : (
         <React.Fragment>
           <BackgroundImage />
           <Scene />
