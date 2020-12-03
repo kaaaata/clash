@@ -10,15 +10,17 @@
     "react-redux": "^7.2.0",
     "react-scripts": "^3.4.3",
     "redux": "^4.0.5",
+    "serve": "^11.3.2",
     "shortid": "^2.2.15"
   },
   "scripts": {
     "start": "react-scripts start",
-    "start-heroku": "serve -s build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "lint": "./node_modules/.bin/eslint src"
+    "lint": "./node_modules/.bin/eslint src",
+    "start-heroku": "serve -s build",
+    "heroku-postbuild": "npm run build"
   },
   "eslintConfig": {
     "extends": "react-app"
