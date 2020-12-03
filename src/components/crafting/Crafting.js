@@ -129,7 +129,7 @@ export const Crafting = ({ closeModal }) => {
           title='Choose a card to upgrade'
           shouldShowCardCount={false}
           cardIds={deck.filter(
-            cardId => cards[cardId].rarity !== 'legendary' && !cards[cardId].isToken
+            cardId => !cards[cardId].isToken && ['attack', 'magic'].includes(cards[cardId].type)
           )}
           cardOnClick={(cardId) => {
             setCard1Id(cardId);
