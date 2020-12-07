@@ -11,7 +11,7 @@ export const genTownActions = (guaranteedTownAction = '') => {
     actions.push(townActions[guaranteedTownAction]);
   }
 
-  for (let i = 0; i < (guaranteedTownAction ? 4 : 5); i++) {
+  for (let i = 0; i < (guaranteedTownAction ? 5 : 6); i++) {
     const action = townActions[sample(townActionPool)];
     actions.push({
       ...action,
@@ -19,7 +19,6 @@ export const genTownActions = (guaranteedTownAction = '') => {
     });
   }
 
-  actions.push(townActions['Wheel of Robbery']);
   actions.push(townActions['Upgrade a Card']);
 
   actions.push({
@@ -106,7 +105,7 @@ const townActions = keyBy([
     name: 'Treasure Chest',
     energy: 3,
     weight: 1,
-    image: 'chest',
+    image: 'treasure_chest',
     description: 'A treasure chest! Contains treasure.'
   },
   {

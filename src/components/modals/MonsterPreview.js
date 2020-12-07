@@ -16,12 +16,25 @@ import { blueprints } from '../../cards/blueprints';
 import shortid from 'shortid';
 import { FlexContainer, Image } from '../particles';
 import { Attributes } from '../Attributes';
+import { store } from '../../stores/store';
 
 const CardsRarityString = ({ cardNames, cardIds, showSpecial }) => {
   const rarityCounts = { common: 0, uncommon: 0, rare: 0, legendary: 0, special: 0 };
   if (cardNames) {
     cardNames.forEach(cardName => {
-      rarityCounts[blueprints.allCardsObject[cardName].rarity]++;
+      try {
+        rarityCounts[blueprints.allCardsObject[cardName].rarity]++;
+      } catch (e) {
+        console.log('error: CardsRarityString bugged out. info:', {
+          e,
+          cardNames,
+          cardIds,
+          showSpecial,
+          state: store.getState()
+        });
+        const x = 'foo';
+        x();
+      }
     });
   } else {
     cardIds.forEach(cardId => {
