@@ -11,8 +11,8 @@ import { monstersByTier } from './monsters/monsters';
 let isControllerEnabled = false;
 // isControllerEnabled = true;
 
-const upgradedCard = genUpgradedCard(
-  blueprints.allCardsObject['Sword'],
+const _genUpgradedCard = (cardName) => genUpgradedCard(
+  blueprints.allCardsObject[cardName],
   upgrades[upgrades.length - 1].cardProperties
 );
 
@@ -22,8 +22,8 @@ const upgradedCard = genUpgradedCard(
 // );
 
 export const controller = isControllerEnabled ? {
-  // yourHand: [upgradedCard, upgradedCard, upgradedCard],
-  yourHand: ['Flowy Lady', 'Lich', 'Blank'].map(i => createNewCard(i)),
+  // yourHand: [_genUpgradedCard('Sword'), _genUpgradedCard('Sword'), _genUpgradedCard('Sword')],
+  // yourHand: ['Flowy Lady', 'Lich', 'Blank'].map(i => createNewCard(i)),
   // yourDeck: [
   //   // cards[upgradedCard],
     
@@ -45,7 +45,11 @@ export const controller = isControllerEnabled ? {
   //   'Dragon Blade',
   //   'Dragon Blade',
   // ].map(i => createNewCard(i)),
-  yourDeck: ['Blank', 'Blank', 'Blank', 'Blank', 'Blank', 'Blank', 'Blank'].map(i => createNewCard(i)),
+  yourDeck: [
+    ...Array(30).fill('Blank').map(i => createNewCard(i)),
+    _genUpgradedCard('Sword'),
+    _genUpgradedCard('Sword'),
+  ],
   yourDiscard: ['Blank', 'Paladin', 'Swordsman'].map(i => createNewCard(i)),
   yourBanish: ['Blank'].map(i => createNewCard(i)),
   // enemyHand: ['Blank', 'Blank', 'Blank'].map(i => createNewCard(i)),
