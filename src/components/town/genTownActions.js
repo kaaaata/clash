@@ -81,10 +81,10 @@ const townActions = keyBy([
     description: 'Purchase ally cards.'
   },
   {
-    name: 'Donate a Card',
+    name: 'Burn a Card',
     energy: 0,
-    weight: 1,
-    image: 'weapons_guy',
+    weight: 2,
+    image: 'burn',
     description: 'Remove a card from your deck.'
   },
   {

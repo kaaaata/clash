@@ -160,7 +160,7 @@ export const Town = () => {
         />
       );
       break;
-    case 'Donate a Card':
+    case 'Burn a Card':
       modal = <RemoveCards closeModal={closeModal} />;
       break;
     case 'Treasure Chest':
