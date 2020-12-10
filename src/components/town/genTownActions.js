@@ -114,6 +114,13 @@ const townActions = keyBy([
     weight: 1,
     image: 'dancing_lady',
     description: 'A random encounter!'
+  },
+  {
+    name: 'Cursed Chest',
+    energy: 2,
+    weight: 1,
+    image: 'cursed_chest',
+    description: 'A random encounter!'
   }
 ], 'name');
 const townActionPool = [];

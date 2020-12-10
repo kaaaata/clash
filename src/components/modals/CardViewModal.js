@@ -50,6 +50,7 @@ export const CardViewModal = ({
   cardIds,
   cardOnClick,
   closeModal,
+  shouldShowCloseButton = true,
   closeButtonText = 'Exit'
 }) => {
   const cards = cardNames || cardIds;
@@ -59,7 +60,7 @@ export const CardViewModal = ({
       title={`${title}${shouldShowCardCount ? ` (${cards.length})` : ''}`}
       closeModal={closeModal}
       shouldCloseOnClick={false}
-      shouldShowCloseButton
+      shouldShowCloseButton={shouldShowCloseButton}
       closeButtonText={closeButtonText}
     >
       <div css={cardViewModalCss}>

@@ -1,5 +1,6 @@
 import { jsx } from '@emotion/core'; /** @jsx jsx */
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import { cards } from '../../../cards/cards';
 import * as actions from '../../../stores/actions';
 import { CardViewModal } from '../../modals/CardViewModal';
 
@@ -20,6 +21,27 @@ export const RemoveCards = ({ closeModal }) => {
       }}
       closeModal={closeModal}
       closeButtonText='Cancel'
+    />
+  );
+};
+
+export const CursedChestRemoveCards = ({ closeModal, rarity }) => {
+  const { deck } = useSelector(state => ({
+    deck: state.clashPlayer.deck.filter(cardId => cards[cardId].rarity === rarity),
+  }), shallowEqual);
+  const dispatch = useDispatch();
+
+  return (
+    <CardViewModal
+      title='Choose a card to remove'
+      shouldShowCardCount={false}
+      cardIds={deck}
+      cardOnClick={(cardId) => {
+        dispatch(actions.removeCardsFromCollection(cardId));
+        closeModal();
+      }}
+      closeModal={closeModal}
+      shouldShowCloseButton={false}
     />
   );
 };

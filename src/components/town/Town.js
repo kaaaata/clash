@@ -11,7 +11,8 @@ import {
   CatherineTheGreat,
   RemoveCards,
   GatherGold,
-  DancingLady
+  DancingLady,
+  CursedChest
 } from './randomEvents';
 import { Crafting } from '../crafting/Crafting';
 import { CardLootModal } from '../modals/CardLootModal';
@@ -167,6 +168,9 @@ export const Town = () => {
       break;
     case 'Dancing Lady':
       modal = <DancingLady closeModal={closeModal} />;
+      break;
+    case 'Cursed Chest':
+      modal = <CursedChest closeModal={closeModal} />;
       break;
     default:
       break;
