@@ -20,9 +20,6 @@ const _Card = ({ cardName, cardId }) => {
   const {
     name,
     image,
-    // imageSlant,
-    // craftedImage,
-    // craftedImageSlant,
     rarity,
     attack,
     defense,
@@ -36,24 +33,6 @@ const _Card = ({ cardName, cardId }) => {
     <React.Fragment>
       <Spacer height={90} />
       {glow && <div className={`glow glow_${glow}`} />}
-      {/* {rarity === 'crafted' ? (
-        <React.Fragment>
-          <Image
-            src={`${image}.png`}
-            width='100%'
-            height={90}
-            size='contain'
-            className='card_art faded'
-          />
-          <Image
-            src={`${craftedImage}.png`}
-            width='100%'
-            height={90}
-            size='contain'
-            className={`card_art ${imageSlant === craftedImageSlant ? 'horizontal_flip' : ''}`}
-          />
-        </React.Fragment>
-      ) : ( */}
       <Image
         src={`${image}.png`}
         width='100%'

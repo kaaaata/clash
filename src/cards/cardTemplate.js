@@ -1,9 +1,6 @@
 export const cardTemplate = {
   name: '',
   image: '',
-  imageSlant: 0, // 0 = SW -> NE, 1 = NW -> SE
-  // craftedImage: '',
-  // craftedImageSlant: 0,
   glow: null,
   rarity: '',
   attack: 0,
