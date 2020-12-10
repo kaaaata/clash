@@ -25,17 +25,14 @@ export const RemoveCards = ({ closeModal }) => {
   );
 };
 
-export const CursedChestRemoveCards = ({ closeModal, rarity }) => {
-  const { deck } = useSelector(state => ({
-    deck: state.clashPlayer.deck.filter(cardId => cards[cardId].rarity === rarity),
-  }), shallowEqual);
+export const CursedChestRemoveCards = ({ closeModal, cardIds }) => {
   const dispatch = useDispatch();
 
   return (
     <CardViewModal
       title='Choose a card to remove'
       shouldShowCardCount={false}
-      cardIds={deck}
+      cardIds={cardIds}
       cardOnClick={(cardId) => {
         dispatch(actions.removeCardsFromCollection(cardId));
         closeModal();

@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import * as actions from '../../../stores/actions';
 import { EventModal, EventModalPage } from '../../modals/EventModal';
 import { createNewCard } from '../../../cards/createNewCard';
 import { sample } from 'lodash';
 import { blueprints } from '../../../cards/blueprints';
 import { CursedChestRemoveCards } from './RemoveCards';
+import { cards } from '../../../cards/cards';
 
 export const CursedChest = ({ closeModal }) => {
+  const { deckCommonCards, deckUncommonCards } = useSelector(state => ({
+    deckCommonCards: state.clashPlayer.deck.filter(cardId => cards[cardId].rarity === 'common'),
+    deckUncommonCards: state.clashPlayer.deck.filter(cardId => cards[cardId].rarity === 'uncommon')
+  }), shallowEqual);
   const dispatch = useDispatch();
 
   const [page, setPage] = useState('default');
@@ -31,6 +36,7 @@ export const CursedChest = ({ closeModal }) => {
           options={[
             {
               name: 'Cheap Offering',
+              isDisabled: !deckCommonCards.length,
               redText: 'Give a common card.',
               greenText: 'Get a random uncommon card.',
               redTextFirst: true,
@@ -41,6 +47,7 @@ export const CursedChest = ({ closeModal }) => {
             },
             {
               name: 'Valuable Offering',
+              isDisabled: !deckUncommonCards.length,
               redText: 'Give an uncommon card.',
               greenText: 'Get a random rare card.',
               redTextFirst: true,
@@ -107,8 +114,8 @@ export const CursedChest = ({ closeModal }) => {
 
   return page === 'remove_cards_modal' ? (
     <CursedChestRemoveCards
+      cardIds={removedCardRarity === 'common' ? deckCommonCards : deckUncommonCards}
       closeModal={() => setPage('given_offering')}
-      rarity={removedCardRarity}
     />
   ) : (
     <EventModal
