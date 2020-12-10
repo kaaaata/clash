@@ -1,6 +1,8 @@
+import { useState } from 'react';
 import { css, jsx } from '@emotion/core'; /** @jsx jsx */
 import { useDispatch } from 'react-redux';
 import * as actions from '../../stores/actions';
+import { store } from '../../stores/store';
 import {
   YourDeck,
   YourDiscard,
@@ -17,6 +19,10 @@ import { playFirstCardInRound } from '../../gameplay/playFirstCardInRound';
 import { BattleRewards } from './BattleRewards';
 import { CardPileModal } from './CardPileModal';
 import { BattleLog } from './BattleLog';
+import { VTrigger } from './VTrigger';
+import { shuffle } from 'lodash';
+
+const inDevelopment = process.env.NODE_ENV !== 'production';
 
 const perspectiveCss = css`perspective: 2000px;`;
 
@@ -26,7 +32,11 @@ const battleSpeeds = {
   'Fast': 300
 };
 
+let isAnimating = false;
+
 export const Battle = () => {
+  const [vBars, setVBars] = useState(2);
+
   const battleSpeedMs = battleSpeeds[
     window.localStorage.getItem('clashsetting_battle_speed') || 'Normal'
   ];
@@ -34,8 +44,7 @@ export const Battle = () => {
 
   let interval = null;
   let renderActions = [];
-  let isAnimating = false;
-
+  
   const executeRenderAction = (action) => {
     if (action) {
       action.forEach(subAction => {
@@ -46,18 +55,7 @@ export const Battle = () => {
     }
   };
 
-  const handleClickCardInYourHand = (index) => {
-    if (isAnimating) {
-      return;
-    }
-
-    isAnimating = true;
-    dispatch(actions.setBattleLogs([]));
-    const t0 = performance.now();
-    renderActions = playFirstCardInRound(index);
-    const t1 = performance.now();
-    console.log(`playCard took ${(t1 - t0).toFixed(3)} milliseconds.`);
-
+  const executeRenderActions = (renderActions) => {
     if (renderActions.length) {
       // later, if we want to allow pausing mid-animation, renderActions should be
       // refactored to be a Stack, and it should pop every time an action is executed.
@@ -77,6 +75,64 @@ export const Battle = () => {
     } else {
       isAnimating = false;
     }
+  };
+
+  const handleClickCardInYourHand = (index) => {
+    if (isAnimating) {
+      return;
+    }
+
+    isAnimating = true;
+    dispatch(actions.setBattleLogs([]));
+    const t0 = performance.now();
+    renderActions = playFirstCardInRound(index);
+    const t1 = performance.now();
+    if (inDevelopment) {
+      console.log(`playCard took ${(t1 - t0).toFixed(3)} ms.`);
+    }
+    executeRenderActions(renderActions);
+  };
+
+  const handleActivateVTrigger = () => {
+    if (isAnimating || !vBars) {
+      return;
+    }
+
+    isAnimating = true;
+    setVBars(vBars - 1);
+    const renderActions = [];
+    const mockState = {
+      yourHand: [...store.getState().clashBattleCards.yourHand],
+      yourDeck: [...store.getState().clashBattleCards.yourDeck],
+    };
+    let { yourHand, yourDeck } = mockState;
+
+    yourDeck = shuffle([...yourDeck, ...yourHand]);
+    yourHand = [null, null, null];
+
+    renderActions.push([{
+      actionKey: 'setYourHand',
+      payload: [...yourHand]
+    }, {
+      actionKey: 'setYourDeck',
+      payload: [...yourDeck]
+    }]);
+
+    renderActions.push([]);
+
+    for (let i = 0; i < 3; i++) {
+      yourHand[i] = yourDeck[yourDeck.length - 1];
+      yourDeck = yourDeck.slice(0, yourDeck.length - 1);
+      renderActions.push([{
+        actionKey: 'setYourHand',
+        payload: [...yourHand]
+      }, {
+        actionKey: 'setYourDeck',
+        payload: [...yourDeck]
+      }]);
+    }
+
+    executeRenderActions(renderActions);
   };
 
   return (
@@ -100,6 +156,7 @@ export const Battle = () => {
       </div>
 
       <BattleLog />
+      <VTrigger handleActivateVTrigger={handleActivateVTrigger} bars={vBars} />
       
       <CardPileModal />
       <BattleRewards />

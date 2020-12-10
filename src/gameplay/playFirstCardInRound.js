@@ -6,6 +6,8 @@ import { logPlayCard, logPlayerWins } from './battleLogGenerators';
 import { cards } from '../cards/cards';
 import { selectEnemyCardToPlay } from './selectEnemyCardToPlay';
 
+const inDevelopment = process.env.NODE_ENV !== 'production';
+
 export const playFirstCardInRound = (index) => {
   const clashBattleCards = store.getState().clashBattleCards;
   const clashBattleStats = store.getState().clashBattleStats;
@@ -93,10 +95,12 @@ export const playFirstCardInRound = (index) => {
     }
   }
 
-  console.log(logs.map(log => log.consoleLog.startsWith('you')
-    ? `Player${log.consoleLog.slice(3)}`
-    : `${state.enemy.name}${log.consoleLog.slice(5)}`
-  ));
+  if (inDevelopment) {
+    console.log(logs.map(log => log.consoleLog.startsWith('you')
+      ? `Player${log.consoleLog.slice(3)}`
+      : `${state.enemy.name}${log.consoleLog.slice(5)}`
+    ));
+  }
 
   renderActions[renderActions.length - 1].push({ actionKey: 'setBattleLogs', payload: logs });
 

@@ -10,7 +10,7 @@ import { colors } from '../styles';
 
 const battleLogButtonCss = css`
   position: absolute;
-  top: 430px;
+  top: 380px;
   left: 25px;
   width: 150px;
 `;
@@ -44,8 +44,10 @@ export const BattleLog = () => {
   }, shallowEqual);
 
   const [isBattleLogModalOpen, setIsBattleLogModalOpen] = useState(false);
+  
+  const showRecapButton = battleLogs.length > 2;
 
-  return battleLogs.length > 2 ? (
+  return showRecapButton ? (
     <React.Fragment>
       <Button
         onClick={() => setIsBattleLogModalOpen(true)}
