@@ -49,7 +49,7 @@ export const playFirstCardInRound = (index) => {
     cardId
   ));
   // any function that uses stateCopy should put its reference as the first arg
-  playCard(state, cardId, 'you', 'hand', index);
+  playCard(state, cardId, 'you', { player: 'you', location: 'hand', index });
 
   if (state.winner) {
     logs.push(logPlayerWins(
@@ -75,7 +75,12 @@ export const playFirstCardInRound = (index) => {
         'enemy',
         enemyHandRandomCardId
       ));
-      playCard(state, enemyHandRandomCardId, 'enemy', 'hand', enemyHandRandomCardIndex);
+      playCard(
+        state,
+        enemyHandRandomCardId,
+        'enemy',
+        { player: 'enemy', location: 'hand', index: enemyHandRandomCardIndex }
+      );
       if (state.winner) {
         logs.push(logPlayerWins(
           `${state.winner} wins!`,

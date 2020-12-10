@@ -9,7 +9,7 @@ import { blueprints } from './cards/blueprints';
 import { monstersByTier } from './monsters/monsters';
 
 let isControllerEnabled = false;
-// isControllerEnabled = true;
+isControllerEnabled = true;
 
 const _genUpgradedCard = (cardName) => genUpgradedCard(
   blueprints.allCardsObject[cardName],
@@ -23,8 +23,8 @@ const _genUpgradedCard = (cardName) => genUpgradedCard(
 
 export const controller = isControllerEnabled ? {
   // yourHand: [_genUpgradedCard('Sword'), _genUpgradedCard('Sword'), _genUpgradedCard('Sword')],
-  yourHand: ['Attack Potion', 'Falchion', 'Blank'].map(i => createNewCard(i)),
-  yourDeck: [
+  yourHand: ['The Devourer', 'Lich', 'Minotaur'].map(i => createNewCard(i)),
+  // yourDeck: [
   //   // cards[upgradedCard],
     
   //   'Dragon Blade',
@@ -44,7 +44,7 @@ export const controller = isControllerEnabled ? {
   //   'Dragon Blade',
   //   'Dragon Blade',
   //   'Dragon Blade',
-  ].map(i => createNewCard(i)),
+  // ].map(i => createNewCard(i)),
   // yourDeck: [
   //   ...Array(30).fill('Blank').map(i => createNewCard(i)),
   //   _genUpgradedCard('Sword'),

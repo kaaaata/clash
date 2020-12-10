@@ -23,7 +23,7 @@ const defaultStatePiles = {
 const simulatePlayCard = ({ cardName, cardId, player = 'you' }) => {
   const _cardId = cardName ? createNewCard(cardName) : cardId; 
   state[player].hand[0] = cardId;
-  playCard(state, _cardId, player, 'hand', 0);
+  playCard(state, _cardId, player, { player, location: 'hand', index: 0 });
 };
 
 const resetState = () => {
@@ -434,4 +434,19 @@ test('CUSTOM CARD EFFECT (Flowy Lady)', () => {
     )).length)
       .not.toBe(0);
   });
+});
+
+test('CUSTOM CARD EFFECT (The Devourer)', () => {
+  state.enemy.deck = CardIdsArray(Array(10).fill('Blank').map(i => createNewCard(i)));
+  simulatePlayCard({ cardName: 'The Devourer' });
+  expect(state.enemy.deck.length).toBe(5);
+  expect(state.you.discard.length).toBe(12);
+
+  resetState();
+
+  state.enemy.deck = CardIdsArray(['Healing Potion'].map(i => createNewCard(i)));
+  simulatePlayCard({ cardName: 'The Devourer' });
+  expect(state.enemy.deck.length).toBe(0);
+  expect(state.you.discard.length).toBe(8);
+  expect(state.you.banish.length).toBe(11);
 });

@@ -1,9 +1,13 @@
 import { css, jsx } from '@emotion/core'; /** @jsx jsx */
+import { shallowEqual, useSelector } from 'react-redux';
 import { Button, FlexContainer } from '../particles';
 import { colors, effects } from '../styles';
 
-export const VTrigger = ({ handleActivateVTrigger, bars }) => {
-  const canActivate = !!bars;
+export const VTrigger = ({ handleActivateVTrigger }) => {
+  const { vBars } = useSelector(state => ({
+    vBars: state.clashBattleStats.vBars
+  }), shallowEqual);
+  const canActivate = !!vBars;
 
   const vTriggerCss = css`
     position: absolute;
@@ -26,7 +30,7 @@ export const VTrigger = ({ handleActivateVTrigger, bars }) => {
         position: absolute;
         height: 28px;
         background: ${canActivate ? colors.yellow : colors.slateLight};
-        width: ${~~(100 * bars / 2)}%;
+        width: ${~~(100 * vBars / 3)}%;
         transition: all 0.75s ease-out;
       }
 
@@ -42,14 +46,14 @@ export const VTrigger = ({ handleActivateVTrigger, bars }) => {
     <Button
       centered
       isDisabled={!canActivate}
-      onClick={handleActivateVTrigger}
+      onClick={canActivate ? handleActivateVTrigger : null}
       className={canActivate ? 'glow' : ''}
       _css={vTriggerCss}
     >
       <div className='fill_container'>
         <div className='fill' />
         <FlexContainer justifyContent='center' alignItems='center' className='text'>
-          <div>Re-draw ({bars}/2)</div>
+          <div>Re-draw ({vBars}/3)</div>
         </FlexContainer>
       </div>
     </Button>

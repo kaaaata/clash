@@ -32,7 +32,7 @@ export const customCardEffects = {
           cardId,
           "Player's discard"
         ));
-        playCard(state, cardId, player, 'discard', attackIndex);
+        playCard(state, cardId, player, { player, location: 'discard', index: attackIndex });
       }
     }
   },
@@ -53,7 +53,7 @@ export const customCardEffects = {
           cardId,
           "Player's discard"
         ));
-        playCard(state, cardId, player, 'discard', attackIndex);
+        playCard(state, cardId, player, { player, location: 'discard', index: attackIndex });
       }
     }
   },
@@ -73,7 +73,7 @@ export const customCardEffects = {
         cardId,
         "Player's discard"
       ));
-      playCard(state, cardId, player, 'discard', allyIndex);
+      playCard(state, cardId, player, { player, location: 'discard', index: allyIndex });
     }
   },
   'Alchemist': (state, player) => {
@@ -221,5 +221,34 @@ export const customCardEffects = {
       actionGenerators.setCardPile(state, 'you', 'hand'),
       actionGenerators.setCardPile(state, 'you', 'banish')
     ]);
+  },
+  'The Devourer': (state, player) => {
+    // Play a random card from the enemy's deck. It gets +4/+4.
+    const enemy = player === 'you' ? 'enemy' : 'you';
+    const cardIndex = state[enemy].deck.getRandomCardIndex();
+    if (cardIndex !== -1) {
+      const card = cards[state[enemy].deck[cardIndex]];
+      const isPotion = card.type === 'potion';
+      const cardId = createNewCard(
+        {
+          ...card,
+          attack: isPotion ? 0 : card.attack + 4,
+          defense: isPotion ? 0 : card.defense + 4,
+          battleMutatedProperties: isPotion ? card.battleMutatedProperties : {
+            ...card.battleMutatedProperties,
+            attack: true,
+            defense: true
+          }
+        },
+        `battle_${shortid.generate()}`
+      );
+      state.logs.push(logPlayCopyOfCard(
+        `${player} plays ${cards[cardId]}(${cardId})`,
+        player,
+        cardId,
+        "Enemy's deck"
+      ));
+      playCard(state, cardId, player, { player: enemy, location: 'deck', index: cardIndex });
+    }
   }
 };

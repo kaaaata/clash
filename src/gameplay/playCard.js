@@ -52,7 +52,12 @@ const triggerDiscardEffect = (state, cardId, player) => {
 };
 
 // a player loses if they receive damage while deck size is 0, or they cannot draw a card.
-export const playCard = (state, cardId, player, location, index) => {
+export const playCard = (
+  state,
+  cardId,
+  player,
+  removeCardArgs // { player, location, index }
+) => {
   const { logs, renderActions } = state; // state gets mutated. only declare objects here!
   const card = cards[cardId];
   const {
@@ -84,7 +89,12 @@ export const playCard = (state, cardId, player, location, index) => {
   if (!state.winner && !isMockCard) {
     renderActions.push([
       actionGenerators.addCardToStack(state, cardId),
-      location && actionGenerators.removeCard(state, player, location, index)
+      removeCardArgs && actionGenerators.removeCard(
+        state,
+        removeCardArgs.player,
+        removeCardArgs.location,
+        removeCardArgs.index
+      )
     ].filter(Boolean));
   }
 

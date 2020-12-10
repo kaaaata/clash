@@ -208,6 +208,15 @@ export const allies = [
     },
     customDescription: 'Give all copies of Blank in your deck, discard, hand, and banish +3/+3.',
     triggerDiscardOnPlay: true
+  },
+  {
+    name: 'The Devourer',
+    image: 'devourer',
+    rarity: 'special',
+    attack: 0,
+    defense: 0,
+    customEffect: true,
+    customDescription: 'Play a random card from the enemy\'s deck. It gets +4/+4.'
   }
 ].map(card => {
   card.type = 'ally';

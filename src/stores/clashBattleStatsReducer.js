@@ -16,7 +16,8 @@ const genInitialState = () => ({
   enemyShields: 0,
   yourShields: 0,
   winner: null,
-  winnerImage: null
+  winnerImage: null,
+  vBars: 3
 });
 
 export default (state = genInitialState(), action) => {
@@ -76,13 +77,19 @@ export default (state = genInitialState(), action) => {
         winner: action.payload,
         winnerImage: action.payload === state.yourName ? state.yourImage : state.enemyImage
       };
+    case 'ACTIVATE_V_TRIGGER':
+      return {
+        ...state,
+        vBars: state.vBars - 1
+      };
     case 'SET_BATTLE_INITIAL_STATE':
       return {
         ...state,
         yourShields: 0,
         enemyShields: 0,
         winner: null,
-        winnerImage: null
+        winnerImage: null,
+        vBars: 3
       };
     case 'START_NEW_DAY':
       return {

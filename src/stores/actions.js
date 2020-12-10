@@ -19,6 +19,7 @@ export const setEnemyShields = payload => ({ type: 'SET_ENEMY_SHIELDS', payload 
 export const setStats = payload => ({ type: 'SET_STATS', payload });
 export const setBattleInitialState = payload => ({ type: 'SET_BATTLE_INITIAL_STATE', payload });
 export const setWinner = payload => ({ type: 'SET_WINNER', payload });
+export const activateVTrigger = payload => ({ type: 'ACTIVATE_V_TRIGGER', payload });
 
 export const setPlayerLives = payload => ({ type: 'SET_PLAYER_LIVES', payload });
 export const adjustPlayerLives = payload => ({ type: 'ADJUST_PLAYER_LIVES', payload });

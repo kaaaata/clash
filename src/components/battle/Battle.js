@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { css, jsx } from '@emotion/core'; /** @jsx jsx */
 import { useDispatch } from 'react-redux';
 import * as actions from '../../stores/actions';
@@ -35,8 +34,6 @@ const battleSpeeds = {
 let isAnimating = false;
 
 export const Battle = () => {
-  const [vBars, setVBars] = useState(2);
-
   const battleSpeedMs = battleSpeeds[
     window.localStorage.getItem('clashsetting_battle_speed') || 'Normal'
   ];
@@ -94,12 +91,12 @@ export const Battle = () => {
   };
 
   const handleActivateVTrigger = () => {
-    if (isAnimating || !vBars) {
+    if (isAnimating) {
       return;
     }
 
     isAnimating = true;
-    setVBars(vBars - 1);
+    dispatch(actions.activateVTrigger());
     const renderActions = [];
     const mockState = {
       yourHand: [...store.getState().clashBattleCards.yourHand],
@@ -156,7 +153,7 @@ export const Battle = () => {
       </div>
 
       <BattleLog />
-      <VTrigger handleActivateVTrigger={handleActivateVTrigger} bars={vBars} />
+      <VTrigger handleActivateVTrigger={handleActivateVTrigger} />
       
       <CardPileModal />
       <BattleRewards />

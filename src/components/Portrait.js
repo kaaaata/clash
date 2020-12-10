@@ -5,7 +5,7 @@ import { Image, Spacer, FlexContainer } from './particles';
 import { Attributes } from './Attributes';
 import { Shields } from './Shields';
 import { portraitCss } from './portraitCss';
-import { colors, effects } from './styles';
+import { colors } from './styles';
 
 export const Portrait = ({ player }) => {
   const { image, stats, statBonuses, shields, isDead, isEnemyElite, isNemesis } = useSelector(state => {
