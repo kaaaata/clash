@@ -1,3 +1,4 @@
+import { colors } from './colors';
 import { mixins } from './mixins';
 
 export const effects = {
@@ -26,5 +27,12 @@ export const effects = {
       50% { transform: scale(1.3); }
       100% { transform: scale(1); }
     `)}
+  `,
+  glowGreen: `
+    ${mixins.keyframes('glowGreen', `
+      0% { filter: drop-shadow(0 0 8px ${colors.green}); }
+      100% { filter: drop-shadow(0 0 22px ${colors.green}); }
+    `)}
+    animation: glowGreen 1s ease-out infinite alternate;
   `
 };

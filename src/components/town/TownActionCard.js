@@ -1,5 +1,6 @@
 import { css, jsx } from '@emotion/core'; /** @jsx jsx */
 import { Spacer, Image, FlexContainer, Text } from '../particles';
+import { colors } from '../styles';
 
 const townActionCardCss = css`
   display: flex;
@@ -51,6 +52,7 @@ export const TownActionCard = ({
         width={100}
         height={100}
         size='contain'
+        _css={name === 'Nemesis' ? css`filter: drop-shadow(0 0 15px ${colors.red});` : ''}
       />
       <Spacer height={5} />
       <Text type='mini'>{name}</Text>

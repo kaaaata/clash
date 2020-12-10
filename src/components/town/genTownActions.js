@@ -121,7 +121,14 @@ const townActions = keyBy([
     weight: 1,
     image: 'cursed_chest',
     description: 'A random encounter!'
-  }
+  },
+  {
+    name: 'Nemesis',
+    energy: 3,
+    weight: 1,
+    image: null,
+    description: 'A random encounter with...yourself?'
+  },
 ], 'name');
 const townActionPool = [];
 Object.values(townActions).forEach(action => {

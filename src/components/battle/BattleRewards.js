@@ -4,10 +4,12 @@ import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import * as actions from '../../stores/actions';
 import { EventModal, EventModalPage } from '../modals/EventModal';
 import { CardLootModal } from '../modals/CardLootModal';
-import { effects } from '../styles';
+import { colors, effects } from '../styles';
 import { packs } from '../shop/packs';
 import { genPackCardNames } from '../shop/genPackCardNames';
 import { genGuaranteedTownAction } from '../town/genTownActions';
+import { sampleSize } from 'lodash';
+import { cards } from '../../cards/cards';
 
 export const BattleRewards = () => {
   const {
@@ -19,7 +21,9 @@ export const BattleRewards = () => {
     enemyType,
     isEnemyElite,
     enemyName,
-    day
+    day,
+    deck,
+    yourImage
   } = useSelector(state => ({
     didPlayerWin: state.clashBattleStats.winner
       && state.clashBattleStats.yourName === state.clashBattleStats.winner,
@@ -32,7 +36,9 @@ export const BattleRewards = () => {
     enemyType: state.clashBattleStats.enemyType,
     isEnemyElite: state.clashBattleStats.isEnemyElite,
     enemyName: state.clashBattleStats.enemyName,
-    day: state.clashTown.day
+    day: state.clashTown.day,
+    deck: state.clashPlayer.deck,
+    yourImage: state.clashBattleStats.yourImage
   }), shallowEqual);
   const dispatch = useDispatch();
 
@@ -42,8 +48,17 @@ export const BattleRewards = () => {
   
   const returnToTown = () => {
     if (!didPlayerWin) {
-      dispatch(actions.addTownFeedText(`You were defeated by: ${enemyName}! You lose 1 life.`));
-      dispatch(actions.adjustPlayerLives(-1));
+      if (enemyName === 'Nemesis') {
+        const lostCards = sampleSize(deck, 2);
+        dispatch(actions.addTownFeedText(
+          `You were defeated by: ${enemyName}! You lost ${battleRewardGold} gold, and two cards: ${cards[lostCards[0]].name} and ${cards[lostCards[1]].name}.`
+        ));
+        dispatch(actions.adjustPlayerGold(battleRewardGold * -1))
+        dispatch(actions.removeCardsFromCollection(lostCards));
+      } else {
+        dispatch(actions.addTownFeedText(`You were defeated by: ${enemyName}! You lost 1 life.`));
+        dispatch(actions.adjustPlayerLives(-1));
+      }
       dispatch(actions.setScene('town'));
     } else if (enemyType === 'wave') {
       dispatch(actions.startNewDay());
@@ -80,13 +95,15 @@ export const BattleRewards = () => {
             </React.Fragment>
           ) : (
             <React.Fragment>
-              You were no match for the <span className='red'>{enemyName}!</span>
+              You were no match for <span className='red'>{enemyName}!</span>
             </React.Fragment>
           )}
           options={[{
             name: 'Continue',
             greenText: didPlayerWin ? `Receive ${battleRewardGold} gold.` : '',
-            redText: didPlayerWin ? '' : 'Lose 1 life.',
+            redText: didPlayerWin
+              ? ''
+              : enemyName === 'Nemesis' ? `Lose ${battleRewardGold} gold, and 2 random cards from your deck`: 'Lose 1 life.',
             onClick: () => {
               if (didPlayerWin) {
                 dispatch(actions.adjustPlayerGold(battleRewardGold));
@@ -226,9 +243,13 @@ export const BattleRewards = () => {
     return (
       <EventModal
         title={modalTitle}
-        image={winnerImage}
+        image={(didPlayerLose && enemyName === 'Nemesis') ? yourImage : winnerImage}
         imageContainerCss={isEnemyElite && didPlayerLose
           ? `${effects.rainbow} animation: rainbow 5s infinite;`
+          : ''
+        }
+        imageCss={(didPlayerLose && enemyName === 'Nemesis')
+          ? `filter: drop-shadow(0 0 15px ${colors.red})`
           : ''
         }
       >

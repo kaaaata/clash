@@ -40,22 +40,6 @@ export const _cardCss = (rarityColor) => css`
       }
     }
 
-    .glow {
-      position: absolute;
-      height: 1px;
-      width: 1px;
-      top: 50%;
-      border-radius: 50%;
-
-      &.glow_red {
-        box-shadow: 0px 0px 55px 35px ${colors.red};
-      }
-
-      &.glow_blue {
-        box-shadow: 0px 0px 55px 35px ${colors.blue};
-      }
-    }
-
     .attack, .defense {
       font-size: 24px;
       position: absolute;

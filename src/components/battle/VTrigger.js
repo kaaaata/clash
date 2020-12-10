@@ -1,6 +1,6 @@
 import { css, jsx } from '@emotion/core'; /** @jsx jsx */
 import { Button, FlexContainer } from '../particles';
-import { colors, mixins } from '../styles';
+import { colors, effects } from '../styles';
 
 export const VTrigger = ({ handleActivateVTrigger, bars }) => {
   const canActivate = !!bars;
@@ -15,12 +15,7 @@ export const VTrigger = ({ handleActivateVTrigger, bars }) => {
     border: 2px solid ${canActivate ? colors.green : colors.red};
     
     &.glow {
-      ${mixins.keyframes('glow', `
-        0% { box-shadow: 0 0 8px ${colors.green}; }
-        100% { box-shadow: 0 0 22px ${colors.green}; }
-      `)}
-
-      animation: glow 1s ease-out infinite alternate;
+      ${effects.glowGreen}
     }
 
     .fill_container {

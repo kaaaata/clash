@@ -25,14 +25,12 @@ const _Card = ({ cardName, cardId }) => {
     defense,
     type,
     description,
-    glow,
     battleMutatedProperties
   } = card;
 
   const cardArt = (
     <React.Fragment>
       <Spacer height={90} />
-      {glow && <div className={`glow glow_${glow}`} />}
       <Image
         src={`${image}.png`}
         width='100%'

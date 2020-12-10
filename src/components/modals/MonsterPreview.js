@@ -10,7 +10,7 @@ import { EventModal, EventModalPage } from '../modals/EventModal';
 import { cards } from '../../cards/cards';
 import { rarityColors } from '../../cards/rarity';
 import { controller } from '../../controller';
-import { effects } from '../styles';
+import { colors, effects } from '../styles';
 import { createNewCard } from '../../cards/createNewCard';
 import { blueprints } from '../../cards/blueprints';
 import shortid from 'shortid';
@@ -66,7 +66,16 @@ export const MonsterPreview = ({
   closeModal,
   retreatText = 'Retreat'
 }) => {
-  const { deck, day, monster, monsterGoldReward, enemyStatBonuses } = useSelector(state => {
+  const isNemesis = monsterOverride && monsterOverride.name === 'Nemesis';
+  const {
+    deck,
+    day,
+    monster,
+    monsterGoldReward,
+    enemyStatBonuses,
+    yourStats,
+    yourImage
+  } = useSelector(state => {
     const day = state.clashTown.day;
     const flowMonsterOverride = allMonsters.filter(i => i.name === (
       ([1, 2, 3].includes(day)
@@ -82,7 +91,9 @@ export const MonsterPreview = ({
       day,
       monster: monsterOverride || flowMonsterOverride || state.clashTown.dailyMonster,
       monsterGoldReward: monsterGoldRewardOverride || state.clashTown.dailyMonsterGoldReward,
-      enemyStatBonuses: state.clashBattleStats.enemyStatBonuses
+      enemyStatBonuses: state.clashBattleStats.enemyStatBonuses,
+      yourStats: state.clashBattleStats.yourStats,
+      yourImage: state.clashBattleStats.yourImage
     };
   }, shallowEqual);
   const dispatch = useDispatch();
@@ -98,9 +109,11 @@ export const MonsterPreview = ({
         delete cards[cardId];
       }
     });
-    const enemyDeckIds = enemyDeckCardNames.map(
-      cardName => createNewCard(cardName, `battle_${shortid.generate()}`)
-    );
+    const enemyDeckIds = isNemesis
+      ? shuffle(yourDeckIds)
+      : enemyDeckCardNames.map(
+        cardName => createNewCard(cardName, `battle_${shortid.generate()}`)
+      );
 
     const yourDeckSorted = (controller.yourDeck || yourDeckIds)
       .map(cardId => createNewCard(cards[cardId], `battle_${shortid.generate()}`))
@@ -115,10 +128,10 @@ export const MonsterPreview = ({
       image: monster.image,
       type: monster.type,
       isEnemyElite: isMonsterElite,
-      stats: monster.stats
+      stats: isNemesis ? yourStats : monster.stats
     }));
     dispatch(actions.setStats({
-      stats: monster.stats,
+      stats: isNemesis ? yourStats : monster.stats,
       type: 'stats',
       player: 'enemy',
       operation: 'set'
@@ -145,33 +158,46 @@ export const MonsterPreview = ({
     dispatch(actions.setScene('battle'));
   };
 
+  const yourCardsRarityString = <CardsRarityString cardIds={yourDeckIds} showSpecial />;
+  const enemyCardsRarityString = isNemesis
+    ? yourCardsRarityString
+    : <CardsRarityString cardNames={enemyDeckCardNames} />;
+  const defeatConsequenceString = isNemesis ? (
+    <React.Fragment>
+      <span className='red'>lose {monsterGoldReward} gold</span> and <span className='red'>2 random cards from your deck</span>
+    </React.Fragment>
+  ) : <span className='red'>lose 1 life.</span>;
+
   const text = (
     <React.Fragment>
       You are attacked by: <span className='yellow'>{monsterName}!</span>
       <br /><br />
-      Enemy cards: <span className='bold yellow'>{enemyDeckCardNames.length}</span> <CardsRarityString cardNames={enemyDeckCardNames} />
+      Enemy cards: <span className='bold yellow'>{(isNemesis ? yourDeckIds : enemyDeckCardNames).length}</span> {enemyCardsRarityString}
       <br />
-      Your cards: <span className='bold yellow'>{yourDeckIds.length}</span> <CardsRarityString cardIds={yourDeckIds} showSpecial />
+      Your cards: <span className='bold yellow'>{yourDeckIds.length}</span> {yourCardsRarityString}
       <br /><br />
       Victory: <span className='green'>gain {monsterGoldReward} gold</span> and {monster.type === 'wave' ? 'a ' : ''}<span className='green'>{monster.type === 'wave' ? '3 card draft' : "2 cards from the enemy's deck"}</span>
       <br />
-      Defeat: <span className='red'>lose 1 life.</span>
+      Defeat: {defeatConsequenceString}
     </React.Fragment>
   );
 
   const imageComponentOverride = (
     <FlexContainer flexDirection='column' alignItems='center'>
       <Image
-        src={`${monster.image}.png`}
+        src={`${isNemesis ? yourImage : monster.image}.png`}
         height={270}
         width={300}
         size='contain'
         _css={isMonsterElite
           ? `${effects.rainbow} animation: rainbow 5s infinite;`
-          : ''
+          : isNemesis ? `filter: drop-shadow(0 0 15px ${colors.red})` : ''
         }
       />
-      <Attributes stats={monster.stats} statBonuses={enemyStatBonuses} />
+      <Attributes
+        stats={isNemesis ? yourStats : monster.stats}
+        statBonuses={enemyStatBonuses}
+      />
     </FlexContainer>
   );
 

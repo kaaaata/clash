@@ -1,7 +1,6 @@
 export const cardTemplate = {
   name: '',
   image: '',
-  glow: null,
   rarity: '',
   attack: 0,
   defense: 0,

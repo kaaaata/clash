@@ -12,24 +12,13 @@ import {
   RemoveCards,
   GatherGold,
   DancingLady,
-  CursedChest
+  CursedChest,
+  Nemesis
 } from './randomEvents';
 import { Crafting } from '../crafting/Crafting';
 import { CardLootModal } from '../modals/CardLootModal';
 import { townCss } from './townCss';
 import { TreasureChest } from './randomEvents/TreasureChest';
-
-const genTownActionCardImage = (townAction, day) => {
-  if (townAction.name === 'Next Day') {
-    if (day === 10) {
-      return 'death_red';
-    } else if ([3, 6, 9].includes(day)) {
-      return 'death';
-    }
-  }
-
-  return townAction.image;
-};
 
 export const Town = () => {
   const {
@@ -38,7 +27,8 @@ export const Town = () => {
     townActions,
     purchasableCards,
     completedTownActions,
-    feed
+    feed,
+    yourImage
   } = useSelector(state => ({
     lives: state.clashPlayer.lives,
     energy: state.clashTown.energy,
@@ -46,7 +36,8 @@ export const Town = () => {
     purchasableCards: state.clashTown.purchasableCards,
     townActions: state.clashTown.townActions,
     completedTownActions: state.clashTown.completedTownActions,
-    feed: state.clashTown.feed
+    feed: state.clashTown.feed,
+    yourImage: state.clashBattleStats.yourImage
   }), shallowEqual);
   const dispatch = useDispatch();
 
@@ -54,6 +45,20 @@ export const Town = () => {
   const [activeModal, setActiveModal] = useState(
     window.flow.skipToBattle_toggle ? 'Next Day' : null
   );
+
+  const genTownActionCardImage = (townAction, day) => {
+    if (townAction.name === 'Next Day') {
+      if (day === 10) {
+        return 'death_red';
+      } else if ([3, 6, 9].includes(day)) {
+        return 'death';
+      }
+    } else if (townAction.name === 'Nemesis') {
+      return yourImage;
+    }
+    
+    return townAction.image;
+  };
 
   useEffect(() => {
     // auto scroll feed to bottom when it updates
@@ -171,6 +176,9 @@ export const Town = () => {
       break;
     case 'Cursed Chest':
       modal = <CursedChest closeModal={closeModal} />;
+      break;
+    case 'Nemesis':
+      modal = <Nemesis closeModal={closeModal} />;
       break;
     default:
       break;

@@ -154,6 +154,13 @@ const _eventMonsters = [
     ]
   },
   {
+    name: 'Nemesis',
+    image: null,
+    stats: { attack: 0, magic: 0, defense: 0 },
+    deck: [],
+    autofill: false
+  },
+  {
     name: 'The Evil Dragon',
     image: 'fire_dragon',
     stats: { attack: 2, magic: 2, defense: 2 },

@@ -112,6 +112,7 @@ export const EventModal = ({
   image,
   imageContainerCss = '',
   imageComponentOverride = null,
+  imageCss = '',
   children // <EventModalPage>
 }) => (
   <Modal halfModal title={title}>
@@ -124,6 +125,7 @@ export const EventModal = ({
             width={300}
             size='contain'
             className='main_image'
+            _css={imageCss}
           />
         )}
       </div>

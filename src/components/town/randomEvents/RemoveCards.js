@@ -1,6 +1,5 @@
 import { jsx } from '@emotion/core'; /** @jsx jsx */
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
-import { cards } from '../../../cards/cards';
 import * as actions from '../../../stores/actions';
 import { CardViewModal } from '../../modals/CardViewModal';
 

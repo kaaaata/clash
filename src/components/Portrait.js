@@ -5,22 +5,26 @@ import { Image, Spacer, FlexContainer } from './particles';
 import { Attributes } from './Attributes';
 import { Shields } from './Shields';
 import { portraitCss } from './portraitCss';
+import { colors, effects } from './styles';
 
 export const Portrait = ({ player }) => {
-  const { image, stats, statBonuses, shields, isDead, isEnemyElite } = useSelector(state => {
+  const { image, stats, statBonuses, shields, isDead, isEnemyElite, isNemesis } = useSelector(state => {
     return player === 'you' ? {
       image: state.clashBattleStats.yourImage,
       stats: state.clashBattleStats.yourStats,
       statBonuses: state.clashBattleStats.yourStatBonuses,
       shields: state.clashBattleStats.yourShields,
-      isDead: state.clashBattleStats.winner === state.clashBattleStats.enemyName
+      isDead: state.clashBattleStats.winner === state.clashBattleStats.enemyName,
     } : {
-      image: state.clashBattleStats.enemyImage,
+      image: state.clashBattleStats.enemyName === 'Nemesis'
+        ? state.clashBattleStats.yourImage
+        : state.clashBattleStats.enemyImage,
       stats: state.clashBattleStats.enemyStats,
       statBonuses: state.clashBattleStats.enemyStatBonuses,
       shields: state.clashBattleStats.enemyShields,
       isDead: state.clashBattleStats.winner === state.clashBattleStats.yourName,
-      isEnemyElite: state.clashBattleStats.isEnemyElite
+      isEnemyElite: state.clashBattleStats.isEnemyElite,
+      isNemesis: state.clashBattleStats.enemyName === 'Nemesis'
     };
   }, shallowEqual);
   const [portraitClassName, setPortraitClassName] = useState('portrait');
@@ -53,6 +57,7 @@ export const Portrait = ({ player }) => {
           height={150}
           className={portraitClassName}
           size='contain'
+          _css={isNemesis ? `filter: drop-shadow(0 0 15px ${colors.red})` : ''}
         />
       </div>
       {/* hold the place during the spinny death animation */}
