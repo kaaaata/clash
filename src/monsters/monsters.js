@@ -87,7 +87,7 @@ const monstersTier3 = [
   {
     name: 'Water Slime',
     image: 'water_slime',
-    stats: { attack: 0, magic: 2, defense: 1 },
+    stats: { attack: 0, magic: 3, defense: 0 },
     deck: [
       'Water Slime',
       'Healing Blade',
@@ -112,6 +112,22 @@ const monstersTier3 = [
     ],
     wave2AdditionalCards: ['Frost', 'Frost', 'Super Frost'],
     eliteAdditionalCards: ['Water Slime', 'Alchemist', 'Super Frost']
+  },
+  {
+    name: 'Fighter Kobold',
+    image: 'purple_kobold',
+    stats: { attack: 3, magic: 0, defense: 2 },
+    deck: [],
+    wave2AdditionalCards: [],
+    eliteAdditionalCards: []
+  },
+  {
+    name: 'Scheming Kobold',
+    image: 'red_kobold',
+    stats: { attack: 2, magic: 2, defense: 2 },
+    deck: Array(45).fill('Magic Scroll'),
+    wave2AdditionalCards: Array(5).fill('Magic Scroll'),
+    eliteAdditionalCards: Array(5).fill('Magic Scroll')
   }
 ];
 
@@ -126,13 +142,31 @@ const _eventMonsters = [
     name: 'Catherine the Great',
     image: 'catherine_the_great',
     stats: { attack: 2, magic: 2, defense: 2 },
-    deck: ['Catherine the Great']
+    deck: [
+      'Catherine the Great',
+      'Healing Blade', 'Healing Blade',
+      'Orc Blade', 'Orc Blade',
+      'Shield', 'Shield',
+      'Super Frost', 'Super Frost',
+      'Frost', 'Frost',
+      'Greataxe',
+      'Longsword'
+    ]
   },
   {
     name: 'The Evil Dragon',
     image: 'fire_dragon',
     stats: { attack: 2, magic: 2, defense: 2 },
-    deck: ['The Evil Dragon Jr.', 'The Evil Dragon Jr.', 'The Evil Dragon Jr.', 'Fire Spear', 'Fire Spear', 'Fire', 'Fire', 'Super Fire', 'Super Fire', 'Dragon Blade', 'Dragon Blade', 'Shield', 'Shield', 'Shield', 'Golden Goblet']
+    deck: [
+      'The Evil Dragon Jr.', 'The Evil Dragon Jr.', 'The Evil Dragon Jr.',
+      'Fire Spear', 'Fire Spear',
+      'Fire', 'Fire',
+      'Super Fire', 'Super Fire',
+      'Dragon Blade', 'Dragon Blade',
+      'Shield', 'Shield', 'Shield',
+      'Golden Goblet',
+      'Greataxe', 'Greataxe'
+    ]
   }
 ];
 

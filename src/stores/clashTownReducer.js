@@ -61,11 +61,11 @@ export default (state = initialState, action) => {
       const newDay = state.day + 1;
       let dailyMonster;
       if (newDay <= 3) {
-        dailyMonster = sample(monstersByTier[1]);
+        dailyMonster = sample(monstersByTier[1].filter(i => i.name !== state.dailyMonster.name));
       } else if (newDay <= 6) {
-        dailyMonster = sample(monstersByTier[2]);
+        dailyMonster = sample(monstersByTier[2].filter(i => i.name !== state.dailyMonster.name));
       } else if (newDay <= 9) {
-        dailyMonster = sample(monstersByTier[3]);
+        dailyMonster = sample(monstersByTier[3].filter(i => i.name !== state.dailyMonster.name));
       } else if (newDay === 10) {
         dailyMonster = eventMonsters['The Evil Dragon'];
       }

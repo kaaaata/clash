@@ -134,7 +134,7 @@ export const MonsterPreview = ({
       : enemyDeckSorted.slice(enemyDeckSorted.length - 3)
     ));
     dispatch(actions.setBattleRewardCards(
-      isMonsterElite
+      (isMonsterElite || monsterOverride)
         ? [
           ...sampleSize(enemyDeckIds.filter(cardId => cards[cardId].rarity !== 'common'), 3),
           ...sampleSize(enemyDeckIds.filter(cardId => cards[cardId].rarity === 'common'), 3)

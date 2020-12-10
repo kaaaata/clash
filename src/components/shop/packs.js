@@ -24,7 +24,7 @@ export const packs = {
       uncommon: 0,
       common: 3
     },
-    cost: 60,
+    cost: 50,
     image: 'bronze_pack'
   },
   silver: {
@@ -35,7 +35,7 @@ export const packs = {
       uncommon: 1,
       common: 2
     },
-    cost: 75,
+    cost: 100,
     image: 'silver_pack'
   },
   gold: {
@@ -46,7 +46,7 @@ export const packs = {
       uncommon: 1,
       common: 1
     },
-    cost: 100,
+    cost: 150,
     image: 'gold_pack'
   },
   diamond: {
@@ -57,7 +57,7 @@ export const packs = {
       uncommon: 1,
       common: 0
     },
-    cost: 150,
+    cost: 200,
     image: 'diamond_pack'
   }
 };
