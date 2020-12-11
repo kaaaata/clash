@@ -99,7 +99,8 @@ export const customCardEffects = {
           state,
           [{ cardId: state[player].banish[banishCardIndex], pile: 'discard' }],
           player,
-          { player, location: 'banish', index: banishCardIndex }
+          { player, location: 'banish', index: banishCardIndex },
+          false
         );
       }
     }

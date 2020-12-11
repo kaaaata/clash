@@ -191,7 +191,9 @@ export const playCard = (
 
       if (destination === 'discard' && cards[removedCardId].onDiscard) {
         if (state[opponent].deck.length || (
-          cards[removedCardId].onDiscard.heal || cards[removedCardId].onDiscard.shuffleCardCopiesIntoYourPiles
+          cards[removedCardId].onDiscard.heal
+          || cards[removedCardId].onDiscard.shuffleCardCopiesIntoYourPiles
+          || cards[removedCardId].name === 'Golden Goblet' // custom "heal" effect
         )) {
           triggerDiscardEffect(state, removedCardId, opponent);
           if (state.winner) break;
