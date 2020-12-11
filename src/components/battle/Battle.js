@@ -19,7 +19,9 @@ import { BattleRewards } from './BattleRewards';
 import { CardPileModal } from './CardPileModal';
 import { BattleLog } from './BattleLog';
 import { VTrigger } from './VTrigger';
+import { SpecialAbility } from './SpecialAbility';
 import { shuffle } from 'lodash';
+import { specialAbilityActionGenerators } from '../../gameplay/actionGenerators';
 
 const inDevelopment = process.env.NODE_ENV !== 'production';
 
@@ -59,6 +61,11 @@ export const Battle = () => {
 
       // instantly execute the first action, which will always be "move to stack"
       executeRenderAction(renderActions[0]);
+      
+      if (renderActions.length === 1) {
+        isAnimating = false;
+        return;
+      }
 
       let i = 1;
       interval = setInterval(() => {
@@ -87,6 +94,20 @@ export const Battle = () => {
     if (inDevelopment) {
       console.log(`playCard took ${(t1 - t0).toFixed(3)} ms.`);
     }
+    executeRenderActions(renderActions);
+  };
+
+  const handleActivateSpecial = () => {
+    if (isAnimating) {
+      return;
+    }
+
+    isAnimating = true;
+    dispatch(actions.activateSpecialAbility());
+    const renderActions = specialAbilityActionGenerators[
+      store.getState().clashBattleStats.yourName
+    ]();
+
     executeRenderActions(renderActions);
   };
 
@@ -151,7 +172,8 @@ export const Battle = () => {
       </div>
 
       <BattleLog />
-      <VTrigger handleActivateVTrigger={handleActivateVTrigger} />
+      <SpecialAbility onClick={handleActivateSpecial} />
+      <VTrigger onClick={handleActivateVTrigger} />
       
       <CardPileModal />
       <BattleRewards />

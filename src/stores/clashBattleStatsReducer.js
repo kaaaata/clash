@@ -17,6 +17,8 @@ const genInitialState = () => ({
   yourShields: 0,
   winner: null,
   winnerImage: null,
+  specialAbility: null,
+  specialAbilityBars: null,
   vBars: 3
 });
 
@@ -26,7 +28,8 @@ export default (state = genInitialState(), action) => {
       return {
         ...state,
         yourName: action.payload.name,
-        yourImage: action.payload.image
+        yourImage: action.payload.image,
+        specialAbility: action.payload.specialAbility
       };
     case 'SET_ENEMY':
       return {
@@ -77,6 +80,11 @@ export default (state = genInitialState(), action) => {
         winner: action.payload,
         winnerImage: action.payload === state.yourName ? state.yourImage : state.enemyImage
       };
+    case 'ACTIVATE_SPECIAL_ABILITY':
+      return {
+        ...state,
+        specialAbilityBars: state.specialAbilityBars - 1
+      };
     case 'ACTIVATE_V_TRIGGER':
       return {
         ...state,
@@ -89,6 +97,7 @@ export default (state = genInitialState(), action) => {
         enemyShields: 0,
         winner: null,
         winnerImage: null,
+        specialAbilityBars: state.specialAbility.uses,
         vBars: 3
       };
     case 'START_NEW_DAY':

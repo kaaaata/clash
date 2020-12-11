@@ -10,7 +10,7 @@ import { colors } from '../styles';
 
 const battleLogButtonCss = css`
   position: absolute;
-  top: 380px;
+  top: 320px;
   left: 25px;
   width: 150px;
 `;

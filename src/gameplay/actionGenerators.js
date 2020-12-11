@@ -1,3 +1,4 @@
+import { store } from '../stores/store';
 import { actionKeys } from './actionKeys';
 
 export const actionGenerators = {
@@ -74,5 +75,16 @@ export const actionGenerators = {
         operation: 'set'
       }
     };
+  }
+};
+
+export const specialAbilityActionGenerators = {
+  'Vampire': () => {
+    const { enemyShields, yourShields } = store.getState().clashBattleStats;
+    const renderActions = [[
+      { actionKey: 'setEnemyShields', payload: 0 },
+      { actionKey: 'setYourShields', payload: yourShields + enemyShields }
+    ]];
+    return renderActions;
   }
 };

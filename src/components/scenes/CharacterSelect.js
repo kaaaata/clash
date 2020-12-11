@@ -7,49 +7,13 @@ import { Card, cardWidth, cardHeight } from '../card/Card';
 import * as actions from '../../stores/actions';
 import { createNewCard } from '../../cards/createNewCard';
 
-const characterSelectCss = css`
-  .showcase {
-    .showcase_image {
-      margin-right: 20px;
-    }
-
-    .card {
-      margin-right: 7px;
-  
-      &:last-child {
-        margin-right: 0;
-      }
-    }
-  }
-
-  .thumbnails {
-    .thumbnail {
-      box-sizing: content-box;
-      cursor: pointer;
-      border-radius: 3px;
-      margin: 0 5px;
-
-      .image {
-        transform-origin: bottom;
-        transition: transform 0.25s ease-out;
-      }
-
-      &:hover {
-        .image {
-          transform: scale(1.15);
-        }
-      }
-    }
-  }
-`;
-
 export const CharacterSelect = () => {
   const dispatch = useDispatch();
   const [selectedCharIndex, setSelectedCharIndex] = useState(0);
 
-  const continueOnClick = (name, image, cardNames) => {
-    dispatch(actions.setPlayer({ name, image }));
-    dispatch(actions.addCardsToCollection(cardNames.map(i => createNewCard(i))));
+  const continueOnClick = ({ name, image, startingCards, specialAbility }) => {
+    dispatch(actions.setPlayer({ name, image, specialAbility }));
+    dispatch(actions.addCardsToCollection(startingCards.map(i => createNewCard(i))));
     dispatch(actions.setScene('town'));
   };
 
@@ -58,11 +22,7 @@ export const CharacterSelect = () => {
       const character = characters.filter(
         i => i.name === (window.flow.skipIntro_value || 'Paladin')
       )[0];
-      continueOnClick(
-        character.name,
-        character.image,
-        character.startingCards
-      );
+      continueOnClick(character);
     }
   })
 
@@ -126,3 +86,39 @@ export const CharacterSelect = () => {
     </div>
   );
 };
+
+const characterSelectCss = css`
+  .showcase {
+    .showcase_image {
+      margin-right: 20px;
+    }
+
+    .card {
+      margin-right: 7px;
+  
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .thumbnails {
+    .thumbnail {
+      box-sizing: content-box;
+      cursor: pointer;
+      border-radius: 3px;
+      margin: 0 5px;
+
+      .image {
+        transform-origin: bottom;
+        transition: transform 0.25s ease-out;
+      }
+
+      &:hover {
+        .image {
+          transform: scale(1.15);
+        }
+      }
+    }
+  }
+`;

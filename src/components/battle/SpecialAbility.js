@@ -1,18 +1,19 @@
 import { css, jsx } from '@emotion/core'; /** @jsx jsx */
 import { shallowEqual, useSelector } from 'react-redux';
-import { Button, FlexContainer, Text } from '../particles';
+import { Button, FlexContainer, Text, Tooltip } from '../particles';
 import { colors, effects } from '../styles';
 
-export const VTrigger = ({ onClick }) => {
-  const { vBars } = useSelector(state => ({
-    vBars: state.clashBattleStats.vBars
+export const SpecialAbility = ({ onClick }) => {
+  const { specialAbilityBars, specialAbility } = useSelector(state => ({
+    specialAbilityBars: state.clashBattleStats.specialAbilityBars,
+    specialAbility: state.clashBattleStats.specialAbility
   }), shallowEqual);
-  const canActivate = !!vBars;
+  const canActivate = !!specialAbilityBars;
 
-  const vTriggerCss = css`
+  const speialAbilityCss = css`
     position: absolute;
     width: 150px;
-    top: 420px;
+    top: 370px;
     left: 25px;
     padding: 0;
     background: none !important;
@@ -25,12 +26,13 @@ export const VTrigger = ({ onClick }) => {
     .fill_container {
       position: relative;
       height: 100%;
+      drop-shadow: none;
 
       .fill {
         position: absolute;
         height: 28px;
-        background: ${canActivate ? colors.yellow : colors.slateLight};
-        width: ${~~(100 * vBars / 3)}%;
+        background: ${canActivate ? colors.blue : colors.slateLight};
+        width: ${~~(100 * specialAbilityBars / specialAbility.uses)}%;
         transition: all 0.75s ease-out;
       }
 
@@ -48,14 +50,14 @@ export const VTrigger = ({ onClick }) => {
       isDisabled={!canActivate}
       onClick={canActivate ? onClick : null}
       className={canActivate ? 'glow' : ''}
-      _css={vTriggerCss}
+      _css={speialAbilityCss}
     >
-      <div className='fill_container'>
+      <Tooltip text={specialAbility.description} className='fill_container'>
         <div className='fill' />
         <FlexContainer justifyContent='center' alignItems='center' className='text_container'>
-          <Text type='mini'>Re-draw ({vBars}/3)</Text>
+          <Text type='mini'>{specialAbility.name} ({specialAbilityBars}/{specialAbility.uses})</Text>
         </FlexContainer>
-      </div>
+      </Tooltip>
     </Button>
   );
 };

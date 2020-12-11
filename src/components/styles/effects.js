@@ -30,8 +30,8 @@ export const effects = {
   `,
   glowGreen: `
     ${mixins.keyframes('glowGreen', `
-      0% { filter: drop-shadow(0 0 8px ${colors.green}); }
-      100% { filter: drop-shadow(0 0 22px ${colors.green}); }
+      0% { box-shadow: 0 0 4px ${colors.green}; }
+      100% { box-shadow: 0 0 12px ${colors.green}; }
     `)}
     animation: glowGreen 1s ease-out infinite alternate;
   `
