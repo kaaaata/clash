@@ -113,10 +113,11 @@ export const playFirstCardInRound = (index, isRogueSpecialAbility) => {
   }
 
   if (inDevelopment) {
-    console.log(logs.map(log => log.consoleLog.startsWith('you')
-      ? `Player${log.consoleLog.slice(3)}`
-      : `${state.enemy.name}${log.consoleLog.slice(5)}`
-    ));
+    // console.log(logs.map(log => log.consoleLog.startsWith('you')
+    //   ? `Player${log.consoleLog.slice(3)}`
+    //   : `${state.enemy.name}${log.consoleLog.slice(5)}`
+    // ));
+    console.log('card objects in memory:', Object.keys(cards).length);
   }
 
   renderActions[renderActions.length - 1].push({ actionKey: 'setBattleLogs', payload: logs });

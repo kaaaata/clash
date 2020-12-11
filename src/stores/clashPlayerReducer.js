@@ -1,3 +1,4 @@
+import { cards } from '../cards/cards';
 import { genStartingDeck } from '../cards/genStartingDeck';
 
 const genInitialState = () => ({
@@ -47,7 +48,7 @@ export default (state = initialState, action) => {
         if (spliceIndex !== -1) {
           newDeck.splice(spliceIndex, 1);
         }
-        // delete cards[cardId];
+        delete cards[cardId];
       });
       return {
         ...state,

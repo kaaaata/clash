@@ -7,16 +7,16 @@ import { createNewCard } from '../cards/createNewCard';
 const state = {};
 const defaultStatePiles = {
   you: {
-    deck: CardIdsArray(Array(10).fill('Sword').map(i => createNewCard(i))),
-    discard: CardIdsArray(Array(10).fill('Sword').map(i => createNewCard(i))),
-    banish: CardIdsArray(Array(10).fill('Sword').map(i => createNewCard(i))),
-    hand: CardIdsArray(Array(3).fill('Sword').map(i => createNewCard(i))),
+    deck: CardIdsArray(Array(10).fill('Blank').map(i => createNewCard(i))),
+    discard: CardIdsArray(Array(10).fill('Blank').map(i => createNewCard(i))),
+    banish: CardIdsArray(Array(10).fill('Blank').map(i => createNewCard(i))),
+    hand: CardIdsArray(Array(3).fill('Blank').map(i => createNewCard(i))),
   },
   enemy: {
-    deck: CardIdsArray(Array(10).fill('Sword').map(i => createNewCard(i))),
-    discard: CardIdsArray(Array(10).fill('Sword').map(i => createNewCard(i))),
-    banish: CardIdsArray(Array(10).fill('Sword').map(i => createNewCard(i))),
-    hand: CardIdsArray(Array(3).fill('Sword').map(i => createNewCard(i))),
+    deck: CardIdsArray(Array(10).fill('Blank').map(i => createNewCard(i))),
+    discard: CardIdsArray(Array(10).fill('Blank').map(i => createNewCard(i))),
+    banish: CardIdsArray(Array(10).fill('Blank').map(i => createNewCard(i))),
+    hand: CardIdsArray(Array(3).fill('Blank').map(i => createNewCard(i))),
   }
 };
 
@@ -366,7 +366,6 @@ test('CUSTOM CARD EFFECT (Viking Slime)', () => {
   expect(state.you.deck.filter(i => (
     ['common', 'uncommon'].includes(cards[i].rarity)
     && cards[i].type === 'attack'
-    && !cards[i].isToken
   )).length)
     .toBe(state.you.deck.length);
 });

@@ -175,7 +175,8 @@ export const customCardEffects = {
         i => cards[i.card].type === 'ally'
       );
       if (discardAllyIndex !== -1) {
-        const oldCard = cards[state[player].discard[discardAllyIndex]];
+        const oldCardId = state[player].discard[discardAllyIndex];
+        const oldCard = cards[oldCardId];
         const newCardId = createNewCard({
           ...oldCard,
           attack: oldCard.attack + 2,
@@ -257,8 +258,20 @@ export const customCardEffects = {
     addCardCopiesIntoPiles(
       state,
       [
-        { cardId: createNewCard(cards[state.stack[state.stack.length - 1]], `battle_${shortid.generate()}`), pile: 'deck' },
-        { cardId: createNewCard(cards[state.stack[state.stack.length - 1]], `battle_${shortid.generate()}`), pile: 'deck' }
+        {
+          cardId: createNewCard(
+            cards[state.stack[state.stack.length - 1]],
+            `battle_${shortid.generate()}`
+          ),
+          pile: 'deck'
+        },
+        {
+          cardId: createNewCard(
+            cards[state.stack[state.stack.length - 1]],
+            `battle_${shortid.generate()}`
+          ),
+          pile: 'deck'
+        }
       ],
       player
     );
