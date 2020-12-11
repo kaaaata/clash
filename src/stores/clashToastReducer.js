@@ -29,7 +29,9 @@ export default (state = initialState, action) => {
       } : state;
     case 'ADD_CARDS_TO_COLLECTION': {
       const cardIds = typeof action.payload === 'string' ? [action.payload] : action.payload;
-      const cardNames = cardIds.map(i => cards[i].name).join(', ');
+      const cardNames = cardIds
+        .map(i => `${cards[i].prefix} ${cards[i].name} ${cards[i].suffix}`.trim())
+        .join(', ');
       return {
         ...state,
         toast: `Received ${cardIds.length === 1 ? 'card' : 'cards'}: ${cardNames}`,

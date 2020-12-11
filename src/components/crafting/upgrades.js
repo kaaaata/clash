@@ -1,37 +1,35 @@
-import { flatten } from 'lodash';
-
-const _upgrades = [
+export const upgrades = [
   {
-    description: '+2 attack.',
+    description: '+3 attack.',
     cardProperties: {
-      prefix: 'Sharp',
-      suffix: 'of Sharpness',
-      attack: 2
+      prefix: 'Lethal',
+      suffix: 'of Lethality',
+      attack: 3
     }
   },
   {
-    description: '+2 defense.',
+    description: '+3 defense.',
     cardProperties: {
-      prefix: 'Sturdy',
-      suffix: 'of Sturdiness',
+      prefix: 'Guarding',
+      suffix: 'of Guarding',
+      defense: 3
+    }
+  },
+  {
+    description: '+2 attack and +2 defense.',
+    cardProperties: {
+      prefix: 'Honed',
+      suffix: 'of Honing',
+      attack: 2,
       defense: 2
     }
   },
   {
-    description: '+1 attack and +1 defense.',
-    cardProperties: {
-      prefix: 'Honed',
-      suffix: 'of Honing',
-      attack: 1,
-      defense: 1
-    }
-  },
-  {
-    description: 'Heal 2.',
+    description: 'Heal 3.',
     cardProperties: {
       prefix: 'Healing',
       suffix: 'of Healing',
-      heal: 2
+      heal: 3
     }
   },
   {
@@ -43,10 +41,10 @@ const _upgrades = [
     }
   },
   {
-    description: 'Damage pierces shields.',
+    description: 'Damage pierces shields. (Converts to Magic Attack)',
     cardProperties: {
-      prefix: 'Piercing',
-      suffix: 'of Piercing',
+      prefix: 'Ensorcelled',
+      suffix: 'of Sorcery',
       type: 'magic',
       pierces: true
     }
@@ -92,8 +90,3 @@ const _upgrades = [
     }
   }
 ];
-
-export const upgrades = flatten(_upgrades.map(i => [
-  { ...i, cardProperties: { ...i.cardProperties, prefix: null } },
-  { ...i, cardProperties: { ...i.cardProperties, suffix: null } },
-]));

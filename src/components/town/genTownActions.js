@@ -37,7 +37,7 @@ export const genGuaranteedTownAction = () => (
   ))
 );
 
-const townActions = keyBy([
+export const townActions = keyBy([
   {
     name: 'Gather Gold',
     energy: 1,

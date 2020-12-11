@@ -19,6 +19,7 @@ export const Flow = () => (
     <InputSwitch name='skipIntro' description='Skip intro and select character:' type='string' />
     <OnOffSwitch name='skipToBattle' description='Skip straight to battle when in town?' />
     <InputSwitch name='testTownEvent' description='Render this town event when in town:' type='string' />
+    <InputSwitch name='replaceTownEvents' description='Replace all town events with:' type='string' />
     <InputSwitch name='gold' description='Starting gold:' type='number' />
     <InputSwitch name='energy' description='Starting energy:' type='number' />
     <InputSwitch name='energyReserved' description='Energy reserved:' type='number' />

@@ -20,6 +20,7 @@ import { Crafting } from '../crafting/Crafting';
 import { CardLootModal } from '../modals/CardLootModal';
 import { townCss } from './townCss';
 import { TreasureChest } from './randomEvents/TreasureChest';
+import { townActions as _townActions } from './genTownActions';
 
 export const Town = () => {
   const {
@@ -30,16 +31,25 @@ export const Town = () => {
     completedTownActions,
     feed,
     yourImage
-  } = useSelector(state => ({
-    lives: state.clashPlayer.lives,
-    energy: state.clashTown.energy,
-    day: state.clashTown.day,
-    purchasableCards: state.clashTown.purchasableCards,
-    townActions: state.clashTown.townActions,
-    completedTownActions: state.clashTown.completedTownActions,
-    feed: state.clashTown.feed,
-    yourImage: state.clashBattleStats.yourImage
-  }), shallowEqual);
+  } = useSelector(state => {
+    let townActions = state.clashTown.townActions;
+    if (
+      window.flow.replaceTownEvents_toggle
+      && typeof window.flow.replaceTownEvents_value === 'string'
+    ) {
+      townActions = Array(8).fill(_townActions[window.flow.replaceTownEvents_value]);
+    }
+    return {
+      lives: state.clashPlayer.lives,
+      energy: state.clashTown.energy,
+      day: state.clashTown.day,
+      purchasableCards: state.clashTown.purchasableCards,
+      townActions,
+      completedTownActions: state.clashTown.completedTownActions,
+      feed: state.clashTown.feed,
+      yourImage: state.clashBattleStats.yourImage
+    };
+  }, shallowEqual);
   const dispatch = useDispatch();
 
   const [townActionDescription, setTownActionDescription] = useState('Choose an action!');

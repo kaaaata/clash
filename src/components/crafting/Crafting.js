@@ -92,8 +92,6 @@ export const Crafting = ({ closeModal }) => {
                     isDisabled={
                       !card1Id // not sure why "Confirm Upgrade" bugs out without this line.
                       || !cards[`upgrade_preview_${index}`]
-                      || (i.cardProperties.prefix && cards[card1Id].prefix)
-                      || (i.cardProperties.suffix && cards[card1Id].suffix)
                     }
                     onMouseEnter={() => {
                       if (!isUpgradeLockedIn) {
@@ -106,18 +104,14 @@ export const Crafting = ({ closeModal }) => {
                     }}
                   >
                     <span className='green'>
-                      [{
-                        i.cardProperties.prefix
-                          ? `${i.cardProperties.prefix}...`
-                          : `...${i.cardProperties.suffix}`
-                      }]</span> {i.description}
+                      [{i.cardProperties.prefix}]</span> {i.description}
                   </Button>
                 ))}
               </div>
             </section>
 
             <section>
-              <Text centered>Each card can have 1 prefix and 1 suffix.</Text>
+              <Text centered>Each card can have up to 2 upgrades.</Text>
               <Spacer height={20} />
             </section>
           </FlexContainer>
@@ -128,9 +122,11 @@ export const Crafting = ({ closeModal }) => {
         <CardViewModal
           title='Choose a card to upgrade'
           shouldShowCardCount={false}
-          cardIds={deck.filter(
-            cardId => !cards[cardId].isToken && ['attack', 'magic'].includes(cards[cardId].type)
-          )}
+          cardIds={deck.filter(cardId => (
+            !cards[cardId].isToken
+            && ['attack', 'magic'].includes(cards[cardId].type)
+            && !(cards[cardId].prefix && cards[cardId].suffix)
+          ))}
           cardOnClick={(cardId) => {
             setCard1Id(cardId);
             setCard2Id(null);
