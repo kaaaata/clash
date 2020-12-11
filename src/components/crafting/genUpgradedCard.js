@@ -15,7 +15,7 @@ export const genUpgradedCard = (card, upgrade, cardIdOverride) => {
   }
 
   const c = {};
-  c.name = `${upgrade.prefix || ''} ${card.name} ${upgrade.suffix || ''}`.trim();
+  c.name = card.name;
   c.image = card.image;
   c.rarity = card.rarity;
   c.attack = card.attack + (upgrade.attack || 0);

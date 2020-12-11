@@ -25,7 +25,9 @@ const _Card = ({ cardName, cardId }) => {
     defense,
     type,
     description,
-    battleMutatedProperties
+    battleMutatedProperties,
+    prefix,
+    suffix
   } = card;
 
   const cardArt = (
@@ -85,7 +87,9 @@ const _Card = ({ cardName, cardId }) => {
       _css={_cardCss(colors[rarityColors[rarity]])}
       rgbaFilter='rgba(0, 0, 0, 0.45)'
     >
-      <div className='name'>{name}</div>
+      <div className='name'>
+        {`${prefix || ''} ${name} ${suffix || ''}`.trim()}
+      </div>
       <div className='border' />
       <div className='image_container'>
         {cardArt}
@@ -160,10 +164,7 @@ export const Card = ({
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
-      {isFaceDown
-        ? <_FaceDownCard />
-        : <_Card cardName={cardName} cardId={cardId} />
-      }
+      {isFaceDown ? <_FaceDownCard /> : <_Card cardName={cardName} cardId={cardId} />}
     </div>
   );
 };

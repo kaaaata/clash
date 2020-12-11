@@ -39,12 +39,10 @@ export const magic = [
     name: 'Candy Corn',
     image: 'candy_corn',
     rarity: 'uncommon',
-    attack: 4,
+    attack: 3,
     defense: 0,
-    shuffleCardCopiesIntoYourPiles: [
-      { cardName: 'Candy Corn', pile: 'discard', index: 'top' },
-      { cardName: 'Candy Corn', pile: 'discard', index: 'top' }
-    ]
+    customEffect: true,
+    customDescription: 'Shuffle 2 copies of this card into your deck.'
   },
   {
     name: 'Super Fire',

@@ -450,3 +450,15 @@ test('CUSTOM CARD EFFECT (The Devourer)', () => {
   expect(state.you.discard.length).toBe(8);
   expect(state.you.banish.length).toBe(11);
 });
+
+test('CUSTOM CARD EFFECT (Candy Corn)', () => {
+  const candyCorn = blueprints.allCardsObject['Candy Corn'];
+  const card = createNewCard({
+    ...candyCorn,
+    attack: candyCorn.attack + 3
+  });
+  simulatePlayCard({ cardId: card });
+  state.you.deck.filter(card => cards[card].name === 'Candy Corn').forEach((card) => {
+    expect(cards[card].attack).toBe(candyCorn.attack + 3)
+  });
+});

@@ -251,5 +251,16 @@ export const customCardEffects = {
       ));
       playCard(state, cardId, player, { player: enemy, location: 'deck', index: cardIndex });
     }
+  },
+  'Candy Corn': (state, player) => {
+    // Shuffle 2 copies of this card into your deck.
+    addCardCopiesIntoPiles(
+      state,
+      [
+        { cardId: createNewCard(cards[state.stack[state.stack.length - 1]], `battle_${shortid.generate()}`), pile: 'deck' },
+        { cardId: createNewCard(cards[state.stack[state.stack.length - 1]], `battle_${shortid.generate()}`), pile: 'deck' }
+      ],
+      player
+    );
   }
 };

@@ -24,8 +24,8 @@ const _genUpgradedCard = (cardName) => genUpgradedCard(
 // );
 
 export const controller = isControllerEnabled ? {
-  // yourHand: [_genUpgradedCard('Sword'), _genUpgradedCard('Sword'), _genUpgradedCard('Sword')],
-  yourHand: ['Golden Goblet', b, 'Greataxe'].map(i => createNewCard(i)),
+  yourHand: [_genUpgradedCard('Candy Corn'), _genUpgradedCard('Candy Corn'), _genUpgradedCard('Candy Corn')],
+  // yourHand: ['Candy Corn', b, 'Greataxe'].map(i => createNewCard(i)),
   // yourDeck: [
   //   // cards[upgradedCard],
     
@@ -42,7 +42,7 @@ export const controller = isControllerEnabled ? {
   // yourDiscard: [b,b,b,b,b].map(i => createNewCard(i)),
   // yourBanish: [b,b,b,b,b].map(i => createNewCard(i)),
   // enemyHand: ['Sword', 'Falchion', 'Greataxe'].map(i => createNewCard(i)),
-  enemyDeck: [].map(i => createNewCard(i)),
+  // enemyDeck: [].map(i => createNewCard(i)),
   // enemyDiscard: [].map(i => createNewCard(i)),
   // enemyBanish: [].map(i => createNewCard(i)),
 } : {};
