@@ -39,10 +39,10 @@ export default (state = initialState, action) => {
       };
     case 'REMOVE_CARDS_FROM_COLLECTION': {
       const newDeck = [...state.deck];
-      const removeCards = typeof action.payload === 'string'
-        ? [action.payload]
-        : action.payload;
-      removeCards.forEach(cardId => {
+      const removeCards = Array.isArray(action.payload)
+        ? action.payload
+        : [action.payload];
+      removeCards.filter(Boolean).forEach(cardId => {
         const spliceIndex = newDeck.indexOf(cardId);
         if (spliceIndex !== -1) {
           newDeck.splice(spliceIndex, 1);

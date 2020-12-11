@@ -96,9 +96,9 @@ export const DancingLady = ({ closeModal }) => {
       pageComponent = (
         <EventModalPage
           page={4}
-          text={'You decide to leave the lady to her antics.'}
+          text='You decide to leave the lady to her antics.'
           options={[{
-            name: 'Continue',
+            name: 'Back to Town',
             onClick: closeModal
           }]}
         />

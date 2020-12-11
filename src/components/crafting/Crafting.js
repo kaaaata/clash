@@ -27,7 +27,7 @@ export const Crafting = ({ closeModal }) => {
 
   const closeButtons = (
     <FlexContainer justifyContent='center' _css={css`width: 100%`}>
-      <Button type='mini' centered onClick={closeModal}>Exit</Button>
+      <Button type='mini' centered onClick={closeModal}>Back to Town</Button>
       <Spacer width={20} />
       <Button
         type='mini'

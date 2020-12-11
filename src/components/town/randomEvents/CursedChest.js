@@ -102,7 +102,7 @@ export const CursedChest = ({ closeModal }) => {
           page={4}
           text='You leave the chest be.'
           options={[{
-            name: 'Continue',
+            name: 'Back to Town',
             onClick: closeModal
           }]}
         />

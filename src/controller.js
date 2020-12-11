@@ -9,7 +9,7 @@ import { blueprints } from './cards/blueprints';
 import { monstersByTier } from './monsters/monsters';
 
 let isControllerEnabled = false;
-isControllerEnabled = true;
+// isControllerEnabled = true;
 
 const _genUpgradedCard = (cardName) => genUpgradedCard(
   blueprints.allCardsObject[cardName],

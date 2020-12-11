@@ -37,8 +37,8 @@ export default (state = initialState, action) => {
       };
     }
     case 'REMOVE_CARDS_FROM_COLLECTION': {
-      const cardIds = typeof action.payload === 'string' ? [action.payload] : action.payload;
-      const cardNames = cardIds.map(i => cards[i].name).join(', ');
+      const cardIds = Array.isArray(action.payload) ? action.payload : [action.payload];
+      const cardNames = cardIds.filter(Boolean).map(i => cards[i].name).join(', ');
       return {
         ...state,
         toast: `Removed ${cardIds.length === 1 ? 'card' : 'cards'}: ${cardNames}`,

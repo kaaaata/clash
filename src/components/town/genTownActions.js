@@ -129,6 +129,13 @@ const townActions = keyBy([
     image: null,
     description: 'A random encounter with...yourself?'
   },
+  {
+    name: 'The Devourer',
+    energy: 3,
+    weight: 1,
+    image: 'devourer',
+    description: 'A random encounter!'
+  },
 ], 'name');
 const townActionPool = [];
 Object.values(townActions).forEach(action => {

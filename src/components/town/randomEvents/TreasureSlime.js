@@ -80,7 +80,7 @@ export const TreasureSlime = ({ rng, closeModal }) => {
           page={4}
           text='You leave the slime alone.'
           options={[{
-            name: 'Continue',
+            name: 'Back to Town',
             onClick: closeModal
           }]}
         />

@@ -13,7 +13,8 @@ import {
   GatherGold,
   DancingLady,
   CursedChest,
-  Nemesis
+  Nemesis,
+  Devourer
 } from './randomEvents';
 import { Crafting } from '../crafting/Crafting';
 import { CardLootModal } from '../modals/CardLootModal';
@@ -128,6 +129,7 @@ export const Town = () => {
           image='dwarf_event'
           cardNames={purchasableCards.map(card => card.name)}
           cardCosts={purchasableCards.map(card => card.cost)}
+          continueText='Back to Town'
           closeModal={closeModal}
         />
       );
@@ -139,6 +141,7 @@ export const Town = () => {
           image='recruiter_event'
           cardNames={purchasableCards.map(card => card.name)}
           cardCosts={purchasableCards.map(card => card.cost)}
+          continueText='Back to Town'
           closeModal={closeModal}
         />
       );
@@ -150,6 +153,7 @@ export const Town = () => {
           image='mage_event'
           cardNames={purchasableCards.map(card => card.name)}
           cardCosts={purchasableCards.map(card => card.cost)}
+          continueText='Back to Town'
           closeModal={closeModal}
         />
       );
@@ -161,6 +165,7 @@ export const Town = () => {
           image='alchemist_event'
           cardNames={purchasableCards.map(card => card.name)}
           cardCosts={purchasableCards.map(card => card.cost)}
+          continueText='Back to Town'
           closeModal={closeModal}
         />
       );
@@ -179,6 +184,9 @@ export const Town = () => {
       break;
     case 'Nemesis':
       modal = <Nemesis closeModal={closeModal} />;
+      break;
+    case 'The Devourer':
+      modal = <Devourer closeModal={closeModal} />;
       break;
     default:
       break;

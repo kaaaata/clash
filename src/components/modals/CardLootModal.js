@@ -15,7 +15,7 @@ export const CardLootModal = ({
   cardIds,
   cardCosts = [],
   maxCardsToTake = cardNames ? cardNames.length : cardIds.length,
-  continueText,
+  continueText = 'Continue',
   showCounter = false,
   closeModal
 }) => {
@@ -44,7 +44,7 @@ export const CardLootModal = ({
     </React.Fragment>
   );
 
-  const continueOptions = [{ name: 'Continue', greenText: continueText, onClick: closeModal }];
+  const continueOptions = [{ name: continueText, onClick: closeModal }];
   if (shouldShowTakeAllButton) {
     continueOptions.unshift({
       name: 'Take All',
