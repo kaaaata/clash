@@ -20,7 +20,6 @@ export const TopNav = () => {
     deck,
     image,
     stats,
-    statBonuses,
     canVisitShop,
     shouldHideTopNav
   } = useSelector(state => ({
@@ -31,7 +30,6 @@ export const TopNav = () => {
     deck: state.clashPlayer.deck,
     image: state.clashBattleStats.yourImage,
     stats: state.clashBattleStats.yourStats,
-    statBonuses: state.clashBattleStats.yourStatBonuses,
     canVisitShop: state.clashScene.canVisitShop,
     shouldHideTopNav: ['story', 'main_menu', 'character_select', 'win_screen'].includes(state.clashScene.scene)
   }), shallowEqual);
@@ -62,7 +60,7 @@ export const TopNav = () => {
             height={36}
             size='contain'
           />
-          <Attributes stats={stats} statBonuses={statBonuses} />
+          <Attributes stats={stats} />
           <FlexContainer className='lives' alignItems='center'>
             <Text type='small'>Lives:&nbsp;</Text>
             {[1, 2, 3].map(i => (

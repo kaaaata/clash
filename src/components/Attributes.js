@@ -29,7 +29,7 @@ const attributesCss = css`
   }
 `;
 
-export const Attributes = ({ stats, statBonuses }) => {
+export const Attributes = ({ stats, statBonuses = { attack: 0, magic: 0, defense: 0 } }) => {
   const attackDisplay = (
     <Image
       className='attack'
