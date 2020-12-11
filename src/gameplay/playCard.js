@@ -98,7 +98,8 @@ export const playCard = (
     ].filter(Boolean));
   }
 
-  if (!state.winner) {
+  // don't delay after adding Burn to the stack, because that's boring and annoying.
+  if (!state.winner && name !== 'Burn') {
     renderActions.push([]);
   }
 
