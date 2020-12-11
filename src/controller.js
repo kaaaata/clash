@@ -39,7 +39,7 @@ export const controller = isControllerEnabled ? {
   //   _genUpgradedCard('Sword'),
   //   _genUpgradedCard('Sword'),
   // ],
-  yourDiscard: ['Minotaur', 'Ice Whelp'].map(i => createNewCard(i)),
+  yourDiscard: ['Minotaur', 'Ice Whelp', 'Healing Potion', 'Falchion', 'Frost', 'Attack Potion'].map(i => createNewCard(i)),
   // yourBanish: [b,b,b,b,b].map(i => createNewCard(i)),
   // enemyHand: ['Sword', 'Falchion', 'Greataxe'].map(i => createNewCard(i)),
   // enemyDeck: [].map(i => createNewCard(i)),

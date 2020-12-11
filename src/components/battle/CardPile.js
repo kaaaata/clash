@@ -17,7 +17,8 @@ const CardPile = ({
   countX,
   countY,
   cardPileModal,
-  isFaceDown = false
+  isFaceDown = false,
+  disablePointer = false,
 }) => {
   const dispatch = useDispatch();
   
@@ -28,11 +29,7 @@ const CardPile = ({
   const prevCardCount = prevCardCountRef.current;
 
   const cardPileCss = css`
-    cursor: pointer;
-
-    .card {
-      cursor: pointer;
-    }
+    cursor: ${disablePointer ? 'default' : 'pointer'};
 
     .outline {
       position: absolute;
@@ -111,7 +108,7 @@ export const YourDeck = () => {
       themeColor={colors.green}
       countX={175}
       countY={594}
-      cardPileModal={inDevelopment ? 'yourDeck' : null}
+      cardPileModal='yourDeck'
       isFaceDown={!inDevelopment}
     />
   );
@@ -227,6 +224,7 @@ export const EnemyDeck = () => {
       countY={171}
       cardPileModal={inDevelopment ? 'enemyDeck' : null}
       isFaceDown={!inDevelopment}
+      disablePointer
     />
   );
 };
@@ -245,6 +243,7 @@ export const EnemyHand = () => {
         y={52}
         shouldDisableZoom
         isFaceDown={!inDevelopment}
+        disablePointer
       />
     ) : null
   ));

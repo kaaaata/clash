@@ -1,3 +1,4 @@
+import { shuffle } from 'lodash';
 import shortid from 'shortid';
 import { cards } from '../cards/cards';
 import { createNewCard } from '../cards/createNewCard';
@@ -122,8 +123,8 @@ export const specialAbilityActionGenerators = {
     const { specialAbilityBars } = store.getState().clashBattleStats;
     const element = specialAbilityBars % 2 === 0 ? 'fire' : 'frost';
     const targetCards = element === 'fire'
-      ? ['Fire', 'Super Fire', 'Fire Spear', 'Warlock', 'The Evil Dragon Jr.']
-      : ['Frost', 'Super Frost', 'Ice Whelp', 'Ice Blade', 'Ice Queen'];
+      ? ['Fire', 'Super Fire', 'Fire Spear', 'Warlock', 'The Evil Dragon Jr.', 'Elementalist']
+      : ['Frost', 'Super Frost', 'Ice Whelp', 'Ice Blade', 'Ice Queen', 'Elementalist'];
     const newHand = yourHand.map((cardId, index) => {
       if (targetCards.includes(cards[cardId].name)) {
         const newCardId = createNewCard({
@@ -139,6 +140,35 @@ export const specialAbilityActionGenerators = {
       }
     });
     const renderActions = [[{ actionKey: 'setYourHand', payload: newHand }]];
+    return renderActions;
+  },
+  'Paladin': () => {
+    let yourDiscard = [...store.getState().clashBattleCards.yourDiscard];
+    let yourDeck = [...store.getState().clashBattleCards.yourDeck];
+    const renderActions = [];
+    for (let i = 0; i < 3; i++) {
+      const cardId = yourDiscard[yourDiscard.length - 1];
+      if (!cardId) {
+        continue;
+      }
+      const newCardId = cards[cardId].type === 'potion' ? cardId : createNewCard({
+        ...cards[cardId],
+        attack: cards[cardId].attack + 1,
+        defense: cards[cardId].defense + 1,
+        battleMutatedProperties: { attack: true, defense: true }
+      }, `battle_${shortid.generate()}`);
+      yourDiscard = yourDiscard.slice(0, yourDiscard.length - 1);
+      renderActions.push([
+        { actionKey: 'setYourDiscard', payload: yourDiscard },
+        { actionKey: 'setStack', payload: [newCardId] }
+      ]);
+      renderActions.push([]);
+      yourDeck = shuffle([...yourDeck, newCardId]);
+      renderActions.push([
+        { actionKey: 'setStack', payload: [] },
+        { actionKey: 'setYourDeck', payload: yourDeck }
+      ]);
+    }
     return renderActions;
   }
 };

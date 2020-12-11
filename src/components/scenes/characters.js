@@ -1,11 +1,17 @@
 import { colors } from "../styles";
 
 export const characters = [
-  // {
-  //   name: 'Paladin',
-  //   image: 'paladin',
-  //   startingCards: ['Paladin', 'Healing Blade', 'Longsword']
-  // },
+  {
+    name: 'Paladin',
+    image: 'paladin',
+    startingCards: ['Paladin', 'Healing Blade', 'Healing Blade'],
+    specialAbility: {
+      name: 'Super Heal',
+      description: 'Heal 3. Each card healed this way gets +1/+1.',
+      uses: 2,
+      color: colors.green
+    }
+  },
   // {
   //   name: 'Alchemist',
   //   image: 'alchemist',

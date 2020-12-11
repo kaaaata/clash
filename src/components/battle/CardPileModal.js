@@ -1,4 +1,5 @@
 import { jsx } from '@emotion/core'; /** @jsx jsx */
+import { shuffle } from 'lodash';
 import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../stores/actions';
 import { CardViewModal } from '../modals/CardViewModal';
@@ -19,14 +20,17 @@ export const CardPileModal = () => {
     enemyBanish: `${enemyName}'s Banish`,
     yourDiscard: 'Your Discard',
     yourBanish: 'Your Banish',
-    yourDeck: 'Your Deck', // dev only
+    yourDeck: 'Your Deck (not shown in order)',
     enemyDeck: 'Enemy Deck' // dev only
   };
 
   return activeModalCardPile ? (
     <CardViewModal
       title={cardPileModalNames[activeModalCardPile]}
-      cardIds={cards.reverse()}
+      cardIds={activeModalCardPile === 'yourDeck'
+        ? shuffle(cards) :
+        cards.map(_ => _).reverse()
+      }
       closeModal={() => dispatch(actions.setActiveModalCardPile(null))}
     />
   ) : null;

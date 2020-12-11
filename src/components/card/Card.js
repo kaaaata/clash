@@ -126,6 +126,7 @@ export const Card = ({
   shouldDisableZoom = false,
   isBlurred = false,
   isHidden = false,
+  disablePointer = false,
   onClick,
   onMouseEnter,
   onMouseLeave
@@ -141,7 +142,7 @@ export const Card = ({
     user-select: none;
     border-radius: 5px;
     ${!isInCardPile && `
-      cursor: pointer;
+      ${disablePointer ? '' : 'cursor: pointer;'}
       transition: transform 0.1s ease-out;
       box-shadow: 2px 2px 3px ${colors.black};
 
@@ -152,7 +153,7 @@ export const Card = ({
         }
       `}
     `}
-    ${isBlurred ? 'filter: blur(3px);' : ''}
+    ${isBlurred ? 'filter: blur(3px); &:hover { filter: none; } ' : ''}
     ${isHidden ? 'visibility: hidden;' : ''}
   `;
 
