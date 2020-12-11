@@ -1,3 +1,5 @@
+import { cards } from '../cards/cards';
+import { createNewCard } from '../cards/createNewCard';
 import { store } from '../stores/store';
 import { actionKeys } from './actionKeys';
 
@@ -85,6 +87,31 @@ export const specialAbilityActionGenerators = {
       { actionKey: 'setEnemyShields', payload: 0 },
       { actionKey: 'setYourShields', payload: yourShields + enemyShields }
     ]];
+    return renderActions;
+  },
+  'Ice Whelp': () => {
+    const { enemyDiscard } = store.getState().clashBattleCards;
+    const cardId = enemyDiscard[enemyDiscard.length - 1];
+    if (!cardId) {
+      return [];
+    }
+    const renderActions = [
+      [
+        { actionKey: 'setEnemyDiscard', payload: enemyDiscard.slice(0, enemyDiscard.length - 1) },
+        { actionKey: 'setStack', payload: [cardId] }
+      ],
+      [],
+      [
+        { actionKey: 'setStack', payload: [] },
+        {
+          actionKey: 'addCardsToCollection',
+          payload: createNewCard({
+            ...cards[cardId],
+            battleMutatedProperties: { attack: false, defense: false }
+          })
+        }
+      ]
+    ];
     return renderActions;
   }
 };

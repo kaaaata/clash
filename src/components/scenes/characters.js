@@ -34,11 +34,16 @@ export const characters = [
   //   image: 'crazy_mage',
   //   startingCards: ['Warlock', 'Super Fire', 'Super Fire']
   // },
-  // {
-  //   name: 'Ice Whelp',
-  //   image: 'ice_whelp',
-  //   startingCards: ['Ice Whelp', 'Super Frost', 'Super Frost']
-  // },
+  {
+    name: 'Ice Whelp',
+    image: 'ice_whelp',
+    startingCards: ['Ice Whelp', 'Super Frost', 'Frost'],
+    specialAbility: {
+      name: 'Mischief',
+      description: 'Steal the top card of the enemy\'s discard pile, and add it to your deck, permanently.',
+      uses: 1
+    }
+  },
   // {
   //   name: 'Brawler',
   //   image: 'brawler',

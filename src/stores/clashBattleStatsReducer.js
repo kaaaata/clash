@@ -19,7 +19,8 @@ const genInitialState = () => ({
   winnerImage: null,
   specialAbility: null,
   specialAbilityBars: null,
-  vBars: 3
+  vBars: 3,
+  isAnimating: false
 });
 
 export default (state = genInitialState(), action) => {
@@ -90,6 +91,11 @@ export default (state = genInitialState(), action) => {
         ...state,
         vBars: state.vBars - 1
       };
+    case 'SET_IS_ANIMATING':
+      return {
+        ...state,
+        isAnimating: action.payload
+      };
     case 'SET_BATTLE_INITIAL_STATE':
       return {
         ...state,
@@ -98,7 +104,8 @@ export default (state = genInitialState(), action) => {
         winner: null,
         winnerImage: null,
         specialAbilityBars: state.specialAbility.uses,
-        vBars: 3
+        vBars: 3,
+        isAnimating: false
       };
     case 'START_NEW_DAY':
       return {

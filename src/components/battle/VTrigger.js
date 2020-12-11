@@ -4,10 +4,11 @@ import { Button, FlexContainer, Text } from '../particles';
 import { colors, effects } from '../styles';
 
 export const VTrigger = ({ onClick }) => {
-  const { vBars } = useSelector(state => ({
-    vBars: state.clashBattleStats.vBars
+  const { vBars, isAnimating } = useSelector(state => ({
+    vBars: state.clashBattleStats.vBars,
+    isAnimating: state.clashBattleStats.isAnimating
   }), shallowEqual);
-  const canActivate = !!vBars;
+  const canActivate = !!vBars && !isAnimating;
 
   const vTriggerCss = css`
     position: absolute;
@@ -19,7 +20,7 @@ export const VTrigger = ({ onClick }) => {
     border: 2px solid ${canActivate ? colors.green : colors.red};
     
     &.glow {
-      ${effects.glowGreen}
+      ${canActivate ? effects.glowGreen : ''}
     }
 
     .fill_container {
@@ -29,7 +30,7 @@ export const VTrigger = ({ onClick }) => {
       .fill {
         position: absolute;
         height: 28px;
-        background: ${canActivate ? colors.yellow : colors.slateLight};
+        background: ${vBars ? colors.yellow : colors.slateLight};
         width: ${~~(100 * vBars / 3)}%;
         transition: all 0.75s ease-out;
       }

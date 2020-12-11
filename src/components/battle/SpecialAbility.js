@@ -4,11 +4,12 @@ import { Button, FlexContainer, Text, Tooltip } from '../particles';
 import { colors, effects } from '../styles';
 
 export const SpecialAbility = ({ onClick }) => {
-  const { specialAbilityBars, specialAbility } = useSelector(state => ({
+  const { specialAbilityBars, specialAbility, isAnimating } = useSelector(state => ({
     specialAbilityBars: state.clashBattleStats.specialAbilityBars,
-    specialAbility: state.clashBattleStats.specialAbility
+    specialAbility: state.clashBattleStats.specialAbility,
+    isAnimating: state.clashBattleStats.isAnimating
   }), shallowEqual);
-  const canActivate = !!specialAbilityBars;
+  const canActivate = !!specialAbilityBars && !isAnimating;
 
   const speialAbilityCss = css`
     position: absolute;
@@ -20,7 +21,7 @@ export const SpecialAbility = ({ onClick }) => {
     border: 2px solid ${canActivate ? colors.green : colors.red};
     
     &.glow {
-      ${effects.glowGreen}
+      ${canActivate ? effects.glowGreen : ''}
     }
 
     .fill_container {
@@ -31,7 +32,7 @@ export const SpecialAbility = ({ onClick }) => {
       .fill {
         position: absolute;
         height: 28px;
-        background: ${canActivate ? colors.blue : colors.slateLight};
+        background: ${specialAbilityBars ? colors.blue : colors.slateLight};
         width: ${~~(100 * specialAbilityBars / specialAbility.uses)}%;
         transition: all 0.75s ease-out;
       }

@@ -43,6 +43,11 @@ export const Battle = () => {
 
   let interval = null;
   let renderActions = [];
+
+  const setIsAnimating = (isAnimatingBool) => {
+    isAnimating = isAnimatingBool;
+    dispatch(actions.setIsAnimating(isAnimatingBool));
+  };
   
   const executeRenderAction = (action) => {
     if (action) {
@@ -61,9 +66,9 @@ export const Battle = () => {
 
       // instantly execute the first action, which will always be "move to stack"
       executeRenderAction(renderActions[0]);
-      
+
       if (renderActions.length === 1) {
-        isAnimating = false;
+        setIsAnimating(false);
         return;
       }
 
@@ -73,11 +78,11 @@ export const Battle = () => {
 
         if (++i === renderActions.length) {
           clearInterval(interval);
-          isAnimating = false;
+          setIsAnimating(false);
         }
       }, battleSpeedMs);
     } else {
-      isAnimating = false;
+      setIsAnimating(false);
     }
   };
 
@@ -86,7 +91,7 @@ export const Battle = () => {
       return;
     }
 
-    isAnimating = true;
+    setIsAnimating(true);
     dispatch(actions.setBattleLogs([]));
     const t0 = performance.now();
     renderActions = playFirstCardInRound(index);
@@ -102,7 +107,7 @@ export const Battle = () => {
       return;
     }
 
-    isAnimating = true;
+    setIsAnimating(true);
     dispatch(actions.activateSpecialAbility());
     const renderActions = specialAbilityActionGenerators[
       store.getState().clashBattleStats.yourName
@@ -116,7 +121,7 @@ export const Battle = () => {
       return;
     }
 
-    isAnimating = true;
+    setIsAnimating(true);
     dispatch(actions.activateVTrigger());
     const renderActions = [];
     const mockState = {
