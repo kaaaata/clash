@@ -109,6 +109,9 @@ export const Battle = () => {
 
     setIsAnimating(true);
     dispatch(actions.activateSpecialAbility());
+    if (store.getState().clashBattleStats.yourName === 'Rogue') {
+      dispatch(actions.setBattleLogs([]));
+    }
     const renderActions = specialAbilityActionGenerators[
       store.getState().clashBattleStats.yourName
     ]();

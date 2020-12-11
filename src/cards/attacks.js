@@ -147,6 +147,14 @@ export const attacks = [
     attack: 7,
     defense: 7,
     dealsBanishingDamage: true
+  },
+  {
+    name: 'Knife',
+    image: 'knife',
+    rarity: 'special',
+    attack: 2,
+    defense: 2,
+    isToken: true
   }
 ].map(card => {
   card.type = 'attack';

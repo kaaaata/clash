@@ -44,6 +44,16 @@ export const characters = [
       uses: 1
     }
   },
+  {
+    name: 'Rogue',
+    image: 'rogue',
+    startingCards: ['Ice Whelp', 'Longsword', 'Cutlass'],
+    specialAbility: {
+      name: 'Knife',
+      description: 'Play a 2/2 attack card. (This does not take up your turn.)',
+      uses: 3
+    }
+  },
   // {
   //   name: 'Brawler',
   //   image: 'brawler',

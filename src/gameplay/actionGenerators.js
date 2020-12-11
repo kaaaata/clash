@@ -2,6 +2,7 @@ import { cards } from '../cards/cards';
 import { createNewCard } from '../cards/createNewCard';
 import { store } from '../stores/store';
 import { actionKeys } from './actionKeys';
+import { playFirstCardInRound } from './playFirstCardInRound';
 
 export const actionGenerators = {
   // these functions mutate state and return actions.
@@ -113,5 +114,6 @@ export const specialAbilityActionGenerators = {
       ]
     ];
     return renderActions;
-  }
+  },
+  'Rogue': () => playFirstCardInRound(null, true)
 };

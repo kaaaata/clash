@@ -5,10 +5,12 @@ import { playCard } from './playCard';
 import { logPlayCard, logPlayerWins } from './battleLogGenerators';
 import { cards } from '../cards/cards';
 import { selectEnemyCardToPlay } from './selectEnemyCardToPlay';
+import { createNewCard } from '../cards/createNewCard';
+import { blueprints } from '../cards/blueprints';
 
 const inDevelopment = process.env.NODE_ENV !== 'production';
 
-export const playFirstCardInRound = (index) => {
+export const playFirstCardInRound = (index, isRogueSpecialAbility) => {
   const clashBattleCards = store.getState().clashBattleCards;
   const clashBattleStats = store.getState().clashBattleStats;
 
@@ -42,14 +44,21 @@ export const playFirstCardInRound = (index) => {
   };
   const { logs, renderActions } = state; // state gets mutated. only declare objects here!
 
-  const cardId = state.you.hand[index];
+  const cardId = isRogueSpecialAbility
+    ? createNewCard(blueprints.allCardsObject['Knife'])
+    : state.you.hand[index];
   logs.push(logPlayCard(
     `you plays: ${cards[cardId].name} (${cardId})`,
     'you',
     cardId
   ));
   // any function that uses stateCopy should put its reference as the first arg
-  playCard(state, cardId, 'you', { player: 'you', location: 'hand', index });
+  playCard(
+    state,
+    cardId,
+    'you',
+    isRogueSpecialAbility ? null : { player: 'you', location: 'hand', index }
+  );
 
   if (state.winner) {
     logs.push(logPlayerWins(
@@ -58,29 +67,8 @@ export const playFirstCardInRound = (index) => {
     ));
     renderActions.push([{ actionKey: 'setWinner', payload: state[state.winner].name }]);
   } else {
-    startTurn(state, 'enemy');
-    if (state.winner) {
-      logs.push(logPlayerWins(
-        `${state.winner} wins!`,
-        state.winner
-      ));
-      renderActions.push([{ actionKey: 'setWinner', payload: state[state.winner].name }]);
-    } else {
-      const enemyHandRandomCardId = selectEnemyCardToPlay(state.enemy.hand);
-      const enemyHandRandomCardIndex = state.enemy.hand.indexOf(enemyHandRandomCardId);
-      // add placeholder
-      state.enemy.hand[enemyHandRandomCardIndex] = null;
-      logs.push(logPlayCard(
-        `enemy plays: ${cards[enemyHandRandomCardId].name} (${enemyHandRandomCardId})`,
-        'enemy',
-        enemyHandRandomCardId
-      ));
-      playCard(
-        state,
-        enemyHandRandomCardId,
-        'enemy',
-        { player: 'enemy', location: 'hand', index: enemyHandRandomCardIndex }
-      );
+    if (!isRogueSpecialAbility) {
+      startTurn(state, 'enemy');
       if (state.winner) {
         logs.push(logPlayerWins(
           `${state.winner} wins!`,
@@ -88,13 +76,36 @@ export const playFirstCardInRound = (index) => {
         ));
         renderActions.push([{ actionKey: 'setWinner', payload: state[state.winner].name }]);
       } else {
-        startTurn(state, 'you');
+        const enemyHandRandomCardId = selectEnemyCardToPlay(state.enemy.hand);
+        const enemyHandRandomCardIndex = state.enemy.hand.indexOf(enemyHandRandomCardId);
+        // add placeholder
+        state.enemy.hand[enemyHandRandomCardIndex] = null;
+        logs.push(logPlayCard(
+          `enemy plays: ${cards[enemyHandRandomCardId].name} (${enemyHandRandomCardId})`,
+          'enemy',
+          enemyHandRandomCardId
+        ));
+        playCard(
+          state,
+          enemyHandRandomCardId,
+          'enemy',
+          { player: 'enemy', location: 'hand', index: enemyHandRandomCardIndex }
+        );
         if (state.winner) {
           logs.push(logPlayerWins(
             `${state.winner} wins!`,
             state.winner
           ));
           renderActions.push([{ actionKey: 'setWinner', payload: state[state.winner].name }]);
+        } else {
+          startTurn(state, 'you');
+          if (state.winner) {
+            logs.push(logPlayerWins(
+              `${state.winner} wins!`,
+              state.winner
+            ));
+            renderActions.push([{ actionKey: 'setWinner', payload: state[state.winner].name }]);
+          }
         }
       }
     }
