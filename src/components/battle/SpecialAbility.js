@@ -10,6 +10,12 @@ export const SpecialAbility = ({ onClick }) => {
     isAnimating: state.clashBattleStats.isAnimating
   }), shallowEqual);
   const canActivate = !!specialAbilityBars && !isAnimating;
+  const barColor = specialAbility.name === 'Invoke'
+    ? specialAbilityBars % 2 === 0 ? colors.blue : colors.red
+    : specialAbility.color;
+  const name = specialAbility.name === 'Invoke'
+    ? specialAbilityBars % 2 === 0 ? 'Invoke Frost' : 'Invoke Fire'
+    : specialAbility.name;
 
   const speialAbilityCss = css`
     position: absolute;
@@ -32,7 +38,7 @@ export const SpecialAbility = ({ onClick }) => {
       .fill {
         position: absolute;
         height: 28px;
-        background: ${specialAbilityBars ? colors.blue : colors.slateLight};
+        background: ${specialAbilityBars ? barColor : colors.slateLight};
         width: ${~~(100 * specialAbilityBars / specialAbility.uses)}%;
         transition: all 0.75s ease-out;
       }
@@ -56,7 +62,7 @@ export const SpecialAbility = ({ onClick }) => {
       <Tooltip text={specialAbility.description} className='fill_container'>
         <div className='fill' />
         <FlexContainer justifyContent='center' alignItems='center' className='text_container'>
-          <Text type='mini'>{specialAbility.name} ({specialAbilityBars}/{specialAbility.uses})</Text>
+          <Text type='mini'>{name} ({specialAbilityBars}/{specialAbility.uses})</Text>
         </FlexContainer>
       </Tooltip>
     </Button>

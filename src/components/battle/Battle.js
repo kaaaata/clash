@@ -66,7 +66,6 @@ export const Battle = () => {
 
       // instantly execute the first action, which will always be "move to stack"
       executeRenderAction(renderActions[0]);
-
       if (renderActions.length === 1) {
         setIsAnimating(false);
         return;

@@ -1,3 +1,4 @@
+import shortid from 'shortid';
 import { cards } from '../cards/cards';
 import { createNewCard } from '../cards/createNewCard';
 import { store } from '../stores/store';
@@ -115,5 +116,29 @@ export const specialAbilityActionGenerators = {
     ];
     return renderActions;
   },
-  'Rogue': () => playFirstCardInRound(null, true)
+  'Rogue': () => playFirstCardInRound(null, true),
+  'Elementalist': () => {
+    const { yourHand } = store.getState().clashBattleCards;
+    const { specialAbilityBars } = store.getState().clashBattleStats;
+    const element = specialAbilityBars % 2 === 0 ? 'fire' : 'frost';
+    const targetCards = element === 'fire'
+      ? ['Fire', 'Super Fire', 'Fire Spear', 'Warlock', 'The Evil Dragon Jr.']
+      : ['Frost', 'Super Frost', 'Ice Whelp', 'Ice Blade', 'Ice Queen'];
+    const newHand = yourHand.map((cardId, index) => {
+      if (targetCards.includes(cards[cardId].name)) {
+        const newCardId = createNewCard({
+          ...cards[cardId],
+          attack: cards[cardId].attack + 1,
+          defense: cards[cardId].defense + 1,
+          battleMutatedProperties: { attack: true, defense: true }
+        }, `battle_${shortid.generate()}`);
+        delete cards[cardId];
+        return newCardId;
+      } else {
+        return cardId;
+      }
+    });
+    const renderActions = [[{ actionKey: 'setYourHand', payload: newHand }]];
+    return renderActions;
+  }
 };

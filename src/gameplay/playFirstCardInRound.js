@@ -7,6 +7,7 @@ import { cards } from '../cards/cards';
 import { selectEnemyCardToPlay } from './selectEnemyCardToPlay';
 import { createNewCard } from '../cards/createNewCard';
 import { blueprints } from '../cards/blueprints';
+import shortid from 'shortid';
 
 const inDevelopment = process.env.NODE_ENV !== 'production';
 
@@ -45,7 +46,7 @@ export const playFirstCardInRound = (index, isRogueSpecialAbility) => {
   const { logs, renderActions } = state; // state gets mutated. only declare objects here!
 
   const cardId = isRogueSpecialAbility
-    ? createNewCard(blueprints.allCardsObject['Knife'])
+    ? createNewCard(blueprints.allCardsObject['Knife'], `battle_${shortid.generate()}`)
     : state.you.hand[index];
   logs.push(logPlayCard(
     `you plays: ${cards[cardId].name} (${cardId})`,

@@ -1,3 +1,5 @@
+import { colors } from "../styles";
+
 export const characters = [
   // {
   //   name: 'Paladin',
@@ -21,14 +23,21 @@ export const characters = [
     specialAbility: {
       name: 'Drain Shields',
       description: 'Drain the enemy\'s shields to 0, and gain that much for yourself.',
-      uses: 2
+      uses: 2,
+      color: colors.black
     }
   },
-  // {
-  //   name: 'Elementalist',
-  //   image: 'cryopyromancer',
-  //   startingCards: ['Elementalist', 'Super Frost', 'Fire']
-  // },
+  {
+    name: 'Elementalist',
+    image: 'cryopyromancer',
+    startingCards: ['Elementalist', 'Super Fire', 'Frost'],
+    specialAbility: {
+      name: 'Invoke',
+      description: 'Give +1/+1 to all Fire or Frost cards in your hand, alternating with each use.',
+      uses: 4,
+      color: null // changes programmatically with each use
+    }
+  },
   // {
   //   name: 'Warlock',
   //   image: 'crazy_mage',
@@ -41,7 +50,8 @@ export const characters = [
     specialAbility: {
       name: 'Mischief',
       description: 'Steal the top card of the enemy\'s discard pile, and add it to your deck, permanently.',
-      uses: 1
+      uses: 1,
+      color: colors.violet
     }
   },
   {
@@ -51,7 +61,8 @@ export const characters = [
     specialAbility: {
       name: 'Knife',
       description: 'Play a 2/2 attack card. (This does not take up your turn.)',
-      uses: 3
+      uses: 2,
+      color: colors.steel
     }
   },
   // {
