@@ -14,7 +14,7 @@ export const CatherineTheGreat = ({ closeModal }) => {
           page={1}
           text={
             <React.Fragment>
-              You are confronted by a lightly armored fighter, who looks like she just got done fighting someone! There is <span className='red'>blood</span> splattered over her armor.
+              You are confronted by an <span className='blue'>armored</span> warrior, who looks like she just got done fighting someone! There is <span className='red'>blood</span> splattered all over her armor.
               <br /><br />
               "I am <span className='yellow'>Catherine the Great!</span> I challenge you to a duel!"
             </React.Fragment>

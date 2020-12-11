@@ -120,6 +120,7 @@ export const EventModal = ({
       <div css={css`${imageContainerCss} flex: none; margin-right: 30px;`}>
         {imageComponentOverride || (
           <Image
+            key='this_key_prevents_image_rerenders'
             src={`${image}.png`}
             height={300}
             width={300}

@@ -182,10 +182,14 @@ export const MonsterPreview = ({
     </React.Fragment>
   );
 
+  const monsterImage = isNemesis
+    ? yourImage
+    : monsterName === 'Catherine the Great' ? 'cat_the_great_event' : monster.image;
+
   const imageComponentOverride = (
     <FlexContainer flexDirection='column' alignItems='center'>
       <Image
-        src={`${isNemesis ? yourImage : monster.image}.png`}
+        src={`${monsterImage}.png`}
         height={270}
         width={300}
         size='contain'
