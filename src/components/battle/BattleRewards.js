@@ -73,7 +73,7 @@ export const BattleRewards = () => {
   switch (page) {
     case 'default':
       modalTitle = didPlayerWin ? 'Victory!' : 'Defeat!';
-      pageComponent = (day === 10 && didPlayerWin) ? (
+      pageComponent = (didPlayerWin && enemyName === 'The Evil Dragon') ? (
         <EventModalPage
           page={1}
           text={
