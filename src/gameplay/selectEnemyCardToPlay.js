@@ -26,6 +26,6 @@ const sortFunc = (a, b) => {
 };
 
 export const selectEnemyCardToPlay = (cardIds) => {
-
-  return cardIds.sort(sortFunc)[0];
+  const cardIdsCopy = [...cardIds];
+  return cardIdsCopy.sort(sortFunc)[0];
 };
