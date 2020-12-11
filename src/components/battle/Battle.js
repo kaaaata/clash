@@ -115,8 +115,6 @@ export const Battle = () => {
       payload: [...yourDeck]
     }]);
 
-    renderActions.push([]);
-
     for (let i = 0; i < 3; i++) {
       yourHand[i] = yourDeck[yourDeck.length - 1];
       yourDeck = yourDeck.slice(0, yourDeck.length - 1);
