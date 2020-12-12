@@ -6,6 +6,7 @@ import { blueprints } from '../cards/blueprints';
 import { cards } from '../cards/cards';
 import { createNewCard } from '../cards/createNewCard';
 import shortid from 'shortid';
+import { sample } from 'lodash';
 
 export const customCardEffects = {
   'Brawler': (state, player) => {
@@ -291,5 +292,28 @@ export const customCardEffects = {
         state.renderActions.push([]);
       }
     });
+  },
+  'Inquisitor': (state, player) => {
+    // Give a random attack card in your hand +3/+0.
+    const cardIds = state[player].hand.filter(
+      cardId => cards[cardId] && cards[cardId].type === 'attack'
+    );
+    const cardId = sample(cardIds);
+    const index = state[player].hand.indexOf(cardId);
+
+    if (!!cardId) {
+      const oldCard = cards[cardId];
+      const newCardId = createNewCard({
+        ...oldCard,
+        attack: oldCard.attack + 3,
+        battleMutatedProperties: {
+          attack: true,
+          defense: oldCard.battleMutatedProperties.defense
+        }
+      }, `battle_${shortid.generate()}`);
+      state[player].hand[index] = newCardId;
+      state.renderActions.push([actionGenerators.setCardPile(state, player, 'hand')]);
+      state.renderActions.push([]);
+    }
   }
 };

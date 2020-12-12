@@ -42,6 +42,15 @@ export const allies = [
     shuffleCardCopiesIntoYourPiles: [{ cardName: 'Healing Blade', pile: 'deck' }]
   },
   {
+    name: 'Inquisitor',
+    image: 'inquisitor',
+    rarity: 'common',
+    attack: 0,
+    defense: 3,
+    customEffect: true,
+    customDescription: 'Give a random attack card in your hand +3/+0.'
+  },
+  {
     name: 'Shaman',
     image: 'mermaid',
     rarity: 'uncommon',

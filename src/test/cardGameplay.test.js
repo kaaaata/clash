@@ -461,3 +461,21 @@ test('CUSTOM CARD EFFECT (Candy Corn)', () => {
     expect(cards[card].attack).toBe(candyCorn.attack + 3)
   });
 });
+
+test('CUSTOM CARD EFFECT (Assassin)', () => {
+  simulatePlayCard({ cardName: 'Assassin' });
+  expect(state.enemy.deck.length).toBe(6);
+  expect(state.you.discard.length).toBe(13);
+  expect(state.you.hand
+    .filter(cardId => cardId && cards[cardId].attack === 1 && cards[cardId].defense === 1)
+    .length
+  ).toBe(2);
+});
+
+test('CUSTOM CARD EFFECT (Inquisitor)', () => {
+  simulatePlayCard({ cardName: 'Inquisitor' });
+  expect(state.you.hand
+    .filter(cardId => cardId && cards[cardId].attack === 3 && cards[cardId].defense === 0)
+    .length
+  ).toBe(1);
+});

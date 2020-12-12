@@ -1,4 +1,4 @@
-import { shuffle } from 'lodash';
+import { random, sample, shuffle } from 'lodash';
 import shortid from 'shortid';
 import { blueprints } from '../cards/blueprints';
 import { cards } from '../cards/cards';
@@ -192,5 +192,32 @@ export const specialAbilityActionGenerators = {
       ]);
     }
     return renderActions;
+  },
+  'Inquisitor': () => {
+    const { yourHand } = store.getState().clashBattleCards;
+    const cardIndex = sample(yourHand
+      .map((cardId, index) => cards[cardId].type === 'attack' ? index : null)
+      .filter(cardId => [0, 1, 2].includes(cardId))
+    );
+    if (typeof cardIndex !== 'number') {
+      return [];
+    } else {
+      const oldCard = cards[yourHand[cardIndex]];
+      const newCardId = createNewCard({
+        ...oldCard,
+        attack: oldCard.attack + 2,
+        battleMutatedProperties: {
+          attack: true,
+          defense: oldCard.battleMutatedProperties.defense
+        }
+      }, `battle_${shortid.generate()}`);
+      yourHand[cardIndex] = newCardId;
+      store.getState().clashBattleStats.yourShields = 6;
+      return [
+        [{ actionKey: 'setYourShields', payload: 6 }],
+        [],
+        ...playFirstCardInRound(cardIndex)
+      ];
+    }
   }
 };

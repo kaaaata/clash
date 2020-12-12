@@ -23,11 +23,6 @@ export const characters = [
       color: colors.violet
     }
   },
-  // {
-  //   name: 'Mage',
-  //   image: 'mage',
-  //   startingCards: ['Mage', 'Candy Corn', 'Frost']
-  // },
   {
     name: 'Vampire',
     image: 'vampire',
@@ -50,11 +45,17 @@ export const characters = [
       color: null // changes programmatically with each use
     }
   },
-  // {
-  //   name: 'Warlock',
-  //   image: 'crazy_mage',
-  //   startingCards: ['Warlock', 'Super Fire', 'Super Fire']
-  // },
+  {
+    name: 'Inquisitor',
+    image: 'inquisitor',
+    startingCards: ['Inquisitor', 'Orc Blade', 'Lotus'],
+    specialAbility: {
+      name: 'Heavy Strike',
+      description: 'Gain 6 shields. Play a random attack card from your hand with +2/+0.',
+      uses: 3,
+      color: colors.red
+    }
+  },
   {
     name: 'Ice Whelp',
     image: 'ice_whelp',
@@ -76,10 +77,5 @@ export const characters = [
       uses: 2,
       color: colors.steel
     }
-  },
-  // {
-  //   name: 'Brawler',
-  //   image: 'brawler',
-  //   startingCards: ['Brawler', 'Greataxe', 'Mace']
-  // },
+  }
 ];
