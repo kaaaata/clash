@@ -19,7 +19,7 @@ const deckSizeByDay = {
 };
 
 export const genMonsterDeck = (monster, day) => {
-  const { deck, wave2AdditionalCards, eliteAdditionalCards, autofill = true } = monster;
+  const { deck, wave2AdditionalCards = [], eliteAdditionalCards = [], autofill = true } = monster;
   let result = [...deck];
 
   if ([2, 5, 8].includes(day)) {

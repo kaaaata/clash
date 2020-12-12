@@ -10,6 +10,7 @@ import { genPackCardNames } from '../shop/genPackCardNames';
 import { genGuaranteedTownAction } from '../town/genTownActions';
 import { sampleSize } from 'lodash';
 import { cards } from '../../cards/cards';
+import { store } from '../../stores/store';
 
 export const BattleRewards = () => {
   const {
@@ -22,7 +23,6 @@ export const BattleRewards = () => {
     isEnemyElite,
     enemyName,
     day,
-    deck,
     yourImage
   } = useSelector(state => ({
     didPlayerWin: state.clashBattleStats.winner
@@ -37,7 +37,6 @@ export const BattleRewards = () => {
     isEnemyElite: state.clashBattleStats.isEnemyElite,
     enemyName: state.clashBattleStats.enemyName,
     day: state.clashTown.day,
-    deck: state.clashPlayer.deck,
     yourImage: state.clashBattleStats.yourImage
   }), shallowEqual);
   const dispatch = useDispatch();
@@ -49,7 +48,7 @@ export const BattleRewards = () => {
   const returnToTown = () => {
     if (!didPlayerWin) {
       if (enemyName === 'Nemesis') {
-        const lostCards = sampleSize(deck, 2);
+        const lostCards = sampleSize(store.getState().clashPlayer.deck, 2);
         dispatch(actions.addTownFeedText(
           `You were defeated by: ${enemyName}! You lost ${battleRewardGold} gold, and two cards: ${cards[lostCards[0]].name} and ${cards[lostCards[1]].name}.`
         ));

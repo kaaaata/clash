@@ -25,7 +25,8 @@ const _genUpgradedCard = (cardName) => genUpgradedCard(
 
 export const controller = isControllerEnabled ? {
   // yourHand: [_genUpgradedCard('Candy Corn'), _genUpgradedCard('Candy Corn'), _genUpgradedCard('Candy Corn')],
-  yourHand: ['Knight', 'Water Slime', 'Vampire Blade'].map(i => createNewCard(i)),
+  yourHand: ['Knight', 'Blank', 'Vampire Blade'].map(i => createNewCard(i)),
+  yourDeck: [].map(i => createNewCard(i)),
   // yourDeck: [
   //   // cards[upgradedCard],
     
