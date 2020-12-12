@@ -1,5 +1,6 @@
 import { shuffle } from 'lodash';
 import shortid from 'shortid';
+import { blueprints } from '../cards/blueprints';
 import { cards } from '../cards/cards';
 import { createNewCard } from '../cards/createNewCard';
 import { store } from '../stores/store';
@@ -159,14 +160,38 @@ export const specialAbilityActionGenerators = {
       }, `battle_${shortid.generate()}`);
       yourDiscard = yourDiscard.slice(0, yourDiscard.length - 1);
       renderActions.push([
-        { actionKey: 'setYourDiscard', payload: yourDiscard },
+        { actionKey: 'setYourDiscard', payload: [...yourDiscard] },
         { actionKey: 'setStack', payload: [newCardId] }
       ]);
       renderActions.push([]);
       yourDeck = shuffle([...yourDeck, newCardId]);
       renderActions.push([
         { actionKey: 'setStack', payload: [] },
-        { actionKey: 'setYourDeck', payload: yourDeck }
+        { actionKey: 'setYourDeck', payload: [...yourDeck] }
+      ]);
+    }
+    return renderActions;
+  },
+  'Alchemist': () => {
+    const yourHand = [...store.getState().clashBattleCards.yourHand];
+    const renderActions = [];
+    for (let i = 0; i < 3; i++) {
+      yourHand[i] = null;
+      renderActions.push([{ actionKey: 'setYourHand', payload: [...yourHand] }])
+    }
+    for (let i = 0; i < 3; i++) {
+      const randomPotion = createNewCard(
+        blueprints.potions.getRandomCardByFilter(
+          card => ['common', 'uncommon'].includes(card.rarity) && !card.isToken
+        ),
+        `battle_${shortid.generate()}`
+      );
+      renderActions.push([{ actionKey: 'setStack', payload: [randomPotion] }]);
+      renderActions.push([]);
+      yourHand[i] = randomPotion;
+      renderActions.push([
+        { actionKey: 'setStack', payload: [] },
+        { actionKey: 'setYourHand', payload: [...yourHand] }
       ]);
     }
     return renderActions;

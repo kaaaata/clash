@@ -12,11 +12,17 @@ export const characters = [
       color: colors.green
     }
   },
-  // {
-  //   name: 'Alchemist',
-  //   image: 'alchemist',
-  //   startingCards: ['Alchemist', 'Healing Potion', 'Defense Potion']
-  // },
+  {
+    name: 'Alchemist',
+    image: 'alchemist',
+    startingCards: ['Alchemist', 'Healing Potion', 'Vial of Acid'],
+    specialAbility: {
+      name: 'Fizzle',
+      description: 'Transform all cards in your hand into random non-legendary potions.',
+      uses: 1,
+      color: colors.violet
+    }
+  },
   // {
   //   name: 'Mage',
   //   image: 'mage',
@@ -57,7 +63,7 @@ export const characters = [
       name: 'Mischief',
       description: 'Steal the top card of the enemy\'s discard pile, and add it to your deck, permanently.',
       uses: 1,
-      color: colors.violet
+      color: colors.blue
     }
   },
   {

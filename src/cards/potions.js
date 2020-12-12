@@ -21,6 +21,15 @@ export const potions = [
     }
   },
   {
+    name: 'Vial of Acid',
+    image: 'acid_potion',
+    rarity: 'uncommon',
+    customDescription: 'Deal 3 damage to the enemy.',
+    onDiscard: {
+      attack: 3
+    }
+  },
+  {
     name: 'Viking Slime',
     image: 'slime_potion',
     rarity: 'uncommon',
