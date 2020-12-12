@@ -46,7 +46,7 @@ export const playFirstCardInRound = (index, isRogueSpecialAbility) => {
   const { logs, renderActions } = state; // state gets mutated. only declare objects here!
 
   const cardId = isRogueSpecialAbility
-    ? createNewCard(blueprints.allCardsObject['Knife'], `battle_${shortid.generate()}`)
+    ? createNewCard('Knife', `battle_${shortid.generate()}`)
     : state.you.hand[index];
   logs.push(logPlayCard(
     `you plays: ${cards[cardId].name} (${cardId})`,

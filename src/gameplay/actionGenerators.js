@@ -182,7 +182,7 @@ export const specialAbilityActionGenerators = {
     for (let i = 0; i < 3; i++) {
       const randomPotion = createNewCard(
         blueprints.potions.getRandomCardByFilter(
-          card => ['common', 'uncommon'].includes(card.rarity) && !card.isToken
+          card => ['common', 'uncommon', 'rare'].includes(card.rarity) && !card.isToken
         ),
         `battle_${shortid.generate()}`
       );

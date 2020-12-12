@@ -11,7 +11,7 @@ export const customCardEffects = {
   'Brawler': (state, player) => {
     // Shuffle a copy of a random non-legendary attack into your deck.
     const attack = blueprints.attacks.getRandomCardByFilter(
-      card => card.rarity !== 'legendary'
+      card => ['common', 'uncommon', 'rare'].includes(card.rarity) && !card.isToken
     );
     addCardCopiesIntoPiles(state, [{ cardName: attack.name, pile: 'deck' }], player);
   },
@@ -128,9 +128,8 @@ export const customCardEffects = {
   'Magic Scroll': (state, player) => {
     // Play a copy of a random non-legendary card.
     const randomCardId = createNewCard(
-      blueprints.allCardsArray.getRandomCardByFilter(
-        card => card.name !== 'Magic Scroll' && card.rarity !== 'legendary'
-      ),
+      // intentionally allows tokens and special rarity cards, becuz cool
+      blueprints.allCardsArray.getRandomCardByFilter(card => card.rarity !== 'legendary'),
       `battle_${shortid.generate()}`
     );
     state.logs.push(logPlayCopyOfCard(
@@ -141,7 +140,7 @@ export const customCardEffects = {
     playCard(state, randomCardId, player);
   },
   'Viking Slime': (state, player) => {
-    // Shuffle 3 random common or uncommon cards into your deck.
+    // Shuffle 3 random common or uncommon attack cards into your deck.
     const copies = [1, 2, 3].map(i => ({
       cardName: blueprints.allCardsArray.getRandomCardByFilter(
         card => (
@@ -161,7 +160,7 @@ export const customCardEffects = {
         card => (
           !card.isToken
           && card.type === 'magic'
-          && card.rarity !== 'legendary'
+          && ['common', 'uncommon', 'rare'].includes(card.rarity)
         )
       ).name,
       pile: 'deck'
