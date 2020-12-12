@@ -7,7 +7,6 @@ import { CardLootModal } from '../modals/CardLootModal';
 import { colors, effects } from '../styles';
 import { packs } from '../shop/packs';
 import { genPackCardNames } from '../shop/genPackCardNames';
-import { genGuaranteedTownAction } from '../town/genTownActions';
 import { sampleSize } from 'lodash';
 import { cards } from '../../cards/cards';
 import { store } from '../../stores/store';
@@ -118,7 +117,6 @@ export const BattleRewards = () => {
       );
       break;
     case 'energy_reservation': {
-      const guaranteedTownAction = genGuaranteedTownAction();
       modalTitle = 'Preparation';
       pageComponent = (
         <EventModalPage
