@@ -63,7 +63,7 @@ const CardPile = ({
     >
       <div className='outline' />
       {cardIds.map((cardId, index) => (
-        (index >= cardIds.length - 2) ? (
+        (index >= cardIds.length - 2) ? ( // need to render top 2 cards, because top card can flip
           <PileCard
             key={index}
             cardProps={{
