@@ -154,7 +154,7 @@ export const specialAbilityActionGenerators = {
     let yourDiscard = [...store.getState().clashBattleCards.yourDiscard];
     let yourDeck = [...store.getState().clashBattleCards.yourDeck];
     const renderActions = [];
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 2; i++) {
       const cardId = yourDiscard[yourDiscard.length - 1];
       if (!cardId) {
         continue;
@@ -222,9 +222,9 @@ export const specialAbilityActionGenerators = {
         }
       }, `battle_${shortid.generate()}`);
       yourHand[cardIndex] = newCardId;
-      store.getState().clashBattleStats.yourShields = 6;
+      store.getState().clashBattleStats.yourShields = 2;
       return [
-        [{ actionKey: 'setYourShields', payload: 6 }],
+        [{ actionKey: 'setYourShields', payload: 2 }],
         [],
         ...playFirstCardInRound(cardIndex)
       ];

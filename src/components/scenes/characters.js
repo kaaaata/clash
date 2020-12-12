@@ -6,8 +6,8 @@ export const characters = [
     image: 'paladin',
     startingCards: ['Paladin', 'Healing Blade', 'Healing Blade'],
     specialAbility: {
-      name: 'Super Heal',
-      description: 'Heal 3. Each card healed this way gets +1/+1.',
+      name: 'Healing Touch',
+      description: 'Heal 2. Each card healed this way gets +1/+1.',
       uses: 2,
       color: colors.green
     }
@@ -30,7 +30,7 @@ export const characters = [
     specialAbility: {
       name: 'Armor Vampire',
       description: 'Drain the enemy\'s shields to 0. Heal 1 for each shield drained.',
-      uses: 2,
+      uses: 1,
       color: colors.black
     }
   },
@@ -51,8 +51,8 @@ export const characters = [
     startingCards: ['Knight', 'Orc Blade', 'Lotus'],
     specialAbility: {
       name: 'Heavy Strike',
-      description: 'Gain 6 shields. Play a random attack card from your hand with +2/+0.',
-      uses: 3,
+      description: 'Gain 2 shields. Play a random attack card from your hand with +2/+0.',
+      uses: 2,
       color: colors.red
     }
   },
