@@ -1,7 +1,13 @@
-import React from 'react';
 import { css, jsx } from '@emotion/core'; /** @jsx jsx */
 import { colors, zIndex } from '../styles';
 import { Text } from './Text';
+
+export const Tooltip = ({ text, className, children }) => (
+  <div css={tooltipCss} className={className}>
+    {children}
+    <Text inline type='mini' className='tooltip_text'>{text}</Text>
+  </div>
+);
 
 const tooltipCss = css`
   position: absolute;
@@ -40,15 +46,4 @@ const tooltipCss = css`
     border-style: solid;
     border-color: ${colors.black} transparent transparent transparent;
   }
-`
-
-export const Tooltip = React.memo(
-  ({ text, className, children }) => {
-    return (
-      <div css={tooltipCss} className={className}>
-        {children}
-        <Text inline type='mini' className='tooltip_text'>{text}</Text>
-      </div>
-    );
-  }
-);
+`;
