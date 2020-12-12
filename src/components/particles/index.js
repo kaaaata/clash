@@ -8,3 +8,4 @@ export { Text } from './Text';
 export { Input } from './Text';
 export { Gold } from './Gold';
 export { Tooltip } from './Tooltip';
+export { YellowUnderlineText } from './YellowUnderlineText';

@@ -125,7 +125,7 @@ export const attacks = [
     name: 'Healing Blade',
     image: 'healing_blade',
     rarity: 'rare',
-    attack: 4,
+    attack: 3,
     defense: 1,
     heal: 3
   },

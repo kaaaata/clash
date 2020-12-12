@@ -472,8 +472,8 @@ test('CUSTOM CARD EFFECT (Assassin)', () => {
   ).toBe(2);
 });
 
-test('CUSTOM CARD EFFECT (Inquisitor)', () => {
-  simulatePlayCard({ cardName: 'Inquisitor' });
+test('CUSTOM CARD EFFECT (Knight)', () => {
+  simulatePlayCard({ cardName: 'Knight' });
   expect(state.you.hand
     .filter(cardId => cardId && cards[cardId].attack === 3 && cards[cardId].defense === 0)
     .length

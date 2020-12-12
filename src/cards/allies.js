@@ -42,8 +42,8 @@ export const allies = [
     shuffleCardCopiesIntoYourPiles: [{ cardName: 'Healing Blade', pile: 'deck' }]
   },
   {
-    name: 'Inquisitor',
-    image: 'inquisitor',
+    name: 'Knight',
+    image: 'knight',
     rarity: 'common',
     attack: 0,
     defense: 3,

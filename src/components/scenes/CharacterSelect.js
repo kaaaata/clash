@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { jsx, css } from '@emotion/core'; /** @jsx jsx */
 import { useDispatch } from 'react-redux';
-import { Image, Spacer, FlexContainer, Text, Button, FlexItem } from '../particles';
+import { Image, Spacer, FlexContainer, Text, Button } from '../particles';
 import { characters } from './characters';
 import { Card, cardWidth, cardHeight } from '../card/Card';
 import * as actions from '../../stores/actions';
@@ -10,6 +10,8 @@ import { createNewCard } from '../../cards/createNewCard';
 export const CharacterSelect = () => {
   const dispatch = useDispatch();
   const [selectedCharIndex, setSelectedCharIndex] = useState(0);
+  
+  const { name, image, startingCards, specialAbility } = characters[selectedCharIndex];
 
   const continueOnClick = ({ name, image, startingCards, specialAbility }) => {
     dispatch(actions.setPlayer({ name, image, specialAbility }));
@@ -35,35 +37,41 @@ export const CharacterSelect = () => {
       <div className='showcase'>
         <FlexContainer justifyContent='center'>
           <Image
-            src={`${characters[selectedCharIndex].image}.png`}
+            src={`${image}.png`}
             width={cardWidth * 2}
             height={cardHeight * 2}
             size='contain'
             className='showcase_image'
           />
           <FlexContainer flexDirection='column'>
-            <Text type='header'>{characters[selectedCharIndex].name}</Text>
+            <Text type='header'>{name}</Text>
             <Spacer height={30} />
             <Text>Additional starting cards:&nbsp;</Text>
             <Spacer height={5} />
             <FlexContainer className='cards'>
-              {characters[selectedCharIndex].startingCards.map((cardName, index) => (
+              {startingCards.map((cardName, index) => (
                 <Card key={index} cardName={cardName} />
               ))}
             </FlexContainer>
-            <FlexItem />
+            <Spacer height={30} />
             <Button
               type='mini'
               centered
-              onClick={() => continueOnClick(
-                characters[selectedCharIndex].name,
-                characters[selectedCharIndex].image,
-                characters[selectedCharIndex].startingCards
-              )}
+              onClick={() => continueOnClick(characters[selectedCharIndex])}
             >
-             Play as {characters[selectedCharIndex].name}
+             Play as {name}
             </Button>
             <Spacer height={10} />
+          </FlexContainer>
+          <FlexContainer flexDirection='column' className='special_ability_section'>
+            <Text type='header'>&nbsp;</Text>
+            <Spacer height={30} />
+            <Text>
+              Special ability:&nbsp;
+              <span css={css`color: ${specialAbility.color}`}>{specialAbility.name}</span>
+            </Text>
+            <Spacer height={20} />
+            <Text type='paragraph'>{specialAbility.description} ({specialAbility.uses} {specialAbility.uses === 1 ? 'use' : 'uses'} per battle)</Text>
           </FlexContainer>
         </FlexContainer>
       </div>
@@ -99,6 +107,11 @@ const characterSelectCss = css`
       &:last-child {
         margin-right: 0;
       }
+    }
+
+    .special_ability_section {
+      margin-left: 20px;
+      width: 350px;
     }
   }
 

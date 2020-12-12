@@ -1,4 +1,4 @@
-import { random, sample, shuffle } from 'lodash';
+import { sample, shuffle } from 'lodash';
 import shortid from 'shortid';
 import { blueprints } from '../cards/blueprints';
 import { cards } from '../cards/cards';
@@ -203,7 +203,7 @@ export const specialAbilityActionGenerators = {
     }
     return renderActions;
   },
-  'Inquisitor': () => {
+  'Knight': () => {
     const { yourHand } = store.getState().clashBattleCards;
     const cardIndex = sample(yourHand
       .map((cardId, index) => cards[cardId].type === 'attack' ? index : null)

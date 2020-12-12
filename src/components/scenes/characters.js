@@ -42,18 +42,29 @@ export const characters = [
       name: 'Invoke',
       description: 'Give +1/+1 to all Fire or Frost cards in your hand, alternating with each use.',
       uses: 4,
-      color: null // changes programmatically with each use
+      color: colors.yellow // changes programmatically with each use
     }
   },
   {
-    name: 'Inquisitor',
-    image: 'inquisitor',
-    startingCards: ['Inquisitor', 'Orc Blade', 'Lotus'],
+    name: 'Knight',
+    image: 'knight',
+    startingCards: ['Knight', 'Orc Blade', 'Lotus'],
     specialAbility: {
       name: 'Heavy Strike',
       description: 'Gain 6 shields. Play a random attack card from your hand with +2/+0.',
       uses: 3,
       color: colors.red
+    }
+  },
+  {
+    name: 'Assassin',
+    image: 'rogue',
+    startingCards: ['Assassin', 'Attack Potion', 'Multishot'],
+    specialAbility: {
+      name: 'Knife',
+      description: 'Play a 2/2 attack card. (This does not take up your turn.)',
+      uses: 2,
+      color: colors.steel
     }
   },
   {
@@ -65,17 +76,6 @@ export const characters = [
       description: 'Steal the top card of the enemy\'s discard pile, and add it to your deck, permanently.',
       uses: 1,
       color: colors.blue
-    }
-  },
-  {
-    name: 'Assassin',
-    image: 'rogue',
-    startingCards: ['Assassin', 'Longsword', 'Cutlass'],
-    specialAbility: {
-      name: 'Knife',
-      description: 'Play a 2/2 attack card. (This does not take up your turn.)',
-      uses: 2,
-      color: colors.steel
     }
   }
 ];

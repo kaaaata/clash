@@ -293,7 +293,7 @@ export const customCardEffects = {
       }
     });
   },
-  'Inquisitor': (state, player) => {
+  'Knight': (state, player) => {
     // Give a random attack card in your hand +3/+0.
     const cardIds = state[player].hand.filter(
       cardId => cards[cardId] && cards[cardId].type === 'attack'
