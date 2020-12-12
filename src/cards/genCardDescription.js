@@ -60,6 +60,7 @@ export const genCardDescription = ({
       genCardDescription(omit(onDiscard, 'pierces'))
     }`
   ),
+  customDescription,
   playCopiesOfCards && genPlayCopiesOfCardsDescription(playCopiesOfCards),
   shuffleCardCopiesIntoYourPiles && genShuffleCardCopiesIntoPilesDescription(
     shuffleCardCopiesIntoYourPiles,
@@ -68,6 +69,5 @@ export const genCardDescription = ({
   shuffleCardCopiesIntoOpponentsPiles && genShuffleCardCopiesIntoPilesDescription(
     shuffleCardCopiesIntoOpponentsPiles,
     'enemy'
-  ),
-  customDescription
+  )
 ].filter(Boolean).join(' ');

@@ -112,7 +112,7 @@ export const townActions = keyBy([
     name: 'Dancing Lady',
     energy: 3,
     weight: 1,
-    image: 'dancing_lady',
+    image: 'flowy_lady',
     description: 'A random encounter!'
   },
   {

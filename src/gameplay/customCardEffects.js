@@ -181,7 +181,6 @@ export const customCardEffects = {
           attack: oldCard.attack + 2,
           defense: oldCard.defense + 2,
           battleMutatedProperties: {
-            ...oldCard.battleMutatedProperties,
             attack: true,
             defense: true
           }
@@ -207,7 +206,6 @@ export const customCardEffects = {
             attack: oldCard.attack + 3,
             defense: oldCard.defense + 3,
             battleMutatedProperties: {
-              ...oldCard.battleMutatedProperties,
               attack: true,
               defense: true
             }
@@ -236,7 +234,6 @@ export const customCardEffects = {
           attack: isPotion ? 0 : card.attack + 4,
           defense: isPotion ? 0 : card.defense + 4,
           battleMutatedProperties: isPotion ? card.battleMutatedProperties : {
-            ...card.battleMutatedProperties,
             attack: true,
             defense: true
           }
@@ -274,5 +271,25 @@ export const customCardEffects = {
       ],
       player
     );
+  },
+  'Assassin': (state, player) => {
+    // Give each card in your hand +1/+1.
+    state[player].hand.forEach((cardId, index) => {
+      if (cardId && cards[cardId].type !== 'potion') {
+        const oldCard = cards[cardId];
+        const newCardId = createNewCard({
+          ...oldCard,
+          attack: oldCard.attack + 1,
+          defense: oldCard.defense + 1,
+          battleMutatedProperties: {
+            attack: true,
+            defense: true
+          }
+        }, `battle_${shortid.generate()}`);
+        state[player].hand[index] = newCardId;
+        state.renderActions.push([actionGenerators.setCardPile(state, player, 'hand')]);
+        state.renderActions.push([]);
+      }
+    });
   }
 };

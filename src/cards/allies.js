@@ -119,6 +119,16 @@ export const allies = [
     tags: { fire: true }
   },
   {
+    name: 'Assassin',
+    image: 'rogue',
+    rarity: 'rare',
+    attack: 0,
+    defense: 0,
+    playCopiesOfCards: ['Knife', 'Knife'],
+    customEffect: true,
+    customDescription: 'Give each card in your hand +1/+1.'
+  },
+  {
     name: 'Minotaur',
     image: 'minotaur',
     rarity: 'rare',

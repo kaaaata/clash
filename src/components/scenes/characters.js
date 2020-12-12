@@ -18,7 +18,7 @@ export const characters = [
     startingCards: ['Alchemist', 'Healing Potion', 'Vial of Acid'],
     specialAbility: {
       name: 'Fizzle',
-      description: 'Transform all cards in your hand into random non-legendary potions.',
+      description: 'Transform each card in your hand into a random non-legendary potion.',
       uses: 1,
       color: colors.violet
     }
@@ -58,7 +58,7 @@ export const characters = [
   {
     name: 'Ice Whelp',
     image: 'ice_whelp',
-    startingCards: ['Ice Whelp', 'Super Frost', 'Frost'],
+    startingCards: ['Ice Whelp', 'Super Frost', 'Magic Scroll'],
     specialAbility: {
       name: 'Mischief',
       description: 'Steal the top card of the enemy\'s discard pile, and add it to your deck, permanently.',
@@ -67,9 +67,9 @@ export const characters = [
     }
   },
   {
-    name: 'Rogue',
+    name: 'Assassin',
     image: 'rogue',
-    startingCards: ['Ice Whelp', 'Longsword', 'Cutlass'],
+    startingCards: ['Assassin', 'Longsword', 'Cutlass'],
     specialAbility: {
       name: 'Knife',
       description: 'Play a 2/2 attack card. (This does not take up your turn.)',

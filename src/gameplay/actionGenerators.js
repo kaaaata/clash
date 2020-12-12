@@ -118,7 +118,7 @@ export const specialAbilityActionGenerators = {
     ];
     return renderActions;
   },
-  'Rogue': () => playFirstCardInRound(null, true),
+  'Assassin': () => playFirstCardInRound(null, true),
   'Elementalist': () => {
     const { yourHand } = store.getState().clashBattleCards;
     const { specialAbilityBars } = store.getState().clashBattleStats;
