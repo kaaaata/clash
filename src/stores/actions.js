@@ -21,6 +21,10 @@ export const setBattleInitialState = payload => ({ type: 'SET_BATTLE_INITIAL_STA
 export const setWinner = payload => ({ type: 'SET_WINNER', payload });
 export const activateVTrigger = payload => ({ type: 'ACTIVATE_V_TRIGGER', payload });
 export const activateSpecialAbility = payload => ({ type: 'ACTIVATE_SPECIAL_ABILITY', payload });
+export const incrementMaxSpecialAbilityBars = payload => ({
+  type: 'INCREMENT_MAX_SPECIAL_ABILITY_BARS', payload
+});
+export const incrementMaxVBars = payload => ({ type: 'INCREMENT_MAX_VBARS', payload });
 export const setIsAnimating = payload => ({ type: 'SET_IS_ANIMATING', payload });
 
 export const setPlayerLives = payload => ({ type: 'SET_PLAYER_LIVES', payload });

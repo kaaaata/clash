@@ -23,7 +23,8 @@ export const BattleRewards = () => {
     isEnemyElite,
     enemyName,
     day,
-    yourImage
+    yourImage,
+    energyReserved
   } = useSelector(state => ({
     didPlayerWin: state.clashBattleStats.winner
       && state.clashBattleStats.yourName === state.clashBattleStats.winner,
@@ -37,7 +38,8 @@ export const BattleRewards = () => {
     isEnemyElite: state.clashBattleStats.isEnemyElite,
     enemyName: state.clashBattleStats.enemyName,
     day: state.clashTown.day,
-    yourImage: state.clashBattleStats.yourImage
+    yourImage: state.clashBattleStats.yourImage,
+    energyReserved: state.clashTown.energyReserved
   }), shallowEqual);
   const dispatch = useDispatch();
 
@@ -186,14 +188,28 @@ export const BattleRewards = () => {
               },
             },
             {
-              name: 'Plan Ahead',
-              greenText: `-1 energy reserved. Guaranteed event tomorrow: ${guaranteedTownAction.name} (${guaranteedTownAction.energy} energy).`,
+              name: 'Prepare',
+              greenText: '+1 to max Re-draw uses.',
+              redText: '+0 energy reserved.',
+              redTextFirst: true,
               onClick: () => {
-                dispatch(actions.adjustPlayerEnergyReserved(-1));
-                dispatch(actions.setGuaranteedTownAction(guaranteedTownAction.name));
+                dispatch(actions.adjustPlayerGold(10));
+                dispatch(actions.incrementMaxVBars());
                 returnToTown();
-              }
-            }
+              },
+            },
+            {
+              name: 'Lift',
+              greenText: '+1 to max special ability uses.',
+              redText: '+1 energy reserved.',
+              redTextFirst: true,
+              isDisabled: energyReserved === 10,
+              onClick: () => {
+                dispatch(actions.adjustPlayerEnergyReserved(1));
+                dispatch(actions.incrementMaxSpecialAbilityBars());
+                returnToTown();
+              },
+            },
           ]}
         />
       );

@@ -4,9 +4,15 @@ import { Button, FlexContainer, Text, Tooltip } from '../particles';
 import { colors, effects } from '../styles';
 
 export const SpecialAbility = ({ onClick }) => {
-  const { specialAbilityBars, specialAbility, isAnimating } = useSelector(state => ({
+  const {
+    specialAbilityBars,
+    specialAbility,
+    maxSpecialAbilityBars,
+    isAnimating
+  } = useSelector(state => ({
     specialAbilityBars: state.clashBattleStats.specialAbilityBars,
     specialAbility: state.clashBattleStats.specialAbility,
+    maxSpecialAbilityBars: state.clashBattleStats.maxSpecialAbilityBars,
     isAnimating: state.clashBattleStats.isAnimating
   }), shallowEqual);
   const canActivate = !!specialAbilityBars && !isAnimating;
@@ -39,7 +45,7 @@ export const SpecialAbility = ({ onClick }) => {
         position: absolute;
         height: 28px;
         background: ${specialAbilityBars ? barColor : colors.slateLight};
-        width: ${~~(100 * specialAbilityBars / specialAbility.uses)}%;
+        width: ${~~(100 * specialAbilityBars / maxSpecialAbilityBars)}%;
         transition: all 0.75s ease-out;
       }
 
@@ -62,7 +68,7 @@ export const SpecialAbility = ({ onClick }) => {
       <Tooltip text={specialAbility.description} className='fill_container'>
         <div className='fill' />
         <FlexContainer justifyContent='center' alignItems='center' className='text_container'>
-          <Text type='mini'>{name} ({specialAbilityBars}/{specialAbility.uses})</Text>
+          <Text type='mini'>{name} ({specialAbilityBars}/{maxSpecialAbilityBars})</Text>
         </FlexContainer>
       </Tooltip>
     </Button>

@@ -5,6 +5,8 @@ const genInitialState = () => ({
   yourImage: '',
   yourStats: { attack: 0, magic: 0, defense: 0 },
   yourStatBonuses: { attack: 0, magic: 0, defense: 0 },
+  maxVBars: 3,
+  maxSpecialAbilityBars: null,
 
   // will be reset before each fight
   enemyName: '',
@@ -30,7 +32,8 @@ export default (state = genInitialState(), action) => {
         ...state,
         yourName: action.payload.name,
         yourImage: action.payload.image,
-        specialAbility: action.payload.specialAbility
+        specialAbility: action.payload.specialAbility,
+        maxSpecialAbilityBars: action.payload.specialAbility.uses
       };
     case 'SET_ENEMY':
       return {
@@ -91,6 +94,16 @@ export default (state = genInitialState(), action) => {
         ...state,
         vBars: state.vBars - 1
       };
+    case 'INCREMENT_MAX_SPECIAL_ABILITY_BARS':
+      return {
+        ...state,
+        maxSpecialAbilityBars: state.maxSpecialAbilityBars + 1
+      };
+    case 'INCREMENT_MAX_VBARS':
+      return {
+        ...state,
+        maxVBars: state.maxVBars + 1
+      };
     case 'SET_IS_ANIMATING':
       return {
         ...state,
@@ -103,8 +116,8 @@ export default (state = genInitialState(), action) => {
         enemyShields: 0,
         winner: null,
         winnerImage: null,
-        specialAbilityBars: state.specialAbility.uses,
-        vBars: 3s,
+        specialAbilityBars: state.maxSpecialAbilityBars,
+        vBars: state.maxVBars,
         isAnimating: false
       };
     case 'START_NEW_DAY':

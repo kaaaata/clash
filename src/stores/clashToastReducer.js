@@ -47,6 +47,18 @@ export default (state = initialState, action) => {
         flipper: !state.flipper
       };
     }
+    case 'INCREMENT_MAX_SPECIAL_ABILITY_BARS':
+      return {
+        ...state,
+        toast: 'Received: +1 max special ability uses',
+        flipper: !state.flipper
+      };
+    case 'INCREMENT_MAX_VBARS':
+      return {
+        ...state,
+        toast: 'Received: +1 max Re-draw uses',
+        flipper: !state.flipper
+      };
     // case 'ADJUST_PLAYER_ENERGY_RESERVED':
     //   return {
     //     ...state,
