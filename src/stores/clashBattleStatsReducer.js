@@ -104,7 +104,7 @@ export default (state = genInitialState(), action) => {
         winner: null,
         winnerImage: null,
         specialAbilityBars: state.specialAbility.uses,
-        vBars: 3,
+        vBars: 3s,
         isAnimating: false
       };
     case 'START_NEW_DAY':

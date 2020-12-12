@@ -10,7 +10,7 @@ const monstersTier1 = [
     name: 'Minotaur',
     image: 'minotaur',
     stats: { attack: 0, magic: 0, defense: 0 },
-    deck: ['Minotaur', 'Falchion'],
+    deck: ['Minotaur', 'Falchion', 'Falchion', 'Longsword', 'Lotus'],
     wave2AdditionalCards: ['Orc Blade', 'Orc Blade'],
     eliteAdditionalCards: ['Orc Blade', 'Orc Blade']
   },
@@ -18,7 +18,7 @@ const monstersTier1 = [
     name: 'Basic Slime',
     image: 'basic_slime',
     stats: { attack: 0, magic: 0, defense: 1 },
-    deck: ['Shield', 'Shield'],
+    deck: ['Shield', 'Shield', 'Shield', 'Shield'],
     wave2AdditionalCards: ['Shield', 'Shield'],
     eliteAdditionalCards: ['Shield', 'Shield']
   },
@@ -26,7 +26,7 @@ const monstersTier1 = [
     name: 'Fire Slime',
     image: 'fire_slime',
     stats: { attack: 0, magic: 0, defense: 0 },
-    deck: ['Fire', 'Fire', 'Fire', 'Fire', 'Fire'],
+    deck: ['Fire', 'Fire', 'Fire', 'Fire', 'Fire', 'Fire', 'Fire'],
     wave2AdditionalCards: ['Super Fire', 'Fire'],
     eliteAdditionalCards: ['Fire Spear', 'Super Fire', 'Fire']
   },
@@ -34,7 +34,7 @@ const monstersTier1 = [
     name: 'Tentacle Monster',
     image: 'tentacles',
     stats: { attack: 0, magic: 0, defense: 0 },
-    deck: ['Tentacles', 'Tentacles', 'Tentacles', 'Tentacles', 'Tentacles'],
+    deck: ['Tentacles', 'Tentacles', 'Tentacles', 'Tentacles', 'Tentacles', 'Tentacles', 'Tentacles'],
     wave2AdditionalCards: ['Mimic', 'Candy Corn'],
     eliteAdditionalCards: ['Mimic', 'Candy Corn']
   }
@@ -45,7 +45,7 @@ const monstersTier2 = [
     name: 'Viking Slime',
     image: 'slime_potion',
     stats: { attack: 1, magic: 0, defense: 1 },
-    deck: ['Viking Slime', 'Viking Slime', 'Viking Slime', 'Shield'],
+    deck: ['Viking Slime', 'Viking Slime', 'Viking Slime', 'Shield', 'Shield', 'Falchion', 'Falchion', 'Lotus', 'Lotus', 'Longsword', 'Longsword'],
     wave2AdditionalCards: ['Viking Slime', 'Falchion'],
     eliteAdditionalCards: ['Viking Slime', 'Longsword']
   },
@@ -53,25 +53,25 @@ const monstersTier2 = [
     name: 'Demonic Slime',
     image: 'demonic_slime',
     stats: { attack: 0, magic: 1, defense: 1 },
-    deck: ['Mage', 'Mage', 'Candy Corn', 'Candy Corn', 'Magic Scroll', 'Tentacles', 'Tentacles', 'Tentacles', 'Tentacles', 'Tentacles', 'Healing Potion'],
-    wave2AdditionalCards: ['Super Frost', 'Super Fire', 'Mimic'],
-    eliteAdditionalCards: ['Super Frost', 'Healing Potion', 'Fire Spear']
+    deck: ['Mage', 'Mage', 'Candy Corn', 'Candy Corn', 'Magic Scroll', 'Tentacles', 'Tentacles', 'Tentacles', 'Tentacles', 'Tentacles', 'Healing Potion', 'Greataxe', 'Mimic', 'Fire Spear'],
+    wave2AdditionalCards: ['Super Frost', 'Super Fire', 'Greataxe'],
+    eliteAdditionalCards: ['Super Frost', 'Healing Potion', 'Greataxe']
   },
   {
     name: 'Hobgoblin',
     image: 'hobgoblin',
     stats: { attack: 2, magic: 0, defense: 0 },
-    deck: ['Hobgoblin', 'Hobgoblin', 'Falchion', 'Falchion', 'Falchion', 'Orc Blade'],
+    deck: ['Hobgoblin', 'Hobgoblin', 'Falchion', 'Falchion', 'Falchion', 'Orc Blade', 'Orc Blade', 'Orc Blade', 'Lotus', 'Lotus'],
     wave2AdditionalCards: ['Lotus', 'Longsword', 'Orc Blade', 'Hobgoblin', 'Minotaur'],
-    eliteAdditionalCards: ['Hobgoblin', 'Orc Blade', 'Longsword']
+    eliteAdditionalCards: ['Hobgoblin', 'Orc Blade', 'Longsword', 'Minotaur']
   },
   {
     name: 'Evil Slime',
     image: 'evil_slime',
     stats: { attack: 0, magic: 0, defense: 2 },
-    deck: ['Evil Slime', 'Evil Slime', 'Evil Slime', 'Evil Slime', 'Minotaur'],
-    wave2AdditionalCards: ['Orc Blade', 'Orc Blade', 'Evil Slime'],
-    eliteAdditionalCards: ['Evil Slime', 'Orc Blade', 'Orc Blade', 'Minotaur'],
+    deck: ['Evil Slime', 'Evil Slime', 'Evil Slime', 'Evil Slime', 'Minotaur', 'Greataxe', 'Greataxe', 'Shield', 'Shield', 'Shield', 'Shield', 'Shield', 'Shield', 'Shield'],
+    wave2AdditionalCards: ['Orc Blade', 'Orc Blade', 'Evil Slime', 'Greataxe'],
+    eliteAdditionalCards: ['Evil Slime', 'Orc Blade', 'Orc Blade', 'Minotaur', 'Greataxe'],
   }
 ];
 
@@ -80,15 +80,16 @@ const monstersTier3 = [
     name: 'Mimic',
     image: 'mimic',
     stats: { attack: 1, magic: 1, defense: 1 },
-    deck: ['Dragon Blade', 'Greataxe', 'Attack Potion', 'Magic Scroll', 'Magic Scroll', 'Magic Scroll', 'Super Frost', 'Super Frost', 'Super Frost', 'Mage', 'Mage'],
-    wave2AdditionalCards: ['Magic Scroll', 'Mage', 'Healing Potion'],
-    eliteAdditionalCards: ['Super Frost', 'Mage', 'Healing Potion']
+    deck: ['Dragon Blade', 'Greataxe', 'Attack Potion', 'Magic Potion', 'Defense Potion', 'Magic Scroll', 'Magic Scroll', 'Magic Scroll', 'Super Frost', 'Super Frost', 'Super Frost', 'Mage', 'Mage', 'Mimic', 'Mimic', 'Mimic', 'Mimic', 'Mimic', 'Gladius'],
+    wave2AdditionalCards: ['Magic Scroll', 'Mage', 'Healing Potion', 'Mimic'],
+    eliteAdditionalCards: ['Super Frost', 'Mage', 'Healing Potion', 'Mimic', 'Gladius']
   },
   {
     name: 'Water Slime',
     image: 'water_slime',
     stats: { attack: 0, magic: 3, defense: 0 },
     deck: [
+      'Water Slime',
       'Water Slime',
       'Water Slime',
       'Healing Blade',
@@ -109,7 +110,8 @@ const monstersTier3 = [
       'Healing Potion',
       'Magic Scroll',
       'Magic Scroll',
-      'Alchemist'
+      'Alchemist',
+      'Candy Corn'
     ],
     wave2AdditionalCards: ['Frost', 'Frost', 'Super Frost'],
     eliteAdditionalCards: ['Water Slime', 'Alchemist', 'Super Frost']
@@ -117,7 +119,7 @@ const monstersTier3 = [
   {
     name: 'Fighter Kobold',
     image: 'purple_kobold',
-    stats: { attack: 3, magic: 0, defense: 2 },
+    stats: { attack: 3, magic: 0, defense: 3 },
     deck: [],
     wave2AdditionalCards: [],
     eliteAdditionalCards: []

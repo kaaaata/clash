@@ -30,7 +30,7 @@ export const characters = [
     specialAbility: {
       name: 'Armor Vampire',
       description: 'Drain the enemy\'s shields to 0. Heal 1 for each shield drained.',
-      uses: 1,
+      uses: 2,
       color: colors.black
     }
   },
