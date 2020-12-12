@@ -10,14 +10,16 @@ export const magic = [
     defense: 0,
     shuffleCardCopiesIntoOpponentsPiles: [
       { cardName: 'Burn', pile: 'deck' }
-    ]
+    ],
+    tags: { fire: true }
   },
   {
     name: 'Frost',
     image: 'frost',
     rarity: 'common',
     attack: 3,
-    defense: 0
+    defense: 0,
+    tags: { frost: true }
   },
   {
     name: 'Tentacles',
@@ -53,14 +55,16 @@ export const magic = [
     shuffleCardCopiesIntoOpponentsPiles: [
       { cardName: 'Burn', pile: 'deck' },
       { cardName: 'Burn', pile: 'deck' },
-    ]
+    ],
+    tags: { fire: true }
   },
   {
     name: 'Super Frost',
     image: 'double_frost',
     rarity: 'uncommon',
     attack: 5,
-    defense: 0
+    defense: 0,
+    tags: { frost: true }
   },
   {
     name: 'Tome of Spells',

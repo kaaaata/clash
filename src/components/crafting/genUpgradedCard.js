@@ -46,6 +46,13 @@ export const genUpgradedCard = (card, upgrade, cardIdOverride) => {
   c.prefix = card.prefix || upgrade.prefix;
   c.suffix = card.prefix ? upgrade.suffix : '';
   c.intrinsic = card.intrinsic || upgrade.intrinsic;
-  
+  c.tags = card.tags;
+  if (upgrade.prefix === 'Frosty' && !c.tags['frost']) {
+    c.tags['frost'] = true;
+  }
+  if (upgrade.prefix === 'Burninating' && !c.tags['fire']) {
+    c.tags['fire'] = true;
+  }
+
   return createNewCard(c, cardIdOverride);
 };

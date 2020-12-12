@@ -56,7 +56,8 @@ export const allies = [
     rarity: 'uncommon',
     attack: 2,
     defense: 3,
-    playCopiesOfCards: ['Frost']
+    playCopiesOfCards: ['Frost'],
+    tags: { frost: true }
   },
   {
     name: 'Lich',
@@ -114,7 +115,8 @@ export const allies = [
     rarity: 'rare',
     attack: 2,
     defense: 0,
-    playCopiesOfCards: ['Fire', 'Fire']
+    playCopiesOfCards: ['Fire', 'Fire'],
+    tags: { fire: true }
   },
   {
     name: 'Minotaur',
@@ -162,7 +164,8 @@ export const allies = [
       { cardName: 'Burn', pile: 'deck' },
       { cardName: 'Burn', pile: 'deck' },
     ],
-    playCopiesOfCards: ['Super Frost']
+    playCopiesOfCards: ['Super Frost'],
+    tags: { fire: true, frost: true }
   },
   {
     name: 'The Evil Dragon Jr.',
@@ -173,7 +176,8 @@ export const allies = [
     onDiscard: {
       playCopiesOfCards: ['Super Fire']
     },
-    triggerDiscardOnPlay: true
+    triggerDiscardOnPlay: true,
+    tags: { fire: true }
   },
   {
     name: 'Catherine the Great',
@@ -195,7 +199,8 @@ export const allies = [
     onDiscard: {
       playCopiesOfCards: ['Ice Blade']
     },
-    triggerDiscardOnPlay: true
+    triggerDiscardOnPlay: true,
+    tags: { frost: true }
   },
   {
     name: 'Flowy Lady',

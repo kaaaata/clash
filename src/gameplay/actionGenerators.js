@@ -123,11 +123,8 @@ export const specialAbilityActionGenerators = {
     const { yourHand } = store.getState().clashBattleCards;
     const { specialAbilityBars } = store.getState().clashBattleStats;
     const element = specialAbilityBars % 2 === 0 ? 'fire' : 'frost';
-    const targetCards = element === 'fire'
-      ? ['Fire', 'Super Fire', 'Fire Spear', 'Warlock', 'The Evil Dragon Jr.', 'Elementalist']
-      : ['Frost', 'Super Frost', 'Ice Whelp', 'Ice Blade', 'Ice Queen', 'Elementalist'];
     const newHand = yourHand.map((cardId, index) => {
-      if (targetCards.includes(cards[cardId].name)) {
+      if (cards[cardId].tags[element]) {
         const newCardId = createNewCard({
           ...cards[cardId],
           attack: cards[cardId].attack + 1,

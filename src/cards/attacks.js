@@ -73,7 +73,8 @@ export const attacks = [
     rarity: 'uncommon',
     attack: 3,
     defense: 0,
-    playCopiesOfCards: ['Fire']
+    playCopiesOfCards: ['Fire'],
+    tags: { fire: true }
   },
   {
     name: 'Multishot',
@@ -128,7 +129,8 @@ export const attacks = [
     defense: 4,
     shuffleCardCopiesIntoYourPiles: [
       { cardName: 'Super Frost', pile: 'deck' }
-    ]
+    ],
+    tags: { frost: true }
   },
   {
     name: 'Forest Bow',

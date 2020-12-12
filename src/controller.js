@@ -15,7 +15,7 @@ const b = 'Blank';
 
 const _genUpgradedCard = (cardName) => genUpgradedCard(
   blueprints.allCardsObject[cardName],
-  upgrades[upgrades.length - 1].cardProperties
+  upgrades[upgrades.length - 5].cardProperties
 );
 
 // const doubleUpgradedCard = genUpgradedCard(
@@ -25,7 +25,7 @@ const _genUpgradedCard = (cardName) => genUpgradedCard(
 
 export const controller = isControllerEnabled ? {
   // yourHand: [_genUpgradedCard('Candy Corn'), _genUpgradedCard('Candy Corn'), _genUpgradedCard('Candy Corn')],
-  yourHand: ['Alchemist', 'Vial of Acid', 'Vial of Acid'].map(i => createNewCard(i)),
+  yourHand: ['Elementalist', 'Fire', 'Ice Whelp'].map(i => createNewCard(i)),
   // yourDeck: [
   //   // cards[upgradedCard],
     
