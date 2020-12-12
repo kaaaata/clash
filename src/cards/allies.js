@@ -150,8 +150,8 @@ export const allies = [
     name: 'Water Slime',
     image: 'water_slime',
     rarity: 'rare',
-    attack: 5,
-    defense: 1,
+    attack: 4,
+    defense: 10,
     drain: true
   },
   {

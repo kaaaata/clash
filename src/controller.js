@@ -9,7 +9,7 @@ import { blueprints } from './cards/blueprints';
 import { monstersByTier } from './monsters/monsters';
 
 let isControllerEnabled = false;
-isControllerEnabled = true;
+// isControllerEnabled = true;
 
 const b = 'Blank';
 
@@ -25,7 +25,7 @@ const _genUpgradedCard = (cardName) => genUpgradedCard(
 
 export const controller = isControllerEnabled ? {
   // yourHand: [_genUpgradedCard('Candy Corn'), _genUpgradedCard('Candy Corn'), _genUpgradedCard('Candy Corn')],
-  yourHand: ['Inquisitor', 'Blank', 'Frost'].map(i => createNewCard(i)),
+  yourHand: ['Inquisitor', 'Water Slime', 'Vampire Blade'].map(i => createNewCard(i)),
   // yourDeck: [
   //   // cards[upgradedCard],
     

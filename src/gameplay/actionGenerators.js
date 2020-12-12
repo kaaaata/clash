@@ -86,11 +86,21 @@ export const actionGenerators = {
 
 export const specialAbilityActionGenerators = {
   'Vampire': () => {
-    const { enemyShields, yourShields } = store.getState().clashBattleStats;
-    const renderActions = [[
-      { actionKey: 'setEnemyShields', payload: 0 },
-      { actionKey: 'setYourShields', payload: yourShields + enemyShields }
-    ]];
+    const { enemyShields } = store.getState().clashBattleStats;
+    let yourDiscard = [...store.getState().clashBattleCards.yourDiscard];
+    let yourDeck = [...store.getState().clashBattleCards.yourDeck];
+    const renderActions = [[{ actionKey: 'setEnemyShields', payload: 0 }]];
+    for (let i = 0; i < enemyShields; i++) {
+      const healedCardId = yourDiscard[yourDiscard.length - 1];
+      if (healedCardId) {
+        yourDiscard = yourDiscard.slice(0, yourDiscard.length - 1);
+        yourDeck = [...yourDeck, healedCardId];
+        renderActions.push([
+          { actionKey: 'setYourDiscard', payload: yourDiscard },
+          { actionKey: 'setYourDeck', payload: yourDeck }
+        ]);
+      }
+    }
     return renderActions;
   },
   'Ice Whelp': () => {

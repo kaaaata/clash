@@ -26,10 +26,10 @@ export const characters = [
   {
     name: 'Vampire',
     image: 'vampire',
-    startingCards: ['Vampire', 'Orc Blade', 'Tentacles'],
+    startingCards: ['Vampire', 'Vampire Blade', 'Vampire Blade'],
     specialAbility: {
-      name: 'Drain Shields',
-      description: 'Drain the enemy\'s shields to 0, and gain that much for yourself.',
+      name: 'Armor Vampire',
+      description: 'Drain the enemy\'s shields to 0. Heal 1 for each shield drained.',
       uses: 2,
       color: colors.black
     }

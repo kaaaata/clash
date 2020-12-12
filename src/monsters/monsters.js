@@ -90,6 +90,7 @@ const monstersTier3 = [
     stats: { attack: 0, magic: 3, defense: 0 },
     deck: [
       'Water Slime',
+      'Water Slime',
       'Healing Blade',
       'Super Frost',
       'Shaman',

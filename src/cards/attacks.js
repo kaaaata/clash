@@ -99,6 +99,14 @@ export const attacks = [
     defense: 3
   },
   {
+    name: 'Vampire Blade',
+    image: 'vampire_blade',
+    rarity: 'uncommon',
+    attack: 2,
+    defense: 0,
+    drain: true
+  },
+  {
     name: 'Greataxe',
     image: 'sunder',
     rarity: 'rare',
