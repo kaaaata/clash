@@ -22,7 +22,7 @@ export const genUpgradedCard = (card, upgrade, cardIdOverride) => {
   c.defense = card.defense + (upgrade.defense || 0);
   c.heal = card.heal + (upgrade.heal || 0);
   c.healEnemy = card.healEnemy + (upgrade.healEnemy || 0);
-  c.drain = card.drain || upgrade.drain;
+  c.drain = card.drain || !!upgrade.drain;
   // onDiscard (currently no non-legendary attacks or magic attacks have onDiscard)
   c.type = upgrade.type || card.type;
   c.customDescription = [
@@ -30,11 +30,11 @@ export const genUpgradedCard = (card, upgrade, cardIdOverride) => {
     upgrade.customDescription
   ].filter(Boolean).join(' ');
   c.damageSelf = card.damageSelf + (upgrade.damageSelf || 0);
-  c.dealsBanishingDamage = card.dealsBanishingDamage || upgrade.dealsBanishingDamage;
-  c.banishesOnPlay = card.banishesOnPlay || upgrade.banishesOnPlay;
-  c.triggerDiscardOnPlay = card.triggerDiscardOnPlay || upgrade.triggerDiscardOnPlay;
+  c.dealsBanishingDamage = card.dealsBanishingDamage || !!upgrade.dealsBanishingDamage;
+  c.banishesOnPlay = card.banishesOnPlay || !!upgrade.banishesOnPlay;
+  c.triggerDiscardOnPlay = card.triggerDiscardOnPlay || !!upgrade.triggerDiscardOnPlay;
   c.customEffect = card.customEffect; // is this going to work? need testing with magic scroll
-  c.pierces = card.pierces || upgrade.pierces;
+  c.pierces = card.pierces || !!upgrade.pierces;
   [
     'playCopiesOfCards',
     'shuffleCardCopiesIntoYourPiles',
@@ -45,7 +45,7 @@ export const genUpgradedCard = (card, upgrade, cardIdOverride) => {
   // statBonuses (currently no non-legendary attacks or magic attacks have statBonuses)
   c.prefix = card.prefix || upgrade.prefix;
   c.suffix = card.prefix ? upgrade.suffix : '';
-  c.intrinsic = card.intrinsic || upgrade.intrinsic;
+  c.intrinsic = card.intrinsic || !!upgrade.intrinsic;
   c.tags = card.tags;
   if (upgrade.prefix === 'Frosty' && !c.tags['frost']) {
     c.tags['frost'] = true;

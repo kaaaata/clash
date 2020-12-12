@@ -37,7 +37,10 @@ export const Town = () => {
       window.flow.replaceTownEvents_toggle
       && typeof window.flow.replaceTownEvents_value === 'string'
     ) {
-      townActions = Array(8).fill(_townActions[window.flow.replaceTownEvents_value]);
+      townActions = [
+        ...Array(7).fill(_townActions[window.flow.replaceTownEvents_value]),
+        townActions[7]
+      ];
     }
     return {
       lives: state.clashPlayer.lives,
