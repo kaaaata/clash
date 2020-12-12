@@ -6,23 +6,23 @@ const commonAttacks = blueprints.lootableCardsByRarity.common.filter(
 );
 
 const deckSizeByDay = {
-  1: 15,
-  2: 20,
-  3: 25, // elite
-  4: 30,
-  5: 35,
-  6: 40, // elite
-  7: 45,
-  8: 50,
-  9: 55, // elite
-  10: 60 // final boss
+  1: 20,
+  2: 25,
+  3: 30, // elite
+  4: 35,
+  5: 40,
+  6: 45, // elite
+  7: 50,
+  8: 55,
+  9: 60, // elite
+  10: 75 // final boss
 };
 
 export const genMonsterDeck = (monster, day) => {
   const { deck, wave2AdditionalCards = [], eliteAdditionalCards = [], autofill = true } = monster;
   let result = [...deck];
 
-  if ([2, 5, 8].includes(day)) {
+  if ([2, 3, 5, 6, 8, 9].includes(day)) {
     result = result.concat(wave2AdditionalCards);
   }
   if ([3, 6, 9].includes(day)) {
