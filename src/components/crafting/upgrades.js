@@ -1,10 +1,10 @@
 export const upgrades = [
   {
-    description: '+3 attack.',
+    description: '+2 attack.',
     cardProperties: {
       prefix: 'Lethal',
       suffix: 'of Lethality',
-      attack: 3
+      attack: 2
     }
   },
   {
@@ -16,20 +16,20 @@ export const upgrades = [
     }
   },
   {
-    description: '+2 attack and +2 defense.',
+    description: '+1 attack and +2 defense.',
     cardProperties: {
       prefix: 'Honed',
       suffix: 'of Honing',
-      attack: 2,
+      attack: 1,
       defense: 2
     }
   },
   {
-    description: 'Heal 3.',
+    description: 'Heal 2.',
     cardProperties: {
       prefix: 'Healing',
       suffix: 'of Healing',
-      heal: 3
+      heal: 2
     }
   },
   {
@@ -41,11 +41,10 @@ export const upgrades = [
     }
   },
   {
-    description: 'Damage pierces shields. (Converts to Magic Attack)',
+    description: 'Damage pierces shields.',
     cardProperties: {
-      prefix: 'Ensorcelled',
-      suffix: 'of Sorcery',
-      type: 'magic',
+      prefix: 'Piercing',
+      suffix: 'of Piercing',
       pierces: true
     }
   },
