@@ -7,8 +7,8 @@ import { colors } from './styles';
 // spinner css credits to https://loading.io/css/
 
 export const ImagePreloadingSpinner = () => {
-  const [areImagesLoading, setAreImagesLoading] = useState(true);
   const [isError, setIsError] = useState(false);
+  const [loadedImageCount, setLoadedImageCount] = useState(0);
 
   useEffect(() => {
     let timeElapsed = 0;
@@ -20,29 +20,30 @@ export const ImagePreloadingSpinner = () => {
           numImagesLoaded++;
         }
       });
+      setLoadedImageCount(numImagesLoaded);
       if (numImagesLoaded === preloadedImages.length) {
         clearInterval(interval);
-        setAreImagesLoading(false);
       }
       if (timeElapsed >= 10000) {
         clearInterval(interval);
         setIsError(true);
       }
-    }, 500);
+    }, 250);
   }, []);
+
+  const isLoading = loadedImageCount < preloadedImages.length;
 
   return (
     <div
       css={imagePreloadingSpinnerCss}
-      className={`${areImagesLoading ? '' : 'done'} ${isError ? 'error' : ''}`}
+      className={`${isLoading ? '' : 'done'} ${isError ? 'error' : ''}`}
     >
       <Text inline>
         {isError
-          ? <span className='red'>Asset loading error. Try reloading.</span>
-          : areImagesLoading
-            ? 'Loading assets'
-            : <span className='green'>Assets loaded.</span>
+          ? 'Asset loading error. Try reloading'
+          : isLoading ? 'Loading assets' : 'Assets loaded.'
         }
+        &nbsp;({loadedImageCount}/{preloadedImages.length})
       </Text>
       <div className='lds-dual-ring' />
     </div>
@@ -57,6 +58,10 @@ const imagePreloadingSpinnerCss = css`
   opacity: 1;
 
   &.done {
+    .text {
+      color: ${colors.green};
+    }
+
     .lds-dual-ring:after {
       animation: none;
       opacity: 0;
@@ -64,6 +69,10 @@ const imagePreloadingSpinnerCss = css`
   }
 
   &.error {
+    .text {
+      color: ${colors.red};
+    }
+
     .lds-dual-ring:after {
       animation: none;
       border-color: ${colors.red} transparent ${colors.red} transparent;
