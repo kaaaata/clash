@@ -5,7 +5,7 @@ This is the codebase for "Clash", a React card game I am developing. It is a wor
 ## Playtesting
 You can playtest it at [https://calm-hollows-81714.herokuapp.com/](https://calm-hollows-81714.herokuapp.com/). Any feedback is appreciated.  
 
-Note: <code>calm-hollows</code> is a testing environment running on a free dyno, so the page may take 20 seconds to load. Images may also load extremely slowly.  
+Note: <code>calm-hollows</code> is a testing environment running on a free dyno, so the page may take 20 seconds to load.  
 
 ## Bootstrapping Instructions
 <code>npm i</code> install dependencies  
