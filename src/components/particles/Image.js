@@ -29,7 +29,10 @@ export const Image = (props) => {
       background-size: ${size};
       ${widthCss}
       ${heightCss}
-    ` : `object-fit: ${size};`
+    ` : `
+      display: block;
+      object-fit: ${size};
+    `
     }
     
     ${circular ? 'border-radius: 50%;' : ''}

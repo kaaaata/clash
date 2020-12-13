@@ -77,7 +77,6 @@ export const imagesToPreload = [
   'mage_event.png',
   'magic.png',
   'magic_potion.png',
-  'map.png',
   'mermaid.png',
   'mimic.png',
   'minotaur.png',

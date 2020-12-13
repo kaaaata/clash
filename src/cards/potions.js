@@ -26,7 +26,8 @@ export const potions = [
     rarity: 'uncommon',
     customDescription: 'Deal 3 damage to the enemy.',
     onDiscard: {
-      attack: 3
+      attack: 3,
+      pierces: true
     }
   },
   {

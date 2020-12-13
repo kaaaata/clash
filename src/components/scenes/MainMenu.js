@@ -4,12 +4,13 @@ import { useDispatch } from 'react-redux';
 import * as actions from '../../stores/actions';
 import { Text, Spacer, YellowUnderlineText } from '../particles';
 import { RulesModal } from '../modals/RulesModal';
+import { CreditsModal } from '../modals/CreditsModal';
 import { ImagePreloadingSpinner } from '../ImagePreloadingSpinner';
 
 export const MainMenu = () => {
   const dispatch = useDispatch();
 
-  const [isRulesModalActive, setIsRulesModalActive] = useState(false);
+  const [activeModal, setActiveModal] = useState(null);
 
   useEffect(() => {
     if (window.flow.skipIntro_toggle) {
@@ -22,24 +23,32 @@ export const MainMenu = () => {
       <Spacer height={90} />
       <Text type='title' centered>Clash</Text>
       <Spacer height={30} />
-      <Text centered>A game by KATA-</Text>
+      <Text centered>A game by kiteezy</Text>
       <div className='menu'>
         <YellowUnderlineText onClick={() => dispatch(actions.setScene('story'))}>
           Play
         </YellowUnderlineText>
         <Spacer height={10} />
-        <YellowUnderlineText onClick={() => setIsRulesModalActive(true)}>
+        <YellowUnderlineText onClick={() => setActiveModal('help')}>
           Help
+        </YellowUnderlineText>
+        <Spacer height={10} />
+        <YellowUnderlineText onClick={() => setActiveModal('credits')}>
+          Credits
         </YellowUnderlineText>
       </div>
 
       <ImagePreloadingSpinner />
 
-      {isRulesModalActive && (
+      {activeModal === 'help' && (
         <RulesModal
           isTopNavPresent={false}
-          closeModal={() => setIsRulesModalActive(false)}
+          closeModal={() => setActiveModal(null)}
         />
+      )}
+
+      {activeModal === 'credits' && (
+        <CreditsModal closeModal={() => setActiveModal(null)} />
       )}
     </div>
   );

@@ -1,41 +1,15 @@
 import { css, jsx } from '@emotion/core'; /** @jsx jsx */
 import { useState } from 'react';
-// import { cards } from '../cards/cards';
 import { Card } from '../card/Card';
 import { FlexContainer, Spacer, Text, Image, Button } from '../particles';
 import { Modal } from './Modal';
 
-const rulesModalCss = css`
-  .card_showcase {
-    width: 50%;
-  }
-
-  .basics {
-    .attribute {
-      display: inline-block;
-    }
-  }
-
-  .battle {
-    .image {
-      flex: none;
-    }
-  }
-
-  .card_properties {
-    .card_props {
-      width: 50%;
-    }
-  }
-`;
-
 const cardPropertiesOrder = [
-  'Deal attack damage to opponent',
+  'Deal damage',
   'Deal damage to yourself',
-  'Heal (from "Heal X for each point of damage dealt")',
-  'Heal (from card heal effect)',
+  'Heal',
   'Heal enemy',
-  'Any special card effects not listed here',
+  'Any unique card effects',
   'Shuffle cards into enemy deck, discard, or banish',
   'Shuffle cards into your deck, discard, or banish',
   'Play copies of cards',
@@ -74,7 +48,7 @@ export const RulesModal = ({ isTopNavPresent = true, closeModal }) => {
               <Text type='paragraph'>
                 This is an <span className='red'>attack card.</span><br />
                 It has 3 attack, increasable with {strength} <span className='red'>strength</span>.<br />
-                This card deals 3 damage, meaning<br />the opponent will discard 3 cards.
+                This card deals 3 damage, meaning<br />the enemy will discard 3 cards.
               </Text>
             </FlexContainer>
             <FlexContainer alignItems='center' className='card_showcase'>
@@ -150,6 +124,7 @@ export const RulesModal = ({ isTopNavPresent = true, closeModal }) => {
                 </Text>
               ))}
             </div>
+            <Spacer width={20} />
             <div className='card_props'>
               <Text className='yellow'>Other card properties</Text>
               <br />
@@ -208,3 +183,27 @@ export const RulesModal = ({ isTopNavPresent = true, closeModal }) => {
     </Modal>
   );
 };
+
+const rulesModalCss = css`
+  .card_showcase {
+    width: 50%;
+  }
+
+  .basics {
+    .attribute {
+      display: inline-block;
+    }
+  }
+
+  .battle {
+    .image {
+      flex: none;
+    }
+  }
+
+  .card_properties {
+    .card_props {
+      width: 50%;
+    }
+  }
+`;
