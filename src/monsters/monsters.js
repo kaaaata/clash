@@ -34,7 +34,7 @@ const monstersTier1 = [
     name: 'Tentacle Monster',
     image: 'tentacles',
     stats: { attack: 0, magic: 0, defense: 0 },
-    deck: ['Tentacles', 'Tentacles', 'Tentacles', 'Tentacles', 'Tentacles', 'Tentacles', 'Tentacles'],
+    deck: ['Mimic', 'Tentacles', 'Tentacles', 'Tentacles', 'Tentacles', 'Tentacles', 'Tentacles'],
     wave2AdditionalCards: ['Mimic', 'Candy Corn'],
     eliteAdditionalCards: ['Mimic', 'Candy Corn']
   }

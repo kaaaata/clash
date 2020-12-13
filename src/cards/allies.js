@@ -37,8 +37,8 @@ export const allies = [
     name: 'Paladin',
     image: 'paladin',
     rarity: 'common',
-    attack: 2,
-    defense: 2,
+    attack: 3,
+    defense: 3,
     shuffleCardCopiesIntoYourPiles: [{ cardName: 'Healing Blade', pile: 'deck' }]
   },
   {
@@ -151,7 +151,7 @@ export const allies = [
     image: 'water_slime',
     rarity: 'rare',
     attack: 4,
-    defense: 10,
+    defense: 5,
     drain: true
   },
   {

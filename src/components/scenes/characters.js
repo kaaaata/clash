@@ -31,7 +31,7 @@ export const characters = [
       name: 'Armor Vampire',
       description: 'Drain the enemy\'s shields to 0. Heal 1 for each shield drained.',
       uses: 2,
-      color: colors.black
+      color: colors.red
     }
   },
   {
@@ -70,7 +70,7 @@ export const characters = [
   {
     name: 'Ice Whelp',
     image: 'ice_whelp',
-    startingCards: ['Ice Whelp', 'Super Frost', 'Magic Scroll'],
+    startingCards: ['Ice Whelp', 'Shield', 'Candy Corn'],
     specialAbility: {
       name: 'Mischief',
       description: 'Steal the top card of the enemy\'s discard pile, and add it to your deck, permanently.',
