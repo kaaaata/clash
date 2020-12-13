@@ -169,13 +169,19 @@ const _eventMonsters = [
     stats: { attack: 2, magic: 2, defense: 2 },
     deck: [
       'The Evil Dragon Jr.', 'The Evil Dragon Jr.', 'The Evil Dragon Jr.',
-      'Fire Spear', 'Fire Spear',
-      'Fire', 'Fire',
-      'Super Fire', 'Super Fire',
-      'Dragon Blade', 'Dragon Blade',
-      'Shield', 'Shield', 'Shield',
+      'Fire Spear', 'Fire Spear', 'Fire Spear', 'Fire Spear',
+      'Fire', 'Fire', 'Fire', 'Fire', 'Fire', 'Fire', 'Fire', 'Fire',
+      'Super Fire', 'Super Fire', 'Super Fire', 'Super Fire',
+      'Dragon Blade', 'Dragon Blade', 'Dragon Blade',
+      'Shield', 'Shield', 'Shield', 'Shield',
       'Golden Goblet',
-      'Greataxe', 'Greataxe'
+      'Greataxe', 'Greataxe',
+      'Gladius', 'Gladius', 'Gladius',
+      'Vampire Blade', 'Vampire Blade',
+      'Lotus', 'Lotus', 'Lotus',
+      'Falchion', 'Falchion',
+      'Healing Potion', 'Healing Potion',
+      'Tome of Spells'
     ]
   }
 ];
