@@ -51,7 +51,8 @@ export const CardViewModal = ({
   cardOnClick,
   closeModal,
   shouldShowCloseButton = true,
-  closeButtonText = 'Exit'
+  closeButtonText = 'Exit',
+  isTopNavPresent = true,
 }) => {
   const cards = cardNames || cardIds;
 
@@ -62,6 +63,7 @@ export const CardViewModal = ({
       shouldCloseOnClick={false}
       shouldShowCloseButton={shouldShowCloseButton}
       closeButtonText={closeButtonText}
+      isTopNavPresent={isTopNavPresent}
     >
       <div css={cardViewModalCss}>
         {cards.map((cardNameOrId, index) => cardNameOrId ? (

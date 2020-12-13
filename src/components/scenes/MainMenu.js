@@ -6,6 +6,8 @@ import { Text, Spacer, YellowUnderlineText } from '../particles';
 import { RulesModal } from '../modals/RulesModal';
 import { CreditsModal } from '../modals/CreditsModal';
 import { ImagePreloadingSpinner } from '../ImagePreloadingSpinner';
+import { CardViewModal } from '../modals/CardViewModal';
+import { blueprints } from '../../cards/blueprints';
 
 export const MainMenu = () => {
   const dispatch = useDispatch();
@@ -33,6 +35,10 @@ export const MainMenu = () => {
           Help
         </YellowUnderlineText>
         <Spacer height={10} />
+        <YellowUnderlineText onClick={() => setActiveModal('gallery')}>
+          Card Gallery
+        </YellowUnderlineText>
+        <Spacer height={10} />
         <YellowUnderlineText onClick={() => setActiveModal('credits')}>
           Credits
         </YellowUnderlineText>
@@ -44,6 +50,15 @@ export const MainMenu = () => {
         <RulesModal
           isTopNavPresent={false}
           closeModal={() => setActiveModal(null)}
+        />
+      )}
+
+      {activeModal === 'gallery' && (
+        <CardViewModal
+          title='Card Gallery'
+          cardNames={blueprints.allCardsArray.map(card => card.name)}
+          closeModal={() => setActiveModal(false)}
+          isTopNavPresent={false}
         />
       )}
 

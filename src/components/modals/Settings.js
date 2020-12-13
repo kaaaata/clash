@@ -71,7 +71,7 @@ export const Settings = ({ closeModal }) => {
             onClick={() => setIsAllCardsModalActive(true)}
             centered
           >
-            All Cards Gallery
+            Card Gallery
           </Button>
 
           <Spacer height={30} />
@@ -88,7 +88,7 @@ export const Settings = ({ closeModal }) => {
       
       {isAllCardsModalActive && (
         <CardViewModal
-          title='All Cards Gallery'
+          title='Card Gallery'
           cardNames={blueprints.allCardsArray.map(card => card.name)}
           closeModal={() => setIsAllCardsModalActive(false)}
         />
