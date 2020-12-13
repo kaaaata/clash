@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { css, jsx } from '@emotion/core'; /** @jsx jsx */
 import { useDispatch } from 'react-redux';
 import * as actions from '../stores/actions';
@@ -10,32 +10,6 @@ import { colors } from './styles';
 import { Flow } from './flow/Flow';
 
 const inDevelopment = process.env.NODE_ENV !== 'production';
-
-const appCss = css`
-  width: 1200px;
-  height: 700px;
-  user-select: none;
-  position: relative;
-
-  color: ${colors.white};
-  letter-spacing: 0.3px;
-  font-family: 'Cabin', sans-serif;
-
-  button {
-    font-family: 'Cabin', sans-serif;
-  }
-
-  .sand { color: ${colors.sand}; }
-  .green { color: ${colors.green}; }
-  .blue { color: ${colors.blue}; }
-  .red { color: ${colors.red}; }
-  .yellow { color: ${colors.yellow}; }
-  .violet { color: ${colors.violet}; }
-  .greyDark { color: ${colors.greyDark}; }
-  .black { color: ${colors.black}; }
-  
-  .bold { font-weight: bold; }
-`;
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -78,3 +52,29 @@ export const App = () => {
     </main>
   );
 };
+
+const appCss = css`
+  width: 1200px;
+  height: 700px;
+  user-select: none;
+  position: relative;
+
+  color: ${colors.white};
+  letter-spacing: 0.3px;
+  font-family: 'Cabin', sans-serif;
+
+  button {
+    font-family: 'Cabin', sans-serif;
+  }
+
+  .sand { color: ${colors.sand}; }
+  .green { color: ${colors.green}; }
+  .blue { color: ${colors.blue}; }
+  .red { color: ${colors.red}; }
+  .yellow { color: ${colors.yellow}; }
+  .violet { color: ${colors.violet}; }
+  .greyDark { color: ${colors.greyDark}; }
+  .black { color: ${colors.black}; }
+  
+  .bold { font-weight: bold; }
+`;

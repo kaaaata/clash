@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import * as actions from '../../stores/actions';
 import { Text, Spacer, YellowUnderlineText } from '../particles';
 import { RulesModal } from '../modals/RulesModal';
+import { ImagePreloadingSpinner } from '../ImagePreloadingSpinner';
 
 export const MainMenu = () => {
   const dispatch = useDispatch();
@@ -14,7 +15,7 @@ export const MainMenu = () => {
     if (window.flow.skipIntro_toggle) {
       dispatch(actions.setScene('character_select'))
     }
-  })
+  }, [dispatch]);
 
   return (
     <div css={mainMenuCss}>
@@ -31,6 +32,8 @@ export const MainMenu = () => {
           Help
         </YellowUnderlineText>
       </div>
+
+      <ImagePreloadingSpinner />
 
       {isRulesModalActive && (
         <RulesModal

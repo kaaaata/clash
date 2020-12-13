@@ -24,10 +24,14 @@ export const Image = (props) => {
   const url = `${external ? '' : 'assets/'}${src}`;
 
   const imageCss = css`
-    background: ${linearGradientCss}url("${url}") no-repeat center center;
-    background-size: ${size};
-    ${widthCss}
-    ${heightCss}
+    ${children ? `
+      background: ${linearGradientCss}url("${url}") no-repeat center center;
+      background-size: ${size};
+      ${widthCss}
+      ${heightCss}
+    ` : `object-fit: ${size};`
+    }
+    
     ${circular ? 'border-radius: 50%;' : ''}
     ${onClick ? 'cursor: pointer;' : ''}
     ${filter ? `filter: ${filter};` : ''}
@@ -35,7 +39,7 @@ export const Image = (props) => {
     ${_css}
   `;
 
-  return (
+  return children ? (
     <div
       className={`image ${className}`}
       css={imageCss}
@@ -44,5 +48,16 @@ export const Image = (props) => {
     >
       {children}
     </div>
+  ) : (
+    <img
+      src={url}
+      width={width}
+      height={height}
+      alt={url}
+      className={`image ${className}`}
+      css={imageCss}
+      onClick={onClick}
+      onMouseEnter={onMouseEnter}
+    />
   );
 };
