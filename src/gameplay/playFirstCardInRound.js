@@ -24,7 +24,7 @@ export const playFirstCardInRound = (index, isAssassinSpecialAbility) => {
       banish: CardIdsArray(clashBattleCards.yourBanish),
       hand: CardIdsArray(clashBattleCards.yourHand),
       shields: clashBattleStats.yourShields,
-      statBonuses: clashBattleStats.yourStatBonuses,
+      statBonuses: { ...clashBattleStats.yourStatBonuses },
       stats: clashBattleStats.yourStats
     },
     enemy: {
@@ -34,7 +34,7 @@ export const playFirstCardInRound = (index, isAssassinSpecialAbility) => {
       banish: CardIdsArray(clashBattleCards.enemyBanish),
       hand: CardIdsArray(clashBattleCards.enemyHand),
       shields: clashBattleStats.enemyShields,
-      statBonuses: clashBattleStats.enemyStatBonuses,
+      statBonuses: { ...clashBattleStats.enemyStatBonuses },
       stats: clashBattleStats.enemyStats
     },
     stack: CardIdsArray(clashBattleCards.stack),
