@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { css, jsx } from '@emotion/core'; /** @jsx jsx */
 import { useDispatch } from 'react-redux';
 import * as actions from '../stores/actions';

@@ -15,7 +15,7 @@ export const MainMenu = () => {
     if (window.flow.skipIntro_toggle) {
       dispatch(actions.setScene('character_select'))
     }
-  }, [dispatch]);
+  });
 
   return (
     <div css={mainMenuCss}>
