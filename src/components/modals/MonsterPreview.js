@@ -154,6 +154,13 @@ export const MonsterPreview = ({
       <span className='red'>lose {monsterGoldReward} gold</span> and <span className='red'>2 random cards from your deck</span>
     </React.Fragment>
   ) : <span className='red'>lose 1 life.</span>;
+  const victoryConsequenceString = monsterName === 'The Evil Dragon' ? (
+    <span className='green'>you win the game!</span>
+  ) : (
+    <React.Fragment>
+      <span className='green'>gain {monsterGoldReward} gold</span> and {monster.type === 'wave' ? 'a ' : ''}<span className='green'>{monster.type === 'wave' ? '3 card draft' : "2 cards from the enemy's deck"}</span>
+    </React.Fragment>
+  );
 
   const text = (
     <React.Fragment>
@@ -163,7 +170,7 @@ export const MonsterPreview = ({
       <br />
       Your cards: <span className='bold yellow'>{yourDeckIds.length}</span> {yourCardsRarityString}
       <br /><br />
-      Victory: <span className='green'>gain {monsterGoldReward} gold</span> and {monster.type === 'wave' ? 'a ' : ''}<span className='green'>{monster.type === 'wave' ? '3 card draft' : "2 cards from the enemy's deck"}</span>
+      Victory: {victoryConsequenceString}
       <br />
       Defeat: {defeatConsequenceString}
     </React.Fragment>
